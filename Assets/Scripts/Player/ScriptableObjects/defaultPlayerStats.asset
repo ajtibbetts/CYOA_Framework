@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62ceb78a0c664244f813c07097524a11, type: 3}
+  m_Name: defaultPlayerStats
+  m_EditorClassIdentifier: 
+  playerName: Sir Ken
+  playerClass: Bandit
+  experienceLevel: 1
+  experienceTotal: 0
+  currentHealth: 45
+  maxHealth: 10
+  currentEnergy: 10
+  maxEnergy: 10
+  currentGold: 0
+  braveryLevel: 1
+  alacrityLevel: 1
+  tenacityLevel: 1
+  brillianceLevel: 1
+  intuitionLevel: 1
+  confidenceLevel: 1
+  playerAbilities:
+  - abilityName: Persuade
+    abilityLevel: 0
+    baseAttributeIDs: 0400000005000000

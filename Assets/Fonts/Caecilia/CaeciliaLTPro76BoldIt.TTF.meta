@@ -1,0 +1,26 @@
+fileFormatVersion: 2
+guid: ea2bbbb69874e9145bac5ac4323f9736
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Caecilia LT Pro
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 337582f7ec889ab448983e14dfdb721a, type: 3}
+  - {fileID: 12800000, guid: 7a1823bcf1a308449a6f8672c369c8ce, type: 3}
+  - {fileID: 12800000, guid: b28fec2da5239154daca46487cc4f497, type: 3}
+  - {fileID: 12800000, guid: f25e3d649aa68d1478d5270f8453d5f6, type: 3}
+  - {fileID: 12800000, guid: 51f1c0b272a11a444a71a387c00324bd, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

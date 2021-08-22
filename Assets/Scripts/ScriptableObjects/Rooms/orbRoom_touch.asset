@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecdcaed9e2cb5a34bab5805728ccea5a, type: 3}
+  m_Name: orbRoom_touch
+  m_EditorClassIdentifier: 
+  description: You approach the orb and extend your hand to touch it.  As your hand
+    gets closer, you feel an intense heat burning at your finger tips.
+  roomName: 
+  exits:
+  - keyString: 
+    exitDescription: 
+    buttonText: Touch Orb!
+    valueRoom: {fileID: 11400000, guid: b3290670c59e82749963ca6f3d857215, type: 2}
+  - keyString: 
+    exitDescription: 
+    buttonText: Go Back
+    valueRoom: {fileID: 11400000, guid: f77e1264738601a48ab881c077a307ec, type: 2}
