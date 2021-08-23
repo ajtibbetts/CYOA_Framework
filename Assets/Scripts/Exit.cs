@@ -12,9 +12,8 @@ public class Exit
         public CYOA_Event eventToTrigger;
         public eventParams parameters;
     }
-    
-    public string exitDescription;
     public string buttonText;
+    public string exitDescription;
     public Room valueRoom;
     public actionEvent eventData;
     

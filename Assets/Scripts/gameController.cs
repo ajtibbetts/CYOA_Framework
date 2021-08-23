@@ -48,13 +48,13 @@ public class gameController : MonoBehaviour
         // Debug.Log(roomNavigator.currentRoom.exits[0].buttonText.ToString());
 
         actionLog.Clear();
-        Debug.Log("logged text displayed..");
+       // Debug.Log("logged text displayed..");
     
     }
 
     public void DisplayRoomText() 
     {
-        Debug.Log("Dispalying room text..");
+        //Debug.Log("Dispalying room text..");
         clearCollectionsForNewRoom();
         UnpackRoom();
 
@@ -82,6 +82,13 @@ public class gameController : MonoBehaviour
         actionLog.Add(stringToAdd + "\n");
     }
 
+    public void UI_updatePlayerStats(){
+        UI_updatePlayerName();
+        UI_updatePlayerHealth();
+        UI_updatePlayerEnergy();
+        UI_updatePlayerGold();
+    }
+
     public void UI_updatePlayerName(){
         UIManager.updatePlayerNameText(player.stats.playerName);
     }
@@ -99,6 +106,8 @@ public class gameController : MonoBehaviour
         UIManager.updatePlayerEnergyText(currentEnergy + "/" + maxEnergy);
     }
     public void UI_updatePlayerGold(){
+        Debug.Log("gold: " + player.stats.currentGold);
+        Debug.Log("gold: " + player.stats.currentGold.ToString());
         UIManager.updatePlayerGoldText(player.stats.currentGold.ToString());
     }
 }

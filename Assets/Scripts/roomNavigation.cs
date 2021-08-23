@@ -12,7 +12,7 @@ public class roomNavigation : MonoBehaviour
     }
 
     public void unpackExitsInRoom() {
-        Debug.Log("unpacking rooms..");
+        //Debug.Log("unpacking rooms..");
 
         for (int i = 0; i < currentRoom.exits.Length; i++)
         {
@@ -27,9 +27,9 @@ public class roomNavigation : MonoBehaviour
         Debug.Log("changing rooms..");
         // check for event
         if(currentRoom.exits[buttonNumber].eventData.eventToTrigger != null) {
-            Debug.Log("changing rooms / activating event..");
+            //Debug.Log("changing rooms / activating event..");
             string eventText = currentRoom.exits[buttonNumber].eventData.eventToTrigger.activateEvent(controller, currentRoom.exits[buttonNumber].eventData.parameters); 
-            Debug.Log(eventText);
+            //Debug.Log(eventText);
             controller.LogStringWithReturn(eventText);
         }
 

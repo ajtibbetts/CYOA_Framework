@@ -38,45 +38,53 @@ MonoBehaviour:
     the two swindlers a large sum of money to start work at once.'
   roomName: starting room
   exits:
-  - exitDescription: You see a dark doorway to the north.
-    buttonText: This is the first option.
+  - buttonText: This is the first option.
+    exitDescription: You see a dark doorway to the north.
     valueRoom: {fileID: 11400000, guid: f77e1264738601a48ab881c077a307ec, type: 2}
     eventData:
       eventToTrigger: {fileID: 0}
       parameters:
+        propertyName: 
+        propertyValue: 0
         intParam: 0
         stringParam: 
-  - exitDescription: You see a dark doorway to the north.
-    buttonText: Change you name to "bearl".
+  - buttonText: Change you name to "bearl".
+    exitDescription: You see a dark doorway to the north.
     valueRoom: {fileID: 11400000, guid: 0f514392e3cbfcd45a2da4b04c146001, type: 2}
     eventData:
       eventToTrigger: {fileID: 11400000, guid: f90010d5499a67143bb72685e7759df2, type: 2}
       parameters:
+        propertyName: 
+        propertyValue: 0
         intParam: 0
         stringParam: bearl
-  - exitDescription: You see a dark doorway to the north.
-    buttonText: This is the third option that is longer than the second option even. 
-      This one may go so long that it could potentially mess up the layout,which
-      is the intention.
+  - buttonText: Select this option to gain 100 gold.
+    exitDescription: You see a dark doorway to the north.
     valueRoom: {fileID: 11400000, guid: 0f514392e3cbfcd45a2da4b04c146001, type: 2}
     eventData:
-      eventToTrigger: {fileID: 0}
+      eventToTrigger: {fileID: 11400000, guid: 8feeff7ea8797ea41a01b1afb0965a59, type: 2}
       parameters:
+        propertyName: currentGold
+        propertyValue: 100
         intParam: 0
-        stringParam: 
-  - exitDescription: You see a dark doorway to the north.
-    buttonText: Select this option to gain 1 health.
+        stringParam: Gold
+  - buttonText: Select this option to gain 1 health.
+    exitDescription: You see a dark doorway to the north.
     valueRoom: {fileID: 11400000, guid: 0f514392e3cbfcd45a2da4b04c146001, type: 2}
     eventData:
-      eventToTrigger: {fileID: 11400000, guid: 1baaaee15a1c8fc459b1f55394613796, type: 2}
+      eventToTrigger: {fileID: 11400000, guid: 8feeff7ea8797ea41a01b1afb0965a59, type: 2}
       parameters:
+        propertyName: currentHealth
+        propertyValue: 1
         intParam: 1
-        stringParam: 
-  - exitDescription: You see a dark doorway to the north.
-    buttonText: Select this option to lose 1 health.
+        stringParam: Health
+  - buttonText: Select this option to lose 1 health.
+    exitDescription: You see a dark doorway to the north.
     valueRoom: {fileID: 11400000, guid: 0f514392e3cbfcd45a2da4b04c146001, type: 2}
     eventData:
-      eventToTrigger: {fileID: 11400000, guid: 1baaaee15a1c8fc459b1f55394613796, type: 2}
+      eventToTrigger: {fileID: 11400000, guid: 8feeff7ea8797ea41a01b1afb0965a59, type: 2}
       parameters:
-        intParam: -1
-        stringParam: 
+        propertyName: currentHealth
+        propertyValue: -1
+        intParam: 0
+        stringParam: Health

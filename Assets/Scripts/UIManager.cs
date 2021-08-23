@@ -88,8 +88,8 @@ public class UIManager : MonoBehaviour
     }
 
     public void setCurrentToggleOption(Toggle toggle, int index) {
-        Debug.Log("current toggle" + toggle.isOn);
-        Debug.Log("toggle index" + index);
+        //Debug.Log("current toggle" + toggle.isOn);
+        //Debug.Log("toggle index" + index);
         if(toggle.isOn) {
             currentActionOption = index;
         }
@@ -104,7 +104,7 @@ public class UIManager : MonoBehaviour
         }
        currentActionOption = i;
        confirmActionButton.GetComponentInChildren<Text>().text = "Confirm";
-       Debug.Log("Current action option is: " + currentActionOption);
+       //Debug.Log("Current action option is: " + currentActionOption);
     }
 
     public void processPlayerAction(int buttonNumber){
@@ -113,11 +113,11 @@ public class UIManager : MonoBehaviour
             controller.roomNavigator.changeRoom(currentActionOption);
             confirmActionButton.GetComponentInChildren<Text>().text = "Select option then confirm.";
             currentActionOption = -1;
-            Debug.Log("set to -1 at time " + Time.deltaTime);
+            //Debug.Log("set to -1 at time " + Time.deltaTime);
             checkForSingleOption();
         }
         else {
-            Debug.Log("curren action value is less than zero at time " + Time.deltaTime);
+            //Debug.Log("curren action value is less than zero at time " + Time.deltaTime);
         }
     }
 
@@ -139,6 +139,7 @@ public class UIManager : MonoBehaviour
         playerEnergyText.GetComponent<TextMeshProUGUI>().text = content;
     }
     public void updatePlayerGoldText(string content) {
+        Debug.Log("UI gold: " + content);
         playerGoldText.GetComponent<TextMeshProUGUI>().text = content;
     }
 
@@ -163,7 +164,7 @@ public class UIManager : MonoBehaviour
         resetButtons();
        // Debug.Log("button list size when called: " + actionOptionButtons.Count);
         
-        Debug.Log("action option size: " + actionOptions.Length);
+        //Debug.Log("action option size: " + actionOptions.Length);
         for (int i = 0; i < actionOptions.Length; i++) {
          //   Debug.Log("current action:" + actionOptions[i].buttonText.ToString());
             actionToggleButtons[i].SetActive(true);
@@ -185,12 +186,12 @@ public class UIManager : MonoBehaviour
     }
 
     public void checkForSingleOption(){
-        Debug.Log("checking for single action");
+        //Debug.Log("checking for single action");
         if(!actionToggleButtons[1].activeSelf) {
             setCurrentActionOption(0);
             actionToggleButtons[0].SetActive(false);
             confirmActionButton.GetComponentInChildren<Text>().text = actionToggleButtons[0].GetComponentInChildren<Text>().text;
-            Debug.Log("single action found");
+            //Debug.Log("single action found");
         }
     }
 }
