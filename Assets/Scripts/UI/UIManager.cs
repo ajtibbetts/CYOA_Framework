@@ -6,7 +6,7 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    private gameController controller;
+    [HideInInspector] public gameController controller;
 
     // UI elements
     
@@ -23,6 +23,10 @@ public class UIManager : MonoBehaviour
     public GameObject playerActionOptionBtnPrefab;
     public ToggleGroup toggleGroup;
     public GameObject togglePrefab;
+
+    // internal components
+    [HideInInspector] public conditionManager conditionChecker;
+    [HideInInspector] public contentManager contentManager;
     
 
 
@@ -34,8 +38,10 @@ public class UIManager : MonoBehaviour
     private int currentActionOption;
 
     void Awake() {
-        // set parent controller
+        // set parent controller and child components
         controller = GetComponent<gameController>();
+        conditionChecker = gameObject.AddComponent(typeof(conditionManager)) as conditionManager;
+        contentManager = gameObject.AddComponent(typeof(contentManager)) as contentManager;
         // set initials content paragraphs
         UI_paragraph = GameObject.Instantiate(paragraphPrefab, Vector3.zero, Quaternion.identity, contentScrollContainer.transform);
         initActionOptionButtons();
@@ -58,16 +64,6 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < globalConfig.UI.MAX_ACTION_OPTIONS; i++)
         {
             int localIndex = i; 
-            //GameObject optionButton = GameObject.Instantiate(togglePrefab, Vector3.zero, Quaternion.identity, contentScrollContainer.transform);
-            // setup each button base on config limit
-            
-           // optionButton.GetComponentInChildren<Button>().onClick.AddListener(delegate { setCurrentActionOption(localIndex); });
-           // optionButton.SetActive(false);
-
-           // actionOptionButtons.Add(optionButton);
-          //  Debug.Log("button list size: " + actionOptionButtons.Count);
-
-
             // just add toggles
             GameObject toggle = GameObject.Instantiate(togglePrefab, Vector3.zero, Quaternion.identity, contentScrollContainer.transform);
             Toggle toggleComponent = toggle.GetComponent<Toggle>();
@@ -114,7 +110,7 @@ public class UIManager : MonoBehaviour
             confirmActionButton.GetComponentInChildren<Text>().text = "Select option then confirm.";
             currentActionOption = -1;
             //Debug.Log("set to -1 at time " + Time.deltaTime);
-            checkForSingleOption();
+            checkForSingleOption(); // CALLED AT END TO REMOVE EXTRA OPTIONS
         }
         else {
             //Debug.Log("curren action value is less than zero at time " + Time.deltaTime);
@@ -124,7 +120,8 @@ public class UIManager : MonoBehaviour
     public void updateContentText(string content) {
         Debug.Log("updating content text..");
         resetScroll();
-
+        string parsedContent = contentManager.parseContent(content);
+        
         UI_paragraph.GetComponent<TextMeshProUGUI>().text = content;
 
     }
@@ -159,7 +156,7 @@ public class UIManager : MonoBehaviour
         }  
     }
 
-    public void updateActionOptionsButtons(Exit[] actionOptions){
+    public void updateActionOptionsButtons(actionOption[] actionOptions){
 
         resetButtons();
        // Debug.Log("button list size when called: " + actionOptionButtons.Count);
@@ -168,21 +165,33 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < actionOptions.Length; i++) {
          //   Debug.Log("current action:" + actionOptions[i].buttonText.ToString());
             actionToggleButtons[i].SetActive(true);
-            actionToggleButtons[i].GetComponentInChildren<Text>().text = actionOptions[i].buttonText;
-           // actionOptionButtons[i].SetActive(true);
-           // actionOptionButtons[i].GetComponentInChildren<Text>().text = actionOptions[i].buttonText;
+            // check for conditional options on this action, otherwise default text
+            if(actionOptions[i].conditionalRequirement.conditionsToMeet.Length > 0){
+                Debug.Log($"condition found on option {i}. checking...");
+                // get the label based on the first conditions property
+                string conditionLabelText;
+                // int satisfiedCondition = conditionChecker.checkConditions(actionOptions[i]);
+                if(conditionChecker.areConditionsMet(actionOptions[i])){
+                    conditionLabelText = conditionChecker.getConditionLabel(actionOptions[i].conditionalRequirement.conditionsToMeet[0].propertyName);
+                    Debug.Log($"Condition met on option {i} condition.");
+                    actionToggleButtons[i].GetComponentInChildren<Text>().text = "<color=\"green\">[" + conditionLabelText +"]</color> " + actionOptions[i].conditionalRequirement.passButtonText;
+                    actionOptions[i].conditionalRequirement.conditionMet = true;
+                    actionToggleButtons[i].GetComponentInChildren<Toggle>().interactable = true;
+                    
+                }
+                else {
+                    Debug.Log("No conditional requirements met for this action option.");
+                    conditionLabelText = conditionChecker.getConditionLabel(actionOptions[i].conditionalRequirement.conditionsToMeet[0].propertyName);
+                    actionToggleButtons[i].GetComponentInChildren<Text>().text = "<color=\"red\">[" + conditionLabelText +"]</color>" + actionOptions[i].conditionalRequirement.failButtonText;
+                    actionOptions[i].conditionalRequirement.conditionMet = false;
+                    actionToggleButtons[i].GetComponentInChildren<Toggle>().interactable = false;
+                }
+            }
+            else {
+                actionToggleButtons[i].GetComponentInChildren<Text>().text = actionOptions[i].buttonText;
+                actionToggleButtons[i].GetComponentInChildren<Toggle>().interactable = true;
+            }
         }
-
-    //    // if single option, hide buttons and setup action button
-    //     if(actionOptions.Length == 1) {
-    //         Debug.Log("length is 1");
-    //        // setCurrentActionOption(0);
-    //         Debug.Log("current action option: " + currentActionOption);
-    //         confirmActionButton.GetComponentInChildren<Text>().text = actionOptions[0].buttonText;
-    //         actionToggleButtons[0].SetActive(false);
-    //         setCurrentActionOption(0);
-    //        // actionToggleButtons[0].GetComponent<Toggle>().isOn = true;
-    //     }
     }
 
     public void checkForSingleOption(){

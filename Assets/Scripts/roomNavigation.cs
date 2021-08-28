@@ -11,13 +11,13 @@ public class roomNavigation : MonoBehaviour
         controller = GetComponent<gameController>();
     }
 
-    public void unpackExitsInRoom() {
+    public void unpackPlayerActionOptionsInRoom() {
         //Debug.Log("unpacking rooms..");
 
-        for (int i = 0; i < currentRoom.exits.Length; i++)
+        for (int i = 0; i < currentRoom.playerActionOptions.Length; i++)
         {
-            controller.interactionDescriptionsInRoom.Add(currentRoom.exits[i].exitDescription);
-            controller.buttonChoicesTexts.Add(currentRoom.exits[i].buttonText);
+            controller.interactionDescriptionsInRoom.Add(currentRoom.playerActionOptions[i].actionTakenText);
+            controller.buttonChoicesTexts.Add(currentRoom.playerActionOptions[i].buttonText);
         }
 
     }
@@ -26,14 +26,14 @@ public class roomNavigation : MonoBehaviour
         
         Debug.Log("changing rooms..");
         // check for event
-        if(currentRoom.exits[buttonNumber].eventData.eventToTrigger != null) {
+        if(currentRoom.playerActionOptions[buttonNumber].eventData.eventToTrigger != null) {
             //Debug.Log("changing rooms / activating event..");
-            string eventText = currentRoom.exits[buttonNumber].eventData.eventToTrigger.activateEvent(controller, currentRoom.exits[buttonNumber].eventData.parameters); 
+            string eventText = currentRoom.playerActionOptions[buttonNumber].eventData.eventToTrigger.activateEvent(controller, currentRoom.playerActionOptions[buttonNumber].eventData.parameters); 
             //Debug.Log(eventText);
             controller.LogStringWithReturn(eventText);
         }
 
-        currentRoom = currentRoom.exits[buttonNumber].valueRoom;
+        currentRoom = currentRoom.playerActionOptions[buttonNumber].valueRoom;
         controller.DisplayRoomText();
 
     }

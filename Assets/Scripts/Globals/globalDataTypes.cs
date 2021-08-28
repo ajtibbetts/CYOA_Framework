@@ -16,7 +16,49 @@ using UnityEngine;
 //     }
 // }
 
- [Serializable]
+// ENUMS
+[Serializable]
+public enum conditionType {
+    playerProperty,
+    enemyProperty,
+    storyProperty,
+    itemProperty
+
+}
+[Serializable]
+public enum conditionEval {
+    isEqualTo,
+    isNotEqualTo,
+    isLessThan,
+    isLessThanOrEqualTo,
+    isGreaterThan,
+    isGreaterThanOrEqualTo
+}
+
+// STRUCTS
+[Serializable]
+public struct actionOptionCondition {
+    [Header("Condition")]
+    public Boolean conditionMet;
+    public conditionalStatement[] conditionsToMeet;
+    [Header("Outcome")]
+    public Room passRoom;
+    public string passButtonText;
+    public string passActionText;
+    public string failButtonText;
+
+}
+
+[Serializable]
+public struct conditionalStatement {
+    public conditionType condition;
+    public string propertyName;
+    public conditionEval evaluation;
+    public string valueString;
+    public int valueInt;
+}
+
+[Serializable]
 public struct statPlayerStat {
     public string statName;
     public int statCurrent;
@@ -26,14 +68,14 @@ public struct statPlayerStat {
 
 }
 
- [Serializable]
+[Serializable]
 public struct statAttribute {
     public string attributeName;
     public int attributeLevel;
     public int attributeID;
 }
 
- [Serializable]
+[Serializable]
 public struct StatAbility {
     public string abilityName;
     public int abilityLevel;

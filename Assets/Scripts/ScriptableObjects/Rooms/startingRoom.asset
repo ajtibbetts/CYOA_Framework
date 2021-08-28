@@ -12,35 +12,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecdcaed9e2cb5a34bab5805728ccea5a, type: 3}
   m_Name: startingRoom
   m_EditorClassIdentifier: 
-  description: 'Many years ago there was an Emperor so exceedingly fond of new clothes
-    that he spent all his money on being well dressed. He cared nothing about reviewing
-    his soldiers, going to the theatre, or going for a ride in his carriage, except
-    to show off his new clothes. He had a coat for every hour of the day, and instead
-    of saying, as one might, about any other ruler, "The King''s in council," here
-    they always said. "The Emperor''s in his dressing room."
-
-
-
-    In the great
-    city where he lived, life was always gay. Every day many strangers came to town,
-    and among them one day came two swindlers. They let it be known they were weavers,
-    and they said they could weave the most magnificent fabrics imaginable. Not only
-    were their colors and patterns uncommonly fine, but clothes made of this cloth
-    had a wonderful way of becoming invisible to anyone who was unfit for his office,
-    or who was unusually stupid.
-
-
-
-    "Those would be just the clothes for me,"
-    thought the Emperor. "If I wore them I would be able to discover which men in
-    my empire are unfit for their posts. And I could tell the wise men from the fools.
-    Yes, I certainly must get some of the stuff woven for me right away." He paid
-    the two swindlers a large sum of money to start work at once.'
+  description: "<align=\"center\">\n<b><u><size=150%>Chapter 1</size></u></b>\n<i><size=110%>Humble
+    Beginnings</size></i></align>\n\n\tMany years ago there was an person named {p.name}
+    so exceedingly fond of new clothes that he spent all his money on being well
+    dressed. He cared nothing about reviewing his soldiers, going to the theatre,
+    or going for a ride in his carriage, except to show off his new clothes. He had
+    a coat for every hour of the day, and instead of saying, as one might, about
+    any other ruler, \"The King's in council,\" here they always said. \"The Emperor's
+    in his dressing room.\"\n\n\nIn the great city where he lived, life was always
+    gay. Every day many strangers came to town, and among them one day came two swindlers.
+    They let it be known they were weavers, and they said they could weave the most
+    magnificent fabrics imaginable. Not only were their colors and patterns uncommonly
+    fine, but clothes made of this cloth had a wonderful way of becoming invisible
+    to anyone who was unfit for his office, or who was unusually stupid.\n\n\n\"Those
+    would be just the clothes for me,\" thought the Emperor. \"If I wore them I would
+    be able to discover which men in my empire are unfit for their posts. And I could
+    tell the wise men from the fools. Yes, I certainly must get some of the stuff
+    woven for me right away.\" He paid the two swindlers a large sum of money to
+    start work at once."
   roomName: starting room
-  exits:
-  - buttonText: This is the first option.
-    exitDescription: You see a dark doorway to the north.
-    valueRoom: {fileID: 11400000, guid: f77e1264738601a48ab881c077a307ec, type: 2}
+  playerActionOptions:
+  - buttonText: This is an option.
+    actionTakenText: 
+    valueRoom: {fileID: 11400000, guid: 0f514392e3cbfcd45a2da4b04c146001, type: 2}
+    conditionalRequirement:
+      conditionMet: 0
+      conditionsToMeet: []
+      passRoom: {fileID: 0}
+      passButtonText: 
+      passActionText: 
+      failButtonText: 
     eventData:
       eventToTrigger: {fileID: 0}
       parameters:
@@ -48,19 +49,16 @@ MonoBehaviour:
         propertyValue: 0
         intParam: 0
         stringParam: 
-  - buttonText: Change you name to "bearl".
-    exitDescription: You see a dark doorway to the north.
+  - buttonText: This option will give the player 100 gold.
+    actionTakenText: 
     valueRoom: {fileID: 11400000, guid: 0f514392e3cbfcd45a2da4b04c146001, type: 2}
-    eventData:
-      eventToTrigger: {fileID: 11400000, guid: f90010d5499a67143bb72685e7759df2, type: 2}
-      parameters:
-        propertyName: 
-        propertyValue: 0
-        intParam: 0
-        stringParam: bearl
-  - buttonText: Select this option to gain 100 gold.
-    exitDescription: You see a dark doorway to the north.
-    valueRoom: {fileID: 11400000, guid: 0f514392e3cbfcd45a2da4b04c146001, type: 2}
+    conditionalRequirement:
+      conditionMet: 0
+      conditionsToMeet: []
+      passRoom: {fileID: 0}
+      passButtonText: 
+      passActionText: 
+      failButtonText: 
     eventData:
       eventToTrigger: {fileID: 11400000, guid: 8feeff7ea8797ea41a01b1afb0965a59, type: 2}
       parameters:
@@ -68,23 +66,25 @@ MonoBehaviour:
         propertyValue: 100
         intParam: 0
         stringParam: Gold
-  - buttonText: Select this option to gain 1 health.
-    exitDescription: You see a dark doorway to the north.
-    valueRoom: {fileID: 11400000, guid: 0f514392e3cbfcd45a2da4b04c146001, type: 2}
+  - buttonText: This option is only available at 500 gold or more.
+    actionTakenText: 
+    valueRoom: {fileID: 11400000, guid: e135d9f1851d0c749b10e4d267b6116d, type: 2}
+    conditionalRequirement:
+      conditionMet: 1
+      conditionsToMeet:
+      - condition: 0
+        propertyName: currentGold
+        evaluation: 5
+        valueString: 
+        valueInt: 500
+      passRoom: {fileID: 11400000, guid: f77e1264738601a48ab881c077a307ec, type: 2}
+      passButtonText: Show your gold to impress.
+      passActionText: You've showed your gold to impress.
+      failButtonText: You do not have enough gold to impress.
     eventData:
-      eventToTrigger: {fileID: 11400000, guid: 8feeff7ea8797ea41a01b1afb0965a59, type: 2}
+      eventToTrigger: {fileID: 0}
       parameters:
-        propertyName: currentHealth
-        propertyValue: 1
-        intParam: 1
-        stringParam: Health
-  - buttonText: Select this option to lose 1 health.
-    exitDescription: You see a dark doorway to the north.
-    valueRoom: {fileID: 11400000, guid: 0f514392e3cbfcd45a2da4b04c146001, type: 2}
-    eventData:
-      eventToTrigger: {fileID: 11400000, guid: 8feeff7ea8797ea41a01b1afb0965a59, type: 2}
-      parameters:
-        propertyName: currentHealth
-        propertyValue: -1
+        propertyName: currentGold
+        propertyValue: 100
         intParam: 0
-        stringParam: Health
+        stringParam: Gold

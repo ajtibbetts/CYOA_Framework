@@ -44,9 +44,9 @@ public class gameController : MonoBehaviour
         // update UI with current room text
         UIManager.updateContentText(actionLogText + roomNavigator.currentRoom.description);
         // update UI action options buttons
-        UIManager.updateActionOptionsButtons(roomNavigator.currentRoom.exits);
+        UIManager.updateActionOptionsButtons(roomNavigator.currentRoom.playerActionOptions);
         // Debug.Log(roomNavigator.currentRoom.exits[0].buttonText.ToString());
-
+        UI_updatePlayerStats();
         actionLog.Clear();
        // Debug.Log("logged text displayed..");
     
@@ -68,7 +68,7 @@ public class gameController : MonoBehaviour
     }
 
     private void UnpackRoom() {
-        roomNavigator.unpackExitsInRoom();
+        roomNavigator.unpackPlayerActionOptionsInRoom();
     }
 
     private void clearCollectionsForNewRoom(){

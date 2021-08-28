@@ -20,7 +20,7 @@ MonoBehaviour:
   maxHealth: 10
   currentEnergy: 10
   maxEnergy: 10
-  currentGold: 0
+  currentGold: 1000
   braveryLevel: 1
   alacrityLevel: 1
   tenacityLevel: 1
