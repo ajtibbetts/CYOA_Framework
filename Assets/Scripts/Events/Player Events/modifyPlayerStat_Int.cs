@@ -15,7 +15,7 @@ public class modifyPlayerStat_Int : CYOA_Event {
         // get player stat property and current value
             PropertyInfo propertyInfo = controller.player.stats.GetType().GetProperty(parameters.propertyName);
             int currentValue = (int)propertyInfo.GetValue(controller.player.stats, null);
-            Debug.Log("Property value of " + parameters.stringParam + ": " + propertyInfo.GetValue(controller.player.stats, null));
+            //Debug.Log("Property value of " + parameters.stringParam + ": " + propertyInfo.GetValue(controller.player.stats, null));
             
             // set value and return UI message.
             // propertyInfo.SetValue(controller.player.stats, Convert.ChangeType(value, propertyInfo.PropertyType), null);
@@ -32,7 +32,7 @@ public class modifyPlayerStat_Int : CYOA_Event {
                 
         }
 
-        Debug.Log("Property Name parameter is missing.  Cannot change player property.");
+        //Debug.Log("Property Name parameter is missing.  Cannot change player property.");
         
         return null;
         

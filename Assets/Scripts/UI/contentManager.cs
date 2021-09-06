@@ -9,7 +9,7 @@ public class contentManager : MonoBehaviour
 {
     [HideInInspector] public UIManager UIManager;
 
-    private Dictionary<string, Func<string, string>> getStrings = new Dictionary<string, Func<string, string>>();
+    private Dictionary<string, Func<string, string>> dict_functions = new Dictionary<string, Func<string, string>>();
     
     private Regex rx = new Regex(@"\{([^{}]+)\}",RegexOptions.Multiline );
 
@@ -19,34 +19,30 @@ public class contentManager : MonoBehaviour
         initDictionary();
     }
 
-    void initDictionary(){
-        
-
+    void initDictionary()
+    {
+        dict_functions.Add("p", getPlayerProperty);
+        dict_functions.Add("n", getNPCProperty);
+        dict_functions.Add("e", getEnemyProperty);
+        dict_functions.Add("s", getStoryProperty);
+        dict_functions.Add("i", getItemProperty);
     }
 
-    static string getVariableText(Match m)
+    private string getVariableText(Match m)
     {
-        // Get the matched string and position of . separator
+       // get string and split by . separator
         string x = m.ToString();
         string[] subs = x.Split('.');
         if(subs.Length > 1) {
-            string group = subs[0].Substring(1);
-            string key = subs[1].Substring(0,subs[1].Length-1);
-            // do some shit with group/key either reflection / dict/whatever
-            
-            Debug.Log($"group: {group} key: {key}");
+            // get key and property from split
+            string key = subs[0].Substring(1);
+            string property = subs[1].Substring(0,subs[1].Length-1);
+            // check for key and return
+            if(dict_functions.ContainsKey(key)) {
+                return dict_functions[key](property);
+            }
+            Debug.Log($"key: {key} property: {property}");
         }
-        
-        //string group = subs[0].Substring(1);
-        //string key = subs[1].Substring(0,subs[1].Length-2);
-
-        //Debug.Log($"group: {group} key: {key}");
-        // If the first char is lower case...
-        // if (char.IsLower(x[0]))
-        // {
-        //     // Capitalize it.
-        //     return char.ToUpper(x[0]) + x.Substring(1, x.Length - 1);
-        // }
         return x;
     }
     
@@ -54,7 +50,7 @@ public class contentManager : MonoBehaviour
        // string ns= Regex.Replace(content,"\{([^{}]+)\}","$1 = MessageBox.Show");
     // THIS WORKS I THINK MAYBE
 
-        string result = rx.Replace(content, new MatchEvaluator(contentManager.getVariableText));
+        string result = rx.Replace(content, new MatchEvaluator(getVariableText));
 
         Debug.Log("PARSE RESULT:\n" + result);
         return result;
@@ -67,6 +63,37 @@ public class contentManager : MonoBehaviour
         //return regex.IsMatch(input);
 
         return false;
+    }
+
+    // retrieval functions
+
+    public string getPlayerProperty(string propertyName) {
+
+        PropertyInfo propertyInfo = UIManager.controller.player.stats.GetType().GetProperty(propertyName);
+        string currentValue = propertyInfo.GetValue(UIManager.controller.player.stats, null).ToString();
+        Debug.Log("Property value of " + propertyName + ": " + currentValue);
+
+        return currentValue;
+    }
+
+    public string getNPCProperty(string propertyName) {
+
+        return null;
+    }
+
+    public string getEnemyProperty(string propertyName) {
+
+        return null;
+    }
+
+    public string getStoryProperty(string propertyName) {
+
+        return null;
+    }
+
+    public string getItemProperty(string propertyName) {
+
+        return null;
     }
 
 

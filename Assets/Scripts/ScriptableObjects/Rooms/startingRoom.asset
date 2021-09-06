@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: startingRoom
   m_EditorClassIdentifier: 
   description: "<align=\"center\">\n<b><u><size=150%>Chapter 1</size></u></b>\n<i><size=110%>Humble
-    Beginnings</size></i></align>\n\n\tMany years ago there was an person named {p.name}
+    Beginnings</size></i></align>\n\n\tMany years ago there was an person named {p.playerName}
     so exceedingly fond of new clothes that he spent all his money on being well
     dressed. He cared nothing about reviewing his soldiers, going to the theatre,
     or going for a ride in his carriage, except to show off his new clothes. He had
@@ -37,6 +37,7 @@ MonoBehaviour:
     valueRoom: {fileID: 11400000, guid: 0f514392e3cbfcd45a2da4b04c146001, type: 2}
     conditionalRequirement:
       conditionMet: 0
+      hideUnlessMet: 0
       conditionsToMeet: []
       passRoom: {fileID: 0}
       passButtonText: 
@@ -54,6 +55,7 @@ MonoBehaviour:
     valueRoom: {fileID: 11400000, guid: 0f514392e3cbfcd45a2da4b04c146001, type: 2}
     conditionalRequirement:
       conditionMet: 0
+      hideUnlessMet: 0
       conditionsToMeet: []
       passRoom: {fileID: 0}
       passButtonText: 
@@ -70,7 +72,8 @@ MonoBehaviour:
     actionTakenText: 
     valueRoom: {fileID: 11400000, guid: e135d9f1851d0c749b10e4d267b6116d, type: 2}
     conditionalRequirement:
-      conditionMet: 1
+      conditionMet: 0
+      hideUnlessMet: 0
       conditionsToMeet:
       - condition: 0
         propertyName: currentGold
@@ -88,3 +91,4 @@ MonoBehaviour:
         propertyValue: 100
         intParam: 0
         stringParam: Gold
+  pageEventsToTrigger: []

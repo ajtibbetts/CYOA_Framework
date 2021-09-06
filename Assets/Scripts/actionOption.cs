@@ -7,11 +7,7 @@ using UnityEngine.Events;
 [System.Serializable]
 public class actionOption
 {
-    [System.Serializable]
-    public struct actionEvent {
-        public CYOA_Event eventToTrigger;
-        public eventParams parameters;
-    }
+    
     [Tooltip("Default text to display on this action option button.")]
     public string buttonText;
     [Tooltip("Text to be added to the content on next page after option is selected and confirmed.")]

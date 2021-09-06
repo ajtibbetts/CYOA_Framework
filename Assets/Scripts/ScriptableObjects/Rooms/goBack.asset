@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecdcaed9e2cb5a34bab5805728ccea5a, type: 3}
   m_Name: goBack
   m_EditorClassIdentifier: 
-  description: This is a page to go back to starting room {p.name} and {p.gold}
+  description: 'This is a page to go back to starting room {p.playerName} and {p.currentGold}
+    and your current health is {p.currentHealth} out of {p.maxHealth}. '
   roomName: 
   playerActionOptions:
   - buttonText: Back to start.

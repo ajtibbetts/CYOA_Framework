@@ -41,6 +41,14 @@ public class gameController : MonoBehaviour
     {
         string actionLogText = string.Join("\n", actionLog.ToArray());
         
+        // check for page image and activate
+        if(roomNavigator.hasPageImage()) {
+            UIManager.updatePageImage(roomNavigator.currentRoom.pageImage);
+        }
+        else {
+            UIManager.hidePageImage();
+        }
+
         // update UI with current room text
         UIManager.updateContentText(actionLogText + roomNavigator.currentRoom.description);
         // update UI action options buttons
@@ -68,6 +76,7 @@ public class gameController : MonoBehaviour
     }
 
     private void UnpackRoom() {
+        roomNavigator.triggerPageEvents();
         roomNavigator.unpackPlayerActionOptionsInRoom();
     }
 

@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     public GameObject contentScrollContainer;
     public Scrollbar vertScrollBar;
     public GameObject paragraphPrefab;
+    public GameObject imagePrefab;
     [Header("Player Stats")]
     public GameObject playerNameText;
     public GameObject playerHealthText;
@@ -31,6 +32,7 @@ public class UIManager : MonoBehaviour
 
 
     private GameObject UI_paragraph;
+    private GameObject UI_contentImage;
     private List<GameObject> actionOptionButtons = new List<GameObject>();
     private List<GameObject> actionToggleButtons = new List<GameObject>();
     private GameObject confirmActionButton;
@@ -42,7 +44,9 @@ public class UIManager : MonoBehaviour
         controller = GetComponent<gameController>();
         conditionChecker = gameObject.AddComponent(typeof(conditionManager)) as conditionManager;
         contentManager = gameObject.AddComponent(typeof(contentManager)) as contentManager;
-        // set initials content paragraphs
+        // set initials content prefabs
+        UI_contentImage = GameObject.Instantiate(imagePrefab, Vector3.zero, Quaternion.identity, contentScrollContainer.transform);
+        UI_contentImage.SetActive(false);
         UI_paragraph = GameObject.Instantiate(paragraphPrefab, Vector3.zero, Quaternion.identity, contentScrollContainer.transform);
         initActionOptionButtons();
         initConfirmActionButton();
@@ -117,12 +121,21 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void updatePageImage(Sprite image){
+        UI_contentImage.GetComponent<Image>().sprite = image;
+        UI_contentImage.SetActive(true);
+    }
+
+    public void hidePageImage(){
+        UI_contentImage.SetActive(false);
+    }
     public void updateContentText(string content) {
         Debug.Log("updating content text..");
         resetScroll();
         string parsedContent = contentManager.parseContent(content);
         
-        UI_paragraph.GetComponent<TextMeshProUGUI>().text = content;
+        // UI_paragraph.GetComponent<TextMeshProUGUI>().text = content;
+        UI_paragraph.GetComponent<TextMeshProUGUI>().text = contentManager.parseContent(content);
 
     }
 
@@ -156,6 +169,14 @@ public class UIManager : MonoBehaviour
         }  
     }
 
+    public void resetButton(int i){
+        if(actionToggleButtons[i] != null) {
+            actionToggleButtons[i].SetActive(true);      
+            actionToggleButtons[i].GetComponent<Toggle>().isOn = false;      
+            actionToggleButtons[i].SetActive(false); 
+        }
+    }
+
     public void updateActionOptionsButtons(actionOption[] actionOptions){
 
         resetButtons();
@@ -181,10 +202,16 @@ public class UIManager : MonoBehaviour
                 }
                 else {
                     Debug.Log("No conditional requirements met for this action option.");
-                    conditionLabelText = conditionChecker.getConditionLabel(actionOptions[i].conditionalRequirement.conditionsToMeet[0].propertyName);
-                    actionToggleButtons[i].GetComponentInChildren<Text>().text = "<color=\"red\">[" + conditionLabelText +"]</color>" + actionOptions[i].conditionalRequirement.failButtonText;
                     actionOptions[i].conditionalRequirement.conditionMet = false;
-                    actionToggleButtons[i].GetComponentInChildren<Toggle>().interactable = false;
+                    // if condition is set to be hidden when not met, hide it
+                    if(actionOptions[i].conditionalRequirement.hideUnlessMet) {
+                        resetButton(i);
+                    }
+                    else {
+                        conditionLabelText = conditionChecker.getConditionLabel(actionOptions[i].conditionalRequirement.conditionsToMeet[0].propertyName);
+                        actionToggleButtons[i].GetComponentInChildren<Text>().text = "<color=\"red\">[" + conditionLabelText +"]</color>" + actionOptions[i].conditionalRequirement.failButtonText;
+                        actionToggleButtons[i].GetComponentInChildren<Toggle>().interactable = false;
+                    }
                 }
             }
             else {

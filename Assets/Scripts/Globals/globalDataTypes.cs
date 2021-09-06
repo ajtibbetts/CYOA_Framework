@@ -20,6 +20,7 @@ using UnityEngine;
 [Serializable]
 public enum conditionType {
     playerProperty,
+    npcProperty,
     enemyProperty,
     storyProperty,
     itemProperty
@@ -37,9 +38,15 @@ public enum conditionEval {
 
 // STRUCTS
 [Serializable]
+public struct actionEvent {
+        public CYOA_Event eventToTrigger;
+        public eventParams parameters;
+    }
+[Serializable]
 public struct actionOptionCondition {
     [Header("Condition")]
     public Boolean conditionMet;
+    public Boolean hideUnlessMet;
     public conditionalStatement[] conditionsToMeet;
     [Header("Outcome")]
     public Room passRoom;

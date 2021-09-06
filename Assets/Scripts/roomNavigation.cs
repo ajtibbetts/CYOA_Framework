@@ -11,15 +11,35 @@ public class roomNavigation : MonoBehaviour
         controller = GetComponent<gameController>();
     }
 
+    public bool hasPageImage(){
+        // activate page image if set
+        if(currentRoom.pageImage != null) {
+            return true;
+        }
+        return false;
+    }
+
     public void unpackPlayerActionOptionsInRoom() {
         //Debug.Log("unpacking rooms..");
 
+        // get player action options
         for (int i = 0; i < currentRoom.playerActionOptions.Length; i++)
         {
             controller.interactionDescriptionsInRoom.Add(currentRoom.playerActionOptions[i].actionTakenText);
             controller.buttonChoicesTexts.Add(currentRoom.playerActionOptions[i].buttonText);
         }
 
+    }
+
+    public void triggerPageEvents() {
+        // triggers any page events 
+        if(currentRoom.pageEventsToTrigger.Length > 0) {
+            foreach(actionEvent e in currentRoom.pageEventsToTrigger) {
+                if(e.eventToTrigger != null) {
+                    controller.LogStringWithReturn(e.eventToTrigger.activateEvent(controller, e.parameters));
+                }
+            }
+        }
     }
 
     public void changeRoom(int buttonNumber){

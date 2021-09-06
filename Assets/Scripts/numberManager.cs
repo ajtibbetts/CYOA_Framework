@@ -16,6 +16,6 @@ public class numberManager : MonoBehaviour
 
     private void routeSwipeDirection(SwipeData data)
     {
-       depreciated_Mobile.UIManager.Instance.setPositionValue(data.Direction);
+       //depreciated_Mobile.UIManager.Instance.setPositionValue(data.Direction);
     }
 }
