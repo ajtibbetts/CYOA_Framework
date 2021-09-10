@@ -40,6 +40,9 @@ public class UIManager : MonoBehaviour
     private int currentActionOption;
 
     void Awake() {
+        // add event listener
+        SwipeDetector.OnSwipe += onSwipe;
+
         // set parent controller and child components
         controller = GetComponent<gameController>();
         conditionChecker = gameObject.AddComponent(typeof(conditionManager)) as conditionManager;
@@ -62,6 +65,16 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void onSwipe(SwipeData data) {
+        Debug.Log("Swipe in Direction: " + data.Direction);
+        if(data.Direction == SwipeDirection.Right){
+            Debug.Log("Swipe is right. Start X: " + data.StartPosition.x + " End X: " + data.EndPosition.x);
+            if(data.EndPosition.x <= globalConfig.UI.MAX_MENU_SWIPE_POS_X){
+                Debug.Log("Open menu!");
+            }
+        }
     }
 
     public void initActionOptionButtons(){

@@ -21,10 +21,12 @@ public class playerStatBuild : ScriptableObject
     public int alacrityLevel;
     public int tenacityLevel;
     public int brillianceLevel;
-    public int intuitionLevel;
-    public int confidenceLevel;
+    public int intuitionLevel; // 3
+    public int confidenceLevel; // 4
     [Header("Abilities")]
     public StatAbility[] playerAbilities;
+
+    
 
 
 

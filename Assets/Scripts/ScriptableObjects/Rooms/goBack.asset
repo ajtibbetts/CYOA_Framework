@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: 'This is a page to go back to starting room {p.playerName} and {p.currentGold}
     and your current health is {p.currentHealth} out of {p.maxHealth}. '
+  pageImage: {fileID: 21300000, guid: efe3e4c300a0b3641893e8613a8c9ba6, type: 3}
   roomName: 
   playerActionOptions:
   - buttonText: Back to start.
@@ -21,6 +22,7 @@ MonoBehaviour:
     valueRoom: {fileID: 11400000, guid: 10e255e32ec12e746bf599430e62aa6a, type: 2}
     conditionalRequirement:
       conditionMet: 0
+      hideUnlessMet: 0
       conditionsToMeet: []
       passRoom: {fileID: 0}
       passButtonText: 
@@ -33,3 +35,4 @@ MonoBehaviour:
         propertyValue: 0
         intParam: 0
         stringParam: 
+  pageEventsToTrigger: []
