@@ -9,7 +9,10 @@ public class UIManager : MonoBehaviour
     [HideInInspector] public gameController controller;
 
     // UI elements
-    
+    [Header("Main Menu")]
+    public RectTransform uGuiElement;
+    public Vector2 targetPosition;
+    public float animationTime;
     [Header("Content")]
     public GameObject contentScrollContainer;
     public Scrollbar vertScrollBar;
@@ -58,6 +61,7 @@ public class UIManager : MonoBehaviour
     void Start(){
         
         toggleGroup.SetAllTogglesOff();
+        
 
     }
 
@@ -67,12 +71,27 @@ public class UIManager : MonoBehaviour
         
     }
 
+    public void SlideIn(){
+        iTween.ValueTo(uGuiElement.gameObject, iTween.Hash(
+            "from", uGuiElement.anchoredPosition,
+            "to", targetPosition,
+            "time", animationTime,
+            "onupdatetarget", this.gameObject, 
+            "onupdate", "MoveGuiElement"));
+    }
+    
+ 
+    public void MoveGuiElement(Vector2 position) {
+        uGuiElement.anchoredPosition = position;
+    }
+
     public void onSwipe(SwipeData data) {
         Debug.Log("Swipe in Direction: " + data.Direction);
         if(data.Direction == SwipeDirection.Right){
             Debug.Log("Swipe is right. Start X: " + data.StartPosition.x + " End X: " + data.EndPosition.x);
             if(data.EndPosition.x <= globalConfig.UI.MAX_MENU_SWIPE_POS_X){
                 Debug.Log("Open menu!");
+                SlideIn();
             }
         }
     }

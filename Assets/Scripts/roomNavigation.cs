@@ -46,11 +46,16 @@ public class roomNavigation : MonoBehaviour
         
         Debug.Log("changing rooms..");
         // check for event
-        if(currentRoom.playerActionOptions[buttonNumber].eventData.eventToTrigger != null) {
-            //Debug.Log("changing rooms / activating event..");
-            string eventText = currentRoom.playerActionOptions[buttonNumber].eventData.eventToTrigger.activateEvent(controller, currentRoom.playerActionOptions[buttonNumber].eventData.parameters); 
-            //Debug.Log(eventText);
-            controller.LogStringWithReturn(eventText);
+
+        // Debug.Log("Checking for events to fire on this selected option..");
+        if(currentRoom.playerActionOptions[buttonNumber].eventsToTrigger.Length > 0) {
+            // Debug.Log("Events found. Firing off events");
+            foreach(actionEvent e in currentRoom.playerActionOptions[buttonNumber].eventsToTrigger) {
+                if(e.eventToTrigger != null) {
+                    controller.LogStringWithReturn(e.eventToTrigger.activateEvent(controller, e.parameters));
+                }
+            }
+            
         }
 
         currentRoom = currentRoom.playerActionOptions[buttonNumber].valueRoom;

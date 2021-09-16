@@ -16,8 +16,9 @@ public class actionOption
     public Room valueRoom;
     [Tooltip("Optional conditional requirement that must be met for this action to be taken.")]
     public actionOptionCondition conditionalRequirement;
+    public conditionalProperty requiredProperty;
     [Tooltip("Action event to fire off if this action is taken.")]
-    public actionEvent eventData;
+    public actionEvent[] eventsToTrigger;
     
 }
 

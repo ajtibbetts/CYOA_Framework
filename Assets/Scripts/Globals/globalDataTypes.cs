@@ -20,12 +20,13 @@ using UnityEngine;
 [Serializable]
 public enum conditionType {
     playerProperty,
+    playerSkill,
     npcProperty,
     enemyProperty,
     storyProperty,
     itemProperty
-
 }
+
 [Serializable]
 public enum conditionEval {
     isEqualTo,
@@ -41,7 +42,8 @@ public enum conditionEval {
 public struct actionEvent {
         public CYOA_Event eventToTrigger;
         public eventParams parameters;
-    }
+}
+
 [Serializable]
 public struct actionOptionCondition {
     [Header("Condition")]
@@ -57,6 +59,55 @@ public struct actionOptionCondition {
 }
 
 [Serializable]
+public struct conditionalProperty {
+    [Header("Condition")]
+    public Boolean allowRoll;
+    public Boolean hideUnlessMet;
+    public conditionType conditionalType;
+    public String propertyName;
+    public int requiredValue;
+    [Header("Outcome")]
+    public Room failedPage;
+    public actionEvent[] failedEvents;
+
+}
+
+[Serializable]
+public struct conditionalThought {
+    [Header("Condition")]
+    public string requiredSkill;
+    public int requiredSkillLevel;
+    [Header("Outcome")]
+    public string passedText;
+    public string failedText;
+    [Header("Optional Player Actions")]
+    public conditionalPageOption[] actionOptionsToAdd;
+    public actionEvent[] eventsToTrigger;
+}
+
+[Serializable]
+public struct conditionalPageText {
+    [Header("Page Info")]
+    [Tooltip("Conditional page text that will replace default text.")]
+    public string pageText;
+    [Tooltip("Conditional page image that will replace default image.")]
+    public Sprite pageImage;
+    [Header("Condition")]
+    public conditionalStatement conditionalRequirement;
+    [Header("Optional Player Actions")]
+    public conditionalPageOption[] actionOptionsToAdd;
+    
+}
+
+[Serializable]
+public struct conditionalPageOption {
+    [Tooltip("Options if any that will be added to options list BEFORE global action options.")]
+    public string buttonText;
+    public Room destinationPage;
+    public actionEvent[] eventsToTrigger;
+}
+
+[Serializable]
 public struct conditionalStatement {
     public conditionType condition;
     public string propertyName;
@@ -65,14 +116,14 @@ public struct conditionalStatement {
     public int valueInt;
 }
 
+
+
 [Serializable]
 public struct statPlayerStat {
     public string statName;
     public int statCurrent;
     public int statMax;
-
     public int statID;
-
 }
 
 [Serializable]

@@ -12,8 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecdcaed9e2cb5a34bab5805728ccea5a, type: 3}
   m_Name: takeGold
   m_EditorClassIdentifier: 
-  description: Thank you, I will take your gold gladly.
   roomName: 
+  pageImage: {fileID: 0}
+  description: Thank you, I will take your gold gladly.
+  conditionalPageTexts: []
+  pageThoughts: []
+  pageEventsToTrigger:
+  - eventToTrigger: {fileID: 11400000, guid: 8feeff7ea8797ea41a01b1afb0965a59, type: 2}
+    parameters:
+      propertyName: currentGold
+      propertyValue: -500
+      intParam: 0
+      stringParam: Gold
   playerActionOptions:
   - buttonText: Go back.
     actionTakenText: 
@@ -26,17 +36,12 @@ MonoBehaviour:
       passButtonText: 
       passActionText: 
       failButtonText: 
-    eventData:
-      eventToTrigger: {fileID: 0}
-      parameters:
-        propertyName: 
-        propertyValue: 0
-        intParam: 0
-        stringParam: 
-  pageEventsToTrigger:
-  - eventToTrigger: {fileID: 11400000, guid: 8feeff7ea8797ea41a01b1afb0965a59, type: 2}
-    parameters:
-      propertyName: currentGold
-      propertyValue: -500
-      intParam: 0
-      stringParam: Gold
+    requiredProperty:
+      allowRoll: 0
+      hideUnlessMet: 0
+      conditionalType: 0
+      propertyName: 
+      requiredValue: 0
+      failedPage: {fileID: 0}
+      failedEvents: []
+    eventsToTrigger: []

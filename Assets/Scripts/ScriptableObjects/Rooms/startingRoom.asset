@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecdcaed9e2cb5a34bab5805728ccea5a, type: 3}
   m_Name: startingRoom
   m_EditorClassIdentifier: 
+  roomName: starting room
+  pageImage: {fileID: 0}
   description: "<align=\"center\">\n<b><u><size=150%>Chapter 1</size></u></b>\n<i><size=110%>Humble
     Beginnings</size></i></align>\n\n\tMany years ago there was an person named {p.playerName}
     so exceedingly fond of new clothes that he spent all his money on being well
@@ -30,7 +32,27 @@ MonoBehaviour:
     tell the wise men from the fools. Yes, I certainly must get some of the stuff
     woven for me right away.\" He paid the two swindlers a large sum of money to
     start work at once."
-  roomName: starting room
+  conditionalPageTexts:
+  - pageText: 
+    pageImage: {fileID: 0}
+    conditionalRequirement:
+      condition: 0
+      propertyName: 
+      evaluation: 0
+      valueString: 
+      valueInt: 0
+    actionOptionsToAdd:
+    - buttonText: 
+      destinationPage: {fileID: 0}
+      eventsToTrigger: []
+  pageThoughts:
+  - requiredSkill: 
+    requiredSkillLevel: 0
+    passedText: 
+    failedText: 
+    actionOptionsToAdd: []
+    eventsToTrigger: []
+  pageEventsToTrigger: []
   playerActionOptions:
   - buttonText: This is an option.
     actionTakenText: 
@@ -43,13 +65,15 @@ MonoBehaviour:
       passButtonText: 
       passActionText: 
       failButtonText: 
-    eventData:
-      eventToTrigger: {fileID: 0}
-      parameters:
-        propertyName: 
-        propertyValue: 0
-        intParam: 0
-        stringParam: 
+    requiredProperty:
+      allowRoll: 0
+      hideUnlessMet: 0
+      conditionalType: 0
+      propertyName: 
+      requiredValue: 0
+      failedPage: {fileID: 0}
+      failedEvents: []
+    eventsToTrigger: []
   - buttonText: This option will give the player 100 gold.
     actionTakenText: 
     valueRoom: {fileID: 11400000, guid: 0f514392e3cbfcd45a2da4b04c146001, type: 2}
@@ -61,11 +85,25 @@ MonoBehaviour:
       passButtonText: 
       passActionText: 
       failButtonText: 
-    eventData:
-      eventToTrigger: {fileID: 11400000, guid: 8feeff7ea8797ea41a01b1afb0965a59, type: 2}
+    requiredProperty:
+      allowRoll: 0
+      hideUnlessMet: 0
+      conditionalType: 0
+      propertyName: 
+      requiredValue: 0
+      failedPage: {fileID: 0}
+      failedEvents: []
+    eventsToTrigger:
+    - eventToTrigger: {fileID: 11400000, guid: 8feeff7ea8797ea41a01b1afb0965a59, type: 2}
       parameters:
         propertyName: currentGold
         propertyValue: 100
+        intParam: 0
+        stringParam: Gold
+    - eventToTrigger: {fileID: 11400000, guid: 8feeff7ea8797ea41a01b1afb0965a59, type: 2}
+      parameters:
+        propertyName: currentGold
+        propertyValue: 300
         intParam: 0
         stringParam: Gold
   - buttonText: This option is only available at 500 gold or more.
@@ -84,11 +122,12 @@ MonoBehaviour:
       passButtonText: Show your gold to impress.
       passActionText: You've showed your gold to impress.
       failButtonText: You do not have enough gold to impress.
-    eventData:
-      eventToTrigger: {fileID: 0}
-      parameters:
-        propertyName: currentGold
-        propertyValue: 100
-        intParam: 0
-        stringParam: Gold
-  pageEventsToTrigger: []
+    requiredProperty:
+      allowRoll: 0
+      hideUnlessMet: 0
+      conditionalType: 0
+      propertyName: 
+      requiredValue: 0
+      failedPage: {fileID: 0}
+      failedEvents: []
+    eventsToTrigger: []
