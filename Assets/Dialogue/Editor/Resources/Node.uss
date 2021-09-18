@@ -1,0 +1,4 @@
+DialogueNode #title{
+    background-color: green;
+    
+}

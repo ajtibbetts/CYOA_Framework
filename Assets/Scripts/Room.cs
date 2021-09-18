@@ -20,6 +20,4 @@ public class Room : ScriptableObject
     public actionEvent[] pageEventsToTrigger;
     [Tooltip("List of action options the player can take on this page, regardless of conditional pages.")]
     public actionOption[] playerActionOptions;
-    
-    
 }
