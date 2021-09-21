@@ -22,13 +22,26 @@ MonoBehaviour:
   - BaseNodeGuid: b2f30fd9-fb0c-42c2-93be-9e31763077bc
     PortName: This is evil, John.
     TargetNodeGuid: f2a3aef9-34df-4eee-a761-da6127cc42cf
+  - BaseNodeGuid: f2a3aef9-34df-4eee-a761-da6127cc42cf
+    PortName: Choice 1
+    TargetNodeGuid: e73f9caf-eb83-43fb-964d-f0eabf9216f8
+  - BaseNodeGuid: fc91b94f-eb6d-47e1-816b-2d5ec75abdc8
+    PortName: Choice 1
+    TargetNodeGuid: e73f9caf-eb83-43fb-964d-f0eabf9216f8
   DialogueNodeData:
-  - Guid: b2f30fd9-fb0c-42c2-93be-9e31763077bc
-    DialogueText: Welcome to Jurassic park!
-    Position: {x: 252, y: 120}
-  - Guid: fc91b94f-eb6d-47e1-816b-2d5ec75abdc8
-    DialogueText: I agree.
-    Position: {x: 627, y: 57}
   - Guid: f2a3aef9-34df-4eee-a761-da6127cc42cf
     DialogueText: What do you know????
-    Position: {x: 627, y: 213}
+    Position: {x: 646, y: 336}
+  - Guid: fc91b94f-eb6d-47e1-816b-2d5ec75abdc8
+    DialogueText: I agree.
+    Position: {x: 664, y: 80}
+  - Guid: e73f9caf-eb83-43fb-964d-f0eabf9216f8
+    DialogueText: either way i am god.
+    Position: {x: 964, y: 200}
+  - Guid: b2f30fd9-fb0c-42c2-93be-9e31763077bc
+    DialogueText: 'Welcome to Jurassic park!
+
+
+      this is some more data'
+    Position: {x: 240, y: 117}
+  ExposedProperties: []

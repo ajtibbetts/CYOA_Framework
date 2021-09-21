@@ -17,6 +17,7 @@ public class GraphSaveUtility
     private List<Edge> Edges => _targetGraphView.edges.ToList();
     private List<DialogueNode> Nodes => _targetGraphView.nodes.ToList().Cast<DialogueNode>().ToList();
 
+    
     public static GraphSaveUtility GetInstance(DialogueGraphView targetGraphView)
     {
         return new GraphSaveUtility
@@ -27,9 +28,38 @@ public class GraphSaveUtility
 
     public void SaveGraph(string fileName)
     {
-        if(!Edges.Any()) return; // if there are no connections (edges) then return;
         
         var dialogueContainer = ScriptableObject.CreateInstance<DialogueContainer>();
+        if(!SaveNodes(dialogueContainer)) return;
+        SaveExposedProperties(dialogueContainer);
+
+        // check for existing filename
+        if(System.IO.File.Exists($"{Application.dataPath}/Resources/{fileName}.asset"))
+        {
+            var overwrite = EditorUtility.DisplayDialog("Filename already exists!",$"Target filename: {fileName} already exists. Are you sure you want to overwrite?","Yes","No");
+            if(!overwrite)
+            {
+                return;
+            }
+        }
+        else
+        {
+            Debug.Log("File name does not exist. Creating new file at location: " + Application.dataPath);
+        }
+
+        // auto creates resources folder if it doesn't exist
+        if(!AssetDatabase.IsValidFolder("Assets/Resources"))
+            AssetDatabase.CreateFolder("Assets","Resources");
+
+        AssetDatabase.CreateAsset(dialogueContainer, $"Assets/Resources/{fileName}.asset");
+        AssetDatabase.SaveAssets();
+
+    
+    }
+
+    private bool SaveNodes(DialogueContainer dialogueContainer)
+    {
+        if(!Edges.Any()) return false; // if there are no connections (edges) then return;
         
         var connectedPorts = Edges.Where(x => x.input.node != null).ToArray();
         for (int i = 0; i < connectedPorts.Length; i++)
@@ -48,22 +78,59 @@ public class GraphSaveUtility
 
         foreach (var dialogueNode in Nodes.Where(node=>!node.EntryPoint))
         {
+            // store node data
             dialogueContainer.DialogueNodeData.Add(new DialogueNodeData
             {
                 Guid = dialogueNode.GUID,
                 DialogueText = dialogueNode.DialogueText,
                 Position = dialogueNode.GetPosition().position
             });
+
+            // check if this node is event node and add data to save
+            if(dialogueNode.DialogueText == "Event Node")
+            {
+                var eventNode = (EventNode) dialogueNode;
+                dialogueContainer.EventNodeData.Add(new EventNodeData
+                {
+                    nodeGuid = dialogueNode.GUID,
+                    EventName = eventNode.EventName,
+                    EventValue = eventNode.EventValue,
+                    isRepeatable = eventNode.isRepeatable,
+                    hasFired = eventNode.hasFired
+                });
+
+            }
+
+            // Check this nodes ports for any skill checks to save
+            foreach (Port outputPort in dialogueNode.outputContainer.Children())
+            {
+                if(outputPort.portName.Contains("Chk.Pass"))
+                {
+                    var _passPort = outputPort;
+                    var _failPort = ((Port)dialogueNode.outputContainer.ElementAt(dialogueNode.outputContainer.IndexOf(outputPort) + 1));
+                    var _content = ((TextField)_passPort.contentContainer.ElementAt(3)).value;
+                    var _skillName = ((TextField)_failPort.contentContainer.ElementAt(2)).value;
+                    var _checkValue = ((TextField)_failPort.contentContainer.ElementAt(4)).value;
+   
+                    dialogueContainer.DialogueCheckData.Add(new DialogueCheckData
+                    {
+                        BaseNodeGuid = dialogueNode.GUID,
+                        passPortName = _passPort.portName,
+                        failPortName = _failPort.portName,
+                        content = _content,
+                        skillName = _skillName,
+                        checkValue = _checkValue
+                    });   
+                }
+            }
         }
 
-        // auto creates resources folder if it doesn't exist
-        if(!AssetDatabase.IsValidFolder("Assets/Resources"))
-            AssetDatabase.CreateFolder("Assets","Resources");
+        return true;
+    }
 
-        AssetDatabase.CreateAsset(dialogueContainer, $"Assets/Resources/{fileName}.asset");
-        AssetDatabase.SaveAssets();
-
-    
+    private void SaveExposedProperties(DialogueContainer dialogueContainer)
+    {
+        dialogueContainer.ExposedProperties.AddRange(_targetGraphView.ExposedProperties);
     }
 
     public void LoadGraph(string fileName)
@@ -78,6 +145,7 @@ public class GraphSaveUtility
         ClearGraph();
         CreateNodes();
         ConnectNodes();
+        CreateExposedProperties();
 
 
     }
@@ -107,12 +175,52 @@ public class GraphSaveUtility
 
         foreach(var nodeData in _containerCache.DialogueNodeData)
         {
-            var tempNode = _targetGraphView.CreateDialogueNode(nodeData.DialogueText);
-            tempNode.GUID = nodeData.Guid;
-            _targetGraphView.AddElement(tempNode);
+            
+            // first check for any event nodes
+            if(nodeData.DialogueText == "Event Node")
+            {
+                var _eventNodeData = _containerCache.EventNodeData.FirstOrDefault(x => x.nodeGuid == nodeData.Guid);
+                if(_eventNodeData != null)
+                {
+                    var tempNode = _targetGraphView.CreateEventNode(nodeData.DialogueText, Vector2.zero, 
+                        _eventNodeData.EventName, _eventNodeData.EventValue, _eventNodeData.isRepeatable, _eventNodeData.hasFired);
+                    tempNode.GUID = nodeData.Guid;
+                    _targetGraphView.AddElement(tempNode);
+                }
+            }
+            else
+            {
 
-            var nodePorts = _containerCache.NodeLinks.Where(x => x.BaseNodeGuid == nodeData.Guid).ToList();
-            nodePorts.ForEach(x => _targetGraphView.AddChoicePort(tempNode,x.PortName));
+            
+                // we set position later, so send vec2 zero for now
+                var tempNode = _targetGraphView.CreateDialogueNode(nodeData.DialogueText, Vector2.zero);
+                tempNode.GUID = nodeData.Guid;
+                _targetGraphView.AddElement(tempNode);
+
+                var nodePorts = _containerCache.NodeLinks.Where(x => x.BaseNodeGuid == nodeData.Guid).ToList();
+                nodePorts.ForEach(x => 
+                {
+                    // check for any skill check ports
+                    if(x.PortName.Contains("Chk.Pass"))
+                    {
+                        var _checkData = _containerCache.DialogueCheckData.FirstOrDefault(y => y.passPortName == x.PortName && y.BaseNodeGuid == nodeData.Guid);
+                        if(_checkData != null)
+                        {
+                            // create check ports
+                            _targetGraphView.AddCheckPorts(tempNode, 
+                                _checkData.content, _checkData.skillName, _checkData.checkValue);
+                        }
+                    }
+                    else if (x.PortName.Contains("Chk.Fail"))
+                    {
+                    // do nothing / skip;
+                    }
+                    else {
+                        _targetGraphView.AddChoicePort(tempNode,x.PortName);
+                    }
+                    
+                });
+            }
 
         }
 
@@ -152,6 +260,18 @@ public class GraphSaveUtility
         tempEdge.input.Connect(tempEdge);
         tempEdge.output.Connect(tempEdge);
         _targetGraphView.Add(tempEdge);
+    }
+
+    private void CreateExposedProperties()
+    {
+        // clear existing properties on hot reload
+        _targetGraphView.ClearBlackBoardAndExposedProperties();
+
+        // add properties from data
+        foreach (var exposedProperty in _containerCache.ExposedProperties)
+        {
+            _targetGraphView.AddPropertyToBlackboard(exposedProperty);
+        }
     }
 
 

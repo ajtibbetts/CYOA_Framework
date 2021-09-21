@@ -13,22 +13,36 @@ MonoBehaviour:
   m_Name: sample
   m_EditorClassIdentifier: 
   NodeLinks:
-  - BaseNodeGuid: be136609-6ab0-47c5-b9a3-483805d496bb
+  - BaseNodeGuid: 8a83bc5f-4af5-463a-a8d6-a063c355fa6b
     PortName: Next
-    TargetNodeGuid: 61a63740-9609-465b-93a8-594ab9d9c5b8
-  - BaseNodeGuid: 61a63740-9609-465b-93a8-594ab9d9c5b8
-    PortName: Choice 1
-    TargetNodeGuid: c84f0ed6-fb36-4c10-af83-751ade832cb7
-  - BaseNodeGuid: 61a63740-9609-465b-93a8-594ab9d9c5b8
-    PortName: Choice 2
-    TargetNodeGuid: d01e24f4-065e-44a6-a2c7-ca8ce66f8e23
+    TargetNodeGuid: 7f600088-bb22-4fd0-87eb-6413237e59d9
+  - BaseNodeGuid: 7f600088-bb22-4fd0-87eb-6413237e59d9
+    PortName: some choice
+    TargetNodeGuid: 576573d5-2a49-46b9-bc48-7ab282f95090
+  - BaseNodeGuid: 7f600088-bb22-4fd0-87eb-6413237e59d9
+    PortName: Chk.Pass
+    TargetNodeGuid: 4fa1906f-a540-42f7-b8e4-7ea95fdba517
+  - BaseNodeGuid: 7f600088-bb22-4fd0-87eb-6413237e59d9
+    PortName: Chk.Fail
+    TargetNodeGuid: 5e78e238-dbc2-43a4-99b6-337ee6e7279f
   DialogueNodeData:
-  - Guid: c84f0ed6-fb36-4c10-af83-751ade832cb7
-    DialogueText: Dialogue Node
-    Position: {x: 529, y: 59}
-  - Guid: 61a63740-9609-465b-93a8-594ab9d9c5b8
-    DialogueText: Dialogue Node
-    Position: {x: 252, y: 124}
-  - Guid: d01e24f4-065e-44a6-a2c7-ca8ce66f8e23
-    DialogueText: Dialogue Node
-    Position: {x: 506, y: 200}
+  - Guid: 576573d5-2a49-46b9-bc48-7ab282f95090
+    DialogueText: results from first choice
+    Position: {x: 703, y: -128}
+  - Guid: 5e78e238-dbc2-43a4-99b6-337ee6e7279f
+    DialogueText: you failed the skill check
+    Position: {x: 703, y: 167}
+  - Guid: 4fa1906f-a540-42f7-b8e4-7ea95fdba517
+    DialogueText: you passed the skill check
+    Position: {x: 703, y: 21}
+  - Guid: 7f600088-bb22-4fd0-87eb-6413237e59d9
+    DialogueText: welcome to zombo com!
+    Position: {x: 291, y: -10}
+  ExposedProperties: []
+  DialogueCheckData:
+  - BaseNodeGuid: 7f600088-bb22-4fd0-87eb-6413237e59d9
+    passPortName: Chk.Pass
+    failPortName: Chk.Fail
+    content: another skill check
+    skillName: fight
+    checkValue: 4
