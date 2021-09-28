@@ -13,35 +13,106 @@ MonoBehaviour:
   m_Name: event
   m_EditorClassIdentifier: 
   NodeLinks:
-  - BaseNodeGuid: fdff5f52-1ba6-4d69-b003-77298c4b5bd0
+  - BaseNodeGuid: 2a154f32-b317-4c31-8c99-9b917b609acf
     PortName: Next
-    TargetNodeGuid: 6f4d2026-c514-4dcf-af5f-3cbe7dadff5c
+    TargetNodeGuid: 059565ce-72fd-441e-a52b-7053e6289d7b
+  - BaseNodeGuid: 059565ce-72fd-441e-a52b-7053e6289d7b
+    PortName: Event Fired
+    TargetNodeGuid: ad6d611c-3536-46ac-b633-46caccc8b2dc
+  - BaseNodeGuid: 059565ce-72fd-441e-a52b-7053e6289d7b
+    PortName: Already Triggered
+    TargetNodeGuid: db6f7375-fb40-4383-b9a6-e5114509be7b
   - BaseNodeGuid: 6f4d2026-c514-4dcf-af5f-3cbe7dadff5c
     PortName: Event Fired
-    TargetNodeGuid: 2a154f32-b317-4c31-8c99-9b917b609acf
+    TargetNodeGuid: d4cf5e8a-5c66-4ec1-a2c2-dcef94abf3ef
+  - BaseNodeGuid: 6f4d2026-c514-4dcf-af5f-3cbe7dadff5c
+    PortName: Already Triggered
+    TargetNodeGuid: f01968f8-6515-4780-ae08-5311a842d581
+  - BaseNodeGuid: 5a707428-72c7-4cbf-8e8f-d09aac7b6049
+    PortName: Event Fired
+    TargetNodeGuid: d4cf5e8a-5c66-4ec1-a2c2-dcef94abf3ef
+  - BaseNodeGuid: 5a707428-72c7-4cbf-8e8f-d09aac7b6049
+    PortName: Already Triggered
+    TargetNodeGuid: d4cf5e8a-5c66-4ec1-a2c2-dcef94abf3ef
+  - BaseNodeGuid: db6f7375-fb40-4383-b9a6-e5114509be7b
+    PortName: Event Fired
+    TargetNodeGuid: f01968f8-6515-4780-ae08-5311a842d581
+  - BaseNodeGuid: db6f7375-fb40-4383-b9a6-e5114509be7b
+    PortName: Already Triggered
+    TargetNodeGuid: f01968f8-6515-4780-ae08-5311a842d581
+  - BaseNodeGuid: ad6d611c-3536-46ac-b633-46caccc8b2dc
+    PortName: Choice 1
+    TargetNodeGuid: 6f4d2026-c514-4dcf-af5f-3cbe7dadff5c
+  - BaseNodeGuid: ad6d611c-3536-46ac-b633-46caccc8b2dc
+    PortName: Choice 2
+    TargetNodeGuid: 5a707428-72c7-4cbf-8e8f-d09aac7b6049
+  - BaseNodeGuid: ad6d611c-3536-46ac-b633-46caccc8b2dc
+    PortName: Choice 3
+    TargetNodeGuid: db6f7375-fb40-4383-b9a6-e5114509be7b
+  - BaseNodeGuid: d4cf5e8a-5c66-4ec1-a2c2-dcef94abf3ef
+    PortName: Event Fired
+    TargetNodeGuid: f01968f8-6515-4780-ae08-5311a842d581
+  - BaseNodeGuid: d4cf5e8a-5c66-4ec1-a2c2-dcef94abf3ef
+    PortName: Already Triggered
+    TargetNodeGuid: f01968f8-6515-4780-ae08-5311a842d581
   DialogueNodeData:
-  - Guid: 6f4d2026-c514-4dcf-af5f-3cbe7dadff5c
-    DialogueText: Event Node
-    Position: {x: 325, y: 127}
-  - Guid: ad6d611c-3536-46ac-b633-46caccc8b2dc
-    DialogueText: Dialogue Node
-    Position: {x: 0, y: 0}
   - Guid: 059565ce-72fd-441e-a52b-7053e6289d7b
     DialogueText: Event Node
-    Position: {x: 0, y: 0}
-  - Guid: 2a154f32-b317-4c31-8c99-9b917b609acf
+    Position: {x: 287, y: 92}
+    nodeType: 1
+  - Guid: f01968f8-6515-4780-ae08-5311a842d581
     DialogueText: Dialogue Node
-    Position: {x: 554, y: 163}
-  ExposedProperties: []
+    Position: {x: 1522, y: -47}
+    nodeType: 0
+  - Guid: 5a707428-72c7-4cbf-8e8f-d09aac7b6049
+    DialogueText: Event Node
+    Position: {x: 988, y: 25}
+    nodeType: 1
+  - Guid: db6f7375-fb40-4383-b9a6-e5114509be7b
+    DialogueText: Event Node
+    Position: {x: 958, y: 266}
+    nodeType: 1
+  - Guid: ad6d611c-3536-46ac-b633-46caccc8b2dc
+    DialogueText: Dialogue Node
+    Position: {x: 500, y: -71}
+    nodeType: 0
+  - Guid: 6f4d2026-c514-4dcf-af5f-3cbe7dadff5c
+    DialogueText: Event Node
+    Position: {x: 932, y: -264}
+    nodeType: 1
+  - Guid: d4cf5e8a-5c66-4ec1-a2c2-dcef94abf3ef
+    DialogueText: Event Node
+    Position: {x: 1315, y: -394}
+    nodeType: 1
+  ExposedProperties:
+  - PropertyName: New String
+    PropertyValue: New Value
   DialogueCheckData: []
   EventNodeData:
-  - nodeGuid: 6f4d2026-c514-4dcf-af5f-3cbe7dadff5c
-    EventName: Event Name
-    EventValue: value
-    isRepeatable: 0
-    hasFired: 0
   - nodeGuid: 059565ce-72fd-441e-a52b-7053e6289d7b
-    EventName: 
-    EventValue: 
+    EventName: openingEvent
+    EventValue: testValue
+    isRepeatable: 1
+    hasFired: 0
+  - nodeGuid: 5a707428-72c7-4cbf-8e8f-d09aac7b6049
+    EventName: choice2Event
+    EventValue: 1
+    isRepeatable: 1
+    hasFired: 0
+  - nodeGuid: db6f7375-fb40-4383-b9a6-e5114509be7b
+    EventName: choice3Event
+    EventValue: 1
     isRepeatable: 0
     hasFired: 0
+  - nodeGuid: 6f4d2026-c514-4dcf-af5f-3cbe7dadff5c
+    EventName: choice1event
+    EventValue: choice1
+    isRepeatable: 0
+    hasFired: 0
+  - nodeGuid: d4cf5e8a-5c66-4ec1-a2c2-dcef94abf3ef
+    EventName: lastEvent
+    EventValue: 4
+    isRepeatable: 0
+    hasFired: 0
+  CheckNodeData: []
+  EndpointNodeData: []

@@ -76,6 +76,8 @@ public class GraphSaveUtility
 
         }
 
+
+        // run through all nodes in the graph and process each type
         foreach (var dialogueNode in Nodes.Where(node=>!node.EntryPoint))
         {
             // store node data
@@ -83,11 +85,12 @@ public class GraphSaveUtility
             {
                 Guid = dialogueNode.GUID,
                 DialogueText = dialogueNode.DialogueText,
-                Position = dialogueNode.GetPosition().position
+                Position = dialogueNode.GetPosition().position,
+                nodeType = dialogueNode.nodeType
             });
 
             // check if this node is event node and add data to save
-            if(dialogueNode.DialogueText == "Event Node")
+            if(dialogueNode.DialogueText.Contains("Event Node"))
             {
                 var eventNode = (EventNode) dialogueNode;
                 dialogueContainer.EventNodeData.Add(new EventNodeData
@@ -96,9 +99,38 @@ public class GraphSaveUtility
                     EventName = eventNode.EventName,
                     EventValue = eventNode.EventValue,
                     isRepeatable = eventNode.isRepeatable,
-                    hasFired = eventNode.hasFired
+                    hasFired = eventNode.hasFired,
+                    eventType = eventNode.eventType
                 });
 
+            }
+
+            // check if the node is a check type node
+            if(dialogueNode.DialogueText.Contains("Check Node"))
+            {
+                // Debug.Log("Check node found while saving!");
+                var checkNode = (CheckNode) dialogueNode;
+                dialogueContainer.CheckNodeData.Add(new CheckNodeData
+                {
+                    nodeGuid = dialogueNode.GUID,
+                    checkType = checkNode.checkType,
+                    checkName = checkNode.checkName,
+                    checkValue = checkNode.checkValue,
+                    isRepeatable = checkNode.isRepeatable,
+                    isRollable = checkNode.isRollable,
+                    alreadyPassed = checkNode.alreadyPassed
+                });
+            }
+
+            // check if the node is an endpoint
+            if(dialogueNode.DialogueText.Contains("ENDPOINT"))
+            {
+                var endNode = (EndpointNode) dialogueNode;
+                dialogueContainer.EndpointNodeData.Add(new EndpointNodeData
+                {
+                    nodeGuid = dialogueNode.GUID,
+                    exitText = endNode.exitText
+                });
             }
 
             // Check this nodes ports for any skill checks to save
@@ -177,20 +209,45 @@ public class GraphSaveUtility
         {
             
             // first check for any event nodes
-            if(nodeData.DialogueText == "Event Node")
+            if(nodeData.DialogueText.Contains("Event Node"))
             {
                 var _eventNodeData = _containerCache.EventNodeData.FirstOrDefault(x => x.nodeGuid == nodeData.Guid);
                 if(_eventNodeData != null)
                 {
-                    var tempNode = _targetGraphView.CreateEventNode(nodeData.DialogueText, Vector2.zero, 
+                    var tempNode = _targetGraphView.CreateEventNode(nodeData.DialogueText, Vector2.zero, _eventNodeData.eventType,
                         _eventNodeData.EventName, _eventNodeData.EventValue, _eventNodeData.isRepeatable, _eventNodeData.hasFired);
+                    tempNode.GUID = nodeData.Guid;
+                    _targetGraphView.AddElement(tempNode);
+                }
+            }
+            else if(nodeData.DialogueText.Contains("Check Node"))
+            {
+                var _checkNodeData = _containerCache.CheckNodeData.FirstOrDefault(x => x.nodeGuid == nodeData.Guid);
+                if(_checkNodeData !=null)
+                {
+                    var tempNode = _targetGraphView.CreateCheckNode(nodeData.DialogueText, Vector2.zero,
+                        dataFormatter.getConditionText(_checkNodeData.checkType), _checkNodeData.checkType,
+                        _checkNodeData.checkName, _checkNodeData.checkValue,
+                        _checkNodeData.isRepeatable, _checkNodeData.isRollable, _checkNodeData.alreadyPassed
+                    );
+                    tempNode.GUID = nodeData.Guid;
+                    _targetGraphView.AddElement(tempNode);
+                }
+            }
+            else if(nodeData.DialogueText.Contains("ENDPOINT"))
+            {
+                var _endpointNodeData = _containerCache.EndpointNodeData.FirstOrDefault(x => x.nodeGuid == nodeData.Guid);
+                if(_endpointNodeData !=null)
+                {
+                    var tempNode = _targetGraphView.CreateEndpointNode(Vector2.zero, _endpointNodeData.exitText);
                     tempNode.GUID = nodeData.Guid;
                     _targetGraphView.AddElement(tempNode);
                 }
             }
             else
             {
-
+                
+                // for all base Dialogue nodes and add saved choice output ports
             
                 // we set position later, so send vec2 zero for now
                 var tempNode = _targetGraphView.CreateDialogueNode(nodeData.DialogueText, Vector2.zero);
@@ -236,13 +293,39 @@ public class GraphSaveUtility
             for(var j = 0; j < connections.Count; j++)
             {
                 var targetNodeGuid = connections[j].TargetNodeGuid;
+                
                 var targetNode = Nodes.First(x => x.GUID == targetNodeGuid);
-                LinkNodes(Nodes[i].outputContainer[j].Q<Port>(), (Port) targetNode.inputContainer[0]);
 
-                targetNode.SetPosition(new Rect( 
-                    _containerCache.DialogueNodeData.First(x => x.Guid == targetNodeGuid).Position,
-                    _targetGraphView.defaultNodeSize
-                ));
+                if(targetNode != null) {
+                    // keep this for now in case shit breaks and you need to assess again
+                    // Debug.Log("--------- NEW CONNECTION -----------");
+                    // Debug.Log("  --------- HOME NODE -------------");
+
+                    // Debug.Log("this node  " + Nodes[i]);
+                    // Debug.Log("this node guid " + Nodes[i].GUID);
+                    // Debug.Log("this node  text " + Nodes[i].DialogueText);
+                    // Debug.Log("this node input length: " + Nodes[i].inputContainer.childCount);
+                    // Debug.Log("this output length: " + Nodes[i].outputContainer.childCount);
+
+                    // Debug.Log("  --------- DESTINATION NODE ---------------");
+                    // Debug.Log("target node  " + targetNode);
+                    // Debug.Log("target node guidL " + targetNodeGuid);
+                    // Debug.Log("target node  text " + targetNode.DialogueText);
+                    // Debug.Log("target node input length: " + targetNode.inputContainer.childCount);
+                    // Debug.Log("target node output length: " + targetNode.outputContainer.childCount);
+                    
+                    
+                    
+                    LinkNodes(Nodes[i].outputContainer[j].Q<Port>(), (Port) targetNode.inputContainer[0]);
+
+                    targetNode.SetPosition(new Rect( 
+                        _containerCache.DialogueNodeData.First(x => x.Guid == targetNodeGuid).Position,
+                        _targetGraphView.defaultNodeSize
+                    ));
+
+                }
+                
+                
             }
         }
 

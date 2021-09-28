@@ -60,6 +60,11 @@ public class UIManager : MonoBehaviour
 
     void Start(){
         
+        // register event listeners
+        controller.CheckManager.onRollCheckStart += initRollUI;
+        controller.CheckManager.onRollCheckPass += initRollPassUI;
+        controller.CheckManager.onRollCheckFail += initRollFailUI;
+        
         toggleGroup.SetAllTogglesOff();
         
 
@@ -261,5 +266,20 @@ public class UIManager : MonoBehaviour
             confirmActionButton.GetComponentInChildren<Text>().text = actionToggleButtons[0].GetComponentInChildren<Text>().text;
             //Debug.Log("single action found");
         }
+    }
+
+    public void initRollUI()
+    {
+        Debug.Log("UI MANAGER: Initializing roll UI.");
+    }
+    
+    public void initRollPassUI()
+    {
+        Debug.Log("UI MANAGER: Initializing roll PASS UI.");
+    }
+
+    public void initRollFailUI()
+    {
+        Debug.Log("UI MANAGER: Initializing roll FAIL UI.");
     }
 }

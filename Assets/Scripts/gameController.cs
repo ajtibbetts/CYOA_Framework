@@ -15,6 +15,9 @@ public class gameController : MonoBehaviour
     [HideInInspector] public playerManager player;
     [HideInInspector] public roomNavigation roomNavigator;
     [HideInInspector] public UIManager UIManager;
+    [HideInInspector] public DialogueParser DialogueParser;
+    [HideInInspector] public CYOA_EventManager EventManager;
+    [HideInInspector] public checkManager CheckManager;
     [HideInInspector] public List<string> interactionDescriptionsInRoom = new List<string>();
     [HideInInspector] public List<string> buttonChoicesTexts = new List<string>();
     List<string> actionLog = new List<string>();
@@ -26,15 +29,25 @@ public class gameController : MonoBehaviour
         player = FindObjectOfType (typeof (playerManager)) as playerManager;
         roomNavigator = GetComponent<roomNavigation>();
         UIManager = GetComponent<UIManager>();
+        DialogueParser = GetComponent<DialogueParser>();
+        EventManager = GetComponent<CYOA_EventManager>();
+        CheckManager = GetComponent<checkManager>();
     }
 
     void Start()
     {
+        // register listeners
+        DialogueParser.onDialogueReachedDeadEnd += ResetDialogueRoute;
+        
+        // update ui
         UI_updatePlayerName();
         UI_updatePlayerHealth();
         UI_updatePlayerEnergy();
         UI_updatePlayerGold();
-        DisplayRoomText();
+        
+        // initialize first dialogue stored
+        DialogueParser.InitDialogue();
+        //DisplayRoomText();
     }
 
     public void DisplayLoggedText()
@@ -72,7 +85,9 @@ public class gameController : MonoBehaviour
 
         // string combinedText = roomNavigator.currentRoom.description + "\n" + joinedInteractionDescriptions;
         //LogStringWithReturn(combinedText);
-        DisplayLoggedText();
+        
+        DisplayLoggedText(); // temp remove to test graph
+        
     }
 
     private void UnpackRoom() {
@@ -118,5 +133,11 @@ public class gameController : MonoBehaviour
         Debug.Log("gold: " + player.stats.currentGold);
         Debug.Log("gold: " + player.stats.currentGold.ToString());
         UIManager.updatePlayerGoldText(player.stats.currentGold.ToString());
+    }
+
+    // Event Listeners
+    public void ResetDialogueRoute()
+    {
+        Debug.Log("End of dialogue graph reached. Resetting Dialogue route.");
     }
 }

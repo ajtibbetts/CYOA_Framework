@@ -92,8 +92,7 @@ public class DialogueGraphView : GraphView
         return node;
     }
 
-
-    public void CreateNode(string nodeName, Vector2 position)
+    public void CreateNode(string nodeName, Vector2 position, string nodePrefix="", string enumType = "")
     {
         switch(nodeName)
         {
@@ -101,12 +100,68 @@ public class DialogueGraphView : GraphView
                 AddElement(CreateDialogueNode(nodeName, position));
             break;
             case "Event Node":
-                AddElement(CreateEventNode(nodeName, position));
+                eventType eventType;
+                if(Enum.TryParse(enumType, out eventType))
+                {
+                    if(Enum.IsDefined(typeof(eventType), eventType) | eventType.ToString().Contains(","))
+                    {
+                        AddElement(CreateEventNode(nodeName, position, eventType));
+                    }
+                }
+
+            break;
+            case "Check Node":
+                conditionType checkType;
+                if(Enum.TryParse(enumType, out checkType))
+                {
+                    if (Enum.IsDefined(typeof(conditionType), checkType) | checkType.ToString().Contains(","))
+                    {
+                        AddElement(CreateCheckNode(nodeName, position, nodePrefix, checkType));
+                    }
+                }
+            break;
+            case "ENDPOINT":
+                AddElement(CreateEndpointNode(position));
             break;
             default:
             break;
         }
         
+    }
+
+    public EndpointNode CreateEndpointNode(Vector2 position, string _exitText = ""){
+
+        var node = new EndpointNode
+        {
+            title = "END",
+            GUID = Guid.NewGuid().ToString(),
+            DialogueText = "ENDPOINT",
+            exitText = _exitText,
+            nodeType = nodeType.endpointNode
+        };
+
+        var generatedPort = GeneratePort(node, Direction.Input);
+        generatedPort.portName = "Input";
+        node.inputContainer.Add(generatedPort);
+        node.styleSheets.Add(Resources.Load<StyleSheet>("Node"));
+
+        var textField = new TextField(string.Empty){
+            multiline = true
+        };
+        textField.RegisterValueChangedCallback(evt => 
+        { 
+            node.exitText = evt.newValue;
+           // dialogueNode.title = evt.newValue;
+        });
+        textField.SetValueWithoutNotify(node.exitText);
+        node.mainContainer.Add(new Label("Added flavor text."));
+        node.mainContainer.Add(textField);
+
+        node.RefreshExpandedState();
+        node.RefreshPorts();
+
+        node.SetPosition(new Rect(position, defaultNodeSize));
+        return node;
     }
 
 
@@ -116,7 +171,8 @@ public class DialogueGraphView : GraphView
         {
             title = "Dialogue Node",
             GUID = Guid.NewGuid().ToString(),
-            DialogueText = dialogueText
+            DialogueText = dialogueText,
+            nodeType = nodeType.dialogueNode
         };
 
         // add input and style sheet
@@ -155,18 +211,20 @@ public class DialogueGraphView : GraphView
         return dialogueNode;
     }
 
-    public EventNode CreateEventNode(string nodeName, Vector2 position, string eventName = "", string eventValue = "", bool repeatable = false, bool fired = false)
+    public EventNode CreateEventNode(string nodeName, Vector2 position, eventType _eventType, string eventName = "", string eventValue = "", bool repeatable = false, bool fired = false)
     {
         //Debug.Log("creating event node!");
         var eventNode = new EventNode
         {
-            title = "Event Node",
+            title = _eventType.ToString() + " Event Node",
             GUID = Guid.NewGuid().ToString(),
             DialogueText = nodeName,
             EventName = eventName,
             EventValue = eventValue,
             isRepeatable = repeatable,
-            hasFired = fired
+            hasFired = fired,
+            eventType = _eventType,
+            nodeType = nodeType.eventNode
         };
 
          // add input and style sheet
@@ -180,15 +238,23 @@ public class DialogueGraphView : GraphView
         outputPort.portName = "Event Fired";
         eventNode.outputContainer.Add(outputPort);
 
+        var outputPort2 = GeneratePort(eventNode, Direction.Output);
+        outputPort2.portName = "Already Triggered";
+        eventNode.outputContainer.Add(outputPort2);
 
         // setup event data container
-        var eventDataContainer = new VisualElement();
+        var eventDataContainer = new VisualElement{
+            name="eventDataContainer"
+        };
+        var eventNameContainer = new VisualElement();
+        var eventValueContainer = new VisualElement();
+        var eventToggleContainer = new VisualElement();
 
         // add event name field
         var textFieldEventName = new TextField
         {
             name = "Event Name",
-            value = String.Empty
+            value = eventName
         };
         textFieldEventName.RegisterValueChangedCallback(evt => eventNode.EventName = evt.newValue);
         textFieldEventName.SetValueWithoutNotify(eventNode.EventName);
@@ -196,15 +262,29 @@ public class DialogueGraphView : GraphView
         var textFieldEventValue = new TextField
         {
             name = "Event Value",
-            value = eventName
+            value = eventValue
         };
         textFieldEventValue.RegisterValueChangedCallback(evt => eventNode.EventValue = evt.newValue);
         textFieldEventValue.SetValueWithoutNotify(eventNode.EventValue);
+        // add is repeatable
+        var toggleIsRepeatable = new Toggle 
+        {
+            name = "isRepeatable?",
+            value = repeatable
+        };
+        toggleIsRepeatable.RegisterValueChangedCallback(evt => eventNode.isRepeatable = evt.newValue);
+        toggleIsRepeatable.SetValueWithoutNotify(eventNode.isRepeatable);
 
-        eventDataContainer.Add(new Label("Event Name:"));
-        eventDataContainer.Add(textFieldEventName);
-        eventDataContainer.Add(new Label("Parameter Value:"));
-        eventDataContainer.Add(textFieldEventValue);
+        eventNameContainer.Add(new Label("Event Name:"));
+        eventNameContainer.Add(textFieldEventName);
+        eventValueContainer.Add(new Label("Parameter Value:"));
+        eventValueContainer.Add(textFieldEventValue);
+        eventToggleContainer.Add(new Label("Is Repeatable?"));
+        eventToggleContainer.Add(toggleIsRepeatable);
+
+        eventDataContainer.Add(eventNameContainer);
+        eventDataContainer.Add(eventValueContainer);
+        eventDataContainer.Add(eventToggleContainer);
 
         
         eventNode.mainContainer.Add(eventDataContainer);
@@ -214,6 +294,119 @@ public class DialogueGraphView : GraphView
         eventNode.SetPosition(new Rect(position, defaultNodeSize));
 
         return eventNode;
+    }
+
+    public CheckNode CreateCheckNode(string nodeName, Vector2 position, string nodePrefix="", conditionType _checkType = conditionType.none, string _checkName = "", string _checkValue = "", bool repeatable = false, bool rollable = true, bool passed = false)
+    {
+        //Debug.Log("creating event node!");
+        var checkNode = new CheckNode
+        {
+            checkType = _checkType,
+            title = nodePrefix + " " + nodeName,
+            GUID = Guid.NewGuid().ToString(),
+            DialogueText = nodePrefix + " " + nodeName,
+            checkName = _checkName,
+            checkValue = _checkValue,
+            isRepeatable = repeatable,
+            isRollable = rollable,
+            alreadyPassed = passed,
+            nodeType = nodeType.checkNode
+        };
+        
+        // Debug.Log("this nodes check type " + checkNode.checkType.ToString());
+
+         // add input and style sheet
+        var inputPort = GeneratePort(checkNode, Direction.Input, Port.Capacity.Multi);
+        inputPort.portName = "Input";
+        checkNode.inputContainer.Add(inputPort);
+        checkNode.styleSheets.Add(Resources.Load<StyleSheet>("Node"));
+        checkNode.titleContainer.name = checkNode.checkType +"Title";
+
+        // output port once event fires
+        var outputPort = GeneratePort(checkNode, Direction.Output);
+        outputPort.portName = "Passed";
+        checkNode.outputContainer.Add(outputPort);
+
+        var outputPort2 = GeneratePort(checkNode, Direction.Output);
+        outputPort2.portName = "Failed";
+        checkNode.outputContainer.Add(outputPort2);
+
+        // setup event data container
+        var eventDataContainer = new VisualElement{
+            name = checkNode.checkType + "DataContainer"
+        };
+        var eventNameContainer = new VisualElement();
+        var eventValueContainer = new VisualElement();
+        var eventToggleContainer = new VisualElement();
+
+        // add event name field
+        var textFieldEventName = new TextField
+        {
+            name = "checkName",
+            value = _checkName
+        };
+        textFieldEventName.RegisterValueChangedCallback(evt => checkNode.checkName = evt.newValue);
+        textFieldEventName.SetValueWithoutNotify(checkNode.checkName);
+        eventNameContainer.Add(new Label("Check Name:"));
+        eventNameContainer.Add(textFieldEventName);
+
+        // add event value field
+        var textFieldEventValue = new TextField
+        {
+            name = "checkValue",
+            value = _checkValue
+        };
+        textFieldEventValue.RegisterValueChangedCallback(evt => checkNode.checkValue = evt.newValue);
+        textFieldEventValue.SetValueWithoutNotify(checkNode.checkValue);
+        eventValueContainer.Add(new Label("Parameter Value:"));
+        eventValueContainer.Add(textFieldEventValue);
+
+        // add is repeatable
+        var toggleIsRepeatable = new Toggle 
+        {
+            name = "isRepeatable?",
+            value = repeatable
+        };
+        toggleIsRepeatable.RegisterValueChangedCallback(evt => checkNode.isRepeatable = evt.newValue);
+        toggleIsRepeatable.SetValueWithoutNotify(checkNode.isRepeatable);
+        eventToggleContainer.Add(new Label("Is Repeatable?"));
+        eventToggleContainer.Add(toggleIsRepeatable);
+
+        // check if node check type is a rollable type
+        var toggleIsRollable = new Toggle 
+            {
+                name = "isRepeatable?",
+                value = repeatable
+        };
+        if(checkNode.checkType == conditionType.playerProperty || checkNode.checkType == conditionType.playerSkill || checkNode.checkType == conditionType.npcProperty || checkNode.checkType == conditionType.enemyProperty)
+        {
+            
+            // add is rollable option
+            checkNode.isRollable = true;
+            toggleIsRollable.RegisterValueChangedCallback(evt => checkNode.isRollable = evt.newValue);
+            toggleIsRollable.SetValueWithoutNotify(checkNode.isRollable);
+            eventToggleContainer.Add(new Label("Is Rollable?"));
+            eventToggleContainer.Add(toggleIsRollable);
+        }
+        
+        
+        
+
+        eventDataContainer.Add(eventNameContainer);
+        eventDataContainer.Add(eventValueContainer);
+        eventDataContainer.Add(eventToggleContainer);
+
+        // var checkTypeSelect = new DropdownMenu();
+        // eventDataContainer.Add(checkTypeSelect);
+
+        
+        checkNode.mainContainer.Add(eventDataContainer);
+
+        checkNode.RefreshExpandedState();
+        checkNode.RefreshPorts();
+        checkNode.SetPosition(new Rect(position, defaultNodeSize));
+
+        return checkNode;
     }
 
     public void AddChoicePort(DialogueNode dialogueNode, string overriddenPortName = "") 

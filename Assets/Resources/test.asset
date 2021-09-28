@@ -13,54 +13,112 @@ MonoBehaviour:
   m_Name: test
   m_EditorClassIdentifier: 
   NodeLinks:
-  - BaseNodeGuid: 3ca2d067-db76-4152-80dc-e362af4cc167
+  - BaseNodeGuid: 78e4b63e-879d-4884-95e6-1761ff38b34e
     PortName: Next
-    TargetNodeGuid: 1b017af9-235a-49b2-9400-24dc061dc7c2
-  - BaseNodeGuid: ab93b775-253b-408a-b872-6e8db8292e73
-    PortName: Event Fired
-    TargetNodeGuid: 1df0d24e-5f12-44c5-ab3e-1778ce47b582
-  - BaseNodeGuid: 1b017af9-235a-49b2-9400-24dc061dc7c2
-    PortName: yes
-    TargetNodeGuid: ab93b775-253b-408a-b872-6e8db8292e73
-  - BaseNodeGuid: 1b017af9-235a-49b2-9400-24dc061dc7c2
-    PortName: no
-    TargetNodeGuid: 377be14d-94c7-4535-8206-eaf7e72f602e
-  - BaseNodeGuid: 1b017af9-235a-49b2-9400-24dc061dc7c2
-    PortName: fight Chk.Pass
-    TargetNodeGuid: ab93b775-253b-408a-b872-6e8db8292e73
-  - BaseNodeGuid: 1b017af9-235a-49b2-9400-24dc061dc7c2
-    PortName: fight Chk.Fail
-    TargetNodeGuid: 377be14d-94c7-4535-8206-eaf7e72f602e
+    TargetNodeGuid: 95f55cf1-9ce1-48a7-8c7c-f6767be45686
+  - BaseNodeGuid: 95f55cf1-9ce1-48a7-8c7c-f6767be45686
+    PortName: Passed
+    TargetNodeGuid: 01dabef3-f5d7-47ba-8e49-ed2369e99e7c
+  - BaseNodeGuid: 01dabef3-f5d7-47ba-8e49-ed2369e99e7c
+    PortName: Passed
+    TargetNodeGuid: a539687a-b735-43b1-833e-b29d72a54e85
+  - BaseNodeGuid: db4f6d26-5f04-4adc-b285-fc8c0ec0b537
+    PortName: Passed
+    TargetNodeGuid: 40152cd0-80fa-41b4-8a0a-c6d4d1a8233f
+  - BaseNodeGuid: b62c5526-4b4e-44bf-8b16-9ae3687d6749
+    PortName: Passed
+    TargetNodeGuid: db4f6d26-5f04-4adc-b285-fc8c0ec0b537
+  - BaseNodeGuid: f197a821-3653-416f-98b2-cccdb76f83da
+    PortName: Passed
+    TargetNodeGuid: b62c5526-4b4e-44bf-8b16-9ae3687d6749
+  - BaseNodeGuid: c453f2cc-5b84-4e6e-adc7-bfc2248c07c0
+    PortName: Passed
+    TargetNodeGuid: f197a821-3653-416f-98b2-cccdb76f83da
+  - BaseNodeGuid: a539687a-b735-43b1-833e-b29d72a54e85
+    PortName: Passed
+    TargetNodeGuid: c453f2cc-5b84-4e6e-adc7-bfc2248c07c0
   DialogueNodeData:
-  - Guid: 1b017af9-235a-49b2-9400-24dc061dc7c2
-    DialogueText: want gold?
-    Position: {x: 236, y: 161}
-  - Guid: 1df0d24e-5f12-44c5-ab3e-1778ce47b582
-    DialogueText: you're welcome!
-    Position: {x: 918, y: 87}
-  - Guid: ab93b775-253b-408a-b872-6e8db8292e73
-    DialogueText: Event Node
-    Position: {x: 683, y: 65}
-  - Guid: 377be14d-94c7-4535-8206-eaf7e72f602e
-    DialogueText: 'fine then!
-
-      begone!'
-    Position: {x: 918, y: 214}
-  ExposedProperties:
-  - PropertyName: New String
-    PropertyValue: New Value
-  - PropertyName: New String(1)
-    PropertyValue: New Value
-  DialogueCheckData:
-  - BaseNodeGuid: 1b017af9-235a-49b2-9400-24dc061dc7c2
-    passPortName: fight Chk.Pass
-    failPortName: fight Chk.Fail
-    content: lets fight!
-    skillName: fight
-    checkValue: 2
-  EventNodeData:
-  - nodeGuid: ab93b775-253b-408a-b872-6e8db8292e73
-    EventName: giveGold
-    EventValue: 100
+  - Guid: 01dabef3-f5d7-47ba-8e49-ed2369e99e7c
+    DialogueText: Player Stat Check Node
+    Position: {x: 400, y: 119}
+  - Guid: a539687a-b735-43b1-833e-b29d72a54e85
+    DialogueText: NPC Stat Check Node
+    Position: {x: 573, y: 119}
+  - Guid: c453f2cc-5b84-4e6e-adc7-bfc2248c07c0
+    DialogueText: Enemy Stat Check Node
+    Position: {x: 733, y: 119}
+  - Guid: f197a821-3653-416f-98b2-cccdb76f83da
+    DialogueText: Quest Flag Check Node
+    Position: {x: 906, y: 119}
+  - Guid: b62c5526-4b4e-44bf-8b16-9ae3687d6749
+    DialogueText: Story Flag Check Node
+    Position: {x: 1078, y: 119}
+  - Guid: db4f6d26-5f04-4adc-b285-fc8c0ec0b537
+    DialogueText: Item Count Check Node
+    Position: {x: 1254, y: 119}
+  - Guid: 95f55cf1-9ce1-48a7-8c7c-f6767be45686
+    DialogueText: Skill Check Node
+    Position: {x: 241, y: 119}
+  - Guid: 40152cd0-80fa-41b4-8a0a-c6d4d1a8233f
+    DialogueText: World Flag Check Node
+    Position: {x: 1430, y: 119}
+  ExposedProperties: []
+  DialogueCheckData: []
+  EventNodeData: []
+  CheckNodeData:
+  - nodeGuid: 01dabef3-f5d7-47ba-8e49-ed2369e99e7c
+    checkType: 0
+    checkName: playerstat
+    checkValue: statvlue
     isRepeatable: 0
-    hasFired: 0
+    isRollable: 1
+    alreadyPassed: 0
+  - nodeGuid: a539687a-b735-43b1-833e-b29d72a54e85
+    checkType: 2
+    checkName: npccheck
+    checkValue: npcvalue
+    isRepeatable: 0
+    isRollable: 1
+    alreadyPassed: 0
+  - nodeGuid: c453f2cc-5b84-4e6e-adc7-bfc2248c07c0
+    checkType: 3
+    checkName: enemyst
+    checkValue: valu
+    isRepeatable: 0
+    isRollable: 1
+    alreadyPassed: 0
+  - nodeGuid: f197a821-3653-416f-98b2-cccdb76f83da
+    checkType: 7
+    checkName: qisetce
+    checkValue: value
+    isRepeatable: 0
+    isRollable: 1
+    alreadyPassed: 0
+  - nodeGuid: b62c5526-4b4e-44bf-8b16-9ae3687d6749
+    checkType: 4
+    checkName: storyflag
+    checkValue: value
+    isRepeatable: 0
+    isRollable: 1
+    alreadyPassed: 0
+  - nodeGuid: db4f6d26-5f04-4adc-b285-fc8c0ec0b537
+    checkType: 5
+    checkName: itemcount
+    checkValue: flag
+    isRepeatable: 0
+    isRollable: 1
+    alreadyPassed: 0
+  - nodeGuid: 95f55cf1-9ce1-48a7-8c7c-f6767be45686
+    checkType: 1
+    checkName: skillname
+    checkValue: skillvalue
+    isRepeatable: 1
+    isRollable: 1
+    alreadyPassed: 0
+  - nodeGuid: 40152cd0-80fa-41b4-8a0a-c6d4d1a8233f
+    checkType: 6
+    checkName: worldd
+    checkValue: valuee
+    isRepeatable: 1
+    isRollable: 1
+    alreadyPassed: 0

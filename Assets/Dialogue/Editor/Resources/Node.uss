@@ -2,3 +2,60 @@ DialogueNode #title{
     background-color: green;
     
 }
+
+EventNode #title{
+    background-color: rgb(73, 238, 247)
+}
+
+EventNode #title Label{
+    font-size:110%;
+    color:black;
+}
+
+EventNode #eventDataContainer{
+    background-color: rgb(73, 238, 247)
+}
+
+EventNode #eventDataContainer Label{
+    color:black;
+}
+
+
+
+CheckNode #title Label{
+    color:black;
+}
+
+CheckNode #playerSkillTitle{
+    background-color:rgb(246, 179, 65)
+}
+
+CheckNode #playerSkillTitle Label{
+    color:black;
+}
+
+CheckNode #playerSkillDataContainer {
+    background-color:rgb(246, 179, 65)
+}
+
+CheckNode #playerSkillDataContainer Label{
+    color:black;
+}
+
+CheckNode #playerPropertyTitle{
+    background-color:rgb(240, 239, 141)
+}
+
+CheckNode #playerPropertyTitle Label{
+    color:black;
+}
+
+CheckNode #playerPropertyDataContainer {
+    background-color:rgb(240, 239, 141)
+}
+
+CheckNode #playerPropertyDataContainer Label{
+    color:black;
+}
+
+

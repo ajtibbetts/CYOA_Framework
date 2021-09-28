@@ -9,4 +9,5 @@ public class EventNode : DialogueNode
     public string EventValue;
     public bool isRepeatable = false; 
     public bool hasFired = false; 
+    public eventType eventType;
 }

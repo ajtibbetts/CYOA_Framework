@@ -1061,6 +1061,9 @@ GameObject:
   - component: {fileID: 990204979}
   - component: {fileID: 990204980}
   - component: {fileID: 990204981}
+  - component: {fileID: 990204982}
+  - component: {fileID: 990204983}
+  - component: {fileID: 990204984}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -1084,6 +1087,9 @@ MonoBehaviour:
   player: {fileID: 0}
   roomNavigator: {fileID: 0}
   UIManager: {fileID: 0}
+  DialogueParser: {fileID: 0}
+  EventManager: {fileID: 0}
+  CheckManager: {fileID: 0}
   interactionDescriptionsInRoom: []
   buttonChoicesTexts: []
 --- !u!4 &990204978
@@ -1162,6 +1168,50 @@ MonoBehaviour:
   playerHealth: 10
   playerMaxHealth: 10
   playerName: Player
+--- !u!114 &990204982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 990204976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3b1f3f5d717fbe488894eb6a1db2b2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 0}
+  dialogue: {fileID: 11400000, guid: 3558e115c12dc734994ce983245786dd, type: 2}
+  dialogueText: {fileID: 0}
+  choicePrefab: {fileID: 6412125591892764153, guid: 52e630b0f04c6ee408397649521e076a,
+    type: 3}
+  buttonContainer: {fileID: 2147117835}
+--- !u!114 &990204983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 990204976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b086e084cfce42f43bb44edc5b5d7a2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 0}
+--- !u!114 &990204984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 990204976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 777cbdc9a39ffe341a3d0ca7ecb3b984, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 0}
 --- !u!1 &1030336263
 GameObject:
   m_ObjectHideFlags: 0

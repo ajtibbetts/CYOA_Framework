@@ -1,20 +1,43 @@
 using System;   
 using UnityEngine;
 
-// public class globalDataTypes : MonoBehaviour
-// {
-//     // Start is called before the first frame update
-//     void Start()
-//     {
-        
-//     }
-
-//     // Update is called once per frame
-//     void Update()
-//     {
-        
-//     }
-// }
+public static class dataFormatter 
+{
+    public static string getConditionText(conditionType checkType)
+    {
+        string checkText = "";
+            switch(checkType)
+            {
+                case conditionType.playerProperty:
+                    checkText = "Player Stat";
+                break;
+                case conditionType.playerSkill:
+                    checkText = "Skill";
+                break;
+                case conditionType.npcProperty:
+                    checkText = "NPC Stat";
+                break;
+                case conditionType.enemyProperty:
+                    checkText = "Enemy Stat";
+                break;
+                case conditionType.storyProperty:
+                    checkText = "Story Flag";
+                break;
+                case conditionType.itemProperty:
+                    checkText = "Item Count";
+                break;
+                case conditionType.worldProperty:
+                    checkText = "World Flag";
+                break;
+                case conditionType.questProperty:
+                    checkText = "Quest Flag";
+                break;
+                default:
+                break;
+            }
+        return checkText;
+    }
+}
 
 // ENUMS
 [Serializable]
@@ -24,7 +47,31 @@ public enum conditionType {
     npcProperty,
     enemyProperty,
     storyProperty,
-    itemProperty
+    itemProperty,
+    worldProperty,
+    questProperty,
+    none
+}
+
+public enum eventType {
+    player,
+    skill,
+    item,
+    npc,
+    enemy,
+    quest,
+    story,
+    world,
+    game,
+    none
+}
+
+[Serializable]
+public enum nodeType {
+    dialogueNode,
+    eventNode,
+    checkNode,
+    endpointNode
 }
 
 [Serializable]

@@ -11,4 +11,6 @@ public class DialogueNode : Node
     public string DialogueText;
 
     public bool EntryPoint = false;
+
+    public nodeType nodeType;
 }
