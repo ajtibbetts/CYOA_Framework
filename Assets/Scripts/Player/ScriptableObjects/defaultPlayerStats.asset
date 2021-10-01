@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62ceb78a0c664244f813c07097524a11, type: 3}
   m_Name: defaultPlayerStats
   m_EditorClassIdentifier: 
-  playerName: Emily
+  playerName: Drew
   playerClass: Bandit
   experienceLevel: 1
   experienceTotal: 0

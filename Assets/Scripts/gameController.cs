@@ -18,6 +18,9 @@ public class gameController : MonoBehaviour
     [HideInInspector] public DialogueParser DialogueParser;
     [HideInInspector] public CYOA_EventManager EventManager;
     [HideInInspector] public checkManager CheckManager;
+    [HideInInspector] public WorldNavigator worldNavigator;
+    
+    
     [HideInInspector] public List<string> interactionDescriptionsInRoom = new List<string>();
     [HideInInspector] public List<string> buttonChoicesTexts = new List<string>();
     List<string> actionLog = new List<string>();
@@ -32,12 +35,14 @@ public class gameController : MonoBehaviour
         DialogueParser = GetComponent<DialogueParser>();
         EventManager = GetComponent<CYOA_EventManager>();
         CheckManager = GetComponent<checkManager>();
+        worldNavigator = GetComponent<WorldNavigator>();
+
+        
     }
 
     void Start()
     {
-        // register listeners
-        DialogueParser.onDialogueReachedDeadEnd += ResetDialogueRoute;
+        RegisterEventListeners();
         
         // update ui
         UI_updatePlayerName();
@@ -45,9 +50,52 @@ public class gameController : MonoBehaviour
         UI_updatePlayerEnergy();
         UI_updatePlayerGold();
         
-        // initialize first dialogue stored
-        DialogueParser.InitDialogue();
-        //DisplayRoomText();
+        UIManager.initGameStartButton();
+        
+    }
+
+    public void StartGame()
+    {
+        // test player saving
+        //player.LoadPlayer();
+        if(player._player.CurrentScene == null)
+        {
+            Debug.Log("Current scene is not saved to player starting fresh.");
+            player._player.CurrentScene = "testLevel";
+            SubSceneManager.AddScene("testLevel");
+        }
+        else
+        {
+            Debug.Log("Loading from previously saved scene.");
+            SubSceneManager.AddScene(player._player.CurrentScene);
+        }
+    }
+
+    void RegisterEventListeners()
+    {
+        // register listeners
+        UIManager.onGameStartSelected += StartGame;
+        WorldNavigator.OnWorldLoaded += ProcessNewScene;
+        // SubSceneManager.OnSceneLoaded += ProcessNewScene;
+        // SubSceneManager.OnSceneUnloaded += CleanupOldScene;
+        DialogueParser.onDialogueReachedDeadEnd += ResetDialogueRoute;
+    }
+
+    void ProcessNewScene(string sceneName)
+    {
+        Debug.Log("Game manager processing new scene.");
+        // check for starting dialogue
+        var dialogue = worldNavigator.GetActiveDialogue();
+        if(dialogue != null)
+        {
+            DialogueParser.SetupNewDialogue(dialogue);
+            DialogueParser.InitDialogue();
+        }
+    }
+
+    void CleanupOldScene(string sceneName)
+    {
+        Debug.Log("Game manager cleaning up old scene.");
     }
 
     public void DisplayLoggedText()
@@ -55,17 +103,17 @@ public class gameController : MonoBehaviour
         string actionLogText = string.Join("\n", actionLog.ToArray());
         
         // check for page image and activate
-        if(roomNavigator.hasPageImage()) {
-            UIManager.updatePageImage(roomNavigator.currentRoom.pageImage);
-        }
-        else {
-            UIManager.hidePageImage();
-        }
+        // if(roomNavigator.hasPageImage()) {
+        //     UIManager.updatePageImage(roomNavigator.currentRoom.pageImage);
+        // }
+        // else {
+        //     UIManager.hidePageImage();
+        // }
 
         // update UI with current room text
-        UIManager.updateContentText(actionLogText + roomNavigator.currentRoom.description);
+        //UIManager.updateContentText(actionLogText + roomNavigator.currentRoom.description);
         // update UI action options buttons
-        UIManager.updateActionOptionsButtons(roomNavigator.currentRoom.playerActionOptions);
+        //UIManager.updateActionOptionsButtons(roomNavigator.currentRoom.playerActionOptions);
         // Debug.Log(roomNavigator.currentRoom.exits[0].buttonText.ToString());
         UI_updatePlayerStats();
         actionLog.Clear();
@@ -139,5 +187,13 @@ public class gameController : MonoBehaviour
     public void ResetDialogueRoute()
     {
         Debug.Log("End of dialogue graph reached. Resetting Dialogue route.");
+        // test stuff below
+        // SubSceneManager.RemoveScene("testLevel");
+        Debug.Log("Current world objects: " + worldNavigator.GetNavObjects().Count);
+    }
+
+    public void InitializePlayer()
+    {
+
     }
 }

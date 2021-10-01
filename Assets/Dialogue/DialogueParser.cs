@@ -19,24 +19,41 @@ public class DialogueParser : MonoBehaviour
 
         // Events
         public event Action<eventType, string, string> onEventTriggered;
-        public Func<string, string, bool> onPlayerSkillRoll;
         public event Action onDialogueReachedDeadEnd;
+        // delegate
+        public Func<string, string, bool> onPlayerSkillRoll;
 
         
         private void Awake() {
             controller = GetComponent<gameController>();  
+            controller.EventManager.onEventFinished += UpdatePendingText;
+            UIManager.onOptionSelected += ProceedToNarrative;
         }
         
         private void Start()
         {
             
+            
+
             // ProceedToNarrative(narrativeData.TargetNodeGuid);
+        }
+
+        public void SetupNewDialogue(DialogueContainer newDialogue)
+        {
+            dialogue = newDialogue;
         }
 
         public void InitDialogue() {
             var narrativeData = dialogue.NodeLinks.First(); //Entrypoint node
             ProceedToNarrative(narrativeData.TargetNodeGuid);
         }
+
+        public void UpdatePendingText(string text)
+        {
+            Debug.Log("Updating pending text: " + text);
+            _pendingText += text;
+        }
+        
 
 
         private void ProceedToNarrative(string narrativeDataGUID)
@@ -69,23 +86,40 @@ public class DialogueParser : MonoBehaviour
             controller.UIManager.updateContentText(_pendingText + text);
             _pendingText = "";
             //dialogueText.text = text;
-            var buttons = buttonContainer.GetComponentsInChildren<Button>();
-            for (int i = 0; i < buttons.Length; i++)
-            {
-                Destroy(buttons[i].gameObject);
-            }
+            Debug.Log("number of choices: " + choices.Count());
+            
+            
+            // instead destroy from UI
+            controller.UIManager.ClearButtons();
+            
+            // var buttons = buttonContainer.GetComponentsInChildren<Button>();
+            // for (int i = 0; i < buttons.Length; i++)
+            // {
+            //     Destroy(buttons[i].gameObject);
+            // }
+
+            if(choices.Count() < 1) onDialogueReachedDeadEnd.Invoke();
 
             foreach (var choice in choices)
             {
-                var button = Instantiate(choicePrefab, buttonContainer);
-                button.GetComponentInChildren<Text>().text = ProcessProperties(choice.PortName);
-                button.onClick.AddListener(() => ProceedToNarrative(choice.TargetNodeGuid));
+                // var button = Instantiate(choicePrefab, buttonContainer);
+                // button.GetComponentInChildren<Text>().text = ProcessProperties(choice.PortName);
+                // button.onClick.AddListener(() => ProceedToNarrative(choice.TargetNodeGuid));
+                Debug.Log("choice found");
+                controller.UIManager.CreateDialogueOptionButton(choice.TargetNodeGuid, choice.PortName);
+
+                // var confirmActionButton = GameObject.Instantiate(playerActionOptionBtnPrefab, Vector3.zero, Quaternion.identity, buttonContainer.transform);
+                // confirmActionButton.GetComponentInChildren<Button>().onClick.AddListener(delegate { processPlayerAction(currentActionOption); });
+                // confirmActionButton.GetComponentInChildren<Text>().text = "Select option then confirm.";
             }
+            
+            // finally create confirm button
+            controller.UIManager.initConfirmActionButton();
         }
 
         private void ProcessEventNode(string narrativeDataGUID)
         {
-            // Debug.Log("event node found!");
+            Debug.Log("event node found!");
             //bool eventAlreadyTriggered = false;
             var data = dialogue.EventNodeData.Find(x => x.nodeGuid == narrativeDataGUID);
             var outputs = dialogue.NodeLinks.Where(x => x.BaseNodeGuid == narrativeDataGUID);
@@ -95,6 +129,7 @@ public class DialogueParser : MonoBehaviour
             // add logic to check event specifics
             if(!data.hasFired || data.isRepeatable) {
                 // trigger event
+                Debug.Log("triggering event!");
                 onEventTriggered?.Invoke(data.eventType, data.EventName,data.EventValue);
                 
                 // route to next node if output is attached to another node
@@ -170,6 +205,8 @@ public class DialogueParser : MonoBehaviour
                         if(passedRoll)
                         {
                             Debug.Log("Skill check passed. Routing...");
+                            // set passed
+                            data.alreadyPassed = true;
                             if(outputs.ElementAt(0).TargetNodeGuid != null) ProceedToNarrative(outputs.ElementAt(0).TargetNodeGuid);
                         }
                         else 
@@ -187,7 +224,9 @@ public class DialogueParser : MonoBehaviour
 
         private void ProcessEndpointNode(string narrativeDataGUID)
         {
-
+            Debug.Log("End point reached.");
+            onDialogueReachedDeadEnd.Invoke();
+            return;
         }
 
         private string ProcessProperties(string text)

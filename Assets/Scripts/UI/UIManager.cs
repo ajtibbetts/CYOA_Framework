@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,10 @@ using TMPro;
 public class UIManager : MonoBehaviour
 {
     [HideInInspector] public gameController controller;
+
+    // events
+    public static event Action onGameStartSelected;
+    public static event Action<string> onOptionSelected;
 
     // UI elements
     [Header("Main Menu")]
@@ -39,8 +44,15 @@ public class UIManager : MonoBehaviour
     private List<GameObject> actionOptionButtons = new List<GameObject>();
     private List<GameObject> actionToggleButtons = new List<GameObject>();
     private GameObject confirmActionButton;
+    private GameObject startGameButton;
     private GameObject lastSelectedButton = null;
     private int currentActionOption;
+    private string _currentTargetNodeGUID;
+
+    // store most recent option data for single option
+    
+    private string _latestTargetGUID;
+    private string _latestChoiceText;
 
     void Awake() {
         // add event listener
@@ -54,8 +66,8 @@ public class UIManager : MonoBehaviour
         UI_contentImage = GameObject.Instantiate(imagePrefab, Vector3.zero, Quaternion.identity, contentScrollContainer.transform);
         UI_contentImage.SetActive(false);
         UI_paragraph = GameObject.Instantiate(paragraphPrefab, Vector3.zero, Quaternion.identity, contentScrollContainer.transform);
-        initActionOptionButtons();
-        initConfirmActionButton();
+        //initActionOptionButtons();
+        // initConfirmActionButton();
     }
 
     void Start(){
@@ -120,8 +132,70 @@ public class UIManager : MonoBehaviour
 
     public void initConfirmActionButton(){
         confirmActionButton = GameObject.Instantiate(playerActionOptionBtnPrefab, Vector3.zero, Quaternion.identity, contentScrollContainer.transform);
-        confirmActionButton.GetComponentInChildren<Button>().onClick.AddListener(delegate { processPlayerAction(currentActionOption); });
+        confirmActionButton.GetComponentInChildren<Button>().onClick.AddListener(delegate { processPlayerAction(); });
         confirmActionButton.GetComponentInChildren<Text>().text = "Select option then confirm.";
+
+        checkForSingleOption();
+    }
+
+    public void initGameStartButton()
+    {   
+        Debug.Log("Adding game start button.");
+        startGameButton = GameObject.Instantiate(playerActionOptionBtnPrefab, Vector3.zero, Quaternion.identity, contentScrollContainer.transform);
+        startGameButton.GetComponentInChildren<Button>().onClick.AddListener(delegate { StartGameFromUI(); });
+        startGameButton.GetComponentInChildren<Text>().text = "Tap here to start.";
+    }
+
+    public void StartGameFromUI()
+    {
+        onGameStartSelected?.Invoke();
+        Destroy(startGameButton.gameObject);
+    }
+
+    public void ClearButtons()
+    {
+        var toggles = contentScrollContainer.GetComponentsInChildren<Toggle>();
+        Debug.Log("Clearing Buttons. Current button count: " + toggles.Length);
+        for (int i = 0; i < toggles.Length; i++)
+        {
+            Destroy(toggles[i].gameObject);
+        }
+        actionToggleButtons.Clear(); // clear list
+
+        if(confirmActionButton != null)
+        {
+            Destroy(confirmActionButton.gameObject);
+        }
+    }
+
+    public void CreateDialogueOptionButton(string TargetNodeGuid, string choiceText)
+    {
+        GameObject toggle = GameObject.Instantiate(togglePrefab, Vector3.zero, Quaternion.identity, contentScrollContainer.transform);
+        Toggle toggleComponent = toggle.GetComponent<Toggle>();
+        toggle.GetComponentInChildren<Text>().text = choiceText;
+        toggleComponent.isOn = false; 
+        toggleComponent.group = toggleGroup;
+        toggleComponent.onValueChanged.AddListener(delegate { SetCurrentDialogueOption(toggleComponent, TargetNodeGuid);});
+        actionToggleButtons.Add(toggle);
+        toggle.name = "toggleChoice_" + actionToggleButtons.Count;
+        // cache most recent entry
+        _latestTargetGUID = TargetNodeGuid;
+        _latestChoiceText = choiceText;
+
+        Debug.Log($"Adding choice Toggle text: {choiceText} | target GUID: {TargetNodeGuid}");
+
+    }
+
+    public void SetCurrentDialogueOption(Toggle toggle, string TargetNodeGuid)
+    {
+        Debug.Log("Checking this toggle");
+        if(toggle.isOn) {
+            
+            _currentTargetNodeGUID = TargetNodeGuid;
+        }
+        else {
+            _currentTargetNodeGUID = null;
+        }
     }
 
     public void setCurrentToggleOption(Toggle toggle, int index) {
@@ -144,18 +218,40 @@ public class UIManager : MonoBehaviour
        //Debug.Log("Current action option is: " + currentActionOption);
     }
 
-    public void processPlayerAction(int buttonNumber){
-        Debug.Log("checking for action option: " + currentActionOption + "at time " + Time.deltaTime);
-        if(currentActionOption >= 0 ) {
-            controller.roomNavigator.changeRoom(currentActionOption);
-            confirmActionButton.GetComponentInChildren<Text>().text = "Select option then confirm.";
-            currentActionOption = -1;
-            //Debug.Log("set to -1 at time " + Time.deltaTime);
-            checkForSingleOption(); // CALLED AT END TO REMOVE EXTRA OPTIONS
+    public void processPlayerAction(){
+
+        Debug.Log("Button clicked. Processing action for guid: " + _currentTargetNodeGUID);
+        
+        if(_currentTargetNodeGUID != null)
+        {
+            onOptionSelected?.Invoke(_currentTargetNodeGUID);
+            _currentTargetNodeGUID = null;
+            // _latestTargetGUID = null;
+            // _latestChoiceText = null;
+            
         }
-        else {
-            //Debug.Log("curren action value is less than zero at time " + Time.deltaTime);
+        else if (_latestTargetGUID != null)
+        {
+            Debug.Log("Button clicked but no current node guid set. Processing action for latest target guid: " + _latestTargetGUID);
+            onOptionSelected?.Invoke(_latestTargetGUID);
+            _latestTargetGUID = null;
+            _latestChoiceText = null;
         }
+        else
+        {
+            Debug.Log("Button clicked but no current or latest target guid set. Check it out.");
+        }
+        // Debug.Log("checking for action option: " + currentActionOption + "at time " + Time.deltaTime);
+        // if(currentActionOption >= 0 ) {
+        //     controller.roomNavigator.changeRoom(currentActionOption);
+        //     confirmActionButton.GetComponentInChildren<Text>().text = "Select option then confirm.";
+        //     currentActionOption = -1;
+        //     //Debug.Log("set to -1 at time " + Time.deltaTime);
+        //     checkForSingleOption(); // CALLED AT END TO REMOVE EXTRA OPTIONS
+        // }
+        // else {
+        //     //Debug.Log("curren action value is less than zero at time " + Time.deltaTime);
+        // }
     }
 
     public void updatePageImage(Sprite image){
@@ -259,13 +355,26 @@ public class UIManager : MonoBehaviour
     }
 
     public void checkForSingleOption(){
-        //Debug.Log("checking for single action");
-        if(!actionToggleButtons[1].activeSelf) {
-            setCurrentActionOption(0);
+
+        Debug.Log("Checking for single option. Latest targetGuid: " + _latestTargetGUID);
+        // var toggles = contentScrollContainer.GetComponentsInChildren<Toggle>();
+        Debug.Log("Current option length: " + actionToggleButtons.Count);
+        // if single choice, change confirm to advance to next dialogue
+        if(actionToggleButtons.Count == 1)
+        {
+            Debug.Log("Setting current guid to latest guid: " + _latestTargetGUID);
+            _currentTargetNodeGUID = _latestTargetGUID;
+            Debug.Log("New current guid: " + _currentTargetNodeGUID);
+            confirmActionButton.GetComponentInChildren<Text>().text = _latestChoiceText;
             actionToggleButtons[0].SetActive(false);
-            confirmActionButton.GetComponentInChildren<Text>().text = actionToggleButtons[0].GetComponentInChildren<Text>().text;
-            //Debug.Log("single action found");
         }
+        // //Debug.Log("checking for single action");
+        // if(!actionToggleButtons[1].activeSelf) {
+        //     setCurrentActionOption(0);
+        //     actionToggleButtons[0].SetActive(false);
+        //     confirmActionButton.GetComponentInChildren<Text>().text = actionToggleButtons[0].GetComponentInChildren<Text>().text;
+        //     //Debug.Log("single action found");
+        // }
     }
 
     public void initRollUI()

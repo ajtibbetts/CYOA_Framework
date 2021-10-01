@@ -15,110 +15,135 @@ MonoBehaviour:
   NodeLinks:
   - BaseNodeGuid: 78e4b63e-879d-4884-95e6-1761ff38b34e
     PortName: Next
-    TargetNodeGuid: 95f55cf1-9ce1-48a7-8c7c-f6767be45686
-  - BaseNodeGuid: 95f55cf1-9ce1-48a7-8c7c-f6767be45686
-    PortName: Passed
-    TargetNodeGuid: 01dabef3-f5d7-47ba-8e49-ed2369e99e7c
-  - BaseNodeGuid: 01dabef3-f5d7-47ba-8e49-ed2369e99e7c
-    PortName: Passed
-    TargetNodeGuid: a539687a-b735-43b1-833e-b29d72a54e85
-  - BaseNodeGuid: db4f6d26-5f04-4adc-b285-fc8c0ec0b537
-    PortName: Passed
-    TargetNodeGuid: 40152cd0-80fa-41b4-8a0a-c6d4d1a8233f
-  - BaseNodeGuid: b62c5526-4b4e-44bf-8b16-9ae3687d6749
-    PortName: Passed
-    TargetNodeGuid: db4f6d26-5f04-4adc-b285-fc8c0ec0b537
-  - BaseNodeGuid: f197a821-3653-416f-98b2-cccdb76f83da
-    PortName: Passed
-    TargetNodeGuid: b62c5526-4b4e-44bf-8b16-9ae3687d6749
-  - BaseNodeGuid: c453f2cc-5b84-4e6e-adc7-bfc2248c07c0
-    PortName: Passed
-    TargetNodeGuid: f197a821-3653-416f-98b2-cccdb76f83da
-  - BaseNodeGuid: a539687a-b735-43b1-833e-b29d72a54e85
-    PortName: Passed
-    TargetNodeGuid: c453f2cc-5b84-4e6e-adc7-bfc2248c07c0
+    TargetNodeGuid: 04abce71-6005-45d8-957a-9b7f0d86a4d8
+  - BaseNodeGuid: 04abce71-6005-45d8-957a-9b7f0d86a4d8
+    PortName: Lion
+    TargetNodeGuid: e62c0300-f2ce-4dc9-b140-bcaa04eee679
+  - BaseNodeGuid: 04abce71-6005-45d8-957a-9b7f0d86a4d8
+    PortName: Tiger
+    TargetNodeGuid: 05aac5de-ca09-4f50-8b72-15597f5a5948
+  - BaseNodeGuid: 04abce71-6005-45d8-957a-9b7f0d86a4d8
+    PortName: Bear
+    TargetNodeGuid: 6cebf502-3923-49bf-a15f-34480b7b1050
+  - BaseNodeGuid: e62c0300-f2ce-4dc9-b140-bcaa04eee679
+    PortName: Of course! I'm the strongest and the bravest.
+    TargetNodeGuid: 48e1ad56-6082-415e-9bbc-b48b684f699f
+  - BaseNodeGuid: e62c0300-f2ce-4dc9-b140-bcaa04eee679
+    PortName: Wait, what is this?
+    TargetNodeGuid: 3904465e-001f-4dce-8dde-045ac6ae743a
+  - BaseNodeGuid: 05aac5de-ca09-4f50-8b72-15597f5a5948
+    PortName: Sorry.. what?
+    TargetNodeGuid: 3904465e-001f-4dce-8dde-045ac6ae743a
+  - BaseNodeGuid: 05aac5de-ca09-4f50-8b72-15597f5a5948
+    PortName: ROARR!
+    TargetNodeGuid: 48e1ad56-6082-415e-9bbc-b48b684f699f
+  - BaseNodeGuid: 6cebf502-3923-49bf-a15f-34480b7b1050
+    PortName: Yeah, grizzly.
+    TargetNodeGuid: 3904465e-001f-4dce-8dde-045ac6ae743a
+  - BaseNodeGuid: 6cebf502-3923-49bf-a15f-34480b7b1050
+    PortName: Nah, black bear bitch.
+    TargetNodeGuid: bb03b05a-5223-4e14-b46c-3390bf3502f5
+  - BaseNodeGuid: 6cebf502-3923-49bf-a15f-34480b7b1050
+    PortName: No way, polar bear.
+    TargetNodeGuid: 1ef202bb-4505-4328-9d59-c7694ab86ab7
+  - BaseNodeGuid: bb03b05a-5223-4e14-b46c-3390bf3502f5
+    PortName: Thanks, Ranger Rick.
+    TargetNodeGuid: 11de824a-d3f9-4502-b061-bf85a8268f9d
+  - BaseNodeGuid: 1ef202bb-4505-4328-9d59-c7694ab86ab7
+    PortName: Wait.. what?
+    TargetNodeGuid: 11de824a-d3f9-4502-b061-bf85a8268f9d
+  - BaseNodeGuid: 3904465e-001f-4dce-8dde-045ac6ae743a
+    PortName: Yeah... okay..
+    TargetNodeGuid: 11de824a-d3f9-4502-b061-bf85a8268f9d
+  - BaseNodeGuid: 3904465e-001f-4dce-8dde-045ac6ae743a
+    PortName: Uhhh. what?
+    TargetNodeGuid: 11de824a-d3f9-4502-b061-bf85a8268f9d
+  - BaseNodeGuid: 11de824a-d3f9-4502-b061-bf85a8268f9d
+    PortName: Sorry, let's start over.
+    TargetNodeGuid: 04abce71-6005-45d8-957a-9b7f0d86a4d8
+  - BaseNodeGuid: 48e1ad56-6082-415e-9bbc-b48b684f699f
+    PortName: Hah, just kidding man.
+    TargetNodeGuid: 11de824a-d3f9-4502-b061-bf85a8268f9d
+  - BaseNodeGuid: 48e1ad56-6082-415e-9bbc-b48b684f699f
+    PortName: ROOOOOOOOOOOOOOOAR!!
+    TargetNodeGuid: f821c457-e6ab-433c-92e9-7e26cdbfb7d3
+  - BaseNodeGuid: f821c457-e6ab-433c-92e9-7e26cdbfb7d3
+    PortName: No.. no thanks.
+    TargetNodeGuid: 11de824a-d3f9-4502-b061-bf85a8268f9d
+  - BaseNodeGuid: f821c457-e6ab-433c-92e9-7e26cdbfb7d3
+    PortName: Sweet.
+    TargetNodeGuid: 1ef5137a-8fa2-4dfd-93fb-15fcb474fd55
+  - BaseNodeGuid: 1ef5137a-8fa2-4dfd-93fb-15fcb474fd55
+    PortName: Event Fired
+    TargetNodeGuid: d0816051-aeba-4c9b-a8ef-b6cc0c010709
+  - BaseNodeGuid: 1ef5137a-8fa2-4dfd-93fb-15fcb474fd55
+    PortName: Already Triggered
+    TargetNodeGuid: d0816051-aeba-4c9b-a8ef-b6cc0c010709
+  - BaseNodeGuid: d0816051-aeba-4c9b-a8ef-b6cc0c010709
+    PortName: Right on!
+    TargetNodeGuid: 04abce71-6005-45d8-957a-9b7f0d86a4d8
   DialogueNodeData:
-  - Guid: 01dabef3-f5d7-47ba-8e49-ed2369e99e7c
-    DialogueText: Player Stat Check Node
-    Position: {x: 400, y: 119}
-  - Guid: a539687a-b735-43b1-833e-b29d72a54e85
-    DialogueText: NPC Stat Check Node
-    Position: {x: 573, y: 119}
-  - Guid: c453f2cc-5b84-4e6e-adc7-bfc2248c07c0
-    DialogueText: Enemy Stat Check Node
-    Position: {x: 733, y: 119}
-  - Guid: f197a821-3653-416f-98b2-cccdb76f83da
-    DialogueText: Quest Flag Check Node
-    Position: {x: 906, y: 119}
-  - Guid: b62c5526-4b4e-44bf-8b16-9ae3687d6749
-    DialogueText: Story Flag Check Node
-    Position: {x: 1078, y: 119}
-  - Guid: db4f6d26-5f04-4adc-b285-fc8c0ec0b537
-    DialogueText: Item Count Check Node
-    Position: {x: 1254, y: 119}
-  - Guid: 95f55cf1-9ce1-48a7-8c7c-f6767be45686
-    DialogueText: Skill Check Node
-    Position: {x: 241, y: 119}
-  - Guid: 40152cd0-80fa-41b4-8a0a-c6d4d1a8233f
-    DialogueText: World Flag Check Node
-    Position: {x: 1430, y: 119}
+  - Guid: 04abce71-6005-45d8-957a-9b7f0d86a4d8
+    DialogueText: "Hello {p.playerName}, and welcome to the magic kingdom \n\nTell
+      me, what is your favorite animal?"
+    Position: {x: 226, y: 151}
+    nodeType: 0
+  - Guid: e62c0300-f2ce-4dc9-b140-bcaa04eee679
+    DialogueText: A lion is strong, and brave! Are you strong and brave?
+    Position: {x: 536, y: 29}
+    nodeType: 0
+  - Guid: 05aac5de-ca09-4f50-8b72-15597f5a5948
+    DialogueText: Ooo! Tiger! Rawr!!
+    Position: {x: 589, y: 205}
+    nodeType: 0
+  - Guid: 6cebf502-3923-49bf-a15f-34480b7b1050
+    DialogueText: A bear huh? Big ole grizzly bear?
+    Position: {x: 483, y: 375}
+    nodeType: 0
+  - Guid: bb03b05a-5223-4e14-b46c-3390bf3502f5
+    DialogueText: If it's black, fight back.
+    Position: {x: 904, y: 484}
+    nodeType: 0
+  - Guid: 1ef202bb-4505-4328-9d59-c7694ab86ab7
+    DialogueText: Yeah polar bears are no joke. All high on coke.
+    Position: {x: 868, y: 623}
+    nodeType: 0
+  - Guid: 3904465e-001f-4dce-8dde-045ac6ae743a
+    DialogueText: Straight grizzly, son.
+    Position: {x: 884, y: 327}
+    nodeType: 0
+  - Guid: 11de824a-d3f9-4502-b061-bf85a8268f9d
+    DialogueText: Hey don't harsh my vibes man.
+    Position: {x: 1266, y: 400}
+    nodeType: 0
+  - Guid: 48e1ad56-6082-415e-9bbc-b48b684f699f
+    DialogueText: ROOOOOOOOOOOAR!
+    Position: {x: 1079, y: 90}
+    nodeType: 0
+  - Guid: f821c457-e6ab-433c-92e9-7e26cdbfb7d3
+    DialogueText: 'You are one with the animal spirts!
+
+
+      I will bless you with
+      the spirit of the jungle!'
+    Position: {x: 1481, y: 90}
+    nodeType: 0
+  - Guid: 1ef5137a-8fa2-4dfd-93fb-15fcb474fd55
+    DialogueText: Event Node
+    Position: {x: 1779, y: 90}
+    nodeType: 1
+  - Guid: d0816051-aeba-4c9b-a8ef-b6cc0c010709
+    DialogueText: You are blessed. We can start again.
+    Position: {x: 2082, y: 207}
+    nodeType: 0
   ExposedProperties: []
   DialogueCheckData: []
-  EventNodeData: []
-  CheckNodeData:
-  - nodeGuid: 01dabef3-f5d7-47ba-8e49-ed2369e99e7c
-    checkType: 0
-    checkName: playerstat
-    checkValue: statvlue
+  EventNodeData:
+  - nodeGuid: 1ef5137a-8fa2-4dfd-93fb-15fcb474fd55
+    EventName: junglelove
+    EventValue: +4
     isRepeatable: 0
-    isRollable: 1
-    alreadyPassed: 0
-  - nodeGuid: a539687a-b735-43b1-833e-b29d72a54e85
-    checkType: 2
-    checkName: npccheck
-    checkValue: npcvalue
-    isRepeatable: 0
-    isRollable: 1
-    alreadyPassed: 0
-  - nodeGuid: c453f2cc-5b84-4e6e-adc7-bfc2248c07c0
-    checkType: 3
-    checkName: enemyst
-    checkValue: valu
-    isRepeatable: 0
-    isRollable: 1
-    alreadyPassed: 0
-  - nodeGuid: f197a821-3653-416f-98b2-cccdb76f83da
-    checkType: 7
-    checkName: qisetce
-    checkValue: value
-    isRepeatable: 0
-    isRollable: 1
-    alreadyPassed: 0
-  - nodeGuid: b62c5526-4b4e-44bf-8b16-9ae3687d6749
-    checkType: 4
-    checkName: storyflag
-    checkValue: value
-    isRepeatable: 0
-    isRollable: 1
-    alreadyPassed: 0
-  - nodeGuid: db4f6d26-5f04-4adc-b285-fc8c0ec0b537
-    checkType: 5
-    checkName: itemcount
-    checkValue: flag
-    isRepeatable: 0
-    isRollable: 1
-    alreadyPassed: 0
-  - nodeGuid: 95f55cf1-9ce1-48a7-8c7c-f6767be45686
-    checkType: 1
-    checkName: skillname
-    checkValue: skillvalue
-    isRepeatable: 1
-    isRollable: 1
-    alreadyPassed: 0
-  - nodeGuid: 40152cd0-80fa-41b4-8a0a-c6d4d1a8233f
-    checkType: 6
-    checkName: worldd
-    checkValue: valuee
-    isRepeatable: 1
-    isRollable: 1
-    alreadyPassed: 0
+    hasFired: 0
+    eventType: 0
+  CheckNodeData: []
+  EndpointNodeData: []

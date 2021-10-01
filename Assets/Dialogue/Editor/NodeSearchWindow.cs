@@ -30,12 +30,12 @@ public class NodeSearchWindow : ScriptableObject, ISearchWindowProvider
        var tree = new List<SearchTreeEntry>
        {
             new SearchTreeGroupEntry(new GUIContent("Create Elements"), 0),
-            new SearchTreeGroupEntry(new GUIContent("Dialogue >>"), 1),
+            new SearchTreeGroupEntry(new GUIContent("Dialogue"), 1),
             new SearchTreeEntry(new GUIContent("Dialogue Node",_indentationIcon))
             {
                userData = new DialogueNode(), level = 2
             },
-            new SearchTreeGroupEntry(new GUIContent("Check Nodes >>"), 1),
+            new SearchTreeGroupEntry(new GUIContent("Check Nodes"), 1),
                 new SearchTreeEntry(new GUIContent("playerSkill",_indentationIcon))
                 {
                     userData = new CheckNode(), level = 2
@@ -68,12 +68,40 @@ public class NodeSearchWindow : ScriptableObject, ISearchWindowProvider
                 {
                     userData = new CheckNode(), level = 2
                 },
-            new SearchTreeGroupEntry(new GUIContent("Event Nodes >>"), 1),
+            new SearchTreeGroupEntry(new GUIContent("Event Nodes"), 1),
                 new SearchTreeEntry(new GUIContent("player",_indentationIcon))
                 {
                     userData = new EventNode(), level = 2
                 },
                 new SearchTreeEntry(new GUIContent("skill",_indentationIcon))
+                {
+                    userData = new EventNode(), level = 2
+                },
+                new SearchTreeEntry(new GUIContent("item",_indentationIcon))
+                {
+                    userData = new EventNode(), level = 2
+                },
+                new SearchTreeEntry(new GUIContent("npc",_indentationIcon))
+                {
+                    userData = new EventNode(), level = 2
+                },
+                new SearchTreeEntry(new GUIContent("enemy",_indentationIcon))
+                {
+                    userData = new EventNode(), level = 2
+                },
+                new SearchTreeEntry(new GUIContent("quest",_indentationIcon))
+                {
+                    userData = new EventNode(), level = 2
+                },
+                new SearchTreeEntry(new GUIContent("story",_indentationIcon))
+                {
+                    userData = new EventNode(), level = 2
+                },
+                new SearchTreeEntry(new GUIContent("world",_indentationIcon))
+                {
+                    userData = new EventNode(), level = 2
+                },
+                new SearchTreeEntry(new GUIContent("game",_indentationIcon))
                 {
                     userData = new EventNode(), level = 2
                 },

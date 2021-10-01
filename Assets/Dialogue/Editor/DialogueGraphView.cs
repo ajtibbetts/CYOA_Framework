@@ -188,9 +188,9 @@ public class DialogueGraphView : GraphView
         dialogueNode.titleContainer.Add(button);
 
         // Add Check Button
-        var button2 = new Button(()=>{AddCheckPorts(dialogueNode);});
-        button2.text = "+ Check";
-        dialogueNode.titleContainer.Add(button2);
+        // var button2 = new Button(()=>{AddCheckPorts(dialogueNode);});
+        // button2.text = "+ Check";
+        // dialogueNode.titleContainer.Add(button2);
 
         var textField = new TextField(string.Empty){
             multiline = true
@@ -302,7 +302,7 @@ public class DialogueGraphView : GraphView
         var checkNode = new CheckNode
         {
             checkType = _checkType,
-            title = nodePrefix + " " + nodeName,
+            title = nodePrefix + " Check Node",
             GUID = Guid.NewGuid().ToString(),
             DialogueText = nodePrefix + " " + nodeName,
             checkName = _checkName,

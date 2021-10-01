@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9837df7c010b3346bca580cac5bac11, type: 3}
+  m_Name: loop
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGuid: a1ab25c3-f6ce-4b9a-95fe-d73a9df742ae
+    PortName: Next
+    TargetNodeGuid: 96c6aaba-dffa-4822-8fc4-a1033781cb63
+  - BaseNodeGuid: 96c6aaba-dffa-4822-8fc4-a1033781cb63
+    PortName: Choice 1
+    TargetNodeGuid: 879f90a2-15c6-4b3a-8a1e-8e3710c47f9b
+  - BaseNodeGuid: 879f90a2-15c6-4b3a-8a1e-8e3710c47f9b
+    PortName: back to start
+    TargetNodeGuid: 96c6aaba-dffa-4822-8fc4-a1033781cb63
+  - BaseNodeGuid: 96c6aaba-dffa-4822-8fc4-a1033781cb63
+    PortName: Choice 2
+    TargetNodeGuid: 9db6dd4a-aa36-4349-9d9f-f95dca8ce0df
+  - BaseNodeGuid: 9db6dd4a-aa36-4349-9d9f-f95dca8ce0df
+    PortName: another option
+    TargetNodeGuid: 879f90a2-15c6-4b3a-8a1e-8e3710c47f9b
+  - BaseNodeGuid: 96c6aaba-dffa-4822-8fc4-a1033781cb63
+    PortName: Choice 3
+    TargetNodeGuid: 34385050-41db-4538-a5b6-46953297e301
+  - BaseNodeGuid: 34385050-41db-4538-a5b6-46953297e301
+    PortName: final option
+    TargetNodeGuid: 9db6dd4a-aa36-4349-9d9f-f95dca8ce0df
+  DialogueNodeData:
+  - Guid: 879f90a2-15c6-4b3a-8a1e-8e3710c47f9b
+    DialogueText: choice 1 response
+    Position: {x: 604, y: 19}
+    nodeType: 0
+  - Guid: 9db6dd4a-aa36-4349-9d9f-f95dca8ce0df
+    DialogueText: choice 2
+    Position: {x: 630, y: 214}
+    nodeType: 0
+  - Guid: 96c6aaba-dffa-4822-8fc4-a1033781cb63
+    DialogueText: this is going to loop around
+    Position: {x: 263, y: 166}
+    nodeType: 0
+  - Guid: 34385050-41db-4538-a5b6-46953297e301
+    DialogueText: choice 3 response
+    Position: {x: 604, y: 361}
+    nodeType: 0
+  ExposedProperties: []
+  DialogueCheckData: []
+  EventNodeData: []
+  CheckNodeData: []
+  EndpointNodeData: []

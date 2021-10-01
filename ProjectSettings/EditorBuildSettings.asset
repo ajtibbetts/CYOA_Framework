@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CYOA-framework.unity
     guid: 040382dd421ba9d43ae96ae8804775e4
+  - enabled: 1
+    path: Assets/Scenes/WorldScenes/testLevel.unity
+    guid: 747e3816fc6cc5a408ed03e4f2edfec0
   m_configObjects: {}

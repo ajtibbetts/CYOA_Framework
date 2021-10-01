@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9837df7c010b3346bca580cac5bac11, type: 3}
-  m_Name: checktest
+  m_Name: checkTest
   m_EditorClassIdentifier: 
   NodeLinks:
   - BaseNodeGuid: 78e4b63e-879d-4884-95e6-1761ff38b34e
@@ -28,9 +28,6 @@ MonoBehaviour:
   - BaseNodeGuid: 40c82b22-537d-46c1-b4d5-f00aef7a5bd5
     PortName: Already Triggered
     TargetNodeGuid: 3d46a004-f4cc-4ad1-b15b-91a4d882f64b
-  - BaseNodeGuid: 4919a61d-f6bc-4f51-9cdb-fca4d3ea69c4
-    PortName: Sorry, let's continue.
-    TargetNodeGuid: 40c82b22-537d-46c1-b4d5-f00aef7a5bd5
   - BaseNodeGuid: 83302503-d57f-48fc-bbe8-28e8bde414f3
     PortName: give me money!
     TargetNodeGuid: b62abd2d-d9ac-4031-8a09-edc23b6377a4
@@ -43,40 +40,53 @@ MonoBehaviour:
   - BaseNodeGuid: b62abd2d-d9ac-4031-8a09-edc23b6377a4
     PortName: Failed
     TargetNodeGuid: 1652a450-5219-49bc-bee8-89b561b46bb1
+  - BaseNodeGuid: 4919a61d-f6bc-4f51-9cdb-fca4d3ea69c4
+    PortName: Sorry, let's continue.
+    TargetNodeGuid: 40c82b22-537d-46c1-b4d5-f00aef7a5bd5
   DialogueNodeData:
   - Guid: 4b8d2462-db66-4af7-a6a3-4e3eb5c6eebd
-    DialogueText: Skill Skill Skill Skill Skill Check Node
+    DialogueText: Skill Skill Skill Skill Skill Skill Check Node
     Position: {x: 232, y: 200}
+    nodeType: 2
   - Guid: 40c82b22-537d-46c1-b4d5-f00aef7a5bd5
     DialogueText: Event Node
     Position: {x: 817, y: 199}
+    nodeType: 1
   - Guid: 4f3ddd3c-4d9a-41b0-8ddf-b1fcf91f24dc
     DialogueText: no, you must pay!
     Position: {x: 1064, y: 188}
+    nodeType: 0
   - Guid: 83302503-d57f-48fc-bbe8-28e8bde414f3
     DialogueText: I am scared!
     Position: {x: 463, y: -112}
+    nodeType: 0
   - Guid: b62abd2d-d9ac-4031-8a09-edc23b6377a4
-    DialogueText: NPC Stat NPC Stat NPC Stat NPC Stat NPC Stat Check Node
+    DialogueText: NPC Stat NPC Stat NPC Stat NPC Stat NPC Stat NPC Stat Check Node
     Position: {x: 867, y: -87}
+    nodeType: 2
   - Guid: 826f345c-edfc-4bf0-8496-1830031afc64
     DialogueText: you're very kind
     Position: {x: 878, y: -306}
+    nodeType: 0
   - Guid: 3d46a004-f4cc-4ad1-b15b-91a4d882f64b
     DialogueText: ENDPOINT
     Position: {x: 1225, y: 427}
+    nodeType: 3
   - Guid: 35770c17-fd19-4b04-9d8d-01b0958d462e
     DialogueText: take my money!
     Position: {x: 1445, y: -161}
+    nodeType: 0
   - Guid: 1652a450-5219-49bc-bee8-89b561b46bb1
     DialogueText: please I am broke!
     Position: {x: 1445, y: 37}
+    nodeType: 0
   - Guid: 4919a61d-f6bc-4f51-9cdb-fca4d3ea69c4
     DialogueText: 'You don''t scare me!
 
 
       I am super tough!'
     Position: {x: 509, y: 252}
+    nodeType: 0
   ExposedProperties: []
   DialogueCheckData: []
   EventNodeData:
@@ -85,6 +95,7 @@ MonoBehaviour:
     EventValue: -4
     isRepeatable: 1
     hasFired: 0
+    eventType: 0
   CheckNodeData:
   - nodeGuid: 4b8d2462-db66-4af7-a6a3-4e3eb5c6eebd
     checkType: 1

@@ -13,19 +13,27 @@ MonoBehaviour:
   m_Name: New Narrative
   m_EditorClassIdentifier: 
   NodeLinks:
-  - BaseNodeGuid: 8dec7a3d-7532-45a4-ad68-f7cf2dbf416c
+  - BaseNodeGuid: 2353a2e5-866b-44f2-9d41-9deef2ed60be
     PortName: Next
-    TargetNodeGuid: e1b9b362-2f84-4a69-8a6b-610205893480
-  - BaseNodeGuid: e1b9b362-2f84-4a69-8a6b-610205893480
-    PortName: Choice 1
-    TargetNodeGuid: 1edec9af-09a5-4fff-b1ad-00d0b966f10d
-  - BaseNodeGuid: e1b9b362-2f84-4a69-8a6b-610205893480
-    PortName: Choice 2
-    TargetNodeGuid: 1edec9af-09a5-4fff-b1ad-00d0b966f10d
+    TargetNodeGuid: 38e8e308-4f99-494e-ac23-c3294a471905
+  - BaseNodeGuid: 38e8e308-4f99-494e-ac23-c3294a471905
+    PortName: STOP SAYING THAT!!!!
+    TargetNodeGuid: f5d4fe8b-f5d3-4292-b887-2c5a68de0921
+  - BaseNodeGuid: 38e8e308-4f99-494e-ac23-c3294a471905
+    PortName: '[Run away]'
+    TargetNodeGuid: f5d4fe8b-f5d3-4292-b887-2c5a68de0921
   DialogueNodeData:
-  - Guid: 1edec9af-09a5-4fff-b1ad-00d0b966f10d
+  - Guid: f5d4fe8b-f5d3-4292-b887-2c5a68de0921
     DialogueText: Dialogue Node
-    Position: {x: 576, y: 75}
-  - Guid: e1b9b362-2f84-4a69-8a6b-610205893480
-    DialogueText: Dialogue Node
-    Position: {x: 250, y: 92}
+    Position: {x: 614, y: 200}
+    nodeType: 0
+  - Guid: 38e8e308-4f99-494e-ac23-c3294a471905
+    DialogueText: "My name is Inigo Montoya. You killed my father. \n\n... Prepare
+      to die."
+    Position: {x: 242, y: 146}
+    nodeType: 0
+  ExposedProperties: []
+  DialogueCheckData: []
+  EventNodeData: []
+  CheckNodeData: []
+  EndpointNodeData: []
