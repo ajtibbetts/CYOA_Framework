@@ -41,12 +41,9 @@ public class UIManager : MonoBehaviour
 
     private GameObject UI_paragraph;
     private GameObject UI_contentImage;
-    private List<GameObject> actionOptionButtons = new List<GameObject>();
     private List<GameObject> actionToggleButtons = new List<GameObject>();
     private GameObject confirmActionButton;
     private GameObject startGameButton;
-    private GameObject lastSelectedButton = null;
-    private int currentActionOption;
     private string _currentTargetNodeGUID;
 
     // store most recent option data for single option
@@ -66,8 +63,6 @@ public class UIManager : MonoBehaviour
         UI_contentImage = GameObject.Instantiate(imagePrefab, Vector3.zero, Quaternion.identity, contentScrollContainer.transform);
         UI_contentImage.SetActive(false);
         UI_paragraph = GameObject.Instantiate(paragraphPrefab, Vector3.zero, Quaternion.identity, contentScrollContainer.transform);
-        //initActionOptionButtons();
-        // initConfirmActionButton();
     }
 
     void Start(){
@@ -77,9 +72,6 @@ public class UIManager : MonoBehaviour
         controller.CheckManager.onRollCheckPass += initRollPassUI;
         controller.CheckManager.onRollCheckFail += initRollFailUI;
         
-        toggleGroup.SetAllTogglesOff();
-        
-
     }
 
     // Update is called once per frame
@@ -88,6 +80,9 @@ public class UIManager : MonoBehaviour
         
     }
 
+
+    /* MENU SWIPE METHODS */
+    // slides in the main menu from left side of the screen
     public void SlideIn(){
         iTween.ValueTo(uGuiElement.gameObject, iTween.Hash(
             "from", uGuiElement.anchoredPosition,
@@ -113,34 +108,11 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void initActionOptionButtons(){
-        for (int i = 0; i < globalConfig.UI.MAX_ACTION_OPTIONS; i++)
-        {
-            int localIndex = i; 
-            // just add toggles
-            GameObject toggle = GameObject.Instantiate(togglePrefab, Vector3.zero, Quaternion.identity, contentScrollContainer.transform);
-            Toggle toggleComponent = toggle.GetComponent<Toggle>();
-            
-            
-            toggleComponent.group = toggleGroup;
-            toggleComponent.onValueChanged.AddListener(delegate { setCurrentToggleOption(toggleComponent, localIndex);});
-            toggle.name = "toggleButton_" + localIndex;
-            actionToggleButtons.Add(toggle);
-            toggle.SetActive(false); 
-        }    
-    }
-
-    public void initConfirmActionButton(){
-        confirmActionButton = GameObject.Instantiate(playerActionOptionBtnPrefab, Vector3.zero, Quaternion.identity, contentScrollContainer.transform);
-        confirmActionButton.GetComponentInChildren<Button>().onClick.AddListener(delegate { processPlayerAction(); });
-        confirmActionButton.GetComponentInChildren<Text>().text = "Select option then confirm.";
-
-        checkForSingleOption();
-    }
-
+    /* GAME START BUTTONS / METHODS */
+    
     public void initGameStartButton()
     {   
-        Debug.Log("Adding game start button.");
+        Debug.Log("UI MANAGER ---- Adding game start button.");
         startGameButton = GameObject.Instantiate(playerActionOptionBtnPrefab, Vector3.zero, Quaternion.identity, contentScrollContainer.transform);
         startGameButton.GetComponentInChildren<Button>().onClick.AddListener(delegate { StartGameFromUI(); });
         startGameButton.GetComponentInChildren<Text>().text = "Tap here to start.";
@@ -152,10 +124,21 @@ public class UIManager : MonoBehaviour
         Destroy(startGameButton.gameObject);
     }
 
+    /* GAME DIALOGUE OPTION BUTTONS */
+
+    public void initConfirmActionButton(){
+        confirmActionButton = GameObject.Instantiate(playerActionOptionBtnPrefab, Vector3.zero, Quaternion.identity, contentScrollContainer.transform);
+        confirmActionButton.GetComponentInChildren<Button>().onClick.AddListener(delegate { processPlayerAction(); });
+        confirmActionButton.GetComponentInChildren<Text>().text = "Select option then confirm.";
+
+        checkForSingleOption();
+    }
+
+
     public void ClearButtons()
     {
         var toggles = contentScrollContainer.GetComponentsInChildren<Toggle>();
-        Debug.Log("Clearing Buttons. Current button count: " + toggles.Length);
+        Debug.Log("UI MANAGER ---- Clearing Buttons. Current button count: " + toggles.Length);
         for (int i = 0; i < toggles.Length; i++)
         {
             Destroy(toggles[i].gameObject);
@@ -182,76 +165,44 @@ public class UIManager : MonoBehaviour
         _latestTargetGUID = TargetNodeGuid;
         _latestChoiceText = choiceText;
 
-        Debug.Log($"Adding choice Toggle text: {choiceText} | target GUID: {TargetNodeGuid}");
+        Debug.Log($"UI MANAGER ---- Adding choice Toggle text: {choiceText} | target GUID: {TargetNodeGuid}");
 
     }
 
     public void SetCurrentDialogueOption(Toggle toggle, string TargetNodeGuid)
     {
-        Debug.Log("Checking this toggle");
+        Debug.Log("UI MANAGER ---- Checking this toggle");
         if(toggle.isOn) {
             
             _currentTargetNodeGUID = TargetNodeGuid;
+            confirmActionButton.GetComponentInChildren<Text>().text = "Confirm";
         }
         else {
             _currentTargetNodeGUID = null;
+            confirmActionButton.GetComponentInChildren<Text>().text = "Select option then confirm.";
         }
-    }
-
-    public void setCurrentToggleOption(Toggle toggle, int index) {
-        //Debug.Log("current toggle" + toggle.isOn);
-        //Debug.Log("toggle index" + index);
-        if(toggle.isOn) {
-            currentActionOption = index;
-        }
-        else {
-            currentActionOption = -1;
-        }
-    }
-
-    public void setCurrentActionOption(int i){
-        if(lastSelectedButton != null) {
-           // lastSelectedButton.GetComponentInChildren<Button>().
-        }
-       currentActionOption = i;
-       confirmActionButton.GetComponentInChildren<Text>().text = "Confirm";
-       //Debug.Log("Current action option is: " + currentActionOption);
     }
 
     public void processPlayerAction(){
 
-        Debug.Log("Button clicked. Processing action for guid: " + _currentTargetNodeGUID);
+        Debug.Log("UI MANAGER ---- Button clicked. Processing action for guid: " + _currentTargetNodeGUID);
         
         if(_currentTargetNodeGUID != null)
         {
             onOptionSelected?.Invoke(_currentTargetNodeGUID);
             _currentTargetNodeGUID = null;
-            // _latestTargetGUID = null;
-            // _latestChoiceText = null;
-            
         }
-        else if (_latestTargetGUID != null)
+        else if (_latestTargetGUID != null && actionToggleButtons.Count == 1)
         {
-            Debug.Log("Button clicked but no current node guid set. Processing action for latest target guid: " + _latestTargetGUID);
+            Debug.Log("UI MANAGER ---- Button clicked but no current node guid set. Processing action for latest target guid: " + _latestTargetGUID);
             onOptionSelected?.Invoke(_latestTargetGUID);
             _latestTargetGUID = null;
             _latestChoiceText = null;
         }
         else
         {
-            Debug.Log("Button clicked but no current or latest target guid set. Check it out.");
+            Debug.Log("UI MANAGER ---- Button clicked but no current or latest target guid set. Check it out.");
         }
-        // Debug.Log("checking for action option: " + currentActionOption + "at time " + Time.deltaTime);
-        // if(currentActionOption >= 0 ) {
-        //     controller.roomNavigator.changeRoom(currentActionOption);
-        //     confirmActionButton.GetComponentInChildren<Text>().text = "Select option then confirm.";
-        //     currentActionOption = -1;
-        //     //Debug.Log("set to -1 at time " + Time.deltaTime);
-        //     checkForSingleOption(); // CALLED AT END TO REMOVE EXTRA OPTIONS
-        // }
-        // else {
-        //     //Debug.Log("curren action value is less than zero at time " + Time.deltaTime);
-        // }
     }
 
     public void updatePageImage(Sprite image){
@@ -263,9 +214,9 @@ public class UIManager : MonoBehaviour
         UI_contentImage.SetActive(false);
     }
     public void updateContentText(string content) {
-        Debug.Log("updating content text..");
+        Debug.Log("UI MANAGER ----- updating content text..");
         resetScroll();
-        string parsedContent = contentManager.parseContent(content);
+        //string parsedContent = contentManager.parseContent(content);
         
         // UI_paragraph.GetComponent<TextMeshProUGUI>().text = content;
         UI_paragraph.GetComponent<TextMeshProUGUI>().text = contentManager.parseContent(content);
@@ -282,7 +233,6 @@ public class UIManager : MonoBehaviour
         playerEnergyText.GetComponent<TextMeshProUGUI>().text = content;
     }
     public void updatePlayerGoldText(string content) {
-        Debug.Log("UI gold: " + content);
         playerGoldText.GetComponent<TextMeshProUGUI>().text = content;
     }
 
@@ -291,74 +241,10 @@ public class UIManager : MonoBehaviour
         vertScrollBar.value = 1;
     }
 
-    public void resetButtons(){
-
-        //toggleGroup.SetAllTogglesOff();
-        for (int i = 0; i < actionToggleButtons.Count; i++)
-        {
-            actionToggleButtons[i].SetActive(true);      
-            actionToggleButtons[i].GetComponent<Toggle>().isOn = false;      
-            actionToggleButtons[i].SetActive(false);      
-        }  
-    }
-
-    public void resetButton(int i){
-        if(actionToggleButtons[i] != null) {
-            actionToggleButtons[i].SetActive(true);      
-            actionToggleButtons[i].GetComponent<Toggle>().isOn = false;      
-            actionToggleButtons[i].SetActive(false); 
-        }
-    }
-
-    public void updateActionOptionsButtons(actionOption[] actionOptions){
-
-        resetButtons();
-       // Debug.Log("button list size when called: " + actionOptionButtons.Count);
-        
-        //Debug.Log("action option size: " + actionOptions.Length);
-        for (int i = 0; i < actionOptions.Length; i++) {
-         //   Debug.Log("current action:" + actionOptions[i].buttonText.ToString());
-            actionToggleButtons[i].SetActive(true);
-            // check for conditional options on this action, otherwise default text
-            if(actionOptions[i].conditionalRequirement.conditionsToMeet.Length > 0){
-                Debug.Log($"condition found on option {i}. checking...");
-                // get the label based on the first conditions property
-                string conditionLabelText;
-                // int satisfiedCondition = conditionChecker.checkConditions(actionOptions[i]);
-                if(conditionChecker.areConditionsMet(actionOptions[i])){
-                    conditionLabelText = conditionChecker.getConditionLabel(actionOptions[i].conditionalRequirement.conditionsToMeet[0].propertyName);
-                    Debug.Log($"Condition met on option {i} condition.");
-                    actionToggleButtons[i].GetComponentInChildren<Text>().text = "<color=\"green\">[" + conditionLabelText +"]</color> " + actionOptions[i].conditionalRequirement.passButtonText;
-                    actionOptions[i].conditionalRequirement.conditionMet = true;
-                    actionToggleButtons[i].GetComponentInChildren<Toggle>().interactable = true;
-                    
-                }
-                else {
-                    Debug.Log("No conditional requirements met for this action option.");
-                    actionOptions[i].conditionalRequirement.conditionMet = false;
-                    // if condition is set to be hidden when not met, hide it
-                    if(actionOptions[i].conditionalRequirement.hideUnlessMet) {
-                        resetButton(i);
-                    }
-                    else {
-                        conditionLabelText = conditionChecker.getConditionLabel(actionOptions[i].conditionalRequirement.conditionsToMeet[0].propertyName);
-                        actionToggleButtons[i].GetComponentInChildren<Text>().text = "<color=\"red\">[" + conditionLabelText +"]</color>" + actionOptions[i].conditionalRequirement.failButtonText;
-                        actionToggleButtons[i].GetComponentInChildren<Toggle>().interactable = false;
-                    }
-                }
-            }
-            else {
-                actionToggleButtons[i].GetComponentInChildren<Text>().text = actionOptions[i].buttonText;
-                actionToggleButtons[i].GetComponentInChildren<Toggle>().interactable = true;
-            }
-        }
-    }
-
     public void checkForSingleOption(){
 
-        Debug.Log("Checking for single option. Latest targetGuid: " + _latestTargetGUID);
-        // var toggles = contentScrollContainer.GetComponentsInChildren<Toggle>();
-        Debug.Log("Current option length: " + actionToggleButtons.Count);
+        Debug.Log("UI MANAGER ---- Checking for single option. Latest targetGuid: " + _latestTargetGUID);
+        Debug.Log("UI MANAGER ---- Current option length: " + actionToggleButtons.Count);
         // if single choice, change confirm to advance to next dialogue
         if(actionToggleButtons.Count == 1)
         {
@@ -368,13 +254,6 @@ public class UIManager : MonoBehaviour
             confirmActionButton.GetComponentInChildren<Text>().text = _latestChoiceText;
             actionToggleButtons[0].SetActive(false);
         }
-        // //Debug.Log("checking for single action");
-        // if(!actionToggleButtons[1].activeSelf) {
-        //     setCurrentActionOption(0);
-        //     actionToggleButtons[0].SetActive(false);
-        //     confirmActionButton.GetComponentInChildren<Text>().text = actionToggleButtons[0].GetComponentInChildren<Text>().text;
-        //     //Debug.Log("single action found");
-        // }
     }
 
     public void initRollUI()

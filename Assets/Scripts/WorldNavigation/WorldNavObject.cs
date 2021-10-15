@@ -7,7 +7,6 @@ using UnityEngine.Events;
 public class WorldNavObject : MonoBehaviour
 {
     
-
     // identifier data for this nav object
     [Header("Navigation")]
     public string Name;
@@ -46,10 +45,11 @@ public class WorldNavObject : MonoBehaviour
 
     // events
 
-    public static event Action OnObjectsLoaded;
+    //public static event Action OnObjectsLoaded;
 
     private void Awake() {
         SubSceneManager.OnSceneMarkedForUnload += PrepareForUnload;
+        //Debug.Log("World nav object loaded: " + gameObject.name);
     }
     
     private void OnEnable()
@@ -70,13 +70,7 @@ public class WorldNavObject : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Root object loaded.");
-        var rootObject = this.GetComponent<Transform>().root;
-        if(rootObject == this.GetComponent<Transform>())
-        {
-            Debug.Log("Root object loaded. Firing off event.");
-            OnObjectsLoaded?.Invoke();
-        }
+        
     }
 
     // Update is called once per frame
@@ -88,6 +82,7 @@ public class WorldNavObject : MonoBehaviour
     void PrepareForUnload(string sceneName)
     {
         AllWorldObjects.Remove(this);
+        SubSceneManager.OnSceneMarkedForUnload -= PrepareForUnload;
     }
 
     public void ActivateNavObject()
@@ -116,6 +111,5 @@ public class WorldNavObject : MonoBehaviour
                 // Debug.Log("World nav child name: " + navObject.Name);
             }
         }
-
     }
 }

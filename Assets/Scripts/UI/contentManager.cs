@@ -12,6 +12,8 @@ public class contentManager : MonoBehaviour
     private Dictionary<string, Func<string, string>> dict_functions = new Dictionary<string, Func<string, string>>();
     
     private Regex rx = new Regex(@"\{([^{}]+)\}",RegexOptions.Multiline );
+    // this regex will capture all instances of text within {}. the parser follows format of {type.property}
+    // example {p.playerName} will parse and return to player > playerName;
 
 
     void Awake() {
@@ -39,6 +41,7 @@ public class contentManager : MonoBehaviour
             string property = subs[1].Substring(0,subs[1].Length-1);
             // check for key and return
             if(dict_functions.ContainsKey(key)) {
+                // calls matched dictionary function key and passes the property name following '.' to get the value
                 return dict_functions[key](property);
             }
             Debug.Log($"key: {key} property: {property}");
@@ -47,12 +50,13 @@ public class contentManager : MonoBehaviour
     }
     
     public string parseContent(string content) {
-       // string ns= Regex.Replace(content,"\{([^{}]+)\}","$1 = MessageBox.Show");
-    // THIS WORKS I THINK MAYBE
+       
+    // THIS WORKS I THINK MAYBE IDK REGEX IS MAGIC
 
         string result = rx.Replace(content, new MatchEvaluator(getVariableText));
+        // will replace each instance matched within {} and check for variable to replace
 
-        Debug.Log("PARSE RESULT:\n" + result);
+        Debug.Log("CONTENT MANAGER ---- PARSE RESULT:\n" + result);
         return result;
     }
 
@@ -65,13 +69,13 @@ public class contentManager : MonoBehaviour
         return false;
     }
 
-    // retrieval functions
+    // retrieval functions using REFLECTION
 
     public string getPlayerProperty(string propertyName) {
 
         PropertyInfo propertyInfo = UIManager.controller.player.stats.GetType().GetProperty(propertyName);
         string currentValue = propertyInfo.GetValue(UIManager.controller.player.stats, null).ToString();
-        Debug.Log("Property value of " + propertyName + ": " + currentValue);
+        Debug.Log("CONTENT MANAGER ---- Property value of " + propertyName + ": " + currentValue);
 
         return currentValue;
     }

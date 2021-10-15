@@ -81,12 +81,13 @@ public class DialogueParser : MonoBehaviour
 
         private void ProcessDialogueNode(string narrativeDataGUID, string text)
         {
+            Debug.Log("DIALOGUE PARSER ---- Setting up new Dialogue Node with Choices");
             var choices = dialogue.NodeLinks.Where(x => x.BaseNodeGuid == narrativeDataGUID);
             // dialogueText.text = ProcessProperties(text);
             controller.UIManager.updateContentText(_pendingText + text);
             _pendingText = "";
             //dialogueText.text = text;
-            Debug.Log("number of choices: " + choices.Count());
+            Debug.Log("DIALOGUE PARSER ---- number of choices: " + choices.Count());
             
             
             // instead destroy from UI
@@ -102,15 +103,8 @@ public class DialogueParser : MonoBehaviour
 
             foreach (var choice in choices)
             {
-                // var button = Instantiate(choicePrefab, buttonContainer);
-                // button.GetComponentInChildren<Text>().text = ProcessProperties(choice.PortName);
-                // button.onClick.AddListener(() => ProceedToNarrative(choice.TargetNodeGuid));
-                Debug.Log("choice found");
+                // let UI manager handle button creation and logic
                 controller.UIManager.CreateDialogueOptionButton(choice.TargetNodeGuid, choice.PortName);
-
-                // var confirmActionButton = GameObject.Instantiate(playerActionOptionBtnPrefab, Vector3.zero, Quaternion.identity, buttonContainer.transform);
-                // confirmActionButton.GetComponentInChildren<Button>().onClick.AddListener(delegate { processPlayerAction(currentActionOption); });
-                // confirmActionButton.GetComponentInChildren<Text>().text = "Select option then confirm.";
             }
             
             // finally create confirm button

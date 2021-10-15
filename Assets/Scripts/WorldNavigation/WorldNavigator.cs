@@ -22,7 +22,7 @@ public class WorldNavigator : MonoBehaviour
             SubSceneManager.OnSceneLoaded += SetupNewArea;
         
         
-        Debug.Log("World Navigation manager setup.");
+        Debug.Log("WORLD NAVIGATOR ---- World Navigation manager setup.");
     }
     
     // Start is called before the first frame update
@@ -48,7 +48,7 @@ public class WorldNavigator : MonoBehaviour
     {
         // Debug.Log("Current world objects: " + GetNavObjects().Count);
         var worldObjects = GetNavObjects();
-        Debug.Log("Setting up for new scene: " + sceneName);
+        Debug.Log("WORLD NAVIGATOR ---- Setting up for new scene: " + sceneName);
         if(worldObjects.Count > 0)
         {
             worldObjects.Reverse();
@@ -58,7 +58,7 @@ public class WorldNavigator : MonoBehaviour
             // }
 
             var rootObject = worldObjects[0].GetComponent<Transform>().root;
-            Debug.Log("Root object: " + rootObject.name);
+            Debug.Log("WORLD NAVIGATOR ---- Root object in this scene (top of hierarchy): " + rootObject.name);
             ActiveNavObject = rootObject.GetComponent<WorldNavObject>();
             ActiveNavObject.ActivateNavObject();
 
@@ -76,7 +76,7 @@ public class WorldNavigator : MonoBehaviour
         //     SetupNewArea("");
         // }
         
-        Debug.Log($"Active nav object name: {ActiveNavObject.Name}");
+        Debug.Log($"WORLD NAVIGATOR ---- Active nav object name: {ActiveNavObject.Name}");
         if(ActiveNavObject.dialogue != null)
         {
             
@@ -93,7 +93,7 @@ public class WorldNavigator : MonoBehaviour
 
     public void NavigateToParent()
     {
-        Debug.Log("Attempting to navigate to this object's parent.");
+        Debug.Log("WORLD NAVIGATOR ---- Attempting to navigate to this object's parent.");
         if(ActiveNavObject !=null)
         {
             if(ActiveNavObject.ParentNavObject != null)

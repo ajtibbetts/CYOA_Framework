@@ -166,6 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isLast: 0
   Name: area1 child2
   GUID: f375d4d5-a139-46a0-a25e-a2127d11baed
   ParentNavObject: {fileID: 0}
@@ -226,6 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isLast: 0
   Name: area1 child1
   GUID: e9957af1-765c-4735-aeff-4f587a118cda
   ParentNavObject: {fileID: 0}
@@ -285,6 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isLast: 1
   Name: area2 child1
   GUID: 238d934e-a8a3-4db8-8cd1-32f88a3fae42
   ParentNavObject: {fileID: 0}
@@ -346,6 +349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isLast: 0
   Name: area1
   GUID: daef2800-8ed3-49c0-81ed-fe94dc81b14b
   ParentNavObject: {fileID: 0}
@@ -391,6 +395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isLast: 0
   Name: area2
   GUID: a6dfb3a8-f392-40f7-a828-f13fa09a74c3
   ParentNavObject: {fileID: 0}
@@ -465,6 +470,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isLast: 0
   Name: third child
   GUID: e9957af1-765c-4735-aeff-4f587a118cda
   ParentNavObject: {fileID: 0}

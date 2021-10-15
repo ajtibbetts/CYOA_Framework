@@ -17,42 +17,46 @@ public static class SubSceneManager
 
     static SubSceneManager()
     {
-        WorldNavObject.OnObjectsLoaded += ConfirmSceneLoaded;
+        SceneManager.sceneLoaded += OnSceneLoadComplete; // use scene manager delegate from API
     }
     
     public static void AddScene(string sceneName)
     {
         // check if scene is already loaded
         var sceneToLoad = SceneManager.GetSceneByName(sceneName);
-        Debug.Log("OnSceneLoaded sub count: " + OnSceneLoaded.GetInvocationList().Length);
+        Debug.Log("SCENE MANAGER ---- OnSceneLoaded sub count: " + OnSceneLoaded.GetInvocationList().Length);
         if(!sceneToLoad.isLoaded)
         {
-            Debug.Log($"Loading scene additive: {sceneName}");
+            Debug.Log($"SCENE MANAGER ---- Loading scene additive: {sceneName}");
             SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
             _currentLoadeSceneName = sceneName;
             
         }
         else 
         {
-            Debug.Log($"Scene {sceneName} is already loaded.");
-            Debug.Log("Firing off onSceneLoaded event!");
+            Debug.Log($"SCENE MANAGER ---- Scene {sceneName} is already loaded.");
+            Debug.Log("SCENE MANAGER ---- Firing off onSceneLoaded event!");
             OnSceneLoaded?.Invoke(sceneName);
             
         }
     }
 
-    public static void ConfirmSceneLoaded()
-    {
-        Debug.Log("Scene load complete. Firing off onSceneLoaded event!");
-        OnSceneLoaded?.Invoke(_currentLoadeSceneName);
-    }
-
     public static void RemoveScene(string sceneName)
     {
-        Debug.Log($"Removing scene additive: {sceneName}");
+        Debug.Log($"SCENE MANAGER ---- Removing scene additive: {sceneName}");
         OnSceneMarkedForUnload?.Invoke(sceneName);
         SceneManager.UnloadSceneAsync(sceneName);
         OnSceneUnloaded?.Invoke(sceneName);
+    }
+
+    public static void OnSceneLoadComplete(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log("SCENE MANAGER ---- OnSceneLoaded: " + scene.name + " | Load Mode: " + mode);
+        if(_currentLoadeSceneName == scene.name && mode == LoadSceneMode.Additive)
+        {
+            Debug.Log("SCENE MANAGER ---- Additive scene confirmed for load: " + _currentLoadeSceneName);
+            OnSceneLoaded?.Invoke(_currentLoadeSceneName);
+        }
     }
 
 }

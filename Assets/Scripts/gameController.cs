@@ -60,13 +60,13 @@ public class gameController : MonoBehaviour
         //player.LoadPlayer();
         if(player._player.CurrentScene == null)
         {
-            Debug.Log("Current scene is not saved to player starting fresh.");
+            Debug.Log("GAME CONTROLLER ---- Current scene is not saved to player starting fresh.");
             player._player.CurrentScene = "testLevel";
             SubSceneManager.AddScene("testLevel");
         }
         else
         {
-            Debug.Log("Loading from previously saved scene.");
+            Debug.Log("GAME CONTROLLER ---- Loading from previously saved scene.");
             SubSceneManager.AddScene(player._player.CurrentScene);
         }
     }
@@ -83,7 +83,7 @@ public class gameController : MonoBehaviour
 
     void ProcessNewScene(string sceneName)
     {
-        Debug.Log("Game manager processing new scene.");
+        Debug.Log("GAME CONTROLLER ---- Game manager processing new scene.");
         // check for starting dialogue
         var dialogue = worldNavigator.GetActiveDialogue();
         if(dialogue != null)
@@ -95,7 +95,7 @@ public class gameController : MonoBehaviour
 
     void CleanupOldScene(string sceneName)
     {
-        Debug.Log("Game manager cleaning up old scene.");
+        Debug.Log("GAME CONTROLLER ---- Game manager cleaning up old scene.");
     }
 
     public void DisplayLoggedText()
@@ -178,18 +178,16 @@ public class gameController : MonoBehaviour
         UIManager.updatePlayerEnergyText(currentEnergy + "/" + maxEnergy);
     }
     public void UI_updatePlayerGold(){
-        Debug.Log("gold: " + player.stats.currentGold);
-        Debug.Log("gold: " + player.stats.currentGold.ToString());
         UIManager.updatePlayerGoldText(player.stats.currentGold.ToString());
     }
 
     // Event Listeners
     public void ResetDialogueRoute()
     {
-        Debug.Log("End of dialogue graph reached. Resetting Dialogue route.");
+        Debug.Log("GAME CONTROLLER ---- End of dialogue graph reached. Resetting Dialogue route.");
         // test stuff below
         // SubSceneManager.RemoveScene("testLevel");
-        Debug.Log("Current world objects: " + worldNavigator.GetNavObjects().Count);
+        Debug.Log("GAME CONTROLLER ---- Current world objects: " + worldNavigator.GetNavObjects().Count);
     }
 
     public void InitializePlayer()
