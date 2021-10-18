@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 144321110}
   - component: {fileID: 144321111}
   m_Layer: 0
-  m_Name: zone (3)
+  m_Name: secondRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -166,17 +166,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isLast: 0
-  Name: area1 child2
+  Name: Large Room
   GUID: f375d4d5-a139-46a0-a25e-a2127d11baed
   ParentNavObject: {fileID: 0}
   AllChildObjects: []
-  dialogue: {fileID: 11400000, guid: 17387ef37366cc54ea21ad49fcf06fe3, type: 2}
-  descriptionNew: 
-  descriptionReturned: 
-  descriptionExit: 
-  buttonTextNew: 
-  buttonTextReturned: 
+  dialogue: {fileID: 0}
+  descriptionNew: You enter the larger room to the side. There is nothing in here
+    but a big empty space.
+  descriptionReturned: You return to the larger room to the side. Surprisingly, it
+    is still empty.
+  descriptionExit: You exit the large room.
+  buttonTextNew: Explore the large room to the side.
+  buttonTextReturned: Check out the large room again.
   OnNavObjectActivated:
     m_PersistentCalls:
       m_Calls: []
@@ -194,7 +195,7 @@ GameObject:
   - component: {fileID: 383172949}
   - component: {fileID: 383172950}
   m_Layer: 0
-  m_Name: zone (2)
+  m_Name: small room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -227,17 +228,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isLast: 0
-  Name: area1 child1
+  Name: Small Room
   GUID: e9957af1-765c-4735-aeff-4f587a118cda
   ParentNavObject: {fileID: 0}
   AllChildObjects: []
-  dialogue: {fileID: 11400000, guid: 17387ef37366cc54ea21ad49fcf06fe3, type: 2}
-  descriptionNew: 
-  descriptionReturned: 
-  descriptionExit: 
-  buttonTextNew: 
-  buttonTextReturned: 
+  dialogue: {fileID: 0}
+  descriptionNew: You enter a small room, for the first time.
+  descriptionReturned: You return to the small room.
+  descriptionExit: You exit the small room.
+  buttonTextNew: Enter the small room.
+  buttonTextReturned: Return to the small room.
   OnNavObjectActivated:
     m_PersistentCalls:
       m_Calls: []
@@ -255,7 +255,7 @@ GameObject:
   - component: {fileID: 554879171}
   - component: {fileID: 554879172}
   m_Layer: 0
-  m_Name: zone (4)
+  m_Name: singleRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -287,7 +287,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isLast: 1
   Name: area2 child1
   GUID: 238d934e-a8a3-4db8-8cd1-32f88a3fae42
   ParentNavObject: {fileID: 0}
@@ -315,7 +314,7 @@ GameObject:
   - component: {fileID: 564815490}
   - component: {fileID: 564815491}
   m_Layer: 0
-  m_Name: zone
+  m_Name: startingArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -349,17 +348,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isLast: 0
-  Name: area1
+  Name: Starting Area
   GUID: daef2800-8ed3-49c0-81ed-fe94dc81b14b
   ParentNavObject: {fileID: 0}
   AllChildObjects: []
-  dialogue: {fileID: 11400000, guid: b657aac0ab37dc44d95f75024da02c0c, type: 2}
-  descriptionNew: 
-  descriptionReturned: 
-  descriptionExit: 
+  dialogue: {fileID: 11400000, guid: ed931eff657890747b9cb35a98b47284, type: 2}
+  descriptionNew: This is your first time entering the staring area.
+  descriptionReturned: You are returning to this starting area.
+  descriptionExit: You are leaving the starting area.
   buttonTextNew: 
-  buttonTextReturned: 
+  buttonTextReturned: Return to the starting area.
   OnNavObjectActivated:
     m_PersistentCalls:
       m_Calls: []
@@ -377,7 +375,7 @@ GameObject:
   - component: {fileID: 1093402701}
   - component: {fileID: 1093402700}
   m_Layer: 0
-  m_Name: zone (1)
+  m_Name: secondArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -395,7 +393,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isLast: 0
   Name: area2
   GUID: a6dfb3a8-f392-40f7-a828-f13fa09a74c3
   ParentNavObject: {fileID: 0}
@@ -438,7 +435,7 @@ GameObject:
   - component: {fileID: 1905155658}
   - component: {fileID: 1905155659}
   m_Layer: 0
-  m_Name: zone (4)
+  m_Name: bathroom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -470,17 +467,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isLast: 0
-  Name: third child
+  Name: Bathroom
   GUID: e9957af1-765c-4735-aeff-4f587a118cda
   ParentNavObject: {fileID: 0}
   AllChildObjects: []
-  dialogue: {fileID: 11400000, guid: 17387ef37366cc54ea21ad49fcf06fe3, type: 2}
-  descriptionNew: 
-  descriptionReturned: 
-  descriptionExit: 
-  buttonTextNew: 
-  buttonTextReturned: 
+  dialogue: {fileID: 0}
+  descriptionNew: You enter the bathroom.
+  descriptionReturned: You return to the bathroom.
+  descriptionExit: You head out of the bathroom.
+  buttonTextNew: Enter the bathroom.
+  buttonTextReturned: Check out the bathroom again.
   OnNavObjectActivated:
     m_PersistentCalls:
       m_Calls: []

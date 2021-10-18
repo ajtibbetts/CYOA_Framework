@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
 
     // events
     public static event Action onGameStartSelected;
+    public static event Action onDialogueEnded;
     public static event Action<string> onOptionSelected;
 
     // UI elements
@@ -43,6 +44,7 @@ public class UIManager : MonoBehaviour
     private GameObject UI_contentImage;
     private List<GameObject> actionToggleButtons = new List<GameObject>();
     private GameObject confirmActionButton;
+    private GameObject endDialogueButton;
     private GameObject startGameButton;
     private string _currentTargetNodeGUID;
 
@@ -71,6 +73,7 @@ public class UIManager : MonoBehaviour
         controller.CheckManager.onRollCheckStart += initRollUI;
         controller.CheckManager.onRollCheckPass += initRollPassUI;
         controller.CheckManager.onRollCheckFail += initRollFailUI;
+        controller.DialogueParser.onDialogueReachedDeadEnd += CreateEndDialogueButton;
         
     }
 
@@ -126,12 +129,20 @@ public class UIManager : MonoBehaviour
 
     /* GAME DIALOGUE OPTION BUTTONS */
 
-    public void initConfirmActionButton(){
+    public void initConfirmActionButton()
+    {
         confirmActionButton = GameObject.Instantiate(playerActionOptionBtnPrefab, Vector3.zero, Quaternion.identity, contentScrollContainer.transform);
         confirmActionButton.GetComponentInChildren<Button>().onClick.AddListener(delegate { processPlayerAction(); });
         confirmActionButton.GetComponentInChildren<Text>().text = "Select option then confirm.";
 
         checkForSingleOption();
+    }
+
+    public void CreateEndDialogueButton()
+    {
+        endDialogueButton = GameObject.Instantiate(playerActionOptionBtnPrefab, Vector3.zero, Quaternion.identity, contentScrollContainer.transform);
+        endDialogueButton.GetComponentInChildren<Button>().onClick.AddListener(() => onDialogueEnded?.Invoke());
+        endDialogueButton.GetComponentInChildren<Text>().text = "Proceed.";
     }
 
 
@@ -148,6 +159,11 @@ public class UIManager : MonoBehaviour
         if(confirmActionButton != null)
         {
             Destroy(confirmActionButton.gameObject);
+        }
+
+        if(endDialogueButton != null)
+        {
+            Destroy(endDialogueButton.gameObject);
         }
     }
 

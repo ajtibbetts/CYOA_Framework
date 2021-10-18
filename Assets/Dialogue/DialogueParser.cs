@@ -27,7 +27,7 @@ public class DialogueParser : MonoBehaviour
         private void Awake() {
             controller = GetComponent<gameController>();  
             controller.EventManager.onEventFinished += UpdatePendingText;
-            UIManager.onOptionSelected += ProceedToNarrative;
+            
         }
         
         private void Start()
@@ -40,7 +40,13 @@ public class DialogueParser : MonoBehaviour
 
         public void SetupNewDialogue(DialogueContainer newDialogue)
         {
+            UIManager.onOptionSelected += ProceedToNarrative;
             dialogue = newDialogue;
+        }
+
+        public void DisableDialogueParser()
+        {
+            UIManager.onOptionSelected -= ProceedToNarrative;
         }
 
         public void InitDialogue() {
@@ -58,6 +64,7 @@ public class DialogueParser : MonoBehaviour
 
         private void ProceedToNarrative(string narrativeDataGUID)
         {
+            Debug.Log("DIALOGUE PARSER ---- Proceeding to next narrative node.");
             var text = dialogue.DialogueNodeData.Find(x => x.Guid == narrativeDataGUID).DialogueText;
             var nodeType = dialogue.DialogueNodeData.Find(x => x.Guid == narrativeDataGUID).nodeType;
 
@@ -99,7 +106,12 @@ public class DialogueParser : MonoBehaviour
             //     Destroy(buttons[i].gameObject);
             // }
 
-            if(choices.Count() < 1) onDialogueReachedDeadEnd.Invoke();
+            // if there are no dialogue choices left/ flag end reached
+            if(choices.Count() < 1) 
+            {
+                onDialogueReachedDeadEnd.Invoke();
+                return;
+            }
 
             foreach (var choice in choices)
             {

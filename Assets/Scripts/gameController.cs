@@ -75,21 +75,26 @@ public class gameController : MonoBehaviour
     {
         // register listeners
         UIManager.onGameStartSelected += StartGame;
-        WorldNavigator.OnWorldLoaded += ProcessNewScene;
+        UIManager.onDialogueEnded += BeginWorldNavigation;
+        WorldNavigator.OnActiveNavObjectLoaded += ProcessNewScene;
         // SubSceneManager.OnSceneLoaded += ProcessNewScene;
         // SubSceneManager.OnSceneUnloaded += CleanupOldScene;
-        DialogueParser.onDialogueReachedDeadEnd += ResetDialogueRoute;
+        // DialogueParser.onDialogueReachedDeadEnd += ResetDialogueRoute;
     }
 
     void ProcessNewScene(string sceneName)
     {
         Debug.Log("GAME CONTROLLER ---- Game manager processing new scene.");
-        // check for starting dialogue
+        // check for starting dialogue, otherwise display nav object
         var dialogue = worldNavigator.GetActiveDialogue();
         if(dialogue != null)
         {
             DialogueParser.SetupNewDialogue(dialogue);
             DialogueParser.InitDialogue();
+        }
+        else {
+            DialogueParser.DisableDialogueParser();
+            worldNavigator.DisplayActiveNavObject();
         }
     }
 
@@ -182,12 +187,11 @@ public class gameController : MonoBehaviour
     }
 
     // Event Listeners
-    public void ResetDialogueRoute()
+    public void BeginWorldNavigation()
     {
-        Debug.Log("GAME CONTROLLER ---- End of dialogue graph reached. Resetting Dialogue route.");
-        // test stuff below
-        // SubSceneManager.RemoveScene("testLevel");
-        Debug.Log("GAME CONTROLLER ---- Current world objects: " + worldNavigator.GetNavObjects().Count);
+        Debug.Log("GAME CONTROLLER ---- End of dialogue graph reached. Moving to active World Nav Object.");
+        DialogueParser.DisableDialogueParser();
+        worldNavigator.DisplayActiveNavObject();
     }
 
     public void InitializePlayer()
