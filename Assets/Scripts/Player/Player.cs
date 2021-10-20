@@ -1,23 +1,36 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player
+[Serializable]
+public class Player : MonoBehaviour
 {
     // base stats
-    public int Physical {get; set;}
-    public int Cognitive {get; set;}
-    public int Volitional {get; set;}
-    public int Narrative {get; set;}
-    public int Social {get; set;}
-
-    // level data
-    public string CurrentScene;
+    [Header("Player Stats")]
+    public int Physical;
+    public int Cognitive;
+    public int Volitional;
+    public int Narrative;
+    public int Social;
 
     // skills
+    [Header("Player Skills")]
     private PlayerSkills _skills;
 
+    // level data
+    [Header("Level Data")]
+    public string CurrentScene;
+    public List<string> visitedWorldNavObjects = new List<string>();
+
+    
+
     // derived stats
+
+    public void addWorldNavObject(string GUID)
+    {
+        visitedWorldNavObjects.Add(GUID);
+    }
     
 
     public void SetTestData()

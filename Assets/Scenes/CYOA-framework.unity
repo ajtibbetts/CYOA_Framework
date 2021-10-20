@@ -588,6 +588,7 @@ GameObject:
   - component: {fileID: 387324955}
   - component: {fileID: 387324954}
   - component: {fileID: 387324953}
+  - component: {fileID: 387324956}
   m_Layer: 0
   m_Name: playerManager
   m_TagString: Untagged
@@ -622,6 +623,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 0}
+  _player: {fileID: 0}
   playerHealth: 10
   playerMaxHealth: 10
   playerName: Player
@@ -640,6 +642,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &387324956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387324952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f1baa455b4069c46bb84b77567ac4d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentScene: testLevel
 --- !u!1 &567535619
 GameObject:
   m_ObjectHideFlags: 0

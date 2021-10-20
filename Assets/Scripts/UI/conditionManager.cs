@@ -48,30 +48,42 @@ public class conditionManager : MonoBehaviour
         }
     }
 
-    public Boolean areConditionsMet(actionOption actionOption) {
-        Debug.Log("checking action option from conditionManager");
-        Debug.Log($"condition length: {actionOption.conditionalRequirement.conditionsToMeet.Length}");
-        for(int i = 0; i < actionOption.conditionalRequirement.conditionsToMeet.Length; i ++) {
-            // get appropriate condition type
-            Debug.Log($"condition type: {actionOption.conditionalRequirement.conditionsToMeet[i].condition}");
-            switch (actionOption.conditionalRequirement.conditionsToMeet[i].condition)
-            {
-                case conditionType.playerProperty:
-                     Debug.Log("Checking player property");
-                     if(!checkPlayerCondition(actionOption.conditionalRequirement.conditionsToMeet[i])){
-                         Debug.Log($"Player property conditional failed at option {i}.");
-                         return false;
-                     }
-                break;
-                default:
-                
-                break;
-            }
-            
+    public static bool isConditionMet(conditionalStatement conditionData)
+    {
+        switch(conditionData.condition)
+        {
+            case conditionType.none:
+                return true;
+            // add other types later
+            default:
+                return true;
         }
-        // if all conditions are satisfied, return true
-        return true;
     }
+
+    // public Boolean areConditionsMet(actionOption actionOption) {
+    //     Debug.Log("checking action option from conditionManager");
+    //     Debug.Log($"condition length: {actionOption.conditionalRequirement.conditionsToMeet.Length}");
+    //     for(int i = 0; i < actionOption.conditionalRequirement.conditionsToMeet.Length; i ++) {
+    //         // get appropriate condition type
+    //         Debug.Log($"condition type: {actionOption.conditionalRequirement.conditionsToMeet[i].condition}");
+    //         switch (actionOption.conditionalRequirement.conditionsToMeet[i].condition)
+    //         {
+    //             case conditionType.playerProperty:
+    //                  Debug.Log("Checking player property");
+    //                  if(!checkPlayerCondition(actionOption.conditionalRequirement.conditionsToMeet[i])){
+    //                      Debug.Log($"Player property conditional failed at option {i}.");
+    //                      return false;
+    //                  }
+    //             break;
+    //             default:
+                
+    //             break;
+    //         }
+            
+    //     }
+    //     // if all conditions are satisfied, return true
+    //     return true;
+    // }
 
     private Boolean checkPlayerCondition(conditionalStatement condition) {
         // get player property and value;

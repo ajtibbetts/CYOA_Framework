@@ -14,9 +14,9 @@ public class actionOption
     public string actionTakenText;
     [Tooltip("Default room that taking this action will move player to.")]
     public Room valueRoom;
-    [Tooltip("Optional conditional requirement that must be met for this action to be taken.")]
-    public actionOptionCondition conditionalRequirement;
-    public conditionalProperty requiredProperty;
+    // [Tooltip("Optional conditional requirement that must be met for this action to be taken.")]
+    // public actionOptionCondition conditionalRequirement;
+    // public conditionalProperty requiredProperty;
     [Tooltip("Action event to fire off if this action is taken.")]
     public actionEvent[] eventsToTrigger;
     

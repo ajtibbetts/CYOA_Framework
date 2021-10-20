@@ -61,22 +61,29 @@ public class WorldNavigator : MonoBehaviour
             Debug.Log("WORLD NAVIGATOR ---- Root object in this scene (top of hierarchy): " + rootObject.name);
             ActiveNavObject = rootObject.GetComponent<WorldNavObject>();
             ActiveNavObject.ActivateNavObject();
-
             OnActiveNavObjectLoaded?.Invoke(sceneName);
         }
 
     }
 
+    public void AddActiveNavObjectToPlayer()
+    {
+        // add active nav object to player's data if not already in there
+        if(!controller.player._player.visitedWorldNavObjects.Contains(ActiveNavObject.GUID))
+        {
+            controller.player._player.visitedWorldNavObjects.Add(ActiveNavObject.GUID);
+        }
+    }
+
+    public bool HasPlayerVisitedNavObject(string objectGUID)
+    {
+        return controller.player._player.visitedWorldNavObjects.Contains(objectGUID);
+    }
+
     public DialogueContainer GetActiveDialogue()
     {
-
-        Debug.Log($"WORLD NAVIGATOR ---- Checking active nav object name: {ActiveNavObject.Name} for dialogue graph.");
-        if(ActiveNavObject.dialogue != null)
-        {
-            return ActiveNavObject.dialogue;
-        }
-
-        return null;
+        Debug.Log($"WORLD NAVIGATOR ---- Checking active nav object name: {ActiveNavObject.Name} for new or returning dialogue graph.");
+        return GetNewOrReturnedDialogue();
     }
 
     public void DisplayActiveNavObject()
@@ -86,39 +93,37 @@ public class WorldNavigator : MonoBehaviour
         
         Debug.Log($"WORLD NAVIGATOR ---- Displaying active world nav object: {ActiveNavObject.Name}");
 
-        // add logic here to determine whether to display new or returning text
-        bool isReturned = false;
-        if(!isReturned)
-        {
-            controller.UIManager.updateContentText(ActiveNavObject.descriptionNew);
-        }
-        else 
-        {
-            controller.UIManager.updateContentText(ActiveNavObject.descriptionReturned);
-        }       
+        // displays new or returned text
+        DisplayActiveNavObjectText();
+
+        // display all toggle buttons for this active nav object (new/returned/parent)
+        DisplayActiveNavObjectOptions();
+    }
+
+    public void DisplayActiveNavObjectText()
+    {
+        string displayText = GetNewOrReturnedText(ActiveNavObject, ActiveNavObject.displayTextOnNew, ActiveNavObject.displayTextOnReturn);
+        controller.UIManager.updateContentText(displayText);
+    }
+
+    public void DisplayActiveNavObjectOptions()
+    {
+        // clear existing buttons first
         controller.UIManager.ClearButtons();
 
         // list all child objects as options
         List<WorldNavObject> childNavObjects = ActiveNavObject.AllChildObjects;
         foreach(WorldNavObject navObject in childNavObjects)
         {
-            // add logic here to determine whether new/returned
-            bool isNavReturned = false;
-            if(!isNavReturned)
-            {
-                // Debug.Log("child nav object: " + navObject.buttonTextNew);
-                controller.UIManager.CreateDialogueOptionButton(navObject.GUID, navObject.buttonTextNew);
-            }
-            else
-            {
-                // Debug.Log("child nav object: " + navObject.buttonTextNew);
-                controller.UIManager.CreateDialogueOptionButton(navObject.GUID, navObject.buttonTextReturned);
-            }
+            string buttonDisplayText = GetNewOrReturnedText(navObject, navObject.buttonTextOnNew, navObject.buttonTextOnReturn);
+            controller.UIManager.CreateDialogueOptionButton(navObject.GUID, buttonDisplayText);
         }
-        // add choice to go back to parent or map
+        // add choice to go back to parent or map if no parent
         if(ActiveNavObject.ParentNavObject != null)
         {
-            controller.UIManager.CreateDialogueOptionButton("PARENT", ActiveNavObject.ParentNavObject.GetComponent<WorldNavObject>().buttonTextReturned);
+            WorldNavObject parentNavObject = ActiveNavObject.ParentNavObject.GetComponent<WorldNavObject>();
+            string buttonDisplayText = parentNavObject.GetConditionalText(parentNavObject.buttonTextAsParent);
+            controller.UIManager.CreateDialogueOptionButton("PARENT", buttonDisplayText);
         }
         else 
         {
@@ -128,11 +133,68 @@ public class WorldNavigator : MonoBehaviour
         controller.UIManager.initConfirmActionButton();
     }
 
+    public string GetNewOrReturnedText(WorldNavObject navObject, conditionalText[] newConditions, conditionalText[] returningConditions)
+    {
+        // used for both buttons and display text
+        string displayText = "MISSING";
+        if(HasPlayerVisitedNavObject(navObject.GUID))
+        {
+            // Debug.Log($"WORLD NAVIGATOR ---- PLAYER HAS VISITED THIS NAV OBJECT");
+            if(returningConditions.Length > 0)
+            {
+                displayText = navObject.GetConditionalText(returningConditions);
+            }
+            else
+            {
+                Debug.Log($"WORLD NAVIGATOR ---- THIS NAV OBJECT DOES NOT HAVE RETURN TEXT SET: {navObject.Name}");
+            }
+
+        }
+        else 
+        {
+            // Debug.Log($"WORLD NAVIGATOR ---- PLAYER HAS NOT VISITED THIS NAV OBJECT");
+            if(newConditions.Length > 0)
+            {
+                displayText = navObject.GetConditionalText(newConditions);
+            }
+            else
+            {
+                Debug.Log($"WORLD NAVIGATOR ---- THIS NAV OBJECT DOES NOT HAVE NEW TEXT SET: {navObject.Name}");
+            }
+        }  
+
+        return displayText;
+    }
+
+    public DialogueContainer GetNewOrReturnedDialogue()
+    {
+        // used only on the activeNavObject
+        DialogueContainer dialogueToDisplay = null;
+        if(HasPlayerVisitedNavObject(ActiveNavObject.GUID))
+        {
+            // Debug.Log($"WORLD NAVIGATOR ---- PLAYER HAS VISITED THIS NAV OBJECT");
+            if(ActiveNavObject.dialogueOnReturn.Length > 0) dialogueToDisplay = ActiveNavObject.GetConditionalDialogue(ActiveNavObject.dialogueOnReturn);
+        }
+        else 
+        {
+            // Debug.Log($"WORLD NAVIGATOR ---- PLAYER HAS NOT VISITED THIS NAV OBJECT");
+            if(ActiveNavObject.dialogueOnNew.Length > 0) dialogueToDisplay = ActiveNavObject.GetConditionalDialogue(ActiveNavObject.dialogueOnNew);
+        }  
+
+        return dialogueToDisplay;
+    }
+
+    
+
+    
+
     public void NavigateToNavObject(string GUID)
     {
         Debug.Log("WORLD NAVIGATOR ---- Navigating to next nav object.");
         // remove listener
         UIManager.onOptionSelected -= NavigateToNavObject;
+        // add object to player data
+        AddActiveNavObjectToPlayer();
         switch(GUID)
         {
             case "MAP":

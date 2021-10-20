@@ -5,7 +5,7 @@ using UnityEngine;
 public class playerManager : MonoBehaviour {
     
     [HideInInspector] public playerStatsManager stats;
-    public Player _player;
+    [SerializeField] public Player _player;
 
     [SerializeField]
     private int playerHealth = globalConfig.Player.PLAYER_STARTING_HEALTH;
@@ -18,7 +18,7 @@ public class playerManager : MonoBehaviour {
 
     private void Awake() {
         stats = GetComponent<playerStatsManager>();
-        _player = new Player();
+        _player = GetComponent<Player>();
         Debug.Log("Starting fresh player.");
         _player.OutputData();
         _player.SetTestData();
