@@ -78,7 +78,13 @@ public class WorldNavObject : MonoBehaviour
     // stores all nav objects in loaded scene
     public static List<WorldNavObject> AllWorldObjects {get; private set;} 
 
-    // events
+    // context creation objects
+    [ContextMenu ("Generate new GUID")]
+    void GenerateNewGUID () {
+        Debug.Log ("Creating new GUID for this object.");
+        GUID = Guid.NewGuid().ToString();
+    }
+
 
     //public static event Action OnObjectsLoaded;
 
