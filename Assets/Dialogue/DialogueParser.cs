@@ -19,7 +19,7 @@ public class DialogueParser : MonoBehaviour
 
         // Events
         public event Action<eventType, string, string> onEventTriggered;
-        public event Action onDialogueReachedDeadEnd;
+        public static event Action onDialogueReachedDeadEnd;
         // delegate
         public Func<string, string, bool> onPlayerSkillRoll;
 
@@ -90,22 +90,14 @@ public class DialogueParser : MonoBehaviour
         {
             Debug.Log("DIALOGUE PARSER ---- Setting up new Dialogue Node with Choices");
             var choices = dialogue.NodeLinks.Where(x => x.BaseNodeGuid == narrativeDataGUID);
-            // dialogueText.text = ProcessProperties(text);
             controller.UIManager.updateContentText(_pendingText + text);
             _pendingText = "";
-            //dialogueText.text = text;
             Debug.Log("DIALOGUE PARSER ---- number of choices: " + choices.Count());
             
             
             // instead destroy from UI
             controller.UIManager.ClearButtons();
             
-            // var buttons = buttonContainer.GetComponentsInChildren<Button>();
-            // for (int i = 0; i < buttons.Length; i++)
-            // {
-            //     Destroy(buttons[i].gameObject);
-            // }
-
             // if there are no dialogue choices left/ flag end reached
             if(choices.Count() < 1) 
             {

@@ -35,7 +35,7 @@ public class UIManager : MonoBehaviour
     public GameObject togglePrefab;
 
     // internal components
-    [HideInInspector] public conditionManager conditionChecker;
+    // [HideInInspector] public conditionManager conditionChecker;
     [HideInInspector] public contentManager contentManager;
     
 
@@ -59,7 +59,7 @@ public class UIManager : MonoBehaviour
 
         // set parent controller and child components
         controller = GetComponent<gameController>();
-        conditionChecker = gameObject.AddComponent(typeof(conditionManager)) as conditionManager;
+        // conditionChecker = gameObject.AddComponent(typeof(conditionManager)) as conditionManager;
         contentManager = gameObject.AddComponent(typeof(contentManager)) as contentManager;
         // set initials content prefabs
         UI_contentImage = GameObject.Instantiate(imagePrefab, Vector3.zero, Quaternion.identity, contentScrollContainer.transform);
@@ -73,7 +73,7 @@ public class UIManager : MonoBehaviour
         controller.CheckManager.onRollCheckStart += initRollUI;
         controller.CheckManager.onRollCheckPass += initRollPassUI;
         controller.CheckManager.onRollCheckFail += initRollFailUI;
-        controller.DialogueParser.onDialogueReachedDeadEnd += CreateEndDialogueButton;
+        DialogueParser.onDialogueReachedDeadEnd += CreateEndDialogueButton;
         
     }
 

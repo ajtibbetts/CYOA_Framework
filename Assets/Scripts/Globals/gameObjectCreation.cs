@@ -27,6 +27,16 @@ public class gameObjectCreation //: Editor
         SetParentNavObject(parent, newObject);
     }
 
+    [MenuItem("GameObject/CYOA/Door", false, -100)]
+    static void CreateDoor(MenuCommand menuCommand)
+    {
+        var parent = menuCommand.context as GameObject;
+        GameObject newObject = new GameObject ("New Door");
+        newObject.AddComponent<interactableDoor>();
+        
+        SetParentNavObject(parent, newObject);
+    }
+
     static void SetParentNavObject(GameObject parent, GameObject newObject)
     {
         if(parent != null) 

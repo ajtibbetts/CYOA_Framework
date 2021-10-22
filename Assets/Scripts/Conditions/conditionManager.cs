@@ -4,20 +4,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class conditionManager : MonoBehaviour
+public static class conditionManager 
 {
-    [HideInInspector] public UIManager UIManager;
+    private static Dictionary<string,string> propertyLabels = new Dictionary<string,string>();
+    private static string currentPropertyValue;
+    private static string requiredPropertyValue;
 
-    private Dictionary<string,string> propertyLabels = new Dictionary<string,string>();
-    private string currentPropertyValue;
-    private string requiredPropertyValue;
-
-    void Awake() {
-        UIManager = GetComponent<UIManager>();
+    static conditionManager()
+    {
         initDictionary();
     }
 
-    void initDictionary(){
+    static void initDictionary(){
         // player vars
         propertyLabels.Add("playerName", "Name");
         propertyLabels.Add("playerClass", "Class");
@@ -39,7 +37,7 @@ public class conditionManager : MonoBehaviour
 
     }
 
-    public string getConditionLabel(string propertyName) {
+    public static string getConditionLabel(string propertyName) {
         if(propertyLabels.ContainsKey(propertyName) == true) {
             return $"{propertyLabels[propertyName].ToUpper()} {currentPropertyValue}/{requiredPropertyValue}";
         }
@@ -60,32 +58,73 @@ public class conditionManager : MonoBehaviour
         }
     }
 
-    // public Boolean areConditionsMet(actionOption actionOption) {
-    //     Debug.Log("checking action option from conditionManager");
-    //     Debug.Log($"condition length: {actionOption.conditionalRequirement.conditionsToMeet.Length}");
-    //     for(int i = 0; i < actionOption.conditionalRequirement.conditionsToMeet.Length; i ++) {
-    //         // get appropriate condition type
-    //         Debug.Log($"condition type: {actionOption.conditionalRequirement.conditionsToMeet[i].condition}");
-    //         switch (actionOption.conditionalRequirement.conditionsToMeet[i].condition)
-    //         {
-    //             case conditionType.playerProperty:
-    //                  Debug.Log("Checking player property");
-    //                  if(!checkPlayerCondition(actionOption.conditionalRequirement.conditionsToMeet[i])){
-    //                      Debug.Log($"Player property conditional failed at option {i}.");
-    //                      return false;
-    //                  }
-    //             break;
-    //             default:
-                
-    //             break;
-    //         }
-            
-    //     }
-    //     // if all conditions are satisfied, return true
-    //     return true;
-    // }
+    public static string GetConditionalText(conditionalText[] conditionalTexts)
+    {   
+        // return first matched text that meets all conditions in its set
+        foreach(conditionalText conditionText in conditionalTexts)
+        {
+            // if there are any conditions, check to ensure all are met
+            if(conditionText.conditions.Length > 0)
+            {
+                bool allConditionsMet = true;
 
-    private Boolean checkPlayerCondition(conditionalStatement condition) {
+                // ensure each condition is met, flag if any single is unmet
+                for(int i = 0; i < conditionText.conditions.Length; i++)
+                {
+                    
+                    if(!isConditionMet(conditionText.conditions[i]))
+                    {
+                        allConditionsMet = false;
+                    }
+                }
+                // return only if all conditions are met
+                if(allConditionsMet) return conditionText.displayText;
+            }
+            else
+            {
+                return conditionText.displayText;
+            }
+        }
+
+        // return null if nothing is met
+        return null;
+    }
+
+    public static DialogueContainer GetConditionalDialogue(conditionalDialogue[] conditionalDialogues)
+    {
+        // return first matched dialogue that meets all conditions in its set
+        foreach(conditionalDialogue conditionDialogue in conditionalDialogues)
+        {
+            // if there are any conditions, check to ensure all are met
+            if(conditionDialogue.conditions.Length > 0)
+            {
+                bool allConditionsMet = true;
+
+                // ensure each condition is met, flag if any single is unmet
+                for(int i = 0; i < conditionDialogue.conditions.Length; i++)
+                {
+                    
+                    if(!isConditionMet(conditionDialogue.conditions[i]))
+                    {
+                        allConditionsMet = false;
+                    }
+                }
+                // return only if all conditions are met
+                if(allConditionsMet) return conditionDialogue.dialogue;
+            }
+            else
+            {
+                return conditionDialogue.dialogue;
+            }
+        }
+
+        // return null if nothing is met
+        return null;
+    }
+
+
+    // old method logic, but keep for now to put together new condition checkers
+    private static Boolean checkPlayerCondition(conditionalStatement condition, UIManager UIManager) {
         // get player property and value;
         PropertyInfo propertyInfo = UIManager.controller.player.stats.GetType().GetProperty(condition.propertyName);
         int currentValue = (int)propertyInfo.GetValue(UIManager.controller.player.stats, null);

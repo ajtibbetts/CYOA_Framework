@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class interactableNPC : Interactable
+public class interactableDoor : Interactable
 {
     // Start is called before the first frame update
     void Start()
@@ -16,10 +16,8 @@ public class interactableNPC : Interactable
         
     }
 
-
     public override void ProcessLocalEvent(string eventName)
     {
-
+        
     }
-
 }

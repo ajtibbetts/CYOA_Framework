@@ -11,6 +11,7 @@ public class WorldNavigator : MonoBehaviour
 
     // events
     public static event Action<string> OnActiveNavObjectLoaded;
+    public static event Action<DialogueContainer> OnNavInteractableLoaded;
     
 
     private void Awake() {
@@ -111,18 +112,27 @@ public class WorldNavigator : MonoBehaviour
         // clear existing buttons first
         controller.UIManager.ClearButtons();
 
-        // list all child objects as options
-        List<WorldNavObject> childNavObjects = ActiveNavObject.AllChildObjects;
+        // list all child nav objects as options
+        List<WorldNavObject> childNavObjects = ActiveNavObject.ChildNavObjects;
         foreach(WorldNavObject navObject in childNavObjects)
         {
             string buttonDisplayText = GetNewOrReturnedText(navObject, navObject.buttonTextOnNew, navObject.buttonTextOnReturn);
             controller.UIManager.CreateDialogueOptionButton(navObject.GUID, buttonDisplayText);
         }
+
+        // list all interactable child objects
+        List<Interactable> childInteractables = ActiveNavObject.ChildInteractiveObjects;
+        foreach(Interactable interactableObject in childInteractables)
+        {
+            string buttonDisplayText = interactableObject.GetNewOrReturnedText(interactableObject.HasPlayerInteracted(controller));
+            controller.UIManager.CreateDialogueOptionButton(interactableObject.GUID, buttonDisplayText);
+        }
+
         // add choice to go back to parent or map if no parent
         if(ActiveNavObject.ParentNavObject != null)
         {
             WorldNavObject parentNavObject = ActiveNavObject.ParentNavObject.GetComponent<WorldNavObject>();
-            string buttonDisplayText = parentNavObject.GetConditionalText(parentNavObject.buttonTextAsParent);
+            string buttonDisplayText = conditionManager.GetConditionalText(parentNavObject.buttonTextAsParent);
             controller.UIManager.CreateDialogueOptionButton("PARENT", buttonDisplayText);
         }
         else 
@@ -142,7 +152,7 @@ public class WorldNavigator : MonoBehaviour
             // Debug.Log($"WORLD NAVIGATOR ---- PLAYER HAS VISITED THIS NAV OBJECT");
             if(returningConditions.Length > 0)
             {
-                displayText = navObject.GetConditionalText(returningConditions);
+                displayText = conditionManager.GetConditionalText(returningConditions);
             }
             else
             {
@@ -155,7 +165,7 @@ public class WorldNavigator : MonoBehaviour
             // Debug.Log($"WORLD NAVIGATOR ---- PLAYER HAS NOT VISITED THIS NAV OBJECT");
             if(newConditions.Length > 0)
             {
-                displayText = navObject.GetConditionalText(newConditions);
+                displayText = conditionManager.GetConditionalText(newConditions);
             }
             else
             {
@@ -173,12 +183,12 @@ public class WorldNavigator : MonoBehaviour
         if(HasPlayerVisitedNavObject(ActiveNavObject.GUID))
         {
             // Debug.Log($"WORLD NAVIGATOR ---- PLAYER HAS VISITED THIS NAV OBJECT");
-            if(ActiveNavObject.dialogueOnReturn.Length > 0) dialogueToDisplay = ActiveNavObject.GetConditionalDialogue(ActiveNavObject.dialogueOnReturn);
+            if(ActiveNavObject.dialogueOnReturn.Length > 0) dialogueToDisplay = conditionManager.GetConditionalDialogue(ActiveNavObject.dialogueOnReturn);
         }
         else 
         {
             // Debug.Log($"WORLD NAVIGATOR ---- PLAYER HAS NOT VISITED THIS NAV OBJECT");
-            if(ActiveNavObject.dialogueOnNew.Length > 0) dialogueToDisplay = ActiveNavObject.GetConditionalDialogue(ActiveNavObject.dialogueOnNew);
+            if(ActiveNavObject.dialogueOnNew.Length > 0) dialogueToDisplay = conditionManager.GetConditionalDialogue(ActiveNavObject.dialogueOnNew);
         }  
 
         return dialogueToDisplay;
@@ -212,7 +222,7 @@ public class WorldNavigator : MonoBehaviour
     public void NavigateToChild(string childGUID)
     {
         Debug.Log("WORLD NAVIGATOR ---- Attempting to navigate to this object's child GUID: " + childGUID);
-        List<WorldNavObject> childNavObjects = ActiveNavObject.AllChildObjects;
+        List<WorldNavObject> childNavObjects = ActiveNavObject.ChildNavObjects;
         foreach(WorldNavObject navObject in childNavObjects)
         {
            if(navObject.GUID == childGUID)
@@ -221,8 +231,19 @@ public class WorldNavigator : MonoBehaviour
                ActiveNavObject = navObject;
                ActiveNavObject.ActivateNavObject();
                OnActiveNavObjectLoaded?.Invoke(null);
-               break;
+               return;
            }
+        }
+
+        // if not a nav object, will be interactable
+        List<Interactable> childInteractables = ActiveNavObject.ChildInteractiveObjects;
+        foreach(Interactable interactiveObject in childInteractables)
+        {
+            if(interactiveObject.GUID == childGUID)
+            {
+                interactiveObject.ActivateInteractable(controller);
+                OnNavInteractableLoaded?.Invoke(interactiveObject.interactiveDialogue);
+            }
         }
     }
 
@@ -250,4 +271,5 @@ public class WorldNavigator : MonoBehaviour
             }
         }
     }
+
 }

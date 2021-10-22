@@ -77,6 +77,7 @@ public class gameController : MonoBehaviour
         UIManager.onGameStartSelected += StartGame;
         UIManager.onDialogueEnded += BeginWorldNavigation;
         WorldNavigator.OnActiveNavObjectLoaded += ProcessNewScene;
+        WorldNavigator.OnNavInteractableLoaded += ProcessInteractiveObject;
         // SubSceneManager.OnSceneLoaded += ProcessNewScene;
         // SubSceneManager.OnSceneUnloaded += CleanupOldScene;
         // DialogueParser.onDialogueReachedDeadEnd += ResetDialogueRoute;
@@ -95,6 +96,20 @@ public class gameController : MonoBehaviour
         else {
             DialogueParser.DisableDialogueParser();
             worldNavigator.DisplayActiveNavObject();
+        }
+    }
+
+    void ProcessInteractiveObject(DialogueContainer dialogue)
+    {
+        Debug.Log("GAME CONTROLLER ---- Game manager processing new dialogue from interactive object.");
+        // check for starting dialogue, otherwise display nav object
+        if(dialogue != null)
+        {
+            DialogueParser.SetupNewDialogue(dialogue);
+            DialogueParser.InitDialogue();
+        }
+        else {
+            Debug.Log("GAME CONTROLLER ---- NO DIALOGUE FOUND ON THIS INTERACTIVE OBJECT");
         }
     }
 

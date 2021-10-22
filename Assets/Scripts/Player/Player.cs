@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     [Header("Level Data")]
     public string CurrentScene;
     public List<string> visitedWorldNavObjects = new List<string>();
+    public List<string> visitedInteractableObjects = new List<string>();
 
     
 
@@ -30,6 +31,11 @@ public class Player : MonoBehaviour
     public void addWorldNavObject(string GUID)
     {
         visitedWorldNavObjects.Add(GUID);
+    }
+
+    public void addInteractableObject(string GUID)
+    {
+        visitedInteractableObjects.Add(GUID);
     }
     
 
