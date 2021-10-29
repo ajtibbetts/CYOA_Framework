@@ -9,5 +9,6 @@ public class EventNodeData
     public string EventValue;
     public bool isRepeatable; 
     public bool hasFired; 
+    public bool ignoreDeadEnd;
     public eventType eventType;
 }

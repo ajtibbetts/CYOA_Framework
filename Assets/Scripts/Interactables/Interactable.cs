@@ -21,6 +21,7 @@ public abstract class Interactable : MonoBehaviour
 
     public static void TriggerLocalEvent(string eventName)
     {
+        Debug.Log("Local event triggered with name: " + eventName);
         onLocalEventTriggered?.Invoke(eventName);
     }
 
@@ -34,6 +35,7 @@ public abstract class Interactable : MonoBehaviour
         
         onLocalEventTriggered += ProcessLocalEvent;
         DialogueParser.onDialogueReachedDeadEnd += DeactivateInteractable;
+        gameObject.name = gameObject.name + "-Active";
         // INIT DIALOGUE HERE
     }
 
@@ -41,6 +43,7 @@ public abstract class Interactable : MonoBehaviour
     {
         onLocalEventTriggered -= ProcessLocalEvent;
         DialogueParser.onDialogueReachedDeadEnd -= DeactivateInteractable;
+        gameObject.name = gameObject.name.Substring(0,gameObject.name.LastIndexOf("-Active"));
         // INIT DIALOGUE HERE
     }
 

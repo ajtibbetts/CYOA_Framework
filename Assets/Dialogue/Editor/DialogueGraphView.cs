@@ -211,7 +211,7 @@ public class DialogueGraphView : GraphView
         return dialogueNode;
     }
 
-    public EventNode CreateEventNode(string nodeName, Vector2 position, eventType _eventType, string eventName = "", string eventValue = "", bool repeatable = false, bool fired = false)
+    public EventNode CreateEventNode(string nodeName, Vector2 position, eventType _eventType, string eventName = "", string eventValue = "", bool repeatable = false, bool fired = false, bool ignoreDeadend = true)
     {
         //Debug.Log("creating event node!");
         var eventNode = new EventNode
@@ -223,6 +223,7 @@ public class DialogueGraphView : GraphView
             EventValue = eventValue,
             isRepeatable = repeatable,
             hasFired = fired,
+            ignoreDeadEnd = ignoreDeadend,
             eventType = _eventType,
             nodeType = nodeType.eventNode
         };
@@ -274,6 +275,14 @@ public class DialogueGraphView : GraphView
         };
         toggleIsRepeatable.RegisterValueChangedCallback(evt => eventNode.isRepeatable = evt.newValue);
         toggleIsRepeatable.SetValueWithoutNotify(eventNode.isRepeatable);
+        // add ignore dead end
+        var toggleIgnoreDeadEnd = new Toggle 
+        {
+            name = "ignoreDeadEnd?",
+            value = repeatable
+        };
+        toggleIgnoreDeadEnd.RegisterValueChangedCallback(evt => eventNode.ignoreDeadEnd = evt.newValue);
+        toggleIgnoreDeadEnd.SetValueWithoutNotify(eventNode.ignoreDeadEnd);
 
         eventNameContainer.Add(new Label("Event Name:"));
         eventNameContainer.Add(textFieldEventName);
@@ -281,6 +290,8 @@ public class DialogueGraphView : GraphView
         eventValueContainer.Add(textFieldEventValue);
         eventToggleContainer.Add(new Label("Is Repeatable?"));
         eventToggleContainer.Add(toggleIsRepeatable);
+        eventToggleContainer.Add(new Label("Ignore Dead End?"));
+        eventToggleContainer.Add(toggleIgnoreDeadEnd);
 
         eventDataContainer.Add(eventNameContainer);
         eventDataContainer.Add(eventValueContainer);

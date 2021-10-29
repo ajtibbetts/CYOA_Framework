@@ -112,6 +112,7 @@ public class WorldNavObject : MonoBehaviour
     {
         SetupChildObjects();
         OnNavObjectActivated.Invoke();
+        gameObject.name = gameObject.name + "-Active";
     }
 
     public void DeactivateNavObject()
@@ -120,6 +121,7 @@ public class WorldNavObject : MonoBehaviour
         ChildNavObjects.Clear();
         ChildInteractiveObjects.Clear();
         OnNavObjectDeactivated.Invoke();
+        gameObject.name = gameObject.name.Substring(0,gameObject.name.LastIndexOf("-Active"));
     }
 
     

@@ -19,7 +19,7 @@ public class CYOA_EventManager : MonoBehaviour
     public event Action<string, string> onQuestEvent;
     public event Action<string, string> onStoryEvent;
     public event Action<string, string> onWorldEvent;
-    public event Action<string, string> onGameEvent;
+    // public event Action<string, string> onGameEvent;
     
     private void Awake() {
             controller = GetComponent<gameController>(); 
@@ -65,13 +65,15 @@ public class CYOA_EventManager : MonoBehaviour
                 onWorldEvent?.Invoke(eventName, eventValue);
             break;
             case eventType.game:
-                onGameEvent?.Invoke(eventName, eventValue);
+                // onGameEvent?.Invoke(eventName, eventValue);
+                gameEvents.ProcessGameEvent(eventName, eventValue);
             break;
             default:
                 return;
         }
 
-        _eventMessage = $"{eventName} increased by {eventValue}.\n";
-        onEventFinished?.Invoke(_eventMessage);
+        // update this to increase/decrease and send event type to ignore certain types
+        // _eventMessage = $"{eventName} increased by {eventValue}.\n";
+        // onEventFinished?.Invoke(_eventMessage);
     }
 }

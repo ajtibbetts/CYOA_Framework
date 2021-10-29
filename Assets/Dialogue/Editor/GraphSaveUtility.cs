@@ -100,7 +100,8 @@ public class GraphSaveUtility
                     EventValue = eventNode.EventValue,
                     isRepeatable = eventNode.isRepeatable,
                     hasFired = eventNode.hasFired,
-                    eventType = eventNode.eventType
+                    eventType = eventNode.eventType,
+                    ignoreDeadEnd = eventNode.ignoreDeadEnd
                 });
 
             }
@@ -215,7 +216,7 @@ public class GraphSaveUtility
                 if(_eventNodeData != null)
                 {
                     var tempNode = _targetGraphView.CreateEventNode(nodeData.DialogueText, Vector2.zero, _eventNodeData.eventType,
-                        _eventNodeData.EventName, _eventNodeData.EventValue, _eventNodeData.isRepeatable, _eventNodeData.hasFired);
+                        _eventNodeData.EventName, _eventNodeData.EventValue, _eventNodeData.isRepeatable, _eventNodeData.hasFired, _eventNodeData.ignoreDeadEnd);
                     tempNode.GUID = nodeData.Guid;
                     _targetGraphView.AddElement(tempNode);
                 }

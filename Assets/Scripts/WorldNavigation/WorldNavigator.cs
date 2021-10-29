@@ -7,11 +7,12 @@ public class WorldNavigator : MonoBehaviour
 {
     [HideInInspector] public gameController controller;
 
-    public WorldNavObject ActiveNavObject {get; private set;}
+    public static WorldNavObject ActiveNavObject {get; private set;}
 
     // events
     public static event Action<string> OnActiveNavObjectLoaded;
     public static event Action<DialogueContainer> OnNavInteractableLoaded;
+    public static event Action OnNewNavObjectSet;
     
 
     private void Awake() {
@@ -36,6 +37,15 @@ public class WorldNavigator : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public static void NavigateToNewWorldNavObject(WorldNavObject navObject)
+    {
+        ActiveNavObject.DeactivateNavObject();
+        ActiveNavObject = navObject;
+        ActiveNavObject.ActivateNavObject();
+        OnActiveNavObjectLoaded?.Invoke(null);
+        OnNewNavObjectSet?.Invoke();
     }
 
     public List<WorldNavObject> GetNavObjects()
@@ -227,11 +237,12 @@ public class WorldNavigator : MonoBehaviour
         {
            if(navObject.GUID == childGUID)
            {
-               ActiveNavObject.DeactivateNavObject();
-               ActiveNavObject = navObject;
-               ActiveNavObject.ActivateNavObject();
-               OnActiveNavObjectLoaded?.Invoke(null);
-               return;
+            //    ActiveNavObject.DeactivateNavObject();
+            //    ActiveNavObject = navObject;
+            //    ActiveNavObject.ActivateNavObject();
+            //    OnActiveNavObjectLoaded?.Invoke(null);
+                NavigateToNewWorldNavObject(navObject);
+                return;
            }
         }
 
@@ -243,6 +254,7 @@ public class WorldNavigator : MonoBehaviour
             {
                 interactiveObject.ActivateInteractable(controller);
                 OnNavInteractableLoaded?.Invoke(interactiveObject.interactiveDialogue);
+                return;
             }
         }
     }
@@ -257,10 +269,11 @@ public class WorldNavigator : MonoBehaviour
                 var destinationNavObject = ActiveNavObject.ParentNavObject.GetComponent<WorldNavObject>();
                 if(destinationNavObject != null)
                 {
-                    ActiveNavObject.DeactivateNavObject();
-                    ActiveNavObject = destinationNavObject;
-                    ActiveNavObject.ActivateNavObject();
-                    OnActiveNavObjectLoaded?.Invoke(null);
+                    // ActiveNavObject.DeactivateNavObject();
+                    // ActiveNavObject = destinationNavObject;
+                    // ActiveNavObject.ActivateNavObject();
+                    // OnActiveNavObjectLoaded?.Invoke(null);
+                    NavigateToNewWorldNavObject(destinationNavObject);
                 }
                 else {
                     Debug.Log("No Nav Object component found on this destination object. Please check scene.");  

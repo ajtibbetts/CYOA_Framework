@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 
 
-public class gameObjectCreation //: Editor
+public class gameObjectCreation : Editor
 {
     /* MENU CONTEXT CREATION ITEMS */
     [MenuItem("GameObject/CYOA/World Nav Object", false, -100)]

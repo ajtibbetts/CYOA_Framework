@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 179606278}
   - component: {fileID: 179606279}
   m_Layer: 0
-  m_Name: Door
+  m_Name: Door to second area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -245,7 +245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   GUID: 202a82ce-fde9-460d-b194-5c32e0b5cd36
-  interactiveDialogue: {fileID: 11400000, guid: ed931eff657890747b9cb35a98b47284,
+  interactiveDialogue: {fileID: 11400000, guid: 0cbe0abfb22ce6541b0d222dd49e5082,
     type: 2}
   buttonTextOnNew:
   - conditions: []
@@ -253,6 +253,8 @@ MonoBehaviour:
   buttonTextOnReturn:
   - conditions: []
     displayText: Use this door again.
+  destinationObject: {fileID: 1093402700}
+  destinationLevelName: 
 --- !u!1 &383172948
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,11 +385,19 @@ MonoBehaviour:
   dialogueOnNew: []
   dialogueOnReturn: []
   dialogueOnExit: []
-  displayTextOnNew: []
-  displayTextOnReturn: []
+  displayTextOnNew:
+  - conditions: []
+    displayText: This is a single room within the second starting area.
+  displayTextOnReturn:
+  - conditions: []
+    displayText: You return to the single room in the second startign area.
   displayTextOnExit: []
-  buttonTextOnNew: []
-  buttonTextOnReturn: []
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Go into the single room.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Check out single room again.
   buttonTextAsParent: []
   OnNavObjectActivated:
     m_PersistentCalls:
@@ -513,12 +523,18 @@ MonoBehaviour:
   dialogueOnNew: []
   dialogueOnReturn: []
   dialogueOnExit: []
-  displayTextOnNew: []
-  displayTextOnReturn: []
+  displayTextOnNew:
+  - conditions: []
+    displayText: This is the second parallel area. No starting dialogue!
+  displayTextOnReturn:
+  - conditions: []
+    displayText: You return to the second parallel area.
   displayTextOnExit: []
   buttonTextOnNew: []
   buttonTextOnReturn: []
-  buttonTextAsParent: []
+  buttonTextAsParent:
+  - conditions: []
+    displayText: Return back to second starting area.
   OnNavObjectActivated:
     m_PersistentCalls:
       m_Calls: []
@@ -640,9 +656,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   GUID: 8a5c5cda-588f-453a-91df-ebaca7992727
-  interactiveDialogue: {fileID: 0}
-  buttonTextOnNew: []
-  buttonTextOnReturn: []
+  interactiveDialogue: {fileID: 11400000, guid: 0cbe0abfb22ce6541b0d222dd49e5082,
+    type: 2}
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Go back to starting area.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Go to starting area again.
+  destinationObject: {fileID: 564815491}
+  destinationLevelName: diner
 --- !u!1 &1905155657
 GameObject:
   m_ObjectHideFlags: 0

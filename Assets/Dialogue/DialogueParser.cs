@@ -123,6 +123,7 @@ public class DialogueParser : MonoBehaviour
             var outputs = dialogue.NodeLinks.Where(x => x.BaseNodeGuid == narrativeDataGUID);
             var eventName = data.EventName;
             var eventValue = data.EventValue;
+            var ignoreDeadEnd = data.ignoreDeadEnd;
             
             // add logic to check event specifics
             if(!data.hasFired || data.isRepeatable) {
@@ -140,10 +141,11 @@ public class DialogueParser : MonoBehaviour
                         return;
                     }
                 }
-                else {
+                else if (!ignoreDeadEnd){
                     onDialogueReachedDeadEnd.Invoke();
                     return;
                 }
+                else return;
             }
             else {
                 if(outputs.Count() > 0)
@@ -156,10 +158,11 @@ public class DialogueParser : MonoBehaviour
                         return;
                     }
                 }
-                else {
+                else if(!ignoreDeadEnd) {
                     onDialogueReachedDeadEnd.Invoke();
                     return;
                 }
+                else return;
             }
         }
 
