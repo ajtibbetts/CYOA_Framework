@@ -192,10 +192,12 @@ public class UIManager : MonoBehaviour
             
             _currentTargetNodeGUID = TargetNodeGuid;
             confirmActionButton.GetComponentInChildren<Text>().text = "Confirm";
+            toggle.GetComponent<Image>().color = globalConfig.UI.toggleSelectedBackgroundColor;
         }
         else {
             _currentTargetNodeGUID = null;
             confirmActionButton.GetComponentInChildren<Text>().text = "Select option then confirm.";
+            toggle.GetComponent<Image>().color = globalConfig.UI.toggleInactiveBackgroundColor;
         }
     }
 

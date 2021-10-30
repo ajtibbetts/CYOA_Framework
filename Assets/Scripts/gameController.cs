@@ -9,24 +9,14 @@ public class gameController : MonoBehaviour
 {
     private static gameController _instance;
     public static gameController Instance { get { return _instance; } }
-
-
-    //private static int TEXTLIMIT = 500;
-    public TextMeshProUGUI displayTextTMP;
-    private GameObject UI_paragraph;
     
     [HideInInspector] public playerManager player;
-    [HideInInspector] public roomNavigation roomNavigator;
     [HideInInspector] public UIManager UIManager;
     [HideInInspector] public DialogueParser DialogueParser;
     [HideInInspector] public CYOA_EventManager EventManager;
     [HideInInspector] public checkManager CheckManager;
     [HideInInspector] public WorldNavigator worldNavigator;
-    
-    
-    [HideInInspector] public List<string> interactionDescriptionsInRoom = new List<string>();
-    [HideInInspector] public List<string> buttonChoicesTexts = new List<string>();
-    List<string> actionLog = new List<string>();
+
     
     void Awake()
     {
@@ -41,14 +31,11 @@ public class gameController : MonoBehaviour
         // init script components
         // player = GetComponent<playerManager>();
         player = FindObjectOfType (typeof (playerManager)) as playerManager;
-        roomNavigator = GetComponent<roomNavigation>();
         UIManager = GetComponent<UIManager>();
         DialogueParser = GetComponent<DialogueParser>();
         EventManager = GetComponent<CYOA_EventManager>();
         CheckManager = GetComponent<checkManager>();
         worldNavigator = GetComponent<WorldNavigator>();
-
-        
     }
 
     void Start()
@@ -144,61 +131,9 @@ public class gameController : MonoBehaviour
         Debug.Log("GAME CONTROLLER ---- Game manager cleaning up old scene.");
     }
 
-    public void DisplayLoggedText()
-    {
-        string actionLogText = string.Join("\n", actionLog.ToArray());
-        
-        // check for page image and activate
-        // if(roomNavigator.hasPageImage()) {
-        //     UIManager.updatePageImage(roomNavigator.currentRoom.pageImage);
-        // }
-        // else {
-        //     UIManager.hidePageImage();
-        // }
+   
 
-        // update UI with current room text
-        //UIManager.updateContentText(actionLogText + roomNavigator.currentRoom.description);
-        // update UI action options buttons
-        //UIManager.updateActionOptionsButtons(roomNavigator.currentRoom.playerActionOptions);
-        // Debug.Log(roomNavigator.currentRoom.exits[0].buttonText.ToString());
-        UI_updatePlayerStats();
-        actionLog.Clear();
-       // Debug.Log("logged text displayed..");
     
-    }
-
-    public void DisplayRoomText() 
-    {
-        //Debug.Log("Dispalying room text..");
-        clearCollectionsForNewRoom();
-        UnpackRoom();
-
-                
-
-        // string joinedInteractionDescriptions = string.Join("\n",interactionDescriptionsInRoom.ToArray());
-
-        // string combinedText = roomNavigator.currentRoom.description + "\n" + joinedInteractionDescriptions;
-        //LogStringWithReturn(combinedText);
-        
-        DisplayLoggedText(); // temp remove to test graph
-        
-    }
-
-    private void UnpackRoom() {
-        roomNavigator.triggerPageEvents();
-        roomNavigator.unpackPlayerActionOptionsInRoom();
-    }
-
-    private void clearCollectionsForNewRoom(){
-        
-        interactionDescriptionsInRoom.Clear();
-        buttonChoicesTexts.Clear();   
-    }
-
-    public void LogStringWithReturn(string stringToAdd)
-    {
-        actionLog.Add(stringToAdd + "\n");
-    }
 
     public void UI_updatePlayerStats(){
         UI_updatePlayerName();
@@ -235,8 +170,4 @@ public class gameController : MonoBehaviour
         worldNavigator.DisplayActiveNavObject();
     }
 
-    public void InitializePlayer()
-    {
-
-    }
 }

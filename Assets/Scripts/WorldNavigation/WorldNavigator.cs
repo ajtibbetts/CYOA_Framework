@@ -147,7 +147,8 @@ public class WorldNavigator : MonoBehaviour
         }
         else 
         {
-            controller.UIManager.CreateDialogueOptionButton("MAP", "Return to map.");
+            // remove map creation for now, maybe make separate button
+            //controller.UIManager.CreateDialogueOptionButton("MAP", "Return to map.");
         }
         
         controller.UIManager.initConfirmActionButton();
