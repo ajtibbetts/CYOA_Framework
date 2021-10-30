@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WorldScenes/testLevel.unity
     guid: 747e3816fc6cc5a408ed03e4f2edfec0
+  - enabled: 1
+    path: Assets/Scenes/WorldScenes/testLevel_2.unity
+    guid: a0cd0ef0ad0bb91498ee13069fe98a5a
   m_configObjects: {}

@@ -7,7 +7,10 @@ using TMPro;
 
 public class gameController : MonoBehaviour
 {
-    
+    private static gameController _instance;
+    public static gameController Instance { get { return _instance; } }
+
+
     //private static int TEXTLIMIT = 500;
     public TextMeshProUGUI displayTextTMP;
     private GameObject UI_paragraph;
@@ -27,6 +30,14 @@ public class gameController : MonoBehaviour
     
     void Awake()
     {
+        //init singleton
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        } else {
+            _instance = this;
+        }
+        
         // init script components
         // player = GetComponent<playerManager>();
         player = FindObjectOfType (typeof (playerManager)) as playerManager;
@@ -79,8 +90,23 @@ public class gameController : MonoBehaviour
         WorldNavigator.OnActiveNavObjectLoaded += ProcessNewScene;
         WorldNavigator.OnNavInteractableLoaded += ProcessInteractiveObject;
         // SubSceneManager.OnSceneLoaded += ProcessNewScene;
-        // SubSceneManager.OnSceneUnloaded += CleanupOldScene;
+        SubSceneManager.OnSceneUnloaded += LoadNewScene;
         // DialogueParser.onDialogueReachedDeadEnd += ResetDialogueRoute;
+    }
+
+    public void SwitchToLevel(string newSceneName)
+    {
+        string currentLevelName = SubSceneManager.GetCurrentSceneName();
+
+        Debug.Log($"GAME CONTROLLER ---- Switching from current level {currentLevelName} to new level {newSceneName}.");
+        SubSceneManager.RemoveScene(currentLevelName, newSceneName);
+        
+    }
+
+    public void LoadNewScene(string unloadedSceneName, string newSceneName)
+    {
+        player._player.CurrentScene = newSceneName;
+        SubSceneManager.AddScene(newSceneName);
     }
 
     void ProcessNewScene(string sceneName)

@@ -52,11 +52,27 @@ public class interactableDoor : Interactable
 
     private void SwitchToNavObject()
     {
-        WorldNavigator.NavigateToNewWorldNavObject(destinationObject);
+        if(destinationObject != null)
+        {
+            WorldNavigator.NavigateToNewWorldNavObject(destinationObject);
+        }
+        else
+        {
+            Debug.Log("DOOR ERROR ---- NO DESTINATION OBJECT SET. CANNOT SWITCH TO NAV OBJECT.");
+        }
     }
 
     private void SwitchToLevel()
     {
-
+        if(destinationLevelName != null || destinationLevelName.Length < 1)
+        {
+            DeactivateInteractable();
+            gameController.Instance.SwitchToLevel(destinationLevelName);
+        }
+        else 
+        {
+            Debug.Log("DOOR ERROR ---- NO DESTINATION OBJECT SET. CANNOT LOAD NEW LEVEL.");
+        }
+        
     }
 }

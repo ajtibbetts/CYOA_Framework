@@ -555,6 +555,7 @@ Transform:
   m_Children:
   - {fileID: 554879171}
   - {fileID: 1496206283}
+  - {fileID: 2059979821}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -741,3 +742,58 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   conditionalEvents: []
+--- !u!1 &2059979820
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2059979821}
+  - component: {fileID: 2059979822}
+  m_Layer: 0
+  m_Name: toLevel2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2059979821
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059979820}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -396.52972, y: -2199.8284, z: 1534.4252}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1093402701}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2059979822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059979820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25994b630f2943c4686b81522afb57ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: eb03dcc2-b185-4f9b-808c-4fe540c89eba
+  interactiveDialogue: {fileID: 11400000, guid: 015df797181d2d246b1aac60f82617c0,
+    type: 2}
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Go to next level.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Return to next level.
+  destinationObject: {fileID: 0}
+  destinationLevelName: testLevel_2

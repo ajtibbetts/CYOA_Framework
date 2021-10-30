@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9837df7c010b3346bca580cac5bac11, type: 3}
+  m_Name: loadlevel
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGuid: 63cd39b5-ca5c-4935-a78d-2821818c836a
+    PortName: Next
+    TargetNodeGuid: 845e50d4-cc13-40d1-b448-d701f74ad6fa
+  DialogueNodeData:
+  - Guid: 845e50d4-cc13-40d1-b448-d701f74ad6fa
+    DialogueText: Event Node
+    Position: {x: 386, y: 158}
+    nodeType: 1
+  ExposedProperties: []
+  DialogueCheckData: []
+  EventNodeData:
+  - nodeGuid: 845e50d4-cc13-40d1-b448-d701f74ad6fa
+    EventName: local
+    EventValue: level
+    isRepeatable: 1
+    hasFired: 0
+    ignoreDeadEnd: 1
+    eventType: 8
+  CheckNodeData: []
+  EndpointNodeData: []
