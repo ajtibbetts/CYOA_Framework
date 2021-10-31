@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
     // UI elements
     [Header("Main Menu")]
     public RectTransform uGuiElement;
+    public Vector2 startingPosition;
     public Vector2 targetPosition;
     public float animationTime;
     [Header("Content")]
@@ -38,7 +39,7 @@ public class UIManager : MonoBehaviour
     // [HideInInspector] public conditionManager conditionChecker;
     [HideInInspector] public contentManager contentManager;
     
-
+    private bool isMainMenuOpen = false;
 
     private GameObject UI_paragraph;
     private GameObject UI_contentImage;
@@ -86,10 +87,20 @@ public class UIManager : MonoBehaviour
 
     /* MENU SWIPE METHODS */
     // slides in the main menu from left side of the screen
-    public void SlideIn(){
+    public void SlideInMainMenu(){
         iTween.ValueTo(uGuiElement.gameObject, iTween.Hash(
             "from", uGuiElement.anchoredPosition,
             "to", targetPosition,
+            "time", animationTime,
+            "onupdatetarget", this.gameObject, 
+            "onupdate", "MoveGuiElement"));
+    }
+
+    public void SlideOutMainMenu()
+    {
+        iTween.ValueTo(uGuiElement.gameObject, iTween.Hash(
+            "from", uGuiElement.anchoredPosition,
+            "to", startingPosition,
             "time", animationTime,
             "onupdatetarget", this.gameObject, 
             "onupdate", "MoveGuiElement"));
@@ -102,13 +113,32 @@ public class UIManager : MonoBehaviour
 
     public void onSwipe(SwipeData data) {
         Debug.Log("Swipe in Direction: " + data.Direction);
-        if(data.Direction == SwipeDirection.Right){
+        if(data.Direction == SwipeDirection.Right && !isMainMenuOpen){
             Debug.Log("Swipe is right. Start X: " + data.StartPosition.x + " End X: " + data.EndPosition.x);
             if(data.EndPosition.x <= globalConfig.UI.MAX_MENU_SWIPE_POS_X){
                 Debug.Log("Open menu!");
-                SlideIn();
+                OpenMainMenu();
             }
         }
+        else if (data.Direction == SwipeDirection.Left && isMainMenuOpen)
+        {
+            Debug.Log("Swipe left detected while main menu is open. Closing main menu.");
+            CloseMainMenu();
+        }
+    }
+
+    public void OpenMainMenu()
+    {
+        Debug.Log("Main menu button touched. Opening main menu.");
+        isMainMenuOpen = true;
+        SlideInMainMenu();
+    }
+
+    public void CloseMainMenu()
+    {
+        Debug.Log("Main menu close button touched. Closing main menu.");
+        isMainMenuOpen = false;
+        SlideOutMainMenu();
     }
 
     /* GAME START BUTTONS / METHODS */

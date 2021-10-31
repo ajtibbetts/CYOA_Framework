@@ -42,6 +42,9 @@ public class CYOA_EventManager : MonoBehaviour
         {
             case eventType.player:
                 onPlayerEvent?.Invoke(eventName, eventValue);
+                // update this to increase/decrease and send event type to ignore certain types
+                _eventMessage = $"{eventName} increased by {eventValue}.\n";
+                onEventFinished?.Invoke(_eventMessage);
             break;
             case eventType.skill:
                 onSkillEvent?.Invoke(eventName, eventValue);
@@ -72,8 +75,6 @@ public class CYOA_EventManager : MonoBehaviour
                 return;
         }
 
-        // update this to increase/decrease and send event type to ignore certain types
-        // _eventMessage = $"{eventName} increased by {eventValue}.\n";
-        // onEventFinished?.Invoke(_eventMessage);
+        
     }
 }
