@@ -16,7 +16,26 @@ public class Player : MonoBehaviour
 
     // skills
     [Header("Player Skills")]
-    private PlayerSkills _skills;
+    //physical
+    public int Athletics;
+    public int Fortitude;
+    public int HardBoiled;
+    //cognitive
+    public int Ballistics;
+    public int Forensics;
+    public int TechnoPath;
+    //volitional
+    public int Command;
+    public int GreySight;
+    public int CaseChaser;
+    //narrative
+    public int Causality;
+    public int Reasoning;
+    public int Mystic;
+    // social
+    public int Confidence;
+    public int Wisdom;
+    public int PeopleReader;
 
     // level data
     [Header("Level Data")]
@@ -42,11 +61,11 @@ public class Player : MonoBehaviour
     public void SetTestData()
     {
         // Debug.Log($"Setting test data!");
-        Physical = 6;
-        Cognitive = 7;
+        Physical = 5;
+        Cognitive = 5;
         Volitional = 5;
-        Narrative = 15;
-        Social = 4;
+        Narrative = 5;
+        Social = 5;
     }
 
     public void OutputData()
