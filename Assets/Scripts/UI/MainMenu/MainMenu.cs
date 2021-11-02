@@ -21,6 +21,9 @@ public class MainMenu : MonoBehaviour
     public GameObject caseScreen;
     public GameObject mapScreen;
 
+    // menu data managers
+    private PlayerStatus _playerStatus;
+
 
     
     private void Awake() {
@@ -39,6 +42,12 @@ public class MainMenu : MonoBehaviour
         playerStatusScreen.SetActive(false);
         caseScreen.SetActive(false);
         mapScreen.SetActive(false);
+        GetManagers();
+    }
+
+    void GetManagers()
+    {
+        _playerStatus = playerStatusScreen.GetComponent<PlayerStatus>();
     }
 
     // Update is called once per frame
@@ -68,6 +77,7 @@ public class MainMenu : MonoBehaviour
         }
         activeContent = playerStatusScreen;
         activeMenuButtonIndex = 0;
+        _playerStatus.UpdateData();
         activeContent.SetActive(true);
         SetActiveColor(0);
     }
