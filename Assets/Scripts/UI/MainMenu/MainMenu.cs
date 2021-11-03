@@ -18,11 +18,13 @@ public class MainMenu : MonoBehaviour
     [Header("Content")]
     public GameObject contentContainer;
     public GameObject playerStatusScreen;
-    public GameObject caseScreen;
+    public GameObject playerSkillsScreen;
+    public GameObject gearScreen;
     public GameObject mapScreen;
 
     // menu data managers
-    private PlayerStatus _playerStatus;
+    private PlayerStatusScreen _playerStatus;
+    private PlayerSkillsScreen _playerSkills;
 
 
     
@@ -34,27 +36,28 @@ public class MainMenu : MonoBehaviour
         } else {
             _instance = this;
         }
+
+        playerStatusScreen.SetActive(false);
+        playerSkillsScreen.SetActive(false);
+        gearScreen.SetActive(false);
+        mapScreen.SetActive(false);
+        GetManagers();
+        OpenPlayerStatusScreen();
     }
     
     // Start is called before the first frame update
     void Start()
     {
-        playerStatusScreen.SetActive(false);
-        caseScreen.SetActive(false);
-        mapScreen.SetActive(false);
-        GetManagers();
+        
+        
     }
 
     void GetManagers()
     {
-        _playerStatus = playerStatusScreen.GetComponent<PlayerStatus>();
+        _playerStatus = playerStatusScreen.GetComponent<PlayerStatusScreen>();
+        _playerSkills = playerSkillsScreen.GetComponent<PlayerSkillsScreen>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     void SetInactiveColor(int index)
     {
@@ -68,43 +71,46 @@ public class MainMenu : MonoBehaviour
         buttonImage.color = Color.yellow;
     }
 
-    public void OpenPlayerStatusScreen()
+    public void SetCurrentScreenInactive()
     {
         if(activeContent != null) 
         {
             activeContent.SetActive(false);
             SetInactiveColor(activeMenuButtonIndex);
         }
-        activeContent = playerStatusScreen;
-        activeMenuButtonIndex = 0;
-        _playerStatus.UpdateData();
-        activeContent.SetActive(true);
-        SetActiveColor(0);
     }
 
-    public void OpenCaseScreen()
+    public void SetActiveScreen(GameObject screen, int index)
     {
-        if(activeContent != null)
+        if(activeContent != screen)
         {
-            activeContent.SetActive(false);
-            SetInactiveColor(activeMenuButtonIndex);
+            SetCurrentScreenInactive();
+            activeContent = screen;
+            activeMenuButtonIndex = index;
+            activeContent.SetActive(true);
+            SetActiveColor(index);
         }
-        activeContent = caseScreen;
-        activeMenuButtonIndex = 1;
-        activeContent.SetActive(true);
-        SetActiveColor(1);
+    }
+
+    public void OpenPlayerStatusScreen()
+    {
+        _playerStatus.UpdateData();
+        SetActiveScreen(playerStatusScreen, 0);
+    }
+
+    public void OpenPlayerSkillsScreen()
+    {
+        _playerSkills.UpdateData();
+        SetActiveScreen(playerSkillsScreen, 1);
+    }
+
+    public void OpenGearScreen()
+    {
+        SetActiveScreen(gearScreen, 2);
     }
 
     public void OpenMapScreen()
     {
-        if(activeContent != null)
-        {
-            activeContent.SetActive(false);
-            SetInactiveColor(activeMenuButtonIndex);
-        }
-        activeContent = mapScreen;
-        activeMenuButtonIndex = 3;
-        activeContent.SetActive(true);
-        SetActiveColor(3);
+        SetActiveScreen(mapScreen, 3);
     }
 }

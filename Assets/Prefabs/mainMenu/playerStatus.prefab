@@ -2358,7 +2358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8018868, g: 0.17777678, b: 0.17777678, a: 0.392}
+  m_Color: {r: 0.9716981, g: 0.7637697, b: 0.0779192, a: 0.57254905}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3363,6 +3363,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3242e1d988950b488bd8c38d4131247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FirstNameText: {fileID: 0}
+  LastNameText: {fileID: 0}
+  RankText: {fileID: 0}
+  ToNextRankText: {fileID: 0}
+  Portrait: {fileID: 0}
+  HealthText: {fileID: 0}
+  EnergyText: {fileID: 0}
+  ResolveText: {fileID: 0}
+  FundsText: {fileID: 0}
+  PhysicalText: {fileID: 0}
+  CognitiveText: {fileID: 0}
+  VolitionalText: {fileID: 0}
+  NarrativeText: {fileID: 0}
+  SocialText: {fileID: 0}
 --- !u!1 &7858922911603717747
 GameObject:
   m_ObjectHideFlags: 0
@@ -3877,7 +3891,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.20225172, g: 0.8790616, b: 0.9528302, a: 0.392}
+  m_Color: {r: 0.92339706, g: 0.9529412, b: 0.20392156, a: 0.9372549}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

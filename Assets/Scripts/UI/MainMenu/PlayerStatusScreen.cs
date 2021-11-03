@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class PlayerStatus : MonoBehaviour
+public class PlayerStatusScreen : MonoBehaviour
 {
     [Header("Character Info")]
     public TextMeshProUGUI FirstNameText;

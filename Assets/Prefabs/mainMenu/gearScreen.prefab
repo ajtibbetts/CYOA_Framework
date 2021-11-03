@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 7858922911502685796}
   - component: {fileID: 7858922911502685797}
   m_Layer: 5
-  m_Name: caseStatus
+  m_Name: gearScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
