@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d9b7b638dafd614eb772090c5da9e61, type: 3}
+  m_Name: testVictim
+  m_EditorClassIdentifier: 
+  _name:
+    propertyValue: Jane Does
+    startAsDiscovered: 1
+  _portrait:
+    portraitSprite: {fileID: 21300000, guid: 25e5ea926ef00e14790d00372ca26963, type: 3}
+    startAsDiscovered: 1
+  _summary:
+    propertyValue: Just a poor soul at the wrong place wrong time.
+    startAsDiscovered: 1
+  _age:
+    propertyValue: 23
+    startAsDiscovered: 1
+  _residence:
+    propertyValue: 54 Lawson Ave
+    startAsDiscovered: 1
+  _occupation:
+    propertyValue: Tatoo Artist at Inks R US
+    startAsDiscovered: 1
+  _causeOfDeath:
+    propertyValue: Head trauma with blunt object.
+    startAsDiscovered: 1
+  _timeOfDeath:
+    propertyValue: April 4th at 23:24 hours.
+    startAsDiscovered: 1
+  _locationOfDeath:
+    propertyValue: Inks R Us
+    startAsDiscovered: 1
+  _additionalInjuries:
+  - Lacerations on right arm.
+  - Defensive wounds on lower torso.
+  _additionalNotes:
+  - Last seen closing shop at 22:00 hours on April 4th.

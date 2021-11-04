@@ -92,68 +92,6 @@ public struct actionEvent {
         public eventParams parameters;
 }
 
-// [Serializable]
-// public struct actionOptionCondition {
-//     [Header("Condition")]
-//     public Boolean conditionMet;
-//     public Boolean hideUnlessMet;
-//     public conditionalStatement[] conditionsToMeet;
-//     [Header("Outcome")]
-//     public Room passRoom;
-//     public string passButtonText;
-//     public string passActionText;
-//     public string failButtonText;
-
-// }
-
-// [Serializable]
-// public struct conditionalProperty {
-//     [Header("Condition")]
-//     public Boolean allowRoll;
-//     public Boolean hideUnlessMet;
-//     public conditionType conditionalType;
-//     public String propertyName;
-//     public int requiredValue;
-//     [Header("Outcome")]
-//     public Room failedPage;
-//     public actionEvent[] failedEvents;
-
-// }
-
-// [Serializable]
-// public struct conditionalThought {
-//     [Header("Condition")]
-//     public string requiredSkill;
-//     public int requiredSkillLevel;
-//     [Header("Outcome")]
-//     public string passedText;
-//     public string failedText;
-//     [Header("Optional Player Actions")]
-//     public conditionalPageOption[] actionOptionsToAdd;
-//     public actionEvent[] eventsToTrigger;
-// }
-
-// [Serializable]
-// public struct conditionalPageText {
-//     [Header("Page Info")]
-//     [Tooltip("Conditional page text that will replace default text.")]
-//     public string pageText;
-//     [Tooltip("Conditional page image that will replace default image.")]
-//     public Sprite pageImage;
-//     [Header("Condition")]
-//     public conditionalStatement conditionalRequirement;
-//     [Header("Optional Player Actions")]
-//     public conditionalPageOption[] actionOptionsToAdd;
-    
-// }
-
-// [Serializable]
-// public struct conditionalPageOption {
-//     [Tooltip("Options if any that will be added to options list BEFORE global action options.")]
-//     public string buttonText;
-//     public Room destinationPage;
-//     public actionEvent[] eventsToTrigger;
-// }
 
 // combined with different structs to make certain conditionals
 [Serializable]
