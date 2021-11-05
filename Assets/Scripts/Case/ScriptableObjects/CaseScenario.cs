@@ -8,8 +8,10 @@ public class CaseScenario : ScriptableObject {
     [SerializeField] private string _caseTitle;
     [SerializeField] [TextArea] private string _caseSummary;
     [SerializeField] private CaseVictim _caseVictim;
-    [SerializeField] private CaseSuspect _caseCulprit;
-    [SerializeField] private CaseLead[] _startingLeads;
+    [SerializeField] private CaseCulprit _caseCulprit;
+    [SerializeField] private List<CaseLead> _startingLeads;
+
+    [SerializeField] private List<CaseCharacterProfile> _characterProfiles;
 
 
     public string GetCaseTitle()
@@ -27,13 +29,18 @@ public class CaseScenario : ScriptableObject {
         return _caseVictim;
     }
 
-    public CaseSuspect GetCulprit()
+    public CaseCulprit GetCulprit()
     {
         return _caseCulprit;
     }
 
-    public CaseLead[] GetStartingLeads()
+    public List<CaseLead> GetStartingLeads()
     {
         return _startingLeads;
+    }
+
+    public List<CaseCharacterProfile> GetCharacterProfiles()
+    {
+        return _characterProfiles;
     }
 }

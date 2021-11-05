@@ -1,4 +1,4 @@
-using System.Collections;
+using System.Reflection;
 using System.Collections.Generic;
 using UnityEngine;
 using CaseDataObjects;
@@ -19,12 +19,14 @@ public class CaseVictim : ScriptableObject {
     [SerializeField] private CaseProperty _causeOfDeath;
     [SerializeField] private CaseProperty _timeOfDeath;
     [SerializeField] private CaseProperty _locationOfDeath;
-    [SerializeField] private string[] _additionalInjuries;
-    [SerializeField] private string[] _additionalNotes;
+    [SerializeField] private List<string> _additionalInjuries;
+    [SerializeField] private List<string> _additionalNotes;
+
+    private string _undiscoveredText = "???";
 
     public string GetVictimName()
     {
-        return _name.startAsDiscovered ? _name.propertyValue : null;
+        return _name.startAsDiscovered ? _name.propertyValue : _undiscoveredText;
     }
 
     public Sprite GetVictimPortrait()
@@ -34,45 +36,56 @@ public class CaseVictim : ScriptableObject {
 
     public string GetVictimSummary()
     {
-        return _summary.startAsDiscovered ? _summary.propertyValue : null;
+        return _summary.startAsDiscovered ? _summary.propertyValue : _undiscoveredText;
     }
 
     public string GetVictimAge()
     {
-        return _age.startAsDiscovered ? _age.propertyValue : null;
+        return _age.startAsDiscovered ? _age.propertyValue : _undiscoveredText;
     }
 
     public string GetVictimResidence()
     {
-        return _residence.startAsDiscovered ? _residence.propertyValue : null;
+        return _residence.startAsDiscovered ? _residence.propertyValue : _undiscoveredText;
     }
 
     public string GetVictimOccupation()
     {
-        return _occupation.startAsDiscovered ? _occupation.propertyValue : null;
+        return _occupation.startAsDiscovered ? _occupation.propertyValue : _undiscoveredText;
     }
 
 
     public string GetCauseOfDeath()
     {
-        return _causeOfDeath.startAsDiscovered ? _causeOfDeath.propertyValue : null;
+        return _causeOfDeath.startAsDiscovered ? _causeOfDeath.propertyValue : _undiscoveredText;
     }
     public string GetTimeOfDeath()
     {
-        return _timeOfDeath.startAsDiscovered ? _timeOfDeath.propertyValue : null;
+        return _timeOfDeath.startAsDiscovered ? _timeOfDeath.propertyValue : _undiscoveredText;
     }
     public string GetLocationOfDeath()
     {
-        return _locationOfDeath.startAsDiscovered ? _locationOfDeath.propertyValue : null;
+        return _locationOfDeath.startAsDiscovered ? _locationOfDeath.propertyValue : _undiscoveredText;
     }
 
-    public string[] GetAdditionalInjuries()
+    public List<string> GetAdditionalInjuries()
     {
         return _additionalInjuries;
     }
 
-    public string[] GetAdditioanlNotes()
+    public List<string> GetAdditionalNotes()
     {
         return _additionalNotes;
+    }
+
+    // reveal victim info using reflection
+    public Sprite RevealVictimPortrait()
+    {
+        return _portrait.portraitSprite;
+    }
+    
+    public string RevealVictimProperty(string propertyName)
+    {
+        return this.GetType().GetProperty(propertyName).GetValue(this,null).ToString();
     }
 }
