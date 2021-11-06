@@ -41,6 +41,15 @@ public static class dataFormatter
 
 // ENUMS
 [Serializable]
+public enum UISTATE
+{
+    MAINMENU,
+    CASEMENU,
+    DRAGGING,
+    NORMALGAMEPLAY
+}
+
+[Serializable]
 public enum conditionType {
     playerProperty,
     playerSkill,

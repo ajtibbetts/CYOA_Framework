@@ -16,6 +16,7 @@ public class PlayerCaseRecord : MonoBehaviour
     [SerializeField] private List<ActiveLead> _leads = new List<ActiveLead>();
     [SerializeField] private List<CharacterProfileData> _profiles = new List<CharacterProfileData>();
     [SerializeField] private List<CaseSuspect> _suspects = new List<CaseSuspect>();
+    [SerializeField] private CaseSuspect _primarySuspect;
     [SerializeField] private List<CaseEvidence> _evidence = new List<CaseEvidence>();
     [SerializeField] private List<string> _customNotes = new List<string>();
     
@@ -37,12 +38,74 @@ public class PlayerCaseRecord : MonoBehaviour
     {
         // to test, setup new case
         StartNewCase();
+
+
+        // setup test data for building UI.
+        SetTestData();
     }
 
+    void SetTestData()
+    {
+        List<string> testCharacterProfiles = new List<String>();
+        testCharacterProfiles.Add("Chad Billingsworth");
+        testCharacterProfiles.Add("Pierre LeFou");
+        testCharacterProfiles.Add("Johnny Cyber");
+        foreach(string name in testCharacterProfiles)
+        {
+            AddProfile(name);
+        }
+
+        AddProfileToSuspects(_profiles[0]);
+        AddProfileToSuspects(_profiles[1]);
+        SetPrimarySuspect(0);
+        UpdateSuspectProfile(_primarySuspect,"means",_evidence[0]);
+        UpdateSuspectProfile(_primarySuspect,"motive",_evidence[1]);
+        UpdateSuspectProfile(_primarySuspect,"opportunity",_evidence[2]);
+
+    }
+
+    // getters
+    public VictimData GetVictim()
+    {
+        return _victim;
+    }
+
+    public List<ActiveLead> GetLeads()
+    {
+        return _leads;
+    }
+
+    public List<CharacterProfileData> GetProfiles()
+    {
+        return _profiles;
+    }
+
+    public List<CaseSuspect> GetSuspects()
+    {
+        return _suspects;
+    }
+
+    public CaseSuspect GetPrimarySuspect()
+    {
+        return _primarySuspect;
+    }
+
+    public List<CaseEvidence> GetEvidence()
+    {
+        return _evidence;
+    }
+
+    public List<string> GetNotes()
+    {
+        return _customNotes;
+    }
+
+
+    // case functionality
     void StartNewCase()
     {
         Debug.Log("Starting new case.");
-        ClearCollectionsForNewCase();
+        // ClearCollectionsForNewCase(); // remove for testing
         _victim = CaseManager.Instance.GetStartingVictimData();
     }
 
@@ -151,6 +214,10 @@ public class PlayerCaseRecord : MonoBehaviour
         }
     }
 
+    private void SetPrimarySuspect(int index)
+    {
+        _primarySuspect = _suspects[index];
+    }
     
     private void AddEvidence(CaseEvidence evidence)
     {

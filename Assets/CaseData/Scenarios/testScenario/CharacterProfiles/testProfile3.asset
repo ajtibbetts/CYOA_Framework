@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a810518b47780074db1dc1d8603dbf16, type: 3}
+  m_Name: testProfile3
+  m_EditorClassIdentifier: 
+  _characterName:
+    propertyValue: Johnny Cyber
+    startAsDiscovered: 1
+  _portrait:
+    portraitSprite: {fileID: 21300000, guid: 2e1afda8f2a56ee44927613c08155a31, type: 3}
+    startAsDiscovered: 1
+  _age:
+    propertyValue: 25
+    startAsDiscovered: 1
+  _occupation:
+    propertyValue: Mechanic at Gearheads Automotive.
+    startAsDiscovered: 1
+  _residence:
+    propertyValue: 4758 Finch Ave Apt #3.
+    startAsDiscovered: 1
+  _summary:
+    propertyValue: Cyber enthusiast and street racer.
+    startAsDiscovered: 1
+  _relationshipToVictim:
+    propertyValue: Boyfriend of the deceased.
+    startAsDiscovered: 1
+  _additionalNotes:
+  - Seems hotheaded.
+  - Had a very passionate relationship with the deceased.
+  AsCulpritCompleteResponse: The boyfriend, that's it! Nicely done, let's grab 'em.
+  AsCulpritPartialResponse: It could be the boyfriend, but we need more evidence
+    to get a warrant.
+  AsInnocentResponse: I know he's wild, but I don't think the boyfriend fits the
+    profile.
+  HasAlibi: 0
+  AlibiText: 

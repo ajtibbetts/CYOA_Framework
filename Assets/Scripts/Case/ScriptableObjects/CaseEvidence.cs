@@ -8,7 +8,7 @@ public class CaseEvidence : ScriptableObject {
     [SerializeField] private string _evidenceName;
     [SerializeField] private Sprite _evidencePortrait;
 
-    [SerializeField] [TextArea] string _evidenceDescription;
+    [SerializeField] [TextArea] private string _evidenceDescription;
     [SerializeField] private DialogueContainer _evidenceDialogue;
 
     public string GetEvidenceName()

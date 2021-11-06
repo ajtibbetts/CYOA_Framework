@@ -15,9 +15,11 @@ public class UIManager : MonoBehaviour
     public static event Action<string> onOptionSelected;
 
     // UI elements
-    [Header("Main Menu")]
-    public RectTransform uGuiElement;
-    public Vector2 startingPosition;
+    [Header("Game Menus")]
+    public RectTransform mainMenuUI;
+    public Vector2 startingMainMenuPosition;
+    public RectTransform caseMenuUI;
+    public Vector2 startingCaseMenuPosition;
     public Vector2 targetPosition;
     public float animationTime;
     [Header("Content")]
@@ -39,7 +41,7 @@ public class UIManager : MonoBehaviour
     // [HideInInspector] public conditionManager conditionChecker;
     [HideInInspector] public contentManager contentManager;
     
-    private bool isMainMenuOpen = false;
+    private UISTATE _UISTATE;
 
     private GameObject UI_paragraph;
     private GameObject UI_contentImage;
@@ -75,6 +77,8 @@ public class UIManager : MonoBehaviour
         controller.CheckManager.onRollCheckPass += initRollPassUI;
         controller.CheckManager.onRollCheckFail += initRollFailUI;
         DialogueParser.onDialogueReachedDeadEnd += CreateEndDialogueButton;
+
+        _UISTATE = UISTATE.NORMALGAMEPLAY;
         
     }
 
@@ -88,57 +92,106 @@ public class UIManager : MonoBehaviour
     /* MENU SWIPE METHODS */
     // slides in the main menu from left side of the screen
     public void SlideInMainMenu(){
-        iTween.ValueTo(uGuiElement.gameObject, iTween.Hash(
-            "from", uGuiElement.anchoredPosition,
+        iTween.ValueTo(mainMenuUI.gameObject, iTween.Hash(
+            "from", mainMenuUI.anchoredPosition,
             "to", targetPosition,
             "time", animationTime,
             "onupdatetarget", this.gameObject, 
-            "onupdate", "MoveGuiElement"));
+            "onupdate", "MoveMainMenuUI"));
     }
 
     public void SlideOutMainMenu()
     {
-        iTween.ValueTo(uGuiElement.gameObject, iTween.Hash(
-            "from", uGuiElement.anchoredPosition,
-            "to", startingPosition,
+        iTween.ValueTo(mainMenuUI.gameObject, iTween.Hash(
+            "from", mainMenuUI.anchoredPosition,
+            "to", startingMainMenuPosition,
             "time", animationTime,
             "onupdatetarget", this.gameObject, 
-            "onupdate", "MoveGuiElement"));
+            "onupdate", "MoveMainMenuUI"));
     }
     
  
-    public void MoveGuiElement(Vector2 position) {
-        uGuiElement.anchoredPosition = position;
+    public void MoveMainMenuUI(Vector2 position) {
+        mainMenuUI.anchoredPosition = position;
+    }
+
+    public void SlideInCaseMenu(){
+        iTween.ValueTo(caseMenuUI.gameObject, iTween.Hash(
+            "from", caseMenuUI.anchoredPosition,
+            "to", targetPosition,
+            "time", animationTime,
+            "onupdatetarget", this.gameObject, 
+            "onupdate", "MoveCaseMenuUI"));
+    }
+
+    public void SlideOutCaseMenu()
+    {
+        iTween.ValueTo(caseMenuUI.gameObject, iTween.Hash(
+            "from", caseMenuUI.anchoredPosition,
+            "to", startingCaseMenuPosition,
+            "time", animationTime,
+            "onupdatetarget", this.gameObject, 
+            "onupdate", "MoveCaseMenuUI"));
+    }
+
+    public void MoveCaseMenuUI(Vector2 position) {
+        caseMenuUI.anchoredPosition = position;
     }
 
     public void onSwipe(SwipeData data) {
         Debug.Log("Swipe in Direction: " + data.Direction);
-        if(data.Direction == SwipeDirection.Right && !isMainMenuOpen){
-            Debug.Log("Swipe is right. Start X: " + data.StartPosition.x + " End X: " + data.EndPosition.x);
-            if(data.EndPosition.x <= globalConfig.UI.MAX_MENU_SWIPE_POS_X){
-                Debug.Log("Open menu!");
-                OpenMainMenu();
-            }
-        }
-        else if (data.Direction == SwipeDirection.Left && isMainMenuOpen)
+        // if(data.Direction == SwipeDirection.Right && _UISTATE == UISTATE.NORMALGAMEPLAY){
+        //     Debug.Log("Swipe is right. Start X: " + data.StartPosition.x + " End X: " + data.EndPosition.x);
+        //     if(data.EndPosition.x <= globalConfig.UI.MAX_MENU_SWIPE_POS_X){
+        //         Debug.Log("Open menu!");
+        //         OpenMainMenu();
+        //     }
+        // }
+        // else if (data.Direction == SwipeDirection.Left && _UISTATE == UISTATE.MAINMENU)
+        // {
+        //     Debug.Log("Swipe left detected while main menu is open. Closing main menu.");
+        //     CloseMainMenu();
+        // }
+
+        switch(data.Direction)
         {
-            Debug.Log("Swipe left detected while main menu is open. Closing main menu.");
-            CloseMainMenu();
+            case SwipeDirection.Left:
+                if(_UISTATE == UISTATE.MAINMENU) CloseMainMenu();
+                else if(data.EndPosition.x >= globalConfig.UI.MIN_CASEMENU_SWIPE_POS_X) OpenCaseMenu();
+            break;
+            case SwipeDirection.Right:
+                if(_UISTATE == UISTATE.CASEMENU) CloseCaseMenu();
+                else if(data.EndPosition.x <= globalConfig.UI.MAX_MENU_SWIPE_POS_X) OpenMainMenu();
+            break;
         }
     }
 
     public void OpenMainMenu()
     {
         Debug.Log("Main menu button touched. Opening main menu.");
-        isMainMenuOpen = true;
+        _UISTATE = UISTATE.MAINMENU;
         SlideInMainMenu();
     }
 
     public void CloseMainMenu()
     {
         Debug.Log("Main menu close button touched. Closing main menu.");
-        isMainMenuOpen = false;
+        _UISTATE = UISTATE.NORMALGAMEPLAY;
         SlideOutMainMenu();
+    }
+
+    public void OpenCaseMenu()
+    {
+        Debug.Log("Case menu button touched. Opening main menu.");
+        _UISTATE = UISTATE.CASEMENU;
+        SlideInCaseMenu();
+    }
+
+    public void CloseCaseMenu()
+    {
+        Debug.Log("Case menu close button touched. Closing main menu.");
+        _UISTATE = UISTATE.NORMALGAMEPLAY;
+        SlideOutCaseMenu();
     }
 
     /* GAME START BUTTONS / METHODS */

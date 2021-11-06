@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: testEvidence2
   m_EditorClassIdentifier: 
   _evidenceName: Wallet
-  _evidencePortrait: {fileID: 0}
+  _evidencePortrait: {fileID: 21300000, guid: 2aacf7feafb14694f87bd9eaa1e37cd9, type: 3}
   _evidenceDescription: A wallet belonging a one John D. Culprit.
   _evidenceDialogue: {fileID: 0}
