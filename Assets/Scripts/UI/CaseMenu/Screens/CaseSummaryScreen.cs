@@ -74,5 +74,6 @@ public class CaseSummaryScreen : MonoBehaviour
     public void ButtonPressedInUI(string screenNameToJumpTo)
     {
         OnButtonPressed?.Invoke(screenNameToJumpTo);
+        Debug.Log("Jumping to screen: " + screenNameToJumpTo);
     }
 }
