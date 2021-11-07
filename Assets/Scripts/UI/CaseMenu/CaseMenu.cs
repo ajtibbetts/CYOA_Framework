@@ -30,6 +30,8 @@ public class CaseMenu : MonoBehaviour
 
     // data managers
     private CaseSummaryScreen _caseSummaryManager;
+    private VictimDataScreen _victimManager;
+    private LeadsScreen _leadManager;
 
 
     private PlayerCaseRecord _caseRecord;
@@ -59,15 +61,22 @@ public class CaseMenu : MonoBehaviour
     void Start()
     {
         _caseRecord = PlayerCaseRecord.Instance;
-        GetManagers();
+        SetupManagers();
+        OpenCaseSummaryScreen();
     }
 
-    void GetManagers()
+    void SetupManagers()
     {
         _caseSummaryManager = caseSummaryScreen.GetComponent<CaseSummaryScreen>();
         _caseSummaryManager.SetCaseRecord(_caseRecord);
         CaseSummaryScreen.OnButtonPressed += JumpToScreenFromSubMenu;
-        OpenCaseSummaryScreen();
+
+        _victimManager = victimDataScreen.GetComponent<VictimDataScreen>();
+        _victimManager.SetCaseRecord(_caseRecord);
+
+        _leadManager = leadsScreen.GetComponent<LeadsScreen>();
+        _leadManager.SetCaseRecord(_caseRecord);
+        
     }
 
     public void SetCurrentScreenInactive()
@@ -110,10 +119,12 @@ public class CaseMenu : MonoBehaviour
     }
     public void OpenVictimDataScreen()
     {
+        _victimManager.UpdateData();
         SetActiveScreen(victimDataScreen, 1);
     }
     public void OpenLeadsScreen()
     {
+        _leadManager.UpdateData();
         SetActiveScreen(leadsScreen, 2);
     }
     public void OpenEvidenceScreen()
