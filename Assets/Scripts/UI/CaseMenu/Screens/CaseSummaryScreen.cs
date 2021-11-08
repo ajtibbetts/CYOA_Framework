@@ -5,10 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class CaseSummaryScreen : MonoBehaviour
+public class CaseSummaryScreen : CaseScreen
 {
-    private PlayerCaseRecord _caseRecord;
-
     public static event Action<string> OnButtonPressed;
     [Header("Case Details")]
     [SerializeField] private TextMeshProUGUI _caseTitle;
@@ -31,25 +29,37 @@ public class CaseSummaryScreen : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _suspectOpportunityText;
 
     
-
-    public void SetCaseRecord(PlayerCaseRecord record)
-    {
-        _caseRecord = record;
-    }
-
-    public void UpdateData()
+    public override void UpdateData()
     {
         _caseTitle.text = CaseManager.Instance.GetActiveCaseTitle();
         _caseSummary.text = CaseManager.Instance.GetActiveCaseSummary();
 
+        UpdateVictimSummaryData();
+        UpdateSuspectSummaryData();
+    }
+
+    public void UpdateVictimSummaryData()
+    {
+        Sprite victimSprite = _caseRecord.GetVictim().VictimPortrait.portraitSprite;
+        float offsetX = _caseRecord.GetVictim().VictimPortrait.thumbNailOffsetX;
+        float offsetY = _caseRecord.GetVictim().VictimPortrait.thumbNailOffsetY;
+        SetPortraitThumbnail(_victimPortrait, victimSprite, offsetX, offsetY);   
+        
+        
         _victimName.text = _caseRecord.GetVictim().VictimName;
-        _victimPortrait.GetComponent<Image>().sprite = _caseRecord.GetVictim().VictimPortrait;
         _victimCOD.text = _caseRecord.GetVictim().CauseOfDeath;
         _victimTOD.text = _caseRecord.GetVictim().TimeofDeath;
         _victimLOD.text = _caseRecord.GetVictim().LocationOfDeath;
+    }
+
+    public void UpdateSuspectSummaryData()
+    {
+        Sprite suspectSprite = _caseRecord.GetPrimarySuspect().SuspectProfile._portrait.portraitSprite;
+        float offsetX = _caseRecord.GetPrimarySuspect().SuspectProfile._portrait.thumbNailOffsetX;
+        float offsetY = _caseRecord.GetPrimarySuspect().SuspectProfile._portrait.thumbNailOffsetY;
+        SetPortraitThumbnail(_suspectPortrait, suspectSprite, offsetX, offsetY);   
 
         _suspectName.text = _caseRecord.GetPrimarySuspect().SuspectProfile._characterName;
-        _suspectPortrait.GetComponent<Image>().sprite = _caseRecord.GetPrimarySuspect().SuspectProfile._portrait;
         _suspectRelation.text = _caseRecord.GetPrimarySuspect().SuspectProfile._relationshipToVictim;
 
         _suspectMeansImage.GetComponent<Image>().sprite = _caseRecord.GetPrimarySuspect().ProposedMeans.GetEvidencePortrait();
@@ -59,6 +69,8 @@ public class CaseSummaryScreen : MonoBehaviour
         _suspectOpportunityImage.GetComponent<Image>().sprite = _caseRecord.GetPrimarySuspect().ProposedOpportunity.GetEvidencePortrait();
         _suspectOpportunityText.text = _caseRecord.GetPrimarySuspect().ProposedOpportunity.GetEvidenceName();
     }
+
+    
 
     public void ButtonPressedInUI(string screenNameToJumpTo)
     {

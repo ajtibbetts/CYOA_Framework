@@ -14,6 +14,7 @@ namespace CaseDataObjects
     /
     /
     ***/
+
     
     [Serializable]
     public struct CaseProperty
@@ -27,10 +28,18 @@ namespace CaseDataObjects
     [Serializable]
     public struct CaseImage
     {
-        public Sprite portraitSprite;
+        public CharacterPortrait portrait;
         
         [Tooltip("If true, this value will be known to player at start of new case.")]
         public bool startAsDiscovered;
+    }
+
+    [Serializable]
+    public struct CharacterPortrait
+    {
+        public Sprite portraitSprite;
+        public float thumbNailOffsetX; // used in square thumbnail offsets
+        public float thumbNailOffsetY; // used in square thumbnail offsets
     }
 
     [Serializable]
@@ -62,7 +71,7 @@ namespace CaseDataObjects
     {
         [Header("Victim Info")]
         public string VictimName;
-        public Sprite VictimPortrait;
+        public CharacterPortrait VictimPortrait;
         public string VictimSummary;
         public string VictimAge;
         public string VictimResidence;
@@ -80,7 +89,7 @@ namespace CaseDataObjects
     {
         [Header("Profile Info")]
         public string _characterName;
-        public Sprite _portrait;
+        public CharacterPortrait _portrait;
         public string _age;
         public string _occupation;
         public string _residence;

@@ -16,8 +16,13 @@ MonoBehaviour:
     propertyValue: Johnny Cyber
     startAsDiscovered: 1
   _portrait:
-    portraitSprite: {fileID: 21300000, guid: 2e1afda8f2a56ee44927613c08155a31, type: 3}
+    portrait:
+      portraitSprite: {fileID: 21300000, guid: 2e1afda8f2a56ee44927613c08155a31, type: 3}
+      thumbNailOffsetX: 13.7
+      thumbNailOffsetY: 32.34
     startAsDiscovered: 1
+  thumbNailOffsetX: 0
+  thumbNailOffsetY: 0
   _age:
     propertyValue: 25
     startAsDiscovered: 1

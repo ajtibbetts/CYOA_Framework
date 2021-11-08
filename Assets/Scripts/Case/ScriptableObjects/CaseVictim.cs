@@ -29,9 +29,9 @@ public class CaseVictim : ScriptableObject {
         return _name.startAsDiscovered ? _name.propertyValue : _undiscoveredText;
     }
 
-    public Sprite GetVictimPortrait()
+    public CharacterPortrait GetVictimPortrait()
     {
-        return _portrait.startAsDiscovered ? _portrait.portraitSprite : null;
+        return _portrait.startAsDiscovered ? _portrait.portrait : new CharacterPortrait();
     }
 
     public string GetVictimSummary()
@@ -79,9 +79,9 @@ public class CaseVictim : ScriptableObject {
     }
 
     // reveal victim info using reflection
-    public Sprite RevealVictimPortrait()
+    public CharacterPortrait RevealVictimPortrait()
     {
-        return _portrait.portraitSprite;
+        return _portrait.portrait;
     }
     
     public string RevealVictimProperty(string propertyName)

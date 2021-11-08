@@ -61,7 +61,7 @@ public class CaseManager : MonoBehaviour
         return _victimData;
     }
 
-    public Sprite UncoverVictimPortrait()
+    public CharacterPortrait UncoverVictimPortrait()
     {
         return _activeCase.GetVictim().RevealVictimPortrait();
     }
@@ -88,7 +88,7 @@ public class CaseManager : MonoBehaviour
         return _characterData;
     }
 
-    public Sprite UncoverCharacterPortrait(string characterName)
+    public CharacterPortrait UncoverCharacterPortrait(string characterName)
     {
         List<CaseCharacterProfile> _caseCharacters = _activeCase.GetCharacterProfiles();
         var matchedCharacter = _caseCharacters.Find(x => x.GetCharacterName(true) == characterName);

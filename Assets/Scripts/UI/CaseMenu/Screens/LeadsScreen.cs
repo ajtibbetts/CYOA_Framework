@@ -5,10 +5,8 @@ using UnityEngine.UI;
 using TMPro;
 using CaseDataObjects;
 
-public class LeadsScreen : MonoBehaviour
+public class LeadsScreen : CaseScreen
 {
-    private PlayerCaseRecord _caseRecord;
-
     [SerializeField] private Scrollbar vertScrollBar;
     [SerializeField] private GameObject leadContentScrollContainer;
     [SerializeField] private GameObject leadEntryPrefab;
@@ -16,10 +14,6 @@ public class LeadsScreen : MonoBehaviour
     private List<ActiveLead> _leads = new List<ActiveLead>();
     private List<GameObject> _leadUIObjects = new List<GameObject>();
 
-    public void SetCaseRecord(PlayerCaseRecord record)
-    {
-        _caseRecord = record;
-    }
     
     public void resetContent(){
         vertScrollBar.value = 1;
@@ -50,7 +44,7 @@ public class LeadsScreen : MonoBehaviour
         _leadUIObjects.Add(emptyLead);
     }
 
-    public void UpdateData()
+    public override void UpdateData()
     {
         resetContent();
         _leads = _caseRecord.GetLeads();

@@ -10,6 +10,8 @@ public class CaseCharacterProfile : ScriptableObject {
     [Header("Character Info")]
     [SerializeField] private CaseProperty _characterName;
     [SerializeField] private CaseImage _portrait;
+    [SerializeField] private int thumbNailOffsetX;
+    [SerializeField] private int thumbNailOffsetY;
     [SerializeField] private CaseProperty _age;
     [SerializeField] private CaseProperty _occupation;
     [SerializeField] private CaseProperty _residence;
@@ -35,9 +37,9 @@ public class CaseCharacterProfile : ScriptableObject {
         }
     }
 
-    public Sprite GetPortrait()
+    public CharacterPortrait GetPortrait()
     {
-        return _portrait.startAsDiscovered ? _portrait.portraitSprite : null;
+        return _portrait.startAsDiscovered ? _portrait.portrait : new CharacterPortrait();
     }
 
     public string GetAge()
@@ -70,9 +72,9 @@ public class CaseCharacterProfile : ScriptableObject {
         return _additionalNotes;
     }
 
-    public Sprite RevealCharacterPortrait()
+    public CharacterPortrait RevealCharacterPortrait()
     {
-        return _portrait.portraitSprite;
+        return _portrait.portrait;
     }
     
     public string RevealCharacterProperty(string propertyName)

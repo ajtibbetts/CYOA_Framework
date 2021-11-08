@@ -5,10 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class VictimDataScreen : MonoBehaviour
+public class VictimDataScreen : CaseScreen
 {
-    private PlayerCaseRecord _caseRecord;
-
     [SerializeField] private TextMeshProUGUI _nameText;
     [SerializeField] private Image _portrait;
     [SerializeField] private TextMeshProUGUI _ageText;
@@ -19,30 +17,10 @@ public class VictimDataScreen : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _todText;
     [SerializeField] private TextMeshProUGUI _lodText;
 
-    
-
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void SetCaseRecord(PlayerCaseRecord record)
-    {
-        _caseRecord = record;
-    }
-
-    public void UpdateData()
+    public override void UpdateData()
     {
         _nameText.text = _caseRecord.GetVictim().VictimName;
-        _portrait.GetComponent<Image>().sprite = _caseRecord.GetVictim().VictimPortrait;
+        _portrait.GetComponent<Image>().sprite = _caseRecord.GetVictim().VictimPortrait.portraitSprite;
         _ageText.text = _caseRecord.GetVictim().VictimAge;
         _residenceText.text = _caseRecord.GetVictim().VictimResidence;
         _occupationText.text = _caseRecord.GetVictim().VictimOccupation;

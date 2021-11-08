@@ -57,7 +57,8 @@ public class PlayerCaseRecord : MonoBehaviour
 
         AddProfileToSuspects(_profiles[0]);
         AddProfileToSuspects(_profiles[1]);
-        SetPrimarySuspect(0);
+        AddProfileToSuspects(_profiles[2]);
+        SetPrimarySuspect(2);
         UpdateSuspectProfile(_primarySuspect,"means",_evidence[0]);
         UpdateSuspectProfile(_primarySuspect,"motive",_evidence[1]);
         UpdateSuspectProfile(_primarySuspect,"opportunity",_evidence[2]);

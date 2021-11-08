@@ -16,8 +16,13 @@ MonoBehaviour:
     propertyValue: Chad Billingsworth
     startAsDiscovered: 1
   _portrait:
-    portraitSprite: {fileID: 21300000, guid: dea0b61e9da7e264fb8156bf357c8882, type: 3}
+    portrait:
+      portraitSprite: {fileID: 21300000, guid: b29550d2b0728674697f47874ec453cb, type: 3}
+      thumbNailOffsetX: 0
+      thumbNailOffsetY: 46.88
     startAsDiscovered: 1
+  thumbNailOffsetX: 0
+  thumbNailOffsetY: 0
   _age:
     propertyValue: 32
     startAsDiscovered: 1
