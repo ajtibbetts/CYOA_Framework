@@ -14,10 +14,19 @@ public class CaseMenu : MonoBehaviour
     
     
     [Header("Menu Icons")]
-    public GameObject[] menuButtons;
-    private GameObject activeContent;
-    private int activeMenuButtonIndex;
-    [Header("Content")]
+    [SerializeField] private GameObject caseSummaryButton;
+    [SerializeField] private GameObject victimButton;
+    [SerializeField] private GameObject leadsButton;
+    [SerializeField] private GameObject evidenceButton;
+    [SerializeField] private GameObject profilesButton;
+    [SerializeField] private GameObject suspectsButton;
+    [SerializeField] private GameObject notesButton;
+    [SerializeField] private GameObject helpButton;
+
+    private GameObject _activeContent;
+    private GameObject _activeButton;
+
+    [Header("Content Screen")]
     public GameObject contentContainer;
     public GameObject caseSummaryScreen;
     public GameObject victimDataScreen;
@@ -33,6 +42,7 @@ public class CaseMenu : MonoBehaviour
     private VictimDataScreen _victimManager;
     private LeadsScreen _leadManager;
     private EvidenceScreen _evidenceManager;
+    private ProfilesScreen _profilesManager;
 
 
     private PlayerCaseRecord _caseRecord;
@@ -80,77 +90,81 @@ public class CaseMenu : MonoBehaviour
 
         _evidenceManager = evidenceScreen.GetComponent<EvidenceScreen>();
         _evidenceManager.SetCaseRecord(_caseRecord);
+
+        _profilesManager = profilesScreen.GetComponent<ProfilesScreen>();
+        _profilesManager.SetCaseRecord(_caseRecord);
         
     }
 
     public void SetCurrentScreenInactive()
     {
-        if(activeContent != null) 
+        if(_activeContent != null) 
         {
-            activeContent.SetActive(false);
-            SetInactiveColor(activeMenuButtonIndex);
+            _activeContent.SetActive(false);
+            SetInactiveColor(_activeButton);
         }
     }
 
-    public void SetActiveScreen(GameObject screen, int index)
+    public void SetActiveScreen(GameObject screenToActivate, GameObject buttonToActivate)
     {
-        if(activeContent != screen)
+        if(_activeContent != screenToActivate)
         {
             SetCurrentScreenInactive();
-            activeContent = screen;
-            activeMenuButtonIndex = index;
-            activeContent.SetActive(true);
-            SetActiveColor(index);
+            _activeContent = screenToActivate;
+            _activeContent.SetActive(true);
+            _activeButton = buttonToActivate;
+            SetActiveColor(buttonToActivate);
         }
     }
 
-    void SetInactiveColor(int index)
+    void SetInactiveColor(GameObject button)
     {
-        var buttonImage = menuButtons[index].GetComponent<Image>();
+        var buttonImage = button.GetComponent<Image>();
         buttonImage.color = Color.white; 
     }
 
-    void SetActiveColor(int index)
+    void SetActiveColor(GameObject button)
     {
-        var buttonImage = menuButtons[index].GetComponent<Image>();
+        var buttonImage = button.GetComponent<Image>();
         buttonImage.color = Color.yellow;
     }
 
     public void OpenCaseSummaryScreen()
     {
         _caseSummaryManager.UpdateData();
-        SetActiveScreen(caseSummaryScreen, 0);
+        SetActiveScreen(caseSummaryScreen, caseSummaryButton);
     }
     public void OpenVictimDataScreen()
     {
         _victimManager.UpdateData();
-        SetActiveScreen(victimDataScreen, 1);
+        SetActiveScreen(victimDataScreen, victimButton);
     }
     public void OpenLeadsScreen()
     {
         _leadManager.UpdateData();
-        SetActiveScreen(leadsScreen, 2);
+        SetActiveScreen(leadsScreen, leadsButton);
     }
     public void OpenEvidenceScreen()
     {
         _evidenceManager.UpdateData();
-        SetActiveScreen(evidenceScreen, 3);
+        SetActiveScreen(evidenceScreen, evidenceButton);
     }
     public void OpenProfilesScreen()
     {
-        SetActiveScreen(profilesScreen, 4);
+        _profilesManager.UpdateData();
+        SetActiveScreen(profilesScreen, profilesButton);
     }
     public void OpenSuspectsScreen()
     {
-        SetActiveScreen(suspectsScreen, 5);
+        SetActiveScreen(suspectsScreen, suspectsButton);
     }
     public void OpenNotesScreen()
     {
-        SetActiveScreen(notesScreen, 6);
+        SetActiveScreen(notesScreen, notesButton);
     }
     public void OpenHelpScreen()
     {
-        SetActiveScreen(helpScreen, 7);
+        SetActiveScreen(helpScreen, helpButton);
     }
 
     public void JumpToScreenFromSubMenu(string screenName)
