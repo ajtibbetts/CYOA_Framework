@@ -8,6 +8,8 @@ using CaseDataObjects;
 [CreateAssetMenu(fileName = "CaseCharacterProfile", menuName = "CYOA/Case/CharacterProfile", order = 0)]
 public class CaseCharacterProfile : ScriptableObject {
     [Header("Character Info")]
+
+    [SerializeField] private CharacterType _characterType;
     [SerializeField] private CaseProperty _characterName;
     [SerializeField] private CaseImage _portrait;
     [SerializeField] private int thumbNailOffsetX;
@@ -27,6 +29,11 @@ public class CaseCharacterProfile : ScriptableObject {
     public string AlibiText;
 
     private string _undiscoveredText = "???";
+
+    public CharacterType GetCharacterType()
+    {
+        return _characterType;
+    }
 
     public string GetCharacterName(bool overrideFlag = false)
     {

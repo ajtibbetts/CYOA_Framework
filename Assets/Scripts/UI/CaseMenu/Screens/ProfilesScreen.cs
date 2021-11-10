@@ -18,6 +18,8 @@ public class ProfilesScreen : CaseScreen
     [SerializeField] private GameObject _profileDetailsScreen;
     [SerializeField] private Button _goBackButton;
 
+    [SerializeField] private Button _flagAsSuspectButton;
+
     [Header("Profile Details")]
     [SerializeField] Image _characterPortrait;
     [SerializeField] TextMeshProUGUI _characterNameText;
@@ -29,6 +31,8 @@ public class ProfilesScreen : CaseScreen
 
     private List<CharacterProfileData> _profiles = new List<CharacterProfileData>();
     private List<GameObject> _contentUIObjects = new List<GameObject>();
+
+    private CharacterProfileData _activeProfileData;
     
     private void Start() {
         ProfileEntryElement.onElementTapped += OpenProfileDetailsScreen;
@@ -60,19 +64,16 @@ public class ProfilesScreen : CaseScreen
         var nameTextObject = profileToAdd.transform.Find("profileNameText").GetComponent<TextMeshProUGUI>();
         var relationshipTextObject = profileToAdd.transform.Find("relationshipText").GetComponent<TextMeshProUGUI>();
 
-        var portraitSprite = profileData._portrait.portraitSprite;
-        var offsetX = profileData._portrait.thumbNailOffsetX + 150; // add 150 / 75 for anchor positioning offset
-        var offsetY = profileData._portrait.thumbNailOffsetY + 75;
+        var portraitSprite = profileData.portrait.portraitSprite;
+        var offsetX = profileData.portrait.thumbNailOffsetX + 150; // add 150 / 75 for anchor positioning offset
+        var offsetY = profileData.portrait.thumbNailOffsetY + 75;
         portraitImageObject.sprite = portraitSprite;
         SetPortraitThumbnail(portraitImageObject, portraitSprite,offsetX,offsetY);
 
-        nameTextObject.text = profileData._characterName;
-        relationshipTextObject.text = profileData._relationshipToVictim;
+        nameTextObject.text = profileData.characterName;
+        relationshipTextObject.text = profileData.relationshipToVictim;
 
         _contentUIObjects.Add(profileToAdd);
-        
-        
-
     }
 
     public override void UpdateData()
@@ -92,19 +93,69 @@ public class ProfilesScreen : CaseScreen
 
     public void OpenProfileDetailsScreen(CharacterProfileData profileData)
     {
-        _characterPortrait.sprite = profileData._portrait.portraitSprite;
-        _characterNameText.text = profileData._characterName;
-        _characterAgeText.text = "<b>Age:</b> " + profileData._age;
-        _characterResidenceText.text = "<b>Residence:</b> " + profileData._residence;
-        _characterOccupationText.text = "<b>Occupation:</b> " +  profileData._occupation;
-        _characterRelationshipText.text = "<b>Relationship to Victim:</b>\n" + profileData._relationshipToVictim;
-        _characterSummaryText.text = "<b>Summary:</b>\n" + profileData._summary;
+        _characterPortrait.sprite = profileData.portrait.portraitSprite;
+        _characterNameText.text = profileData.characterName;
+        _characterAgeText.text = "<b>Age:</b> " + profileData.age;
+        _characterResidenceText.text = "<b>Residence:</b> " + profileData.residence;
+        _characterOccupationText.text = "<b>Occupation:</b> " +  profileData.occupation;
+        _characterRelationshipText.text = "<b>Relationship to Victim:</b>\n" + profileData.relationshipToVictim;
+        _characterSummaryText.text = "<b>Summary:</b>\n" + profileData.summary;
 
+
+        if(profileData.characterType == CharacterType.ALLY) _flagAsSuspectButton.gameObject.SetActive(false);
+        else
+        {
+            string buttonText = profileData.characterType == CharacterType.NEUTRAL ? "Add to Suspects" : "Remove from Suspects";
+            _flagAsSuspectButton.GetComponentInChildren<TextMeshProUGUI>().text = buttonText;
+            _flagAsSuspectButton.gameObject.SetActive(true);
+        }
+
+        SetBackgroundColor(profileData.characterType);
+
+
+        _activeProfileData = profileData;
         _profileDetailsScreen.SetActive(true);
+
+        
     }
 
     public void CloseProfileDetailsScreen()
     {
+        UpdateData();
         _profileDetailsScreen.SetActive(false);
+    }
+
+
+    public void SetBackgroundColor(CharacterType charType)
+    {
+        switch(charType)
+        {
+            case CharacterType.ALLY:
+                _profileDetailsScreen.GetComponent<Image>().color = globalConfig.UI.CaseUI.profileAllyBackgroundColor;
+            break;
+            case CharacterType.NEUTRAL:
+                _profileDetailsScreen.GetComponent<Image>().color = globalConfig.UI.CaseUI.profileNeutralBackgroundColor;
+            break;
+            case CharacterType.SUSPECT:
+                _profileDetailsScreen.GetComponent<Image>().color = globalConfig.UI.CaseUI.profileSuspectBackgroundColor;
+            break;
+        }
+    }
+
+    public void ToggleSuspectFlag()
+    {
+        if(_activeProfileData.characterType == CharacterType.NEUTRAL)
+        {
+            _caseRecord.AddProfileToSuspects(_activeProfileData);
+            _activeProfileData.characterType = CharacterType.SUSPECT;
+            
+        }
+        else if (_activeProfileData.characterType == CharacterType.SUSPECT)
+        {
+            _caseRecord.RemoveProfileFromSuspects(_activeProfileData);
+            _activeProfileData.characterType = CharacterType.NEUTRAL;
+        }
+
+        OpenProfileDetailsScreen(_activeProfileData);
     }
 }

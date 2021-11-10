@@ -39,7 +39,7 @@ public class CaseCulprit : ScriptableObject {
         }
         
         // check for culprit match
-        if(suspect.SuspectProfile._characterName == _suspectProfile.GetCharacterName(true))
+        if(suspect.SuspectProfile.characterName == _suspectProfile.GetCharacterName(true))
         {
             results.MatchedSuspect = true;
             // if any of the evidence was correct, add complete response. else add partial hint

@@ -18,6 +18,8 @@ public class PlayerCaseRecord : MonoBehaviour
     [SerializeField] private List<CaseSuspect> _suspects = new List<CaseSuspect>();
     [SerializeField] private CaseSuspect _primarySuspect;
     [SerializeField] private List<CaseEvidence> _evidence = new List<CaseEvidence>();
+    
+    [SerializeField] private CaseEvidence _nullEvidence;
     [SerializeField] private List<string> _customNotes = new List<string>();
     
     
@@ -37,6 +39,7 @@ public class PlayerCaseRecord : MonoBehaviour
     void Start()
     {
         // to test, setup new case
+        _primarySuspect = null;
         StartNewCase();
 
 
@@ -55,13 +58,13 @@ public class PlayerCaseRecord : MonoBehaviour
             AddProfile(name);
         }
 
-        AddProfileToSuspects(_profiles[0]);
-        AddProfileToSuspects(_profiles[1]);
-        AddProfileToSuspects(_profiles[2]);
-        SetPrimarySuspect(2);
-        UpdateSuspectProfile(_primarySuspect,"means",_evidence[0]);
-        UpdateSuspectProfile(_primarySuspect,"motive",_evidence[1]);
-        UpdateSuspectProfile(_primarySuspect,"opportunity",_evidence[2]);
+        // AddProfileToSuspects(_profiles[0]);
+        // AddProfileToSuspects(_profiles[1]);
+        // AddProfileToSuspects(_profiles[2]);
+        // SetPrimarySuspect(2);
+        // UpdateSuspectProfile(_primarySuspect,"means",_evidence[0]);
+        // UpdateSuspectProfile(_primarySuspect,"motive",_evidence[1]);
+        // UpdateSuspectProfile(_primarySuspect,"opportunity",_evidence[2]);
 
     }
 
@@ -168,11 +171,11 @@ public class PlayerCaseRecord : MonoBehaviour
 
     private void DiscoverProfileData(string characterName, string propertyName)
     {
-        var characterToUpdate = _profiles.Find(x => x._characterName == characterName);
+        var characterToUpdate = _profiles.Find(x => x.characterName == characterName);
         
         if(propertyName == "portrait")
         {
-            characterToUpdate._portrait = CaseManager.Instance.UncoverCharacterPortrait(characterName);
+            characterToUpdate.portrait = CaseManager.Instance.UncoverCharacterPortrait(characterName);
             OnCaseDataUpdated?.Invoke();
             return;
         }
@@ -186,15 +189,30 @@ public class PlayerCaseRecord : MonoBehaviour
         }
     }
 
-    private void AddProfileToSuspects(CharacterProfileData characterProfile)
+    public void AddProfileToSuspects(CharacterProfileData characterProfile)
     {
+        var characterToUpdate = _profiles.Find(x => x.characterName == characterProfile.characterName);
+        characterToUpdate.characterType = CharacterType.SUSPECT;
+
         CaseSuspect newSuspect = new CaseSuspect(characterProfile);
+        UpdateSuspectProfile(newSuspect,"means",_nullEvidence);
+        UpdateSuspectProfile(newSuspect,"motive",_nullEvidence);
+        UpdateSuspectProfile(newSuspect,"opportunity",_nullEvidence);
         _suspects.Add(newSuspect);
+        if(_suspects.Count == 1) SetPrimarySuspect(0);
     }
 
-    private void RemoveProfileFromSuspects(CaseSuspect suspect)
+    public void RemoveProfileFromSuspects(CharacterProfileData characterProfile)
     {
-        _suspects.Remove(suspect);
+        var characterToUpdate = _profiles.Find(x => x.characterName == characterProfile.characterName);
+        
+        var suspectToRemove = _suspects.Find(x => x.SuspectProfile.characterName == characterProfile.characterName);
+        
+        characterToUpdate.characterType = CharacterType.NEUTRAL;
+
+        _suspects.Remove(suspectToRemove);
+        if(_primarySuspect == suspectToRemove && _suspects.Count < 1) _primarySuspect = null;
+        else if (_primarySuspect == suspectToRemove) SetPrimarySuspect(0);
     }
 
     private void UpdateSuspectProfile(CaseSuspect suspect, string profileType, CaseEvidence evidence)

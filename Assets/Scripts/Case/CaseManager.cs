@@ -77,13 +77,14 @@ public class CaseManager : MonoBehaviour
         List<CaseCharacterProfile> _caseCharacters = _activeCase.GetCharacterProfiles();
         // match to (hidden) character name and popualte starting values;
         var matchedCharacter = _caseCharacters.Find(x => x.GetCharacterName(true) == characterName);
-        _characterData._characterName = matchedCharacter.GetCharacterName();
-        _characterData._portrait = matchedCharacter.GetPortrait();
-        _characterData._summary = matchedCharacter.GetSummary();
-        _characterData._age = matchedCharacter.GetAge();
-        _characterData._residence = matchedCharacter.GetResidence();
-        _characterData._occupation = matchedCharacter.GetOccupation();
-        _characterData._relationshipToVictim = matchedCharacter.GetRelationShipToVictim();
+        _characterData.characterName = matchedCharacter.GetCharacterName();
+        _characterData.portrait = matchedCharacter.GetPortrait();
+        _characterData.summary = matchedCharacter.GetSummary();
+        _characterData.age = matchedCharacter.GetAge();
+        _characterData.residence = matchedCharacter.GetResidence();
+        _characterData.occupation = matchedCharacter.GetOccupation();
+        _characterData.relationshipToVictim = matchedCharacter.GetRelationShipToVictim();
+        _characterData.characterType = matchedCharacter.GetCharacterType();
     
         return _characterData;
     }

@@ -10,6 +10,22 @@ namespace CaseDataObjects
     /***
     /
     /
+    / ENUMS
+    /
+    /
+    ***/
+
+    public enum CharacterType 
+    {
+        ALLY,
+        NEUTRAL,
+        SUSPECT
+    }
+    
+    
+    /***
+    /
+    /
     / STRUCTS
     /
     /
@@ -66,44 +82,7 @@ namespace CaseDataObjects
         public bool isResolved;
     }
 
-    [Serializable]
-    public struct VictimData
-    {
-        [Header("Victim Info")]
-        public string VictimName;
-        public CharacterPortrait VictimPortrait;
-        public string VictimSummary;
-        public string VictimAge;
-        public string VictimResidence;
-        public string VictimOccupation;
-        [Header("Homicide Info")]
-        public string CauseOfDeath;
-        public string TimeofDeath;
-        public string LocationOfDeath;
-        public List<String> AdditionalInjuries;
-        public List<String> AdditionalNotes;
-    }
-
-    [Serializable]
-    public struct CharacterProfileData
-    {
-        [Header("Profile Info")]
-        public string _characterName;
-        public CharacterPortrait _portrait;
-        public string _age;
-        public string _occupation;
-        public string _residence;
-        public string _summary;
-        public string _relationshipToVictim;
-        public List<string> _additionalNotes;
-
-        [Header("As Suspect Info")]
-        public string AsCulpritCompleteResponse;
-        public string AsCulpritPartialResponse;
-        public string AsInnocentResponse;
-        public bool HasAlibi;
-        public string AlibiText;
-    }
+    
     /***
     /
     /
@@ -138,4 +117,46 @@ namespace CaseDataObjects
             return MatchedSuspect && MatchedMeans && MatchedMotive && MatchedOpportunity;
         }
     }
+
+    [Serializable]
+    public class CharacterProfileData
+    {
+        [Header("Profile Info")]
+        public string characterName;
+        public CharacterPortrait portrait;
+        public string age;
+        public string occupation;
+        public string residence;
+        public string summary;
+        public string relationshipToVictim;
+        public List<string> additionalNotes;
+
+        public CharacterType characterType;
+
+        [Header("As Suspect Info")]
+        public string AsCulpritCompleteResponse;
+        public string AsCulpritPartialResponse;
+        public string AsInnocentResponse;
+        public bool HasAlibi;
+        public string AlibiText;
+    }
+    
+    [Serializable]
+    public class VictimData
+    {
+        [Header("Victim Info")]
+        public string VictimName;
+        public CharacterPortrait VictimPortrait;
+        public string VictimSummary;
+        public string VictimAge;
+        public string VictimResidence;
+        public string VictimOccupation;
+        [Header("Homicide Info")]
+        public string CauseOfDeath;
+        public string TimeofDeath;
+        public string LocationOfDeath;
+        public List<String> AdditionalInjuries;
+        public List<String> AdditionalNotes;
+    }
+
 }

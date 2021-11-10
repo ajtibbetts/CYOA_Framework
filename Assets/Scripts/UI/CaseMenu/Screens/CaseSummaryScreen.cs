@@ -18,6 +18,9 @@ public class CaseSummaryScreen : CaseScreen
     [SerializeField] private TextMeshProUGUI _victimTOD;
     [SerializeField] private TextMeshProUGUI _victimLOD;
     [Header("Suspect Data")]
+    [SerializeField] private GameObject _activeSuspectContainer;
+    [SerializeField] private GameObject _noActiveSuspectContainer;
+
     [SerializeField] private TextMeshProUGUI _suspectName;
     [SerializeField] private Image _suspectPortrait;
     [SerializeField] private TextMeshProUGUI _suspectRelation;
@@ -54,13 +57,21 @@ public class CaseSummaryScreen : CaseScreen
 
     public void UpdateSuspectSummaryData()
     {
-        Sprite suspectSprite = _caseRecord.GetPrimarySuspect().SuspectProfile._portrait.portraitSprite;
-        float offsetX = _caseRecord.GetPrimarySuspect().SuspectProfile._portrait.thumbNailOffsetX;
-        float offsetY = _caseRecord.GetPrimarySuspect().SuspectProfile._portrait.thumbNailOffsetY;
+        if(_caseRecord.GetPrimarySuspect() == null)
+        {
+            _activeSuspectContainer.SetActive(false);
+            _noActiveSuspectContainer.SetActive(true);
+            return;
+        }
+        
+        
+        Sprite suspectSprite = _caseRecord.GetPrimarySuspect().SuspectProfile.portrait.portraitSprite;
+        float offsetX = _caseRecord.GetPrimarySuspect().SuspectProfile.portrait.thumbNailOffsetX;
+        float offsetY = _caseRecord.GetPrimarySuspect().SuspectProfile.portrait.thumbNailOffsetY;
         SetPortraitThumbnail(_suspectPortrait, suspectSprite, offsetX, offsetY);   
 
-        _suspectName.text = _caseRecord.GetPrimarySuspect().SuspectProfile._characterName;
-        _suspectRelation.text = _caseRecord.GetPrimarySuspect().SuspectProfile._relationshipToVictim;
+        _suspectName.text = _caseRecord.GetPrimarySuspect().SuspectProfile.characterName;
+        _suspectRelation.text = _caseRecord.GetPrimarySuspect().SuspectProfile.relationshipToVictim;
 
         _suspectMeansImage.GetComponent<Image>().sprite = _caseRecord.GetPrimarySuspect().ProposedMeans.GetEvidencePortrait();
         _suspectMeansText.text = _caseRecord.GetPrimarySuspect().ProposedMeans.GetEvidenceName();
@@ -68,6 +79,9 @@ public class CaseSummaryScreen : CaseScreen
         _suspectMotiveText.text = _caseRecord.GetPrimarySuspect().ProposedMotive.GetEvidenceName();
         _suspectOpportunityImage.GetComponent<Image>().sprite = _caseRecord.GetPrimarySuspect().ProposedOpportunity.GetEvidencePortrait();
         _suspectOpportunityText.text = _caseRecord.GetPrimarySuspect().ProposedOpportunity.GetEvidenceName();
+
+        _noActiveSuspectContainer.SetActive(false);
+        _activeSuspectContainer.SetActive(true);
     }
 
     

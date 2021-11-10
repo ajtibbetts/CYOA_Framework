@@ -177,6 +177,9 @@ public class CaseMenu : MonoBehaviour
             case "suspect":
                 OpenSuspectsScreen();
             break;
+            case "profiles":
+                OpenProfilesScreen();
+            break;
             default:
             break;
         }
