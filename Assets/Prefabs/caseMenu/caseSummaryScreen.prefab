@@ -335,7 +335,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Go to Character Profiles Screen
+  m_text: Go to Suspects Screen
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a0a7df6dce06549458deadfdd647cd39, type: 2}
   m_sharedMaterial: {fileID: 6701398589742300524, guid: a0a7df6dce06549458deadfdd647cd39,
@@ -614,7 +614,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: profiles
+          m_StringArgument: suspect
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &1057408482414646120
@@ -3856,8 +3856,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'No suspects determined yet.  Add suspects from the Character Profiles
-    screen. '
+  m_text: 'No suspects determined yet.  Add suspects from the Suspects screen. '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 25e295ea8061fe84c8258d1c7a7d5014, type: 2}
   m_sharedMaterial: {fileID: 8000137751021137458, guid: 25e295ea8061fe84c8258d1c7a7d5014,

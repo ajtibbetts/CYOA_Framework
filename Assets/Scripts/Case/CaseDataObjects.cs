@@ -21,6 +21,13 @@ namespace CaseDataObjects
         NEUTRAL,
         SUSPECT
     }
+
+    public enum EvidenceType
+    {
+        MEANS,
+        MOTIVE,
+        OPPORTUNITY
+    }
     
     
     /***

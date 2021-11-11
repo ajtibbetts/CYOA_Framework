@@ -8,6 +8,7 @@ using CaseDataObjects;
 public abstract class CaseScreen : MonoBehaviour
 {
     protected PlayerCaseRecord _caseRecord;
+    protected bool _isActiveScreen;
 
     public void SetCaseRecord(PlayerCaseRecord record)
     {
@@ -19,8 +20,13 @@ public abstract class CaseScreen : MonoBehaviour
     public void SetPortraitThumbnail(Image portraitObject, Sprite portraitSprite, float offsetX, float offsetY)
     {
         portraitObject.sprite = portraitSprite;
-        Debug.Log("Setting sprite positon x/y: " + offsetX + "/" + offsetY);
+        // Debug.Log("Setting sprite positon x/y: " + offsetX + "/" + offsetY);
         portraitObject.gameObject.transform.localPosition = new Vector3(offsetX,offsetY,0);
+    }
+
+    public void SetScreenActive(bool isActive)
+    {
+        _isActiveScreen = isActive;
     }
 
 }

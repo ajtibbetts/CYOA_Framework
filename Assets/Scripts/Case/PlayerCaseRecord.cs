@@ -16,6 +16,7 @@ public class PlayerCaseRecord : MonoBehaviour
     [SerializeField] private List<ActiveLead> _leads = new List<ActiveLead>();
     [SerializeField] private List<CharacterProfileData> _profiles = new List<CharacterProfileData>();
     [SerializeField] private List<CaseSuspect> _suspects = new List<CaseSuspect>();
+    [SerializeField] private List<CaseSuspect> _inactiveSuspects = new List<CaseSuspect>();
     [SerializeField] private CaseSuspect _primarySuspect;
     [SerializeField] private List<CaseEvidence> _evidence = new List<CaseEvidence>();
     
@@ -118,6 +119,8 @@ public class PlayerCaseRecord : MonoBehaviour
         _leads.Clear();
         _profiles.Clear();
         _suspects.Clear();
+        _inactiveSuspects.Clear();
+        _primarySuspect = null;
         _evidence.Clear();
         _customNotes.Clear();
     }
@@ -191,41 +194,69 @@ public class PlayerCaseRecord : MonoBehaviour
 
     public void AddProfileToSuspects(CharacterProfileData characterProfile)
     {
+        // first update character profile to suspect
         var characterToUpdate = _profiles.Find(x => x.characterName == characterProfile.characterName);
         characterToUpdate.characterType = CharacterType.SUSPECT;
 
-        CaseSuspect newSuspect = new CaseSuspect(characterProfile);
-        UpdateSuspectProfile(newSuspect,"means",_nullEvidence);
-        UpdateSuspectProfile(newSuspect,"motive",_nullEvidence);
-        UpdateSuspectProfile(newSuspect,"opportunity",_nullEvidence);
-        _suspects.Add(newSuspect);
+        // second check if suspect entry already exists in inactive
+        // Debug.Log("this profile is alraedy inactive suspect: " + isProfileAlreadyInactiveSuspect(characterProfile));
+        if(isProfileAlreadyInactiveSuspect(characterProfile))
+        {
+            _suspects.Add(GetInactiveSuspect(characterProfile));
+        }
+        else
+        {
+            CaseSuspect newSuspect = new CaseSuspect(characterProfile);
+            UpdateSuspectProfile(newSuspect,_nullEvidence, EvidenceType.MEANS);
+            UpdateSuspectProfile(newSuspect,_nullEvidence, EvidenceType.MOTIVE);
+            UpdateSuspectProfile(newSuspect,_nullEvidence, EvidenceType.OPPORTUNITY);
+            _suspects.Add(newSuspect);
+        }
+
+        
         if(_suspects.Count == 1) SetPrimarySuspect(0);
     }
 
     public void RemoveProfileFromSuspects(CharacterProfileData characterProfile)
     {
         var characterToUpdate = _profiles.Find(x => x.characterName == characterProfile.characterName);
-        
         var suspectToRemove = _suspects.Find(x => x.SuspectProfile.characterName == characterProfile.characterName);
         
+        // update character profile back to neutral
         characterToUpdate.characterType = CharacterType.NEUTRAL;
 
+        // remove suspect from list and set primary as needed
         _suspects.Remove(suspectToRemove);
         if(_primarySuspect == suspectToRemove && _suspects.Count < 1) _primarySuspect = null;
         else if (_primarySuspect == suspectToRemove) SetPrimarySuspect(0);
+
+        // finally add suspect to inactive list to retrieve if used again.
+        _inactiveSuspects.Add(suspectToRemove);
     }
 
-    private void UpdateSuspectProfile(CaseSuspect suspect, string profileType, CaseEvidence evidence)
+    private bool isProfileAlreadyInactiveSuspect(CharacterProfileData characterProfile)
     {
-        switch(profileType.ToLower())
+        return _inactiveSuspects.Find(x => x.SuspectProfile.characterName == characterProfile.characterName) != null;
+    }
+
+    private CaseSuspect GetInactiveSuspect(CharacterProfileData characterProfile)
+    {
+        var _suspect = _inactiveSuspects.Find(x => x.SuspectProfile.characterName == characterProfile.characterName);
+        _inactiveSuspects.Remove(_suspect);
+        return _suspect;
+    }
+
+    public void UpdateSuspectProfile(CaseSuspect suspect, CaseEvidence evidence, EvidenceType type)
+    {
+        switch(type)
         {
-            case "means":
+            case EvidenceType.MEANS:
                 suspect.ProposedMeans = evidence;
             break;
-            case "motive":
+            case EvidenceType.MOTIVE:
                 suspect.ProposedMotive = evidence;
             break;
-            case "opportunity":
+            case EvidenceType.OPPORTUNITY:
                 suspect.ProposedOpportunity = evidence;
             break;
             default:
@@ -233,9 +264,12 @@ public class PlayerCaseRecord : MonoBehaviour
         }
     }
 
-    private void SetPrimarySuspect(int index)
+    public void SetPrimarySuspect(int index)
     {
         _primarySuspect = _suspects[index];
+        // update suspect lists so primary is always first entry
+        _suspects.RemoveAt(index);
+        _suspects.Insert(0,_primarySuspect);
     }
     
     private void AddEvidence(CaseEvidence evidence)

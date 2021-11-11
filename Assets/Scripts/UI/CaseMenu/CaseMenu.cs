@@ -43,6 +43,7 @@ public class CaseMenu : MonoBehaviour
     private LeadsScreen _leadManager;
     private EvidenceScreen _evidenceManager;
     private ProfilesScreen _profilesManager;
+    private SuspectsScreen _suspectsManager;
 
 
     private PlayerCaseRecord _caseRecord;
@@ -93,6 +94,10 @@ public class CaseMenu : MonoBehaviour
 
         _profilesManager = profilesScreen.GetComponent<ProfilesScreen>();
         _profilesManager.SetCaseRecord(_caseRecord);
+
+        _suspectsManager = suspectsScreen.GetComponent<SuspectsScreen>();
+        _suspectsManager.SetCaseRecord(_caseRecord);
+        _suspectsManager.onGoToProfile += GoToCharacterProfile;
         
     }
 
@@ -100,6 +105,7 @@ public class CaseMenu : MonoBehaviour
     {
         if(_activeContent != null) 
         {
+            _activeContent.GetComponent<CaseScreen>().SetScreenActive(false);
             _activeContent.SetActive(false);
             SetInactiveColor(_activeButton);
         }
@@ -112,6 +118,7 @@ public class CaseMenu : MonoBehaviour
             SetCurrentScreenInactive();
             _activeContent = screenToActivate;
             _activeContent.SetActive(true);
+            _activeContent.GetComponent<CaseScreen>().SetScreenActive(true);
             _activeButton = buttonToActivate;
             SetActiveColor(buttonToActivate);
         }
@@ -156,6 +163,7 @@ public class CaseMenu : MonoBehaviour
     }
     public void OpenSuspectsScreen()
     {
+        _suspectsManager.UpdateData();
         SetActiveScreen(suspectsScreen, suspectsButton);
     }
     public void OpenNotesScreen()
@@ -167,6 +175,8 @@ public class CaseMenu : MonoBehaviour
         SetActiveScreen(helpScreen, helpButton);
     }
 
+
+    // event handlers
     public void JumpToScreenFromSubMenu(string screenName)
     {
         switch(screenName)
@@ -183,5 +193,11 @@ public class CaseMenu : MonoBehaviour
             default:
             break;
         }
+    }
+
+    public void GoToCharacterProfile(CharacterProfileData characterProfile)
+    {
+        OpenProfilesScreen();
+        _profilesManager.OpenProfileDetailsScreen(characterProfile);
     }
 }

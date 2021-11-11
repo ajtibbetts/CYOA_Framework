@@ -28,29 +28,7 @@ public class EvidenceScreen : CaseScreen
     public void AddEvidenceToContent(CaseEvidence evidenceData)
     {
         GameObject evidenceToAdd = GameObject.Instantiate(evidenceEntryPrefab, Vector3.zero, Quaternion.identity, evidenceContentScrollContainer.transform);
-        
-        var evidenceImage = evidenceToAdd.transform.Find("Image");
-        var evidenceTitle = evidenceToAdd.transform.Find("evidenceNameText");
-        var evidenceDescription = evidenceToAdd.transform.Find("evidenceDescriptionText").GetComponent<TextMeshProUGUI>();
-        
-        evidenceImage.GetComponent<Image>().sprite = evidenceData.GetEvidencePortrait();
-        evidenceTitle.GetComponent<TextMeshProUGUI>().text = evidenceData.GetEvidenceName();
-        evidenceDescription.text = evidenceData.GetEvidenceDescription();
-        
-        // check if the description text is needing to expand the container panel height
-        var textHeight = evidenceDescription.GetComponent<TextMeshProUGUI>().GetPreferredValues().y;
-        Debug.Log("overflowing preferred height: " + textHeight);
-        if(textHeight >= 25.01f) // tweaked value based on default w/o overflow.
-        {
-            var boxSize = evidenceToAdd.GetComponent<RectTransform>().sizeDelta;
-            evidenceToAdd.GetComponent<RectTransform>().sizeDelta = new Vector2(boxSize.x, boxSize.y + textHeight);
-        }
-        
-        // evidenceToAdd.GetComponent<TextMeshProUGUI>().text = leadData.lead.GetLead();
-        // if(leadData.isResolved)
-        // {
-        //     evidenceToAdd.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Strikethrough;
-        // }
+        evidenceToAdd.GetComponent<EvidenceEntryElement>().UpdateData(evidenceData, EvidenceType.MEANS);
         _contentUIObjects.Add(evidenceToAdd);
     }
 

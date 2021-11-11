@@ -20,6 +20,7 @@ public class CaseSummaryScreen : CaseScreen
     [Header("Suspect Data")]
     [SerializeField] private GameObject _activeSuspectContainer;
     [SerializeField] private GameObject _noActiveSuspectContainer;
+    
 
     [SerializeField] private TextMeshProUGUI _suspectName;
     [SerializeField] private Image _suspectPortrait;

@@ -93,6 +93,9 @@ public class ProfilesScreen : CaseScreen
 
     public void OpenProfileDetailsScreen(CharacterProfileData profileData)
     {
+        Debug.Log("Opening profile for " + profileData.characterName);
+        if(!_isActiveScreen) return;
+        
         _characterPortrait.sprite = profileData.portrait.portraitSprite;
         _characterNameText.text = profileData.characterName;
         _characterAgeText.text = "<b>Age:</b> " + profileData.age;
