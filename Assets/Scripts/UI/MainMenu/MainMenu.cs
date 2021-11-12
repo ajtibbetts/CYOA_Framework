@@ -25,6 +25,7 @@ public class MainMenu : MonoBehaviour
     // menu data managers
     private PlayerStatusScreen _playerStatus;
     private PlayerSkillsScreen _playerSkills;
+    private MapScreen _map;
 
 
     
@@ -43,6 +44,9 @@ public class MainMenu : MonoBehaviour
         mapScreen.SetActive(false);
         GetManagers();
         OpenPlayerStatusScreen();
+
+        // add listener for new maps
+        CaseManager.OnNewCaseMap += SetActiveMap;
     }
     
     // Start is called before the first frame update
@@ -56,6 +60,7 @@ public class MainMenu : MonoBehaviour
     {
         _playerStatus = playerStatusScreen.GetComponent<PlayerStatusScreen>();
         _playerSkills = playerSkillsScreen.GetComponent<PlayerSkillsScreen>();
+        _map = mapScreen.GetComponent<MapScreen>();
     }
 
 
@@ -112,5 +117,11 @@ public class MainMenu : MonoBehaviour
     public void OpenMapScreen()
     {
         SetActiveScreen(mapScreen, 3);
+    }
+
+    public void SetActiveMap(MapObject newMap)
+    {
+        Debug.Log("Setting new map name: " + newMap.GetMapName());
+        _map.LoadMap(newMap);
     }
 }

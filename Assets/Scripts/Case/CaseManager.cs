@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,9 @@ public class CaseManager : MonoBehaviour
     
     private static CaseManager _instance;
     public static CaseManager Instance { get { return _instance; } }
+
+
+    public static event Action<MapObject> OnNewCaseMap;
 
     [SerializeField] private CaseScenario _activeCase;
 
@@ -32,6 +36,12 @@ public class CaseManager : MonoBehaviour
     public void GetNewCase(CaseScenario newScenario)
     {
         _activeCase = newScenario;
+        
+    }
+
+    public void SetupCaseMap()
+    {
+        OnNewCaseMap?.Invoke(_activeCase.GetCaseMap());
     }
 
     public string GetActiveCaseTitle()

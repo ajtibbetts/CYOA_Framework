@@ -13,6 +13,8 @@ public class CaseScenario : ScriptableObject {
 
     [SerializeField] private List<CaseCharacterProfile> _characterProfiles;
 
+    [SerializeField] private MapObject _caseMap;
+
 
     public string GetCaseTitle()
     {
@@ -42,5 +44,10 @@ public class CaseScenario : ScriptableObject {
     public List<CaseCharacterProfile> GetCharacterProfiles()
     {
         return _characterProfiles;
+    }
+
+    public MapObject GetCaseMap()
+    {
+        return _caseMap;
     }
 }

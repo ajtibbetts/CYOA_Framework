@@ -1,6 +1,8 @@
 using System;   
 using UnityEngine;
 
+
+// CLASSES
 public static class dataFormatter 
 {
     public static string getConditionText(conditionType checkType)
@@ -38,6 +40,7 @@ public static class dataFormatter
         return checkText;
     }
 }
+
 
 // ENUMS
 [Serializable]

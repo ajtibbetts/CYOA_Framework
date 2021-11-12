@@ -112,6 +112,7 @@ public class PlayerCaseRecord : MonoBehaviour
         Debug.Log("Starting new case.");
         // ClearCollectionsForNewCase(); // remove for testing
         _victim = CaseManager.Instance.GetStartingVictimData();
+        CaseManager.Instance.SetupCaseMap();
     }
 
     void ClearCollectionsForNewCase()

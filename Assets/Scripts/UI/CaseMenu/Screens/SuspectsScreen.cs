@@ -230,7 +230,7 @@ public class SuspectsScreen : CaseScreen
                 _evidenceContainerTitle.text = "Assign Evidence\nMOTIVE";
             break;
             case EvidenceType.OPPORTUNITY:
-                _evidenceContainerTitle.text = "Assign Evidence\nOpportunity";
+                _evidenceContainerTitle.text = "Assign Evidence\nOPPORTUNITY";
             break;
         }
 

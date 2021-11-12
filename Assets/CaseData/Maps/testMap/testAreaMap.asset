@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee32181d551b81b41a1dac597d721e4f, type: 3}
+  m_Name: testAreaMap
+  m_EditorClassIdentifier: 
+  _areaMapName: Test Map
+  _mapSprite: {fileID: 21300000, guid: c1333c79ddf30a3488745d8f8ba36083, type: 3}
+  _mapOffSetX: -500
+  _mapOffSetY: 0
+  _locations:
+  - {fileID: 11400000, guid: c1e69218cc84c8d469bf702e4064f53e, type: 2}
+  - {fileID: 11400000, guid: 3aa9f3e7776c2304f9d43f9675be7442, type: 2}
+  - {fileID: 11400000, guid: bdf04ac7ec1122a4e915c279aafd97b0, type: 2}

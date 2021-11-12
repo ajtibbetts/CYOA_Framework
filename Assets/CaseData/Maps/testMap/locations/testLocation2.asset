@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7043fed152edd1f448f200d85597c4a3, type: 3}
+  m_Name: testLocation2
+  m_EditorClassIdentifier: 
+  _destinationLevelName: 
+  _locationDisplayName: Central Park
+  _displayIcon: {fileID: 21300000, guid: 6db8a479ad2ce6344889f28418c2a2f1, type: 3}
+  _displayPortrait: {fileID: 21300000, guid: b2b61060c7adf244a96fe54c2867fcb7, type: 3}
+  _locationDescription: The Central Park is always active during the day, but at
+    night it becomes a breeding ground for criminal activity.
+  _displayOffsetX: 124
+  _displayOffsetY: 287
+  _availableOnStart: 1
