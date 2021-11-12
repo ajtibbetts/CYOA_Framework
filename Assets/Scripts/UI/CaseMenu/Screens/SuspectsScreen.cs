@@ -26,11 +26,16 @@ public class SuspectsScreen : CaseScreen
     [SerializeField] private GameObject _navPrevImage;
     [SerializeField] private GameObject _navNextImage;
 
+    [SerializeField] private CaseEvidence _nullEvidenceScriptableObject;
+
     [Header("Add Evidence")]
     [SerializeField] private GameObject _addEvidenceContainer;
     [SerializeField] private Scrollbar _vertScrollBarEvidence;
     [SerializeField] private GameObject _contentScrollContainerEvidence;
     [SerializeField] private GameObject _evidenceEntryPrefab;
+    [SerializeField] private TextMeshProUGUI _evidenceContainerTitle;
+
+    
 
 
     [Header("Add Suspects")]
@@ -69,21 +74,18 @@ public class SuspectsScreen : CaseScreen
         _addSuspectsButton.SetActive(true);
         _addEvidenceContainer.SetActive(false);
         
+        ClearUIList(_contentProfileUIObjects,_vertScrollBar);
+    
+    }
 
-
-        _vertScrollBar.value = 1;
-        foreach(GameObject uiObject in _contentProfileUIObjects)
+    public void ClearUIList(List<GameObject> uiList, Scrollbar scrollbar)
+    {
+        scrollbar.value = 1;
+        foreach(GameObject uiObject in uiList)
         {
             Destroy(uiObject.gameObject);
         }
-        _contentProfileUIObjects.Clear();
-
-        _vertScrollBarEvidence.value = 1;
-        foreach(GameObject uiObject in _contentEvidenceUIObjects)
-        {
-            Destroy(uiObject.gameObject);
-        }
-        _contentEvidenceUIObjects.Clear();
+        uiList.Clear();
     }
 
     
@@ -101,7 +103,14 @@ public class SuspectsScreen : CaseScreen
 
         // otherwise activate and continue
         _activeSuspectsContainer.SetActive(true);
-        UpdateSuspectView(_caseRecord.GetPrimarySuspect());
+        // if no active suspect data is set, load primary
+        if(_activeSuspectProfile == null) UpdateSuspectView(_caseRecord.GetPrimarySuspect());
+        else
+        {
+            var suspectToUpdate = _suspects.Find(x => x.SuspectProfile == _activeSuspectProfile);
+            UpdateSuspectView(suspectToUpdate);
+        }
+        
     }
 
     /***
@@ -187,6 +196,7 @@ public class SuspectsScreen : CaseScreen
     
     public void GotoActiveProfile()
     {
+        UpdateData();
         onGoToProfile?.Invoke(_activeSuspectProfile);
     }
 
@@ -211,6 +221,19 @@ public class SuspectsScreen : CaseScreen
             _contentEvidenceUIObjects.Add(evidenceToAdd);
         }
 
+        switch(type)
+        {
+            case EvidenceType.MEANS:
+                _evidenceContainerTitle.text = "Assign Evidence\nMEANS";
+            break;
+            case EvidenceType.MOTIVE:
+                _evidenceContainerTitle.text = "Assign Evidence\nMOTIVE";
+            break;
+            case EvidenceType.OPPORTUNITY:
+                _evidenceContainerTitle.text = "Assign Evidence\nOpportunity";
+            break;
+        }
+
         _addEvidenceContainer.SetActive(true);
     }
 
@@ -218,22 +241,38 @@ public class SuspectsScreen : CaseScreen
     {
         var _suspects = _caseRecord.GetSuspects();
         var _suspectToUpate = _suspects.Find(x => x.SuspectProfile.characterName == _activeSuspectProfile.characterName);
-        GameObject evidenceContainer = null;
-        switch(type)
+        GameObject evidenceContainer = GetEvidenceContainer(type);
+        
+        // check if evidence is already assigned to a slot and empty existing slot if needed
+        var oldAssingmentType =_caseRecord.GetEvidenceAssignmentTypeOnSuspect(_suspectToUpate,evidenceData);
+        if(oldAssingmentType != EvidenceType.UNASSIGNED)
         {
-            case EvidenceType.MEANS:
-                evidenceContainer = _meansContainer;
-            break;
-            case EvidenceType.MOTIVE:
-                evidenceContainer = _motiveContainer;
-            break;
-            case EvidenceType.OPPORTUNITY:
-                evidenceContainer = _opportunityContainer;
-            break;
+            GameObject oldContainer = GetEvidenceContainer(oldAssingmentType);
+            UpdateEvidenceContainer(oldContainer, _nullEvidenceScriptableObject, oldAssingmentType);
+            _caseRecord.UpdateSuspectProfile(_suspectToUpate,null,oldAssingmentType);
         }
+
         UpdateEvidenceContainer(evidenceContainer, evidenceData, type);
         _caseRecord.UpdateSuspectProfile(_suspectToUpate, evidenceData, type);
-        UpdateData();
+        
+        // clear list and close
+        ClearUIList(_contentEvidenceUIObjects, _vertScrollBarEvidence);
+        _addEvidenceContainer.SetActive(false);
+    }
+
+    private GameObject GetEvidenceContainer(EvidenceType evidenceType)
+    {
+        switch(evidenceType)
+        {
+            case EvidenceType.MEANS:
+                return _meansContainer;
+            case EvidenceType.MOTIVE:
+                return _motiveContainer;
+            case EvidenceType.OPPORTUNITY:
+                return _opportunityContainer;
+        }
+
+        return null;
     }
 
     /***

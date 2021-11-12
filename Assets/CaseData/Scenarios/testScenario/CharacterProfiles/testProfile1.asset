@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a810518b47780074db1dc1d8603dbf16, type: 3}
   m_Name: testProfile1
   m_EditorClassIdentifier: 
+  _characterType: 1
   _characterName:
     propertyValue: Chad Billingsworth
     startAsDiscovered: 1

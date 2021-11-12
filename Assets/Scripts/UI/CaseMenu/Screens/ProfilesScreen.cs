@@ -36,7 +36,6 @@ public class ProfilesScreen : CaseScreen
     
     private void Start() {
         ProfileEntryElement.onElementTapped += OpenProfileDetailsScreen;
-        _profileDetailsScreen.SetActive(false);
     }
 
     public void resetContent(){
@@ -88,12 +87,13 @@ public class ProfilesScreen : CaseScreen
                 AddToContent(profileData);
             }
         }
+
+        Debug.Log("Profile Screen Data Updated");
     }
 
 
     public void OpenProfileDetailsScreen(CharacterProfileData profileData)
     {
-        Debug.Log("Opening profile for " + profileData.characterName);
         if(!_isActiveScreen) return;
         
         _characterPortrait.sprite = profileData.portrait.portraitSprite;
@@ -118,8 +118,6 @@ public class ProfilesScreen : CaseScreen
 
         _activeProfileData = profileData;
         _profileDetailsScreen.SetActive(true);
-
-        
     }
 
     public void CloseProfileDetailsScreen()
@@ -127,7 +125,6 @@ public class ProfilesScreen : CaseScreen
         UpdateData();
         _profileDetailsScreen.SetActive(false);
     }
-
 
     public void SetBackgroundColor(CharacterType charType)
     {

@@ -207,9 +207,9 @@ public class PlayerCaseRecord : MonoBehaviour
         else
         {
             CaseSuspect newSuspect = new CaseSuspect(characterProfile);
-            UpdateSuspectProfile(newSuspect,_nullEvidence, EvidenceType.MEANS);
-            UpdateSuspectProfile(newSuspect,_nullEvidence, EvidenceType.MOTIVE);
-            UpdateSuspectProfile(newSuspect,_nullEvidence, EvidenceType.OPPORTUNITY);
+            UpdateSuspectProfile(newSuspect,null, EvidenceType.MEANS);
+            UpdateSuspectProfile(newSuspect,null, EvidenceType.MOTIVE);
+            UpdateSuspectProfile(newSuspect,null, EvidenceType.OPPORTUNITY);
             _suspects.Add(newSuspect);
         }
 
@@ -248,6 +248,7 @@ public class PlayerCaseRecord : MonoBehaviour
 
     public void UpdateSuspectProfile(CaseSuspect suspect, CaseEvidence evidence, EvidenceType type)
     {
+        if(evidence == null) evidence = _nullEvidence;
         switch(type)
         {
             case EvidenceType.MEANS:
@@ -262,6 +263,28 @@ public class PlayerCaseRecord : MonoBehaviour
             default:
             break;
         }
+    }
+
+    public EvidenceType GetEvidenceAssignmentTypeOnSuspect(CaseSuspect suspect, CaseEvidence evidence)
+    {
+        if(evidence == suspect.ProposedMeans) return EvidenceType.MEANS;
+        if(evidence == suspect.ProposedMotive) return EvidenceType.MOTIVE;
+        if(evidence == suspect.ProposedOpportunity) return EvidenceType.OPPORTUNITY;
+        return EvidenceType.UNASSIGNED;
+    }
+
+    public CaseEvidence GetEvidenceOnSuspectByType(CaseSuspect suspect, EvidenceType type)
+    {
+        switch(type){
+            case EvidenceType.MEANS:
+                return suspect.ProposedMeans;
+            case EvidenceType.MOTIVE:
+                return suspect.ProposedMotive;
+            case EvidenceType.OPPORTUNITY:
+                return suspect.ProposedOpportunity;
+        }
+
+        return _nullEvidence;
     }
 
     public void SetPrimarySuspect(int index)

@@ -11,6 +11,7 @@ public class CaseEvidence : ScriptableObject {
     [SerializeField] [TextArea] private string _evidenceDescription;
     [SerializeField] private DialogueContainer _evidenceDialogue;
 
+    
     public string GetEvidenceName()
     {
         return _evidenceName;

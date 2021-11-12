@@ -10153,6 +10153,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2441107037748321614, guid: d7fb37569f4ce8a42a7914081c79dadb,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2441107037748321614, guid: d7fb37569f4ce8a42a7914081c79dadb,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2776849879787185389, guid: d7fb37569f4ce8a42a7914081c79dadb,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -10277,6 +10287,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: suspectsScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 3436282127047393950, guid: d7fb37569f4ce8a42a7914081c79dadb,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3436282127047393950, guid: d7fb37569f4ce8a42a7914081c79dadb,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4563352333588354510, guid: d7fb37569f4ce8a42a7914081c79dadb,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4563352333588354510, guid: d7fb37569f4ce8a42a7914081c79dadb,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4563352333588354510, guid: d7fb37569f4ce8a42a7914081c79dadb,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7301047184564293364, guid: d7fb37569f4ce8a42a7914081c79dadb,
         type: 3}
@@ -10411,6 +10446,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: notesScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 3564585830933299073, guid: d10cebef70fd32f409e621de1aa556ee,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d10cebef70fd32f409e621de1aa556ee, type: 3}
@@ -11322,6 +11362,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: helpScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 8265939462622259961, guid: 060e7ee42e32f8548a4660debb196293,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 060e7ee42e32f8548a4660debb196293, type: 3}

@@ -26,7 +26,8 @@ namespace CaseDataObjects
     {
         MEANS,
         MOTIVE,
-        OPPORTUNITY
+        OPPORTUNITY,
+        UNASSIGNED
     }
     
     
