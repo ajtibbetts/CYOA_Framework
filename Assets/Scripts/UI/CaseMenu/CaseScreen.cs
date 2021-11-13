@@ -1,21 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using CaseDataObjects;
 
-public abstract class CaseScreen : MonoBehaviour
+
+public abstract class CaseScreen : UIScreen
 {
     protected PlayerCaseRecord _caseRecord;
-    protected bool _isActiveScreen;
 
     public void SetCaseRecord(PlayerCaseRecord record)
     {
         _caseRecord = record;
     }
-
-    public abstract void UpdateData();
 
     public void SetPortraitThumbnail(Image portraitObject, Sprite portraitSprite, float offsetX, float offsetY)
     {
@@ -23,10 +17,4 @@ public abstract class CaseScreen : MonoBehaviour
         // Debug.Log("Setting sprite positon x/y: " + offsetX + "/" + offsetY);
         portraitObject.gameObject.transform.localPosition = new Vector3(offsetX,offsetY,0);
     }
-
-    public void SetScreenActive(bool isActive)
-    {
-        _isActiveScreen = isActive;
-    }
-
 }

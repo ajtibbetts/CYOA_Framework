@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7043fed152edd1f448f200d85597c4a3, type: 3}
   m_Name: testLocation1
   m_EditorClassIdentifier: 
-  _destinationLevelName: 
+  _destinationLevelName: testLevel
+  _destinationAreaName: detectiveHQ
   _locationDisplayName: Detective H.Q.
   _displayIcon: {fileID: 21300000, guid: 188a2960850bd8542a32719402b92b0b, type: 3}
   _displayPortrait: {fileID: 21300000, guid: 1db75e2cfea1df44280edce1ce9238ee, type: 3}

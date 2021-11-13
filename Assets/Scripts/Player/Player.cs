@@ -72,6 +72,7 @@ public class Player : MonoBehaviour
     // level data
     [Header("Level Data")]
     public string CurrentScene;
+    public string CurrentAreaName;
     public List<string> visitedWorldNavObjects = new List<string>();
     public List<string> visitedInteractableObjects = new List<string>();
 

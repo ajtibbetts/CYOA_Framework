@@ -7,6 +7,7 @@ using UnityEngine;
 public class MapLocationObject : ScriptableObject
 {
     [SerializeField] private string _destinationLevelName;
+    [SerializeField] private string _destinationAreaName;
     [SerializeField] private string _locationDisplayName;
     [SerializeField] private Sprite _displayIcon;
     [SerializeField] private Sprite _displayPortrait;
@@ -20,6 +21,11 @@ public class MapLocationObject : ScriptableObject
     public string GetLevelName()
     {
         return _destinationLevelName;
+    }
+
+    public string GetAreaName()
+    {
+        return _destinationAreaName;
     }
 
     public string GetDisplayName()

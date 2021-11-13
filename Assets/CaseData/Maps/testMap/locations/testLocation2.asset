@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7043fed152edd1f448f200d85597c4a3, type: 3}
   m_Name: testLocation2
   m_EditorClassIdentifier: 
-  _destinationLevelName: 
+  _destinationLevelName: centralPark
+  _destinationAreaName: centralPark
   _locationDisplayName: Central Park
   _displayIcon: {fileID: 21300000, guid: 6db8a479ad2ce6344889f28418c2a2f1, type: 3}
   _displayPortrait: {fileID: 21300000, guid: b2b61060c7adf244a96fe54c2867fcb7, type: 3}

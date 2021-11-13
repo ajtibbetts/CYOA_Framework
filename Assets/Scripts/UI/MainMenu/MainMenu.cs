@@ -4,17 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class MainMenu : MonoBehaviour
+public class MainMenu : UIMenu
 {
-    
     private static MainMenu _instance;
     public static MainMenu Instance { get { return _instance; } }
 
     [Header("Menu Icons")]
-    public GameObject[] menuButtons;
+    [SerializeField] private GameObject playerStatusButton;
+    [SerializeField] private GameObject playerSkillsButton;
+    [SerializeField] private GameObject gearButton;
+    [SerializeField] private GameObject mapButton;
+    [SerializeField] private GameObject settingsButton;
+    [SerializeField] private GameObject helpButton;
 
-    private GameObject activeContent;
-    private int activeMenuButtonIndex;
     [Header("Content")]
     public GameObject contentContainer;
     public GameObject playerStatusScreen;
@@ -23,12 +25,10 @@ public class MainMenu : MonoBehaviour
     public GameObject mapScreen;
 
     // menu data managers
-    private PlayerStatusScreen _playerStatus;
-    private PlayerSkillsScreen _playerSkills;
-    private MapScreen _map;
+    private PlayerStatusScreen _playerStatusManager;
+    private PlayerSkillsScreen _playerSkillsManager;
+    private MapScreen _mapManager;
 
-
-    
     private void Awake() {
         //init singleton
         if (_instance != null && _instance != this)
@@ -42,7 +42,7 @@ public class MainMenu : MonoBehaviour
         playerSkillsScreen.SetActive(false);
         gearScreen.SetActive(false);
         mapScreen.SetActive(false);
-        GetManagers();
+        SetupManagers();
         OpenPlayerStatusScreen();
 
         // add listener for new maps
@@ -56,72 +56,38 @@ public class MainMenu : MonoBehaviour
         
     }
 
-    void GetManagers()
+    protected override void SetupManagers()
     {
-        _playerStatus = playerStatusScreen.GetComponent<PlayerStatusScreen>();
-        _playerSkills = playerSkillsScreen.GetComponent<PlayerSkillsScreen>();
-        _map = mapScreen.GetComponent<MapScreen>();
-    }
-
-
-    void SetInactiveColor(int index)
-    {
-        var buttonImage = menuButtons[index].GetComponent<Image>();
-        buttonImage.color = Color.white; 
-    }
-
-    void SetActiveColor(int index)
-    {
-        var buttonImage = menuButtons[index].GetComponent<Image>();
-        buttonImage.color = Color.yellow;
-    }
-
-    public void SetCurrentScreenInactive()
-    {
-        if(activeContent != null) 
-        {
-            activeContent.SetActive(false);
-            SetInactiveColor(activeMenuButtonIndex);
-        }
-    }
-
-    public void SetActiveScreen(GameObject screen, int index)
-    {
-        if(activeContent != screen)
-        {
-            SetCurrentScreenInactive();
-            activeContent = screen;
-            activeMenuButtonIndex = index;
-            activeContent.SetActive(true);
-            SetActiveColor(index);
-        }
+        _playerStatusManager = playerStatusScreen.GetComponent<PlayerStatusScreen>();
+        _playerSkillsManager = playerSkillsScreen.GetComponent<PlayerSkillsScreen>();
+        _mapManager = mapScreen.GetComponent<MapScreen>();
     }
 
     public void OpenPlayerStatusScreen()
     {
-        _playerStatus.UpdateData();
-        SetActiveScreen(playerStatusScreen, 0);
+        _playerStatusManager.UpdateData();
+        SetActiveScreen(playerStatusScreen, playerStatusButton);
     }
 
     public void OpenPlayerSkillsScreen()
     {
-        _playerSkills.UpdateData();
-        SetActiveScreen(playerSkillsScreen, 1);
+        _playerSkillsManager.UpdateData();
+        SetActiveScreen(playerSkillsScreen, playerSkillsButton);
     }
 
     public void OpenGearScreen()
     {
-        SetActiveScreen(gearScreen, 2);
+        SetActiveScreen(gearScreen, gearButton);
     }
 
     public void OpenMapScreen()
-    {
-        SetActiveScreen(mapScreen, 3);
+    {   
+        _mapManager.UpdateData();
+        SetActiveScreen(mapScreen, mapButton);
     }
 
     public void SetActiveMap(MapObject newMap)
     {
-        Debug.Log("Setting new map name: " + newMap.GetMapName());
-        _map.LoadMap(newMap);
+        _mapManager.LoadMap(newMap);
     }
 }

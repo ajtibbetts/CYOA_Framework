@@ -48,7 +48,8 @@ public class gameController : MonoBehaviour
         UI_updatePlayerEnergy();
         UI_updatePlayerGold();
         
-        UIManager.initGameStartButton();
+        // UIManager.initGameStartButton(); // disable start button for now and just load game
+        StartGame();
         
     }
 
@@ -59,13 +60,16 @@ public class gameController : MonoBehaviour
         if(player._player.CurrentScene == null)
         {
             Debug.Log("GAME CONTROLLER ---- Current scene is not saved to player starting fresh.");
-            player._player.CurrentScene = "testLevel";
+             Player.Instance.CurrentScene = "testLevel";
+            // player._player.CurrentScene = "testLevel";
+            Player.Instance.CurrentAreaName = "detectiveHQ";
             SubSceneManager.AddScene("testLevel");
         }
         else
         {
             Debug.Log("GAME CONTROLLER ---- Loading from previously saved scene.");
             SubSceneManager.AddScene(player._player.CurrentScene);
+            Player.Instance.CurrentAreaName = "detectiveHQ";
         }
     }
 

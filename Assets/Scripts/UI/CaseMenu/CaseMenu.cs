@@ -6,13 +6,11 @@ using UnityEngine.UI;
 using CaseDataObjects;
 
 
-public class CaseMenu : MonoBehaviour
+public class CaseMenu : UIMenu
 {
     private static CaseMenu _instance;
     public static CaseMenu Instance { get { return _instance; } }
 
-    
-    
     [Header("Menu Icons")]
     [SerializeField] private GameObject caseSummaryButton;
     [SerializeField] private GameObject victimButton;
@@ -22,9 +20,6 @@ public class CaseMenu : MonoBehaviour
     [SerializeField] private GameObject suspectsButton;
     [SerializeField] private GameObject notesButton;
     [SerializeField] private GameObject helpButton;
-
-    private GameObject _activeContent;
-    private GameObject _activeButton;
 
     [Header("Content Screen")]
     public GameObject contentContainer;
@@ -66,9 +61,6 @@ public class CaseMenu : MonoBehaviour
         suspectsScreen.SetActive(false);
         notesScreen.SetActive(false);
         helpScreen.SetActive(false);
-
-        
-        
     }
     void Start()
     {
@@ -77,7 +69,7 @@ public class CaseMenu : MonoBehaviour
         OpenCaseSummaryScreen();
     }
 
-    void SetupManagers()
+    protected override void SetupManagers()
     {
         _caseSummaryManager = caseSummaryScreen.GetComponent<CaseSummaryScreen>();
         _caseSummaryManager.SetCaseRecord(_caseRecord);
@@ -98,42 +90,6 @@ public class CaseMenu : MonoBehaviour
         _suspectsManager = suspectsScreen.GetComponent<SuspectsScreen>();
         _suspectsManager.SetCaseRecord(_caseRecord);
         _suspectsManager.onGoToProfile += GoToCharacterProfile;
-        
-    }
-
-    public void SetCurrentScreenInactive()
-    {
-        if(_activeContent != null) 
-        {
-            _activeContent.GetComponent<CaseScreen>().SetScreenActive(false);
-            _activeContent.SetActive(false);
-            SetInactiveColor(_activeButton);
-        }
-    }
-
-    public void SetActiveScreen(GameObject screenToActivate, GameObject buttonToActivate)
-    {
-        if(_activeContent != screenToActivate)
-        {
-            SetCurrentScreenInactive();
-            _activeContent = screenToActivate;
-            _activeContent.SetActive(true);
-            _activeContent.GetComponent<CaseScreen>().SetScreenActive(true);
-            _activeButton = buttonToActivate;
-            SetActiveColor(buttonToActivate);
-        }
-    }
-
-    void SetInactiveColor(GameObject button)
-    {
-        var buttonImage = button.GetComponent<Image>();
-        buttonImage.color = Color.white; 
-    }
-
-    void SetActiveColor(GameObject button)
-    {
-        var buttonImage = button.GetComponent<Image>();
-        buttonImage.color = Color.yellow;
     }
 
     public void OpenCaseSummaryScreen()

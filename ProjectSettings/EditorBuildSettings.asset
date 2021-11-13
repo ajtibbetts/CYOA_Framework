@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WorldScenes/testLevel_2.unity
     guid: a0cd0ef0ad0bb91498ee13069fe98a5a
+  - enabled: 1
+    path: Assets/Scenes/WorldScenes/centralPark.unity
+    guid: 6a72af5ced3523e4c85908f99f3303ea
+  - enabled: 1
+    path: Assets/Scenes/WorldScenes/eastPort.unity
+    guid: 5307a4cea209b904981e85e218ee64aa
   m_configObjects: {}

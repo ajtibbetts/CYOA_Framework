@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class MapScreen : MonoBehaviour
+public class MapScreen : MenuScreen
 {
     [Header("Main Map Screen")]
     [SerializeField] private MapObject _activeMap;
@@ -19,6 +19,8 @@ public class MapScreen : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _confirmLocationName;
     [SerializeField] private Image _confirmLocationPortrait;
     [SerializeField] private TextMeshProUGUI _confirmLocationDescription;
+    [SerializeField] private GameObject _confirmButton;
+    [SerializeField] private GameObject _isCurrentLocationText;
 
 
     private MapLocationObject _confirmLocationData;
@@ -29,14 +31,22 @@ public class MapScreen : MonoBehaviour
         MapLocationElement.onElementTapped += OpenConfirmLocationScreen;
     }
 
+    public override void UpdateData()
+    {
+        if(_activeMap != null)
+        {
+            SetMapImage();
+            SetMapName();
+            SetupMapLocations();
+            GoBacktoMainMapScreen();
+        }
+    }
+
     public void LoadMap(MapObject newMap)
     {
         Debug.Log("Loading new map!");
         _activeMap = newMap;
-        SetMapImage();
-        SetMapName();
-        SetupMapLocations();
-        GoBacktoMainMapScreen();
+        UpdateData();
     }
 
 
@@ -72,6 +82,18 @@ public class MapScreen : MonoBehaviour
         _confirmLocationName.text = locationData.GetDisplayName();
         _confirmLocationPortrait.sprite = locationData.GetPortrait();
         _confirmLocationDescription.text = locationData.GetDescription();
+
+        // check if this location is current location
+        if(_confirmLocationData.GetAreaName() == Player.Instance.CurrentAreaName)
+        {
+            _confirmButton.SetActive(false);
+            _isCurrentLocationText.SetActive(true);
+        }
+        else
+        {
+            _confirmButton.SetActive(true);
+            _isCurrentLocationText.SetActive(false);
+        }
         
         _confirmLocationContainer.SetActive(true);
     }
@@ -81,6 +103,10 @@ public class MapScreen : MonoBehaviour
         Debug.Log("Traveling to location: " + _confirmLocationData.GetDisplayName());
 
         // add code here to load level on event call
+        gameController.Instance.SwitchToLevel(_confirmLocationData.GetLevelName());
+        // set area and close map screen
+        Player.Instance.CurrentAreaName = _confirmLocationData.GetAreaName();
+        GoBacktoMainMapScreen();
     }
 
     public void GoBacktoMainMapScreen()

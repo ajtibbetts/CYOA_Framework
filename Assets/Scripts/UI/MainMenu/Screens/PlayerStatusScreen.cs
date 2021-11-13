@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class PlayerStatusScreen : MonoBehaviour
+public class PlayerStatusScreen : MenuScreen
 {
     [Header("Character Info")]
     public TextMeshProUGUI FirstNameText;
@@ -33,7 +33,7 @@ public class PlayerStatusScreen : MonoBehaviour
         
     }
 
-    public void UpdateData()
+    public override void UpdateData()
     {
         FirstNameText.text = Player.Instance.PlayerFirstName;
         LastNameText.text = Player.Instance.PlayerLastName;

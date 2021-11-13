@@ -4,11 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class PlayerSkillsScreen : MonoBehaviour
+public class PlayerSkillsScreen : MenuScreen
 {
     [Header("Physical Skills")]
     public TextMeshProUGUI PhysicalSkillValueText;
-
     public TextMeshProUGUI AthleticsSkillValueText;
     public TextMeshProUGUI FortitudeSkillValueText;
     public TextMeshProUGUI StealthSkillValueText;
@@ -16,7 +15,6 @@ public class PlayerSkillsScreen : MonoBehaviour
 
     [Header("Cognitive Skills")]
     public TextMeshProUGUI CognitiveSkillValueText;
-
     public TextMeshProUGUI BallisticsSkillValueText;
     public TextMeshProUGUI ForensicsSkillValueText;
     public TextMeshProUGUI MedicineSkillValueText;
@@ -24,7 +22,6 @@ public class PlayerSkillsScreen : MonoBehaviour
 
     [Header("Volitional Skills")]
     public TextMeshProUGUI VolitionalSkillValueText;
-
     public TextMeshProUGUI FocusSkillValueText;
     public TextMeshProUGUI TacticsSkillValueText;
     public TextMeshProUGUI GreySightSkillValueText;
@@ -32,7 +29,6 @@ public class PlayerSkillsScreen : MonoBehaviour
 
     [Header("Narrative Skills")]
     public TextMeshProUGUI NarrativeSkillValueText;
-
     public TextMeshProUGUI CausalitySkillValueText;
     public TextMeshProUGUI ReasoningSkillValueText;
     public TextMeshProUGUI OccultSkillValueText;
@@ -40,7 +36,6 @@ public class PlayerSkillsScreen : MonoBehaviour
 
     [Header("Social Skills")]
     public TextMeshProUGUI SocialSkillValueText;
-
     public TextMeshProUGUI EmotionSkillValueText;
     public TextMeshProUGUI ConfidenceSkillValueText;
     public TextMeshProUGUI WisdomSkillValueText;
@@ -53,7 +48,7 @@ public class PlayerSkillsScreen : MonoBehaviour
         
     }
 
-    public void UpdateData()
+    public override void UpdateData()
     {
         PhysicalSkillValueText.text = Player.Instance.Physical.ToString();
             AthleticsSkillValueText.text = Player.Instance.GetSkillValue("Athletics").ToString();
@@ -61,13 +56,11 @@ public class PlayerSkillsScreen : MonoBehaviour
             StealthSkillValueText.text = Player.Instance.GetSkillValue("Stealth").ToString();
             HardboiledHotshotSkillValueText.text = Player.Instance.GetSkillValue("HardboiledHotshot").ToString();
 
-
         CognitiveSkillValueText.text = Player.Instance.Cognitive.ToString();
             BallisticsSkillValueText.text = Player.Instance.GetSkillValue("Ballistics").ToString();
             ForensicsSkillValueText.text = Player.Instance.GetSkillValue("Forensics").ToString();
             MedicineSkillValueText.text = Player.Instance.GetSkillValue("Medicine").ToString();
             CyberSleuthSkillValueText.text = Player.Instance.GetSkillValue("CyberSleuth").ToString();
-
 
         VolitionalSkillValueText.text = Player.Instance.Volitional.ToString();
             FocusSkillValueText.text = Player.Instance.GetSkillValue("Focus").ToString();
@@ -75,20 +68,16 @@ public class PlayerSkillsScreen : MonoBehaviour
             GreySightSkillValueText.text = Player.Instance.GetSkillValue("GreySight").ToString();
             CaseChaserSkillValueText.text = Player.Instance.GetSkillValue("CaseChaser").ToString();
 
-
         NarrativeSkillValueText.text = Player.Instance.Narrative.ToString();
             CausalitySkillValueText.text = Player.Instance.GetSkillValue("Causality").ToString();
             ReasoningSkillValueText.text = Player.Instance.GetSkillValue("Reasoning").ToString();
             OccultSkillValueText.text = Player.Instance.GetSkillValue("Occult").ToString();
             AceInvestigatorSkillValueText.text = Player.Instance.GetSkillValue("AceInspector").ToString();
 
-
         SocialSkillValueText.text = Player.Instance.Social.ToString();
             EmotionSkillValueText.text = Player.Instance.GetSkillValue("Emotion").ToString();
             ConfidenceSkillValueText.text = Player.Instance.GetSkillValue("Confidence").ToString();
             WisdomSkillValueText.text = Player.Instance.GetSkillValue("Wisdom").ToString();
             StreetSavantSkillValueText.text = Player.Instance.GetSkillValue("StreetSavant").ToString();
-
-
     }
 }

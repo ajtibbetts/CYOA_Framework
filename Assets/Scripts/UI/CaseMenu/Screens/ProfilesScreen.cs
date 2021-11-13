@@ -18,8 +18,6 @@ public class ProfilesScreen : CaseScreen
     [SerializeField] private GameObject _profileDetailsScreen;
     [SerializeField] private Button _goBackButton;
 
-    [SerializeField] private Button _flagAsSuspectButton;
-
     [Header("Profile Details")]
     [SerializeField] Image _characterPortrait;
     [SerializeField] TextMeshProUGUI _characterNameText;
@@ -104,17 +102,7 @@ public class ProfilesScreen : CaseScreen
         _characterRelationshipText.text = "<b>Relationship to Victim:</b>\n" + profileData.relationshipToVictim;
         _characterSummaryText.text = "<b>Summary:</b>\n" + profileData.summary;
 
-
-        if(profileData.characterType == CharacterType.ALLY) _flagAsSuspectButton.gameObject.SetActive(false);
-        else
-        {
-            string buttonText = profileData.characterType == CharacterType.NEUTRAL ? "Add to Suspects" : "Remove from Suspects";
-            _flagAsSuspectButton.GetComponentInChildren<TextMeshProUGUI>().text = buttonText;
-            _flagAsSuspectButton.gameObject.SetActive(true);
-        }
-
         SetBackgroundColor(profileData.characterType);
-
 
         _activeProfileData = profileData;
         _profileDetailsScreen.SetActive(true);
