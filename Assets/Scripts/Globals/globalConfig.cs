@@ -8,7 +8,6 @@ using UnityEngine.UI;
 static public class globalConfig
 {
     static public class UI {
-        static public readonly int MAX_ACTION_OPTIONS = 10; 
         static public readonly int MAX_MENU_SWIPE_POS_X = 128; // in pixels; if less than, menu will open
         static public readonly int MIN_CASEMENU_SWIPE_POS_X = 952; // in pixels; if greater, menu will open
 

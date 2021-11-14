@@ -20,8 +20,23 @@ public class MapLocationElement : MonoBehaviour, IPointerClickHandler
         var offsetX = _locationData.GetOffsetX();
         var offsetY = _locationData.GetOffSetY();
         var mapIcon = this.transform.Find("mapIcon").GetComponent<Image>();
+        var iconFrame = this.GetComponent<Image>();
         this.transform.localPosition = new Vector3(offsetX,offsetY,0);
         mapIcon.sprite = locationData.GetIcon();
+
+        // set icon color based on whether current location or not
+        var currentLocationColor = globalConfig.UI.toggleSelectedBackgroundColor;
+        var notCurrentLocationColor = globalConfig.UI.toggleInactiveBackgroundColor;
+        var currentAreaName = Player.Instance.CurrentAreaName;
+        var colorToSet = currentAreaName == locationData.GetAreaName() ? currentLocationColor : notCurrentLocationColor;
+        
+        mapIcon.color = colorToSet;
+        iconFrame.color = colorToSet;
+
+        // set 'current' header if this is current location
+        this.transform.Find("currentPanel").gameObject.SetActive(currentAreaName == locationData.GetAreaName());
+        
+
     }
 
     public void OnPointerClick(PointerEventData pointerEventData)

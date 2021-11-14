@@ -142,6 +142,7 @@ public class CaseMenu : UIMenu
             break;
             case "suspect":
                 OpenSuspectsScreen();
+                _suspectsManager.UpdateSuspectView(_caseRecord.GetPrimarySuspect());
             break;
             case "profiles":
                 OpenProfilesScreen();

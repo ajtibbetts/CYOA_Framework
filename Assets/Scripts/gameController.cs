@@ -10,12 +10,17 @@ public class gameController : MonoBehaviour
     private static gameController _instance;
     public static gameController Instance { get { return _instance; } }
     
+    private GAMESTATE _GAMESTATE;
+    public event Action<GAMESTATE> OnGameStateChanged;
+
     [HideInInspector] public playerManager player;
     [HideInInspector] public UIManager UIManager;
     [HideInInspector] public DialogueParser DialogueParser;
     [HideInInspector] public CYOA_EventManager EventManager;
     [HideInInspector] public checkManager CheckManager;
     [HideInInspector] public WorldNavigator worldNavigator;
+
+
 
     
     void Awake()
@@ -107,10 +112,12 @@ public class gameController : MonoBehaviour
         var dialogue = worldNavigator.GetActiveDialogue();
         if(dialogue != null)
         {
+            SetGAMESTATE(GAMESTATE.DIALOGUE);
             DialogueParser.SetupNewDialogue(dialogue);
             DialogueParser.InitDialogue();
         }
         else {
+            SetGAMESTATE(GAMESTATE.WORLDNAVIGATION);
             DialogueParser.DisableDialogueParser();
             worldNavigator.DisplayActiveNavObject();
         }
@@ -122,11 +129,13 @@ public class gameController : MonoBehaviour
         // check for starting dialogue, otherwise display nav object
         if(dialogue != null)
         {
+            SetGAMESTATE(GAMESTATE.DIALOGUE);
             DialogueParser.SetupNewDialogue(dialogue);
             DialogueParser.InitDialogue();
         }
         else {
             Debug.Log("GAME CONTROLLER ---- NO DIALOGUE FOUND ON THIS INTERACTIVE OBJECT");
+            SetGAMESTATE(GAMESTATE.WORLDNAVIGATION);
         }
     }
 
@@ -170,8 +179,20 @@ public class gameController : MonoBehaviour
     public void BeginWorldNavigation()
     {
         Debug.Log("GAME CONTROLLER ---- End of dialogue graph reached. Moving to active World Nav Object.");
+        SetGAMESTATE(GAMESTATE.WORLDNAVIGATION);
         DialogueParser.DisableDialogueParser();
         worldNavigator.DisplayActiveNavObject();
     }
 
+
+    public GAMESTATE GetGAMESTATE()
+    {
+        return _GAMESTATE;
+    }
+
+    private void SetGAMESTATE(GAMESTATE newState)
+    {
+        _GAMESTATE = newState;
+        OnGameStateChanged?.Invoke(_GAMESTATE);
+    }
 }

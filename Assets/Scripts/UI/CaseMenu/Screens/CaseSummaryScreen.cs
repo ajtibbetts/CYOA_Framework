@@ -92,4 +92,5 @@ public class CaseSummaryScreen : CaseScreen
         OnButtonPressed?.Invoke(screenNameToJumpTo);
         Debug.Log("Jumping to screen: " + screenNameToJumpTo);
     }
+
 }

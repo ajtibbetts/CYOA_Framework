@@ -27,6 +27,7 @@ public class UIManager : MonoBehaviour
     public Scrollbar vertScrollBar;
     public GameObject paragraphPrefab;
     public GameObject imagePrefab;
+    [SerializeField] GameObject _bottonMenuBar;
     [Header("Player Stats")]
     public GameObject playerNameText;
     public GameObject playerHealthText;
@@ -59,6 +60,7 @@ public class UIManager : MonoBehaviour
     void Awake() {
         // add event listener
         SwipeDetector.OnSwipe += onSwipe;
+        gameController.Instance.OnGameStateChanged += UpdateUIGameState;
 
         // set parent controller and child components
         controller = GetComponent<gameController>();
@@ -73,10 +75,12 @@ public class UIManager : MonoBehaviour
     void Start(){
         
         // register event listeners
+        
         controller.CheckManager.onRollCheckStart += initRollUI;
         controller.CheckManager.onRollCheckPass += initRollPassUI;
         controller.CheckManager.onRollCheckFail += initRollFailUI;
         DialogueParser.onDialogueReachedDeadEnd += CreateEndDialogueButton;
+        UIScreen.onCloseMenu += CloseUIMenu;
 
         _UISTATE = UISTATE.NORMALGAMEPLAY;
         
@@ -86,6 +90,23 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void UpdateUIGameState(GAMESTATE GAMESTATE)
+    {
+        var gameStateText = _bottonMenuBar.transform.Find("gameStateText").GetComponent<TextMeshProUGUI>();
+        switch(GAMESTATE)
+        {
+            case GAMESTATE.WORLDNAVIGATION:
+                gameStateText.text = "Navigating\n(Fast Travel Available)";
+            break;
+            case GAMESTATE.DIALOGUE:
+                gameStateText.text = "Dialogue\n(Fast Travel Unavailable)";
+            break;
+            case GAMESTATE.INVESTIGATING:
+                gameStateText.text = "Investigating\n(Fast Travel Unavailable)";
+            break;
+        }
     }
 
 
@@ -192,6 +213,19 @@ public class UIManager : MonoBehaviour
         Debug.Log("Case menu close button touched. Closing main menu.");
         _UISTATE = UISTATE.NORMALGAMEPLAY;
         SlideOutCaseMenu();
+    }
+
+    public void CloseUIMenu(MENUTYPE menuType)
+    {
+        switch(menuType)
+        {
+            case MENUTYPE.MAINMENU:
+                CloseMainMenu();
+            break;
+            case MENUTYPE.CASEMENU:
+                CloseCaseMenu();
+            break;
+        }
     }
 
     /* GAME START BUTTONS / METHODS */

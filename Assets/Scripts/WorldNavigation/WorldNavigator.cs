@@ -72,6 +72,7 @@ public class WorldNavigator : MonoBehaviour
             Debug.Log("WORLD NAVIGATOR ---- Root object in this scene (top of hierarchy): " + rootObject.name);
             ActiveNavObject = rootObject.GetComponent<WorldNavObject>();
             ActiveNavObject.ActivateNavObject();
+
             OnActiveNavObjectLoaded?.Invoke(sceneName);
         }
 
@@ -109,6 +110,9 @@ public class WorldNavigator : MonoBehaviour
 
         // display all toggle buttons for this active nav object (new/returned/parent)
         DisplayActiveNavObjectOptions();
+
+        // add object to player data
+        AddActiveNavObjectToPlayer();
     }
 
     public void DisplayActiveNavObjectText()
@@ -152,6 +156,8 @@ public class WorldNavigator : MonoBehaviour
         }
         
         controller.UIManager.initConfirmActionButton();
+
+        
     }
 
     public string GetNewOrReturnedText(WorldNavObject navObject, conditionalText[] newConditions, conditionalText[] returningConditions)
@@ -214,8 +220,8 @@ public class WorldNavigator : MonoBehaviour
         Debug.Log("WORLD NAVIGATOR ---- Navigating to next nav object.");
         // remove listener
         UIManager.onOptionSelected -= NavigateToNavObject;
-        // add object to player data
-        AddActiveNavObjectToPlayer();
+        // // add object to player data
+        // AddActiveNavObjectToPlayer();
         switch(GUID)
         {
             case "MAP":

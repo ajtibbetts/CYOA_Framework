@@ -44,12 +44,27 @@ public static class dataFormatter
 
 // ENUMS
 [Serializable]
+public enum GAMESTATE 
+{
+    WORLDNAVIGATION,
+    DIALOGUE,
+    INVESTIGATING
+}
+
+[Serializable]
 public enum UISTATE
 {
     MAINMENU,
     CASEMENU,
     DRAGGING,
     NORMALGAMEPLAY
+}
+
+[Serializable]
+public enum MENUTYPE
+{
+    MAINMENU,
+    CASEMENU
 }
 
 [Serializable]

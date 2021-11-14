@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,9 @@ public class MapScreen : MenuScreen
     [SerializeField] private TextMeshProUGUI _confirmLocationDescription;
     [SerializeField] private GameObject _confirmButton;
     [SerializeField] private GameObject _isCurrentLocationText;
+    [SerializeField] private GameObject _fastTravelDisabledText;
+
+    private List<GameObject> _locationUIObjects = new List<GameObject>();
 
 
     private MapLocationObject _confirmLocationData;
@@ -33,6 +37,7 @@ public class MapScreen : MenuScreen
 
     public override void UpdateData()
     {
+        ResetScreen();
         if(_activeMap != null)
         {
             SetMapImage();
@@ -40,6 +45,15 @@ public class MapScreen : MenuScreen
             SetupMapLocations();
             GoBacktoMainMapScreen();
         }
+    }
+
+    public void ResetScreen()
+    {
+        foreach(GameObject UIObject in _locationUIObjects)
+        {
+            Destroy(UIObject.gameObject);
+        }
+        _locationUIObjects.Clear();
     }
 
     public void LoadMap(MapObject newMap)
@@ -73,6 +87,7 @@ public class MapScreen : MenuScreen
         {
             GameObject newLocation = GameObject.Instantiate(_mapLocationPrefab, Vector3.zero, Quaternion.identity, _mapLocationsContainer.transform);
             newLocation.GetComponent<MapLocationElement>().UpdateData(locationData);
+            _locationUIObjects.Add(newLocation);
         }
     }
 
@@ -83,16 +98,24 @@ public class MapScreen : MenuScreen
         _confirmLocationPortrait.sprite = locationData.GetPortrait();
         _confirmLocationDescription.text = locationData.GetDescription();
 
-        // check if this location is current location
+        // check if this location is current location or not world nav gamestate
         if(_confirmLocationData.GetAreaName() == Player.Instance.CurrentAreaName)
         {
             _confirmButton.SetActive(false);
+            _fastTravelDisabledText.SetActive(false);
             _isCurrentLocationText.SetActive(true);
+        }
+        else if(gameController.Instance.GetGAMESTATE() != GAMESTATE.WORLDNAVIGATION)
+        {
+            _confirmButton.SetActive(false);
+            _fastTravelDisabledText.SetActive(true);
+            _isCurrentLocationText.SetActive(false);
         }
         else
         {
             _confirmButton.SetActive(true);
             _isCurrentLocationText.SetActive(false);
+            _fastTravelDisabledText.SetActive(false);
         }
         
         _confirmLocationContainer.SetActive(true);
@@ -104,9 +127,10 @@ public class MapScreen : MenuScreen
 
         // add code here to load level on event call
         gameController.Instance.SwitchToLevel(_confirmLocationData.GetLevelName());
-        // set area and close map screen
+        // set area and close map screen & main menu
         Player.Instance.CurrentAreaName = _confirmLocationData.GetAreaName();
-        GoBacktoMainMapScreen();
+        UpdateData();
+        CloseMenu(MENUTYPE.MAINMENU);
     }
 
     public void GoBacktoMainMapScreen()
