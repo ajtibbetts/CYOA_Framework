@@ -33,6 +33,8 @@ public class PlayerCaseRecord : MonoBehaviour
         } else {
             _instance = this;
         }
+
+        AddListeners();
     }
     
     
@@ -48,12 +50,18 @@ public class PlayerCaseRecord : MonoBehaviour
         SetTestData();
     }
 
+    private void AddListeners()
+    {
+        caseEvents.onProfileAdded += AddProfile;
+        caseEvents.onEvidenceAdded += AddEvidenceByID;
+    }
+
     void SetTestData()
     {
         List<string> testCharacterProfiles = new List<String>();
-        testCharacterProfiles.Add("Chad Billingsworth");
+        // testCharacterProfiles.Add("Chad Billingsworth");
         testCharacterProfiles.Add("Pierre LeFou");
-        testCharacterProfiles.Add("Johnny Cyber");
+        // testCharacterProfiles.Add("Johnny Cyber");
         foreach(string name in testCharacterProfiles)
         {
             AddProfile(name);
@@ -169,8 +177,12 @@ public class PlayerCaseRecord : MonoBehaviour
     private void AddProfile(string characterName)
     {
         CharacterProfileData _newCharacterData = CaseManager.Instance.GetStartingCharacterProfileData(characterName);
-        _profiles.Add(_newCharacterData);
-        OnCaseDataUpdated?.Invoke();
+        // only add if not already in list
+        if(!_profiles.Exists(x => x.characterName.ToLower() == characterName.ToLower()))
+        {
+            _profiles.Add(_newCharacterData);
+            OnCaseDataUpdated?.Invoke();
+        }
     }
 
     private void DiscoverProfileData(string characterName, string propertyName)
@@ -299,6 +311,17 @@ public class PlayerCaseRecord : MonoBehaviour
     private void AddEvidence(CaseEvidence evidence)
     {
         _evidence.Add(evidence);
+    }
+
+    private void AddEvidenceByID(string evidenceID)
+    {
+        var availableEvidence = CaseManager.Instance.GetAvailableEvidence();
+        var evidenceToAdd = availableEvidence.Find(x => x.GetEvidenceID().ToLower() == evidenceID.ToLower());
+        if(!_evidence.Exists(x => x.GetEvidenceID().ToLower() == evidenceID.ToLower()))
+        {
+            _evidence.Add(evidenceToAdd);
+            OnCaseDataUpdated?.Invoke();
+        }
     }
     
     private void SubmitProposedCase()

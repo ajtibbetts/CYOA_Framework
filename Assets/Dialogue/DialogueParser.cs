@@ -101,7 +101,7 @@ public class DialogueParser : MonoBehaviour
             // if there are no dialogue choices left/ flag end reached
             if(choices.Count() < 1) 
             {
-                onDialogueReachedDeadEnd.Invoke();
+                onDialogueReachedDeadEnd?.Invoke();
                 return;
             }
 
@@ -142,7 +142,7 @@ public class DialogueParser : MonoBehaviour
                     }
                 }
                 else if (!ignoreDeadEnd){
-                    onDialogueReachedDeadEnd.Invoke();
+                    onDialogueReachedDeadEnd?.Invoke();
                     return;
                 }
                 else return;
@@ -159,7 +159,7 @@ public class DialogueParser : MonoBehaviour
                     }
                 }
                 else if(!ignoreDeadEnd) {
-                    onDialogueReachedDeadEnd.Invoke();
+                    onDialogueReachedDeadEnd?.Invoke();
                     return;
                 }
                 else return;
@@ -177,7 +177,7 @@ public class DialogueParser : MonoBehaviour
                 Debug.Log("Check node found with no outputs. Please check this dialogue graph.");
                 Debug.Log("Graph: " + dialogue);
                 Debug.Log("NodeGUID: " + narrativeDataGUID);
-                onDialogueReachedDeadEnd.Invoke();
+                onDialogueReachedDeadEnd?.Invoke();
                 return;
             }
 
@@ -226,7 +226,7 @@ public class DialogueParser : MonoBehaviour
         private void ProcessEndpointNode(string narrativeDataGUID)
         {
             Debug.Log("End point reached.");
-            onDialogueReachedDeadEnd.Invoke();
+            onDialogueReachedDeadEnd?.Invoke();
             return;
         }
 

@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9837df7c010b3346bca580cac5bac11, type: 3}
+  m_Name: evidenceEventTest
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGuid: aa134aba-2efd-4dda-98c6-d0bc97660337
+    PortName: Next
+    TargetNodeGuid: d002f613-a0cd-4d46-8b6e-531f88f9142b
+  DialogueNodeData:
+  - Guid: d002f613-a0cd-4d46-8b6e-531f88f9142b
+    DialogueText: Event Node
+    Position: {x: 225, y: 215}
+    nodeType: 1
+  ExposedProperties: []
+  DialogueCheckData: []
+  EventNodeData:
+  - nodeGuid: d002f613-a0cd-4d46-8b6e-531f88f9142b
+    EventName: addEvidence
+    EventValue: tatooGun
+    isRepeatable: 0
+    hasFired: 0
+    ignoreDeadEnd: 0
+    eventType: 5
+  CheckNodeData: []
+  EndpointNodeData: []

@@ -61,6 +61,8 @@ public class CaseMenu : UIMenu
         suspectsScreen.SetActive(false);
         notesScreen.SetActive(false);
         helpScreen.SetActive(false);
+
+        PlayerCaseRecord.OnCaseDataUpdated += UpdateActiveData;
     }
     void Start()
     {

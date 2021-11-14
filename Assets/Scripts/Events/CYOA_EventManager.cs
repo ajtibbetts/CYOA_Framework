@@ -60,6 +60,7 @@ public class CYOA_EventManager : MonoBehaviour
             break;
             case eventType.quest:
                 onQuestEvent?.Invoke(eventName, eventValue);
+                caseEvents.ProcessEvent(eventName, eventValue);
             break;
             case eventType.story:
                 onStoryEvent?.Invoke(eventName, eventValue);

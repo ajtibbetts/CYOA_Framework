@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9837df7c010b3346bca580cac5bac11, type: 3}
+  m_Name: profileEventTest
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGuid: ea102dfb-1949-4e20-9552-1b8f5ff76f3b
+    PortName: Next
+    TargetNodeGuid: 46a9c936-8589-4a99-a4ff-376aa4bd1061
+  - BaseNodeGuid: 46a9c936-8589-4a99-a4ff-376aa4bd1061
+    PortName: unlock johnny cyber
+    TargetNodeGuid: 9640a791-38b0-4867-8175-36773f863dd9
+  - BaseNodeGuid: 9640a791-38b0-4867-8175-36773f863dd9
+    PortName: Event Fired
+    TargetNodeGuid: dfcf8ce2-1cd8-4a33-ac0d-2f3c577f0ccc
+  - BaseNodeGuid: 9640a791-38b0-4867-8175-36773f863dd9
+    PortName: Already Triggered
+    TargetNodeGuid: dfcf8ce2-1cd8-4a33-ac0d-2f3c577f0ccc
+  - BaseNodeGuid: dfcf8ce2-1cd8-4a33-ac0d-2f3c577f0ccc
+    PortName: Event Fired
+    TargetNodeGuid: ae00b103-51d1-45cd-86d6-7f034bcba01d
+  - BaseNodeGuid: dfcf8ce2-1cd8-4a33-ac0d-2f3c577f0ccc
+    PortName: Already Triggered
+    TargetNodeGuid: ae00b103-51d1-45cd-86d6-7f034bcba01d
+  DialogueNodeData:
+  - Guid: 46a9c936-8589-4a99-a4ff-376aa4bd1061
+    DialogueText: This dialogue will unlock character profile for johnny cyber and
+      chad
+    Position: {x: 218, y: 179}
+    nodeType: 0
+  - Guid: 9640a791-38b0-4867-8175-36773f863dd9
+    DialogueText: Event Node
+    Position: {x: 615, y: 168}
+    nodeType: 1
+  - Guid: dfcf8ce2-1cd8-4a33-ac0d-2f3c577f0ccc
+    DialogueText: Event Node
+    Position: {x: 854, y: 158}
+    nodeType: 1
+  - Guid: ae00b103-51d1-45cd-86d6-7f034bcba01d
+    DialogueText: profile event test complete
+    Position: {x: 1084, y: 168}
+    nodeType: 0
+  ExposedProperties: []
+  DialogueCheckData: []
+  EventNodeData:
+  - nodeGuid: 9640a791-38b0-4867-8175-36773f863dd9
+    EventName: addProfile
+    EventValue: johnny cyber
+    isRepeatable: 0
+    hasFired: 0
+    ignoreDeadEnd: 0
+    eventType: 5
+  - nodeGuid: dfcf8ce2-1cd8-4a33-ac0d-2f3c577f0ccc
+    EventName: addProfile
+    EventValue: chad billingsworth
+    isRepeatable: 0
+    hasFired: 0
+    ignoreDeadEnd: 1
+    eventType: 5
+  CheckNodeData: []
+  EndpointNodeData: []

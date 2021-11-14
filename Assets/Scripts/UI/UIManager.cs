@@ -61,6 +61,7 @@ public class UIManager : MonoBehaviour
         // add event listener
         SwipeDetector.OnSwipe += onSwipe;
         gameController.Instance.OnGameStateChanged += UpdateUIGameState;
+        DialogueParser.onDialogueReachedDeadEnd += CreateEndDialogueButton;
 
         // set parent controller and child components
         controller = GetComponent<gameController>();
@@ -79,7 +80,7 @@ public class UIManager : MonoBehaviour
         controller.CheckManager.onRollCheckStart += initRollUI;
         controller.CheckManager.onRollCheckPass += initRollPassUI;
         controller.CheckManager.onRollCheckFail += initRollFailUI;
-        DialogueParser.onDialogueReachedDeadEnd += CreateEndDialogueButton;
+        
         UIScreen.onCloseMenu += CloseUIMenu;
 
         _UISTATE = UISTATE.NORMALGAMEPLAY;

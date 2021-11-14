@@ -10,6 +10,11 @@ public abstract class UIMenu : MonoBehaviour
 
     protected abstract void SetupManagers();
 
+    protected void UpdateActiveData()
+    {
+        if(_activeContent != null) _activeContent.GetComponent<UIScreen>().UpdateData();
+    }
+
     protected void SetInactiveColor(GameObject button)
     {
         var buttonImage = button.GetComponent<Image>();

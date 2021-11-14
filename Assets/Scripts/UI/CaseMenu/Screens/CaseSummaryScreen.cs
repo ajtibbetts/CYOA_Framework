@@ -44,6 +44,8 @@ public class CaseSummaryScreen : CaseScreen
 
     public void UpdateVictimSummaryData()
     {
+        if(_caseRecord.GetVictim() == null) return;
+        
         Sprite victimSprite = _caseRecord.GetVictim().VictimPortrait.portraitSprite;
         float offsetX = _caseRecord.GetVictim().VictimPortrait.thumbNailOffsetX;
         float offsetY = _caseRecord.GetVictim().VictimPortrait.thumbNailOffsetY;
@@ -58,7 +60,7 @@ public class CaseSummaryScreen : CaseScreen
 
     public void UpdateSuspectSummaryData()
     {
-        if(_caseRecord.GetPrimarySuspect() == null)
+        if(_caseRecord.GetPrimarySuspect() == null || _caseRecord.GetSuspects().Count < 1)
         {
             _activeSuspectContainer.SetActive(false);
             _noActiveSuspectContainer.SetActive(true);

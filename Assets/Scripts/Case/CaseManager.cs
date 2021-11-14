@@ -86,7 +86,7 @@ public class CaseManager : MonoBehaviour
         CharacterProfileData _characterData = new CharacterProfileData();
         List<CaseCharacterProfile> _caseCharacters = _activeCase.GetCharacterProfiles();
         // match to (hidden) character name and popualte starting values;
-        var matchedCharacter = _caseCharacters.Find(x => x.GetCharacterName(true) == characterName);
+        var matchedCharacter = _caseCharacters.Find(x => x.GetCharacterName(true).ToLower() == characterName.ToLower());
         _characterData.characterName = matchedCharacter.GetCharacterName();
         _characterData.portrait = matchedCharacter.GetPortrait();
         _characterData.summary = matchedCharacter.GetSummary();
@@ -113,6 +113,10 @@ public class CaseManager : MonoBehaviour
         return matchedCharacter.RevealCharacterProperty(propertyName);
     }
 
+    public List<CaseEvidence> GetAvailableEvidence()
+    {
+        return _activeCase.GetAvailableEvidence();
+    }
 
     public bool ValidateArrestWarrant(CaseSuspect suspect)
     {
