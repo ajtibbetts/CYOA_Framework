@@ -61,9 +61,13 @@ public class ProfilesScreen : CaseScreen
         var nameTextObject = profileToAdd.transform.Find("profileNameText").GetComponent<TextMeshProUGUI>();
         var relationshipTextObject = profileToAdd.transform.Find("relationshipText").GetComponent<TextMeshProUGUI>();
 
+        // Sprite portraitSprite;
+        // if(profileData.portrait == null) portraitSprite = _unknownPortraitSprite;
+        // else portraitSprite = profileData.portrait.portraitSprite;
+
         var portraitSprite = profileData.portrait.portraitSprite;
-        var offsetX = profileData.portrait.thumbNailOffsetX + 150; // add 150 / 75 for anchor positioning offset
-        var offsetY = profileData.portrait.thumbNailOffsetY + 75;
+        var offsetX =profileData.portrait.thumbNailOffsetX + 150; // add 150 / 75 for anchor positioning offset
+        var offsetY =profileData.portrait.thumbNailOffsetY + 75;
         portraitImageObject.sprite = portraitSprite;
         SetPortraitThumbnail(portraitImageObject, portraitSprite,offsetX,offsetY);
 
@@ -94,7 +98,7 @@ public class ProfilesScreen : CaseScreen
     {
         if(!_isActiveScreen) return;
         
-        _characterPortrait.sprite = profileData.portrait.portraitSprite;
+        _characterPortrait.sprite =profileData.portrait.portraitSprite;
         _characterNameText.text = profileData.characterName;
         _characterAgeText.text = "<b>Age:</b> " + profileData.age;
         _characterResidenceText.text = "<b>Residence:</b> " + profileData.residence;

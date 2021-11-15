@@ -8,7 +8,7 @@ using CaseDataObjects;
 [CreateAssetMenu(fileName = "CaseCharacterProfile", menuName = "CYOA/Case/CharacterProfile", order = 0)]
 public class CaseCharacterProfile : ScriptableObject {
     [Header("Character Info")]
-
+    [SerializeField] private string _characterID;
     [SerializeField] private CharacterType _characterType;
     [SerializeField] private CaseProperty _characterName;
     [SerializeField] private CaseImage _portrait;
@@ -35,6 +35,11 @@ public class CaseCharacterProfile : ScriptableObject {
         return _characterType;
     }
 
+    public string GetCharacterID()
+    {
+        return _characterID;
+    }
+
     public string GetCharacterName(bool overrideFlag = false)
     {
         if(overrideFlag) return _characterName.propertyValue;
@@ -46,7 +51,7 @@ public class CaseCharacterProfile : ScriptableObject {
 
     public CharacterPortrait GetPortrait()
     {
-        return _portrait.startAsDiscovered ? _portrait.portrait : new CharacterPortrait();
+        return _portrait.startAsDiscovered ? _portrait.portrait : null;
     }
 
     public string GetAge()
@@ -86,6 +91,14 @@ public class CaseCharacterProfile : ScriptableObject {
     
     public string RevealCharacterProperty(string propertyName)
     {
-        return this.GetType().GetProperty(propertyName).GetValue(this,null).ToString();
+        string fieldToFetch = "_"+propertyName;
+        // Debug.Log("CASE PROFILE ---- ATTEMPTING TO RETURN PROPERTY: " + fieldToFetch);
+        var propType = this.GetType();
+        // Debug.Log("CASE PROFILE ---- PROP TYPE: " + propType.ToString());
+        var propField = propType.GetField(fieldToFetch, BindingFlags.Instance | BindingFlags.NonPublic);
+        // Debug.Log("PROP FIELD: " + propField.ToString());
+        CaseProperty propValue = (CaseProperty)propField.GetValue(this);
+        Debug.Log("CASE CHARACTER PROFILE ---- VALUE: " + propValue.propertyValue);
+        return propValue.propertyValue;
     }
 }

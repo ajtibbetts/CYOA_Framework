@@ -10,6 +10,7 @@ public class CaseScenario : ScriptableObject {
     [SerializeField] private CaseVictim _caseVictim;
     [SerializeField] private CaseCulprit _caseCulprit;
     [SerializeField] private List<CaseLead> _startingLeads;
+    [SerializeField] private List<CaseLead> _availableLeads;
 
     [SerializeField] private List<CaseCharacterProfile> _characterProfiles;
     [SerializeField] private List<CaseEvidence> _availableCaseEvidence;
@@ -39,6 +40,11 @@ public class CaseScenario : ScriptableObject {
     public List<CaseLead> GetStartingLeads()
     {
         return _startingLeads;
+    }
+
+    public List<CaseLead> GetAvailableLeads()
+    {
+        return _availableLeads;
     }
 
     public List<CaseCharacterProfile> GetCharacterProfiles()

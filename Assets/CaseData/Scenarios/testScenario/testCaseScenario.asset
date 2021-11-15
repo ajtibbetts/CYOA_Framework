@@ -19,6 +19,9 @@ MonoBehaviour:
   _startingLeads:
   - {fileID: 11400000, guid: 3dba73b9964fa524da6db0ee180c965f, type: 2}
   - {fileID: 11400000, guid: abe9ac7a72c6c4b4e888c9167ff9d09f, type: 2}
+  _availableLeads:
+  - {fileID: 11400000, guid: 3dba73b9964fa524da6db0ee180c965f, type: 2}
+  - {fileID: 11400000, guid: abe9ac7a72c6c4b4e888c9167ff9d09f, type: 2}
   _characterProfiles:
   - {fileID: 11400000, guid: e85ebb3080915e8489fa48fdb9c62325, type: 2}
   - {fileID: 11400000, guid: 96bea0cf881d37549a78131f09af38e5, type: 2}

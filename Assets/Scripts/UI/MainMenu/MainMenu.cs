@@ -80,10 +80,19 @@ public class MainMenu : UIMenu
         SetActiveScreen(gearScreen, gearButton);
     }
 
-    public void OpenMapScreen()
+    public void OpenMapScreen(string areaName = null)
     {   
         _mapManager.UpdateData();
         SetActiveScreen(mapScreen, mapButton);
+        if(areaName != null && areaName.Length > 0)
+        {
+            var locationToOpen = CaseManager.Instance.GetMapLocations().Find(x => x.GetAreaName() == areaName);
+            if(locationToOpen != null)
+            {
+                _mapManager.OpenConfirmLocationScreen(locationToOpen);
+            }
+            else Debug.LogError("MAIN MENU ---- FAILED TO OPEN MAP LOCATION CONFIRM SCREEN FOR AREA: " + areaName);
+        }
     }
 
     public void SetActiveMap(MapObject newMap)

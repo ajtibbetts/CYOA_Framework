@@ -14,6 +14,7 @@ public class CaseManager : MonoBehaviour
     public static event Action<MapObject> OnNewCaseMap;
 
     [SerializeField] private CaseScenario _activeCase;
+    [SerializeField] private CharacterPortrait _unknownPortrait;
 
     private void Awake() {
         if (_instance != null && _instance != this)
@@ -42,6 +43,11 @@ public class CaseManager : MonoBehaviour
     public void SetupCaseMap()
     {
         OnNewCaseMap?.Invoke(_activeCase.GetCaseMap());
+    }
+
+    public List<MapLocationObject> GetMapLocations()
+    {
+        return _activeCase.GetCaseMap().GetLocations();
     }
 
     public string GetActiveCaseTitle()
@@ -81,41 +87,57 @@ public class CaseManager : MonoBehaviour
         return _activeCase.GetVictim().RevealVictimProperty(propertyName);
     }
 
-    public CharacterProfileData GetStartingCharacterProfileData(string characterName)
+    public CharacterProfileData GetStartingCharacterProfileData(string characterID)
     {
         CharacterProfileData _characterData = new CharacterProfileData();
         List<CaseCharacterProfile> _caseCharacters = _activeCase.GetCharacterProfiles();
         // match to (hidden) character name and popualte starting values;
-        var matchedCharacter = _caseCharacters.Find(x => x.GetCharacterName(true).ToLower() == characterName.ToLower());
-        _characterData.characterName = matchedCharacter.GetCharacterName();
-        _characterData.portrait = matchedCharacter.GetPortrait();
-        _characterData.summary = matchedCharacter.GetSummary();
-        _characterData.age = matchedCharacter.GetAge();
-        _characterData.residence = matchedCharacter.GetResidence();
-        _characterData.occupation = matchedCharacter.GetOccupation();
-        _characterData.relationshipToVictim = matchedCharacter.GetRelationShipToVictim();
-        _characterData.characterType = matchedCharacter.GetCharacterType();
+        var matchedCharacter = _caseCharacters.Find(x => x.GetCharacterID().ToLower() == characterID.ToLower());
+        if(matchedCharacter != null)
+        {
+            _characterData.characterID = matchedCharacter.GetCharacterID();
+            _characterData.characterName = matchedCharacter.GetCharacterName();
+            if(matchedCharacter.GetPortrait() == null) _characterData.portrait = _unknownPortrait;
+            else _characterData.portrait = matchedCharacter.GetPortrait();
+            _characterData.summary = matchedCharacter.GetSummary();
+            _characterData.age = matchedCharacter.GetAge();
+            _characterData.residence = matchedCharacter.GetResidence();
+            _characterData.occupation = matchedCharacter.GetOccupation();
+            _characterData.relationshipToVictim = matchedCharacter.GetRelationShipToVictim();
+            _characterData.characterType = matchedCharacter.GetCharacterType();
     
-        return _characterData;
+            return _characterData;
+        }
+        else 
+        {
+            Debug.LogError("CASE MANAGER ---- FAILED TO GET STARTING PROFILE BY ID: " +characterID);
+            return null;
+        }
+        
     }
 
-    public CharacterPortrait UncoverCharacterPortrait(string characterName)
+    public CharacterPortrait UncoverCharacterPortrait(string characterID)
     {
         List<CaseCharacterProfile> _caseCharacters = _activeCase.GetCharacterProfiles();
-        var matchedCharacter = _caseCharacters.Find(x => x.GetCharacterName(true) == characterName);
+        var matchedCharacter = _caseCharacters.Find(x => x.GetCharacterID().ToLower() == characterID.ToLower());
         return matchedCharacter.RevealCharacterPortrait();
     }
 
-    public string UncoverCharacterProperty(string characterName, string propertyName)
+    public string UncoverCharacterProperty(string characterID, string propertyName)
     {
         List<CaseCharacterProfile> _caseCharacters = _activeCase.GetCharacterProfiles();
-        var matchedCharacter = _caseCharacters.Find(x => x.GetCharacterName(true) == characterName);
+        var matchedCharacter = _caseCharacters.Find(x => x.GetCharacterID().ToLower() == characterID.ToLower());
         return matchedCharacter.RevealCharacterProperty(propertyName);
     }
 
     public List<CaseEvidence> GetAvailableEvidence()
     {
         return _activeCase.GetAvailableEvidence();
+    }
+
+    public List<CaseLead> GetAvailableLeads()
+    {
+        return _activeCase.GetAvailableLeads();
     }
 
     public bool ValidateArrestWarrant(CaseSuspect suspect)

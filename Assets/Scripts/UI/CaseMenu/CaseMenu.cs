@@ -159,4 +159,19 @@ public class CaseMenu : UIMenu
         OpenProfilesScreen();
         _profilesManager.OpenProfileDetailsScreen(characterProfile);
     }
+
+    public void GoToCharacterProfileByID(string characterID)
+    {
+        var characterProfile = _caseRecord.GetProfiles().Find(x => x.characterID == characterID);
+        if(characterProfile !=null)
+        {
+            OpenProfilesScreen();
+            _profilesManager.OpenProfileDetailsScreen(characterProfile);
+        }
+        else
+        {
+            Debug.LogError("CASE MENU - failed to open profile for name: " + characterID);
+        }
+        
+    }
 }

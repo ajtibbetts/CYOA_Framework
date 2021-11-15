@@ -12,33 +12,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a810518b47780074db1dc1d8603dbf16, type: 3}
   m_Name: testProfile2
   m_EditorClassIdentifier: 
+  _characterID: pierreL
   _characterType: 1
   _characterName:
     propertyValue: Pierre LeFou
-    startAsDiscovered: 1
+    startAsDiscovered: 0
   _portrait:
     portrait:
       portraitSprite: {fileID: 21300000, guid: dea0b61e9da7e264fb8156bf357c8882, type: 3}
       thumbNailOffsetX: 0
       thumbNailOffsetY: 28.06
-    startAsDiscovered: 1
+    startAsDiscovered: 0
   thumbNailOffsetX: 0
   thumbNailOffsetY: 0
   _age:
     propertyValue: 23
-    startAsDiscovered: 1
+    startAsDiscovered: 0
   _occupation:
     propertyValue: Smoker at Cancerous
-    startAsDiscovered: 1
+    startAsDiscovered: 0
   _residence:
     propertyValue: 356 Anyville St.
-    startAsDiscovered: 1
+    startAsDiscovered: 0
   _summary:
     propertyValue: A scooter man.
-    startAsDiscovered: 1
+    startAsDiscovered: 0
   _relationshipToVictim:
     propertyValue: Friend of the deceased.
-    startAsDiscovered: 1
+    startAsDiscovered: 0
   _additionalNotes:
   - Loves his scooter.
   - Last seen with deceased 3 days ago.

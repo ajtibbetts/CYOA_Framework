@@ -31,6 +31,51 @@ MonoBehaviour:
   - BaseNodeGuid: dfcf8ce2-1cd8-4a33-ac0d-2f3c577f0ccc
     PortName: Already Triggered
     TargetNodeGuid: ae00b103-51d1-45cd-86d6-7f034bcba01d
+  - BaseNodeGuid: ae00b103-51d1-45cd-86d6-7f034bcba01d
+    PortName: unlock!
+    TargetNodeGuid: 4f4ccaaa-afdf-4bf8-9518-14d1641042b0
+  - BaseNodeGuid: 4f4ccaaa-afdf-4bf8-9518-14d1641042b0
+    PortName: Event Fired
+    TargetNodeGuid: cee720f8-4084-4d0f-9eb5-9b472a54efce
+  - BaseNodeGuid: 4f4ccaaa-afdf-4bf8-9518-14d1641042b0
+    PortName: Already Triggered
+    TargetNodeGuid: cee720f8-4084-4d0f-9eb5-9b472a54efce
+  - BaseNodeGuid: cee720f8-4084-4d0f-9eb5-9b472a54efce
+    PortName: Event Fired
+    TargetNodeGuid: d73a953a-2c8c-48e6-8509-19554b0b785c
+  - BaseNodeGuid: cee720f8-4084-4d0f-9eb5-9b472a54efce
+    PortName: Already Triggered
+    TargetNodeGuid: d73a953a-2c8c-48e6-8509-19554b0b785c
+  - BaseNodeGuid: d73a953a-2c8c-48e6-8509-19554b0b785c
+    PortName: Event Fired
+    TargetNodeGuid: 822d6e9c-90d6-4705-9691-fb0731a1967c
+  - BaseNodeGuid: d73a953a-2c8c-48e6-8509-19554b0b785c
+    PortName: Already Triggered
+    TargetNodeGuid: 822d6e9c-90d6-4705-9691-fb0731a1967c
+  - BaseNodeGuid: 822d6e9c-90d6-4705-9691-fb0731a1967c
+    PortName: Event Fired
+    TargetNodeGuid: 86e619fd-cb3a-4261-a926-646e6f2e2904
+  - BaseNodeGuid: 822d6e9c-90d6-4705-9691-fb0731a1967c
+    PortName: Already Triggered
+    TargetNodeGuid: 86e619fd-cb3a-4261-a926-646e6f2e2904
+  - BaseNodeGuid: 86e619fd-cb3a-4261-a926-646e6f2e2904
+    PortName: Event Fired
+    TargetNodeGuid: bc4b1728-a2b1-4574-9669-906f745df3e8
+  - BaseNodeGuid: 86e619fd-cb3a-4261-a926-646e6f2e2904
+    PortName: Already Triggered
+    TargetNodeGuid: bc4b1728-a2b1-4574-9669-906f745df3e8
+  - BaseNodeGuid: bc4b1728-a2b1-4574-9669-906f745df3e8
+    PortName: Event Fired
+    TargetNodeGuid: 6bec7f62-eb84-403d-aa46-a4da2eebbaf8
+  - BaseNodeGuid: bc4b1728-a2b1-4574-9669-906f745df3e8
+    PortName: Already Triggered
+    TargetNodeGuid: 6bec7f62-eb84-403d-aa46-a4da2eebbaf8
+  - BaseNodeGuid: 6bec7f62-eb84-403d-aa46-a4da2eebbaf8
+    PortName: Event Fired
+    TargetNodeGuid: 8f59c2c0-4c8b-4729-b779-38ce0ce0e11c
+  - BaseNodeGuid: 6bec7f62-eb84-403d-aa46-a4da2eebbaf8
+    PortName: Already Triggered
+    TargetNodeGuid: 8f59c2c0-4c8b-4729-b779-38ce0ce0e11c
   DialogueNodeData:
   - Guid: 46a9c936-8589-4a99-a4ff-376aa4bd1061
     DialogueText: This dialogue will unlock character profile for johnny cyber and
@@ -46,22 +91,106 @@ MonoBehaviour:
     Position: {x: 854, y: 158}
     nodeType: 1
   - Guid: ae00b103-51d1-45cd-86d6-7f034bcba01d
-    DialogueText: profile event test complete
-    Position: {x: 1084, y: 168}
+    DialogueText: 'both profiles unlocked. the next events
+
+      will unlock hidden
+      data on "pierre le fou"'
+    Position: {x: 1092, y: 169}
+    nodeType: 0
+  - Guid: 4f4ccaaa-afdf-4bf8-9518-14d1641042b0
+    DialogueText: Event Node
+    Position: {x: 1396, y: 142}
+    nodeType: 1
+  - Guid: cee720f8-4084-4d0f-9eb5-9b472a54efce
+    DialogueText: Event Node
+    Position: {x: 1616, y: 142}
+    nodeType: 1
+  - Guid: d73a953a-2c8c-48e6-8509-19554b0b785c
+    DialogueText: Event Node
+    Position: {x: 1844, y: 142}
+    nodeType: 1
+  - Guid: 86e619fd-cb3a-4261-a926-646e6f2e2904
+    DialogueText: Event Node
+    Position: {x: 2311, y: 142}
+    nodeType: 1
+  - Guid: 822d6e9c-90d6-4705-9691-fb0731a1967c
+    DialogueText: Event Node
+    Position: {x: 2079, y: 142}
+    nodeType: 1
+  - Guid: bc4b1728-a2b1-4574-9669-906f745df3e8
+    DialogueText: Event Node
+    Position: {x: 2534, y: 142}
+    nodeType: 1
+  - Guid: 6bec7f62-eb84-403d-aa46-a4da2eebbaf8
+    DialogueText: Event Node
+    Position: {x: 2768, y: 142}
+    nodeType: 1
+  - Guid: 8f59c2c0-4c8b-4729-b779-38ce0ce0e11c
+    DialogueText: profile unlock event test complete!
+    Position: {x: 3048, y: 189}
     nodeType: 0
   ExposedProperties: []
   DialogueCheckData: []
   EventNodeData:
   - nodeGuid: 9640a791-38b0-4867-8175-36773f863dd9
     EventName: addProfile
-    EventValue: johnny cyber
+    EventValue: johnnyC
     isRepeatable: 0
     hasFired: 0
     ignoreDeadEnd: 0
     eventType: 5
   - nodeGuid: dfcf8ce2-1cd8-4a33-ac0d-2f3c577f0ccc
     EventName: addProfile
-    EventValue: chad billingsworth
+    EventValue: chadB
+    isRepeatable: 0
+    hasFired: 0
+    ignoreDeadEnd: 1
+    eventType: 5
+  - nodeGuid: 4f4ccaaa-afdf-4bf8-9518-14d1641042b0
+    EventName: updateProfile
+    EventValue: pierreL.name
+    isRepeatable: 0
+    hasFired: 0
+    ignoreDeadEnd: 1
+    eventType: 5
+  - nodeGuid: cee720f8-4084-4d0f-9eb5-9b472a54efce
+    EventName: updateProfile
+    EventValue: pierreL.portrait
+    isRepeatable: 0
+    hasFired: 0
+    ignoreDeadEnd: 1
+    eventType: 5
+  - nodeGuid: d73a953a-2c8c-48e6-8509-19554b0b785c
+    EventName: updateProfile
+    EventValue: pierreL.age
+    isRepeatable: 0
+    hasFired: 0
+    ignoreDeadEnd: 1
+    eventType: 5
+  - nodeGuid: 86e619fd-cb3a-4261-a926-646e6f2e2904
+    EventName: updateProfile
+    EventValue: pierreL.residence
+    isRepeatable: 0
+    hasFired: 0
+    ignoreDeadEnd: 1
+    eventType: 5
+  - nodeGuid: 822d6e9c-90d6-4705-9691-fb0731a1967c
+    EventName: updateProfile
+    EventValue: pierreL.occupation
+    isRepeatable: 0
+    hasFired: 0
+    ignoreDeadEnd: 1
+    eventType: 5
+  - nodeGuid: bc4b1728-a2b1-4574-9669-906f745df3e8
+    EventName: updateProfile
+    EventValue: pierreL.summary
+    isRepeatable: 0
+    hasFired: 0
+    ignoreDeadEnd: 1
+    eventType: 5
+  - nodeGuid: 6bec7f62-eb84-403d-aa46-a4da2eebbaf8
+    EventName: updateProfile
+    EventValue: pierreL.relationship
     isRepeatable: 0
     hasFired: 0
     ignoreDeadEnd: 1

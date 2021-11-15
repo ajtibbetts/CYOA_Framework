@@ -64,7 +64,7 @@ public class DialogueParser : MonoBehaviour
 
         private void ProceedToNarrative(string narrativeDataGUID)
         {
-            Debug.Log("DIALOGUE PARSER ---- Proceeding to next narrative node.");
+            Debug.Log("DIALOGUE PARSER ---- Proceeding to next narrative node for GUID: " + narrativeDataGUID);
             var text = dialogue.DialogueNodeData.Find(x => x.Guid == narrativeDataGUID).DialogueText;
             var nodeType = dialogue.DialogueNodeData.Find(x => x.Guid == narrativeDataGUID).nodeType;
 

@@ -23,12 +23,17 @@ public class MapScreen : MenuScreen
     [SerializeField] private GameObject _confirmButton;
     [SerializeField] private GameObject _isCurrentLocationText;
     [SerializeField] private GameObject _fastTravelDisabledText;
+    [SerializeField] private GameObject _locationLockedText;
 
     private List<GameObject> _locationUIObjects = new List<GameObject>();
 
 
     private MapLocationObject _confirmLocationData;
     
+    private void Awake() {
+        PlayerCaseRecord.OnCaseDataUpdated += UpdateData;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -85,9 +90,12 @@ public class MapScreen : MenuScreen
         var _locations = _activeMap.GetLocations();
         foreach(MapLocationObject locationData in _locations)
         {
-            GameObject newLocation = GameObject.Instantiate(_mapLocationPrefab, Vector3.zero, Quaternion.identity, _mapLocationsContainer.transform);
-            newLocation.GetComponent<MapLocationElement>().UpdateData(locationData);
-            _locationUIObjects.Add(newLocation);
+            if(PlayerCaseRecord.Instance.isLocationActive(locationData.GetAreaName()))
+            {
+                GameObject newLocation = GameObject.Instantiate(_mapLocationPrefab, Vector3.zero, Quaternion.identity, _mapLocationsContainer.transform);
+                newLocation.GetComponent<MapLocationElement>().UpdateData(locationData);
+                _locationUIObjects.Add(newLocation);
+            }
         }
     }
 
@@ -98,25 +106,20 @@ public class MapScreen : MenuScreen
         _confirmLocationPortrait.sprite = locationData.GetPortrait();
         _confirmLocationDescription.text = locationData.GetDescription();
 
-        // check if this location is current location or not world nav gamestate
-        if(_confirmLocationData.GetAreaName() == Player.Instance.CurrentAreaName)
-        {
-            _confirmButton.SetActive(false);
-            _fastTravelDisabledText.SetActive(false);
-            _isCurrentLocationText.SetActive(true);
-        }
-        else if(gameController.Instance.GetGAMESTATE() != GAMESTATE.WORLDNAVIGATION)
-        {
-            _confirmButton.SetActive(false);
-            _fastTravelDisabledText.SetActive(true);
-            _isCurrentLocationText.SetActive(false);
-        }
-        else
-        {
-            _confirmButton.SetActive(true);
-            _isCurrentLocationText.SetActive(false);
-            _fastTravelDisabledText.SetActive(false);
-        }
+        bool isLocked = PlayerCaseRecord.Instance.GetActiveLocationStatus(locationData.GetAreaName()) == CaseDataObjects.LocationStatus.LOCKED;
+
+        _confirmButton.SetActive(false);
+        _fastTravelDisabledText.SetActive(false);
+        _isCurrentLocationText.SetActive(false);
+        _locationLockedText.SetActive(false);
+
+
+        // check if this location is current location or not world nav gamestate, or locked in the current story state
+        if(_confirmLocationData.GetAreaName() == Player.Instance.CurrentAreaName) _isCurrentLocationText.SetActive(true);
+        else if (isLocked) _locationLockedText.SetActive(true);
+        else if(gameController.Instance.GetGAMESTATE() != GAMESTATE.WORLDNAVIGATION) _fastTravelDisabledText.SetActive(true);
+        else _confirmButton.SetActive(true);
+
         
         _confirmLocationContainer.SetActive(true);
     }

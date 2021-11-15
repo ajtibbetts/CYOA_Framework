@@ -29,6 +29,13 @@ namespace CaseDataObjects
         OPPORTUNITY,
         UNASSIGNED
     }
+
+    public enum LocationStatus
+    {
+        AVAILABLE,
+        LOCKED,
+        UNDISCOVERED
+    }
     
     
     /***
@@ -58,13 +65,7 @@ namespace CaseDataObjects
         public bool startAsDiscovered;
     }
 
-    [Serializable]
-    public struct CharacterPortrait
-    {
-        public Sprite portraitSprite;
-        public float thumbNailOffsetX; // used in square thumbnail offsets
-        public float thumbNailOffsetY; // used in square thumbnail offsets
-    }
+    
 
     [Serializable]
     public struct CaseTheory
@@ -83,12 +84,7 @@ namespace CaseDataObjects
         public List<CaseTheory> InvalidTheories;
     }
 
-    [Serializable]
-    public struct ActiveLead
-    {
-        public CaseLead lead;
-        public bool isResolved;
-    }
+    
 
     
     /***
@@ -98,6 +94,26 @@ namespace CaseDataObjects
     /
     /
     ***/
+
+    [Serializable]
+    public class ActiveLocation
+    {
+        public String MapLocationAreaName;
+        public LocationStatus LocationStatus;
+
+        public ActiveLocation(string areaname, LocationStatus status)
+        {
+            MapLocationAreaName = areaname;
+            LocationStatus = status;
+        }
+    }
+
+    [Serializable]
+    public class ActiveLead
+    {
+        public CaseLead lead;
+        public bool isResolved;
+    }
 
     [Serializable]
     public class CaseSuspect
@@ -127,9 +143,18 @@ namespace CaseDataObjects
     }
 
     [Serializable]
+    public class CharacterPortrait
+    {
+        public Sprite portraitSprite;
+        public float thumbNailOffsetX; // used in square thumbnail offsets
+        public float thumbNailOffsetY; // used in square thumbnail offsets
+    }
+
+    [Serializable]
     public class CharacterProfileData
     {
         [Header("Profile Info")]
+        public string characterID;
         public string characterName;
         public CharacterPortrait portrait;
         public string age;

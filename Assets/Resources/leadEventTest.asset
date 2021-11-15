@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9837df7c010b3346bca580cac5bac11, type: 3}
+  m_Name: leadEventTest
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGuid: f1eca8db-df29-4bb5-aa06-2e7f50c69df8
+    PortName: Next
+    TargetNodeGuid: 6f3ad977-fa65-470e-845a-54cc8303eeb7
+  - BaseNodeGuid: 6f3ad977-fa65-470e-845a-54cc8303eeb7
+    PortName: Add leads!
+    TargetNodeGuid: 4ac58496-c02e-44d0-b35d-7498b588fde2
+  - BaseNodeGuid: 4ac58496-c02e-44d0-b35d-7498b588fde2
+    PortName: Event Fired
+    TargetNodeGuid: 0cec0f0e-9fc6-4958-9746-c0495ece9551
+  - BaseNodeGuid: 4ac58496-c02e-44d0-b35d-7498b588fde2
+    PortName: Already Triggered
+    TargetNodeGuid: 0cec0f0e-9fc6-4958-9746-c0495ece9551
+  - BaseNodeGuid: 0cec0f0e-9fc6-4958-9746-c0495ece9551
+    PortName: Event Fired
+    TargetNodeGuid: e51131ea-276e-43d6-aee5-91c7ea6588cc
+  - BaseNodeGuid: 0cec0f0e-9fc6-4958-9746-c0495ece9551
+    PortName: Already Triggered
+    TargetNodeGuid: e51131ea-276e-43d6-aee5-91c7ea6588cc
+  - BaseNodeGuid: e51131ea-276e-43d6-aee5-91c7ea6588cc
+    PortName: Event Fired
+    TargetNodeGuid: 3cfa5380-ca77-4b74-b03c-3550cba447ba
+  - BaseNodeGuid: e51131ea-276e-43d6-aee5-91c7ea6588cc
+    PortName: Already Triggered
+    TargetNodeGuid: 3cfa5380-ca77-4b74-b03c-3550cba447ba
+  DialogueNodeData:
+  - Guid: 6f3ad977-fa65-470e-845a-54cc8303eeb7
+    DialogueText: This event will add 2 leads by ID boyfriend and coworker, and resolve
+      the coworker lead..
+    Position: {x: 219, y: 200}
+    nodeType: 0
+  - Guid: 4ac58496-c02e-44d0-b35d-7498b588fde2
+    DialogueText: Event Node
+    Position: {x: 804, y: 200}
+    nodeType: 1
+  - Guid: 0cec0f0e-9fc6-4958-9746-c0495ece9551
+    DialogueText: Event Node
+    Position: {x: 1033, y: 200}
+    nodeType: 1
+  - Guid: e51131ea-276e-43d6-aee5-91c7ea6588cc
+    DialogueText: Event Node
+    Position: {x: 1279, y: 200}
+    nodeType: 1
+  - Guid: 3cfa5380-ca77-4b74-b03c-3550cba447ba
+    DialogueText: Lead event test complete!
+    Position: {x: 1510, y: 210}
+    nodeType: 0
+  ExposedProperties: []
+  DialogueCheckData: []
+  EventNodeData:
+  - nodeGuid: 4ac58496-c02e-44d0-b35d-7498b588fde2
+    EventName: addLead
+    EventValue: boyfriend
+    isRepeatable: 0
+    hasFired: 0
+    ignoreDeadEnd: 1
+    eventType: 5
+  - nodeGuid: 0cec0f0e-9fc6-4958-9746-c0495ece9551
+    EventName: addLead
+    EventValue: coworker
+    isRepeatable: 0
+    hasFired: 0
+    ignoreDeadEnd: 1
+    eventType: 5
+  - nodeGuid: e51131ea-276e-43d6-aee5-91c7ea6588cc
+    EventName: resolveLead
+    EventValue: coworker
+    isRepeatable: 0
+    hasFired: 0
+    ignoreDeadEnd: 1
+    eventType: 5
+  CheckNodeData: []
+  EndpointNodeData: []

@@ -1729,6 +1729,26 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.14150941
       objectReference: {fileID: 0}
+    - target: {fileID: 2440230945919400108, guid: 5b8d78c9220552d4b8d2b6509f191486,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2440230945919400108, guid: 5b8d78c9220552d4b8d2b6509f191486,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2440230945919400108, guid: 5b8d78c9220552d4b8d2b6509f191486,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2440230945919400108, guid: 5b8d78c9220552d4b8d2b6509f191486,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4033251289628144347, guid: 5b8d78c9220552d4b8d2b6509f191486,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -3895,7 +3915,7 @@ MonoBehaviour:
         - m_Target: {fileID: 1262179165}
           m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
           m_MethodName: OpenMapScreen
-          m_Mode: 1
+          m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5428,16 +5448,13 @@ MonoBehaviour:
     LocationOfDeath: 
     AdditionalInjuries: []
     AdditionalNotes: []
-  _leads:
-  - lead: {fileID: 11400000, guid: 3dba73b9964fa524da6db0ee180c965f, type: 2}
-    isResolved: 0
-  - lead: {fileID: 11400000, guid: abe9ac7a72c6c4b4e888c9167ff9d09f, type: 2}
-    isResolved: 1
+  _leads: []
   _profiles: []
   _suspects: []
   _inactiveSuspects: []
   _primarySuspect:
     SuspectProfile:
+      characterID: 
       characterName: 
       portrait:
         portraitSprite: {fileID: 0}
@@ -5466,6 +5483,7 @@ MonoBehaviour:
   _customNotes:
   - This is a custom note you've added.
   - This is another custom note you've added.
+  _activeLocations: []
 --- !u!4 &1510813219
 Transform:
   m_ObjectHideFlags: 0
@@ -5878,6 +5896,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _activeCase: {fileID: 11400000, guid: 0edb1ec0af7d88840afa39da5b84242d, type: 2}
+  _unknownPortrait:
+    portraitSprite: {fileID: 21300000, guid: 8a0e46123a24921459ca69fd77cc1ed0, type: 3}
+    thumbNailOffsetX: 0
+    thumbNailOffsetY: 75
 --- !u!1 &1695832806
 GameObject:
   m_ObjectHideFlags: 0
@@ -10495,6 +10517,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1623709607688784786, guid: 36cc43efa6153664892cfa5344bdcd4f,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3411039601826948672, guid: 36cc43efa6153664892cfa5344bdcd4f,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -10504,6 +10531,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411039601826948672, guid: 36cc43efa6153664892cfa5344bdcd4f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.00000821799
       objectReference: {fileID: 0}
     - target: {fileID: 3678416080291550324, guid: 36cc43efa6153664892cfa5344bdcd4f,
         type: 3}

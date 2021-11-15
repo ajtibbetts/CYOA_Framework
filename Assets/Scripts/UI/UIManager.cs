@@ -46,6 +46,7 @@ public class UIManager : MonoBehaviour
 
     private GameObject UI_paragraph;
     private GameObject UI_contentImage;
+    private List<String> _additionalUIMessages = new List<string>();
     private List<GameObject> actionToggleButtons = new List<GameObject>();
     private GameObject confirmActionButton;
     private GameObject endDialogueButton;
@@ -62,6 +63,10 @@ public class UIManager : MonoBehaviour
         SwipeDetector.OnSwipe += onSwipe;
         gameController.Instance.OnGameStateChanged += UpdateUIGameState;
         DialogueParser.onDialogueReachedDeadEnd += CreateEndDialogueButton;
+        PlayerCaseRecord.OnMessageToUI += addToContentText;
+        PlayerCaseRecord.OnLinkToUI += addLinkToContentText;
+        UIScreen.onCloseMenu += CloseUIMenu;
+        contentLinkManager.OnOpenMenu += OpenUIMenu;
 
         // set parent controller and child components
         controller = GetComponent<gameController>();
@@ -81,7 +86,7 @@ public class UIManager : MonoBehaviour
         controller.CheckManager.onRollCheckPass += initRollPassUI;
         controller.CheckManager.onRollCheckFail += initRollFailUI;
         
-        UIScreen.onCloseMenu += CloseUIMenu;
+        
 
         _UISTATE = UISTATE.NORMALGAMEPLAY;
         
@@ -228,7 +233,18 @@ public class UIManager : MonoBehaviour
             break;
         }
     }
-
+    public void OpenUIMenu(MENUTYPE menuType)
+    {
+        switch(menuType)
+        {
+            case MENUTYPE.MAINMENU:
+                OpenMainMenu();
+            break;
+            case MENUTYPE.CASEMENU:
+                OpenCaseMenu();
+            break;
+        }
+    }
     /* GAME START BUTTONS / METHODS */
     
     public void initGameStartButton()
@@ -355,8 +371,28 @@ public class UIManager : MonoBehaviour
         //string parsedContent = contentManager.parseContent(content);
         
         // UI_paragraph.GetComponent<TextMeshProUGUI>().text = content;
-        UI_paragraph.GetComponent<TextMeshProUGUI>().text = contentManager.parseContent(content);
+        UI_paragraph.GetComponent<TextMeshProUGUI>().text = contentManager.parseContent(content) + "\n";
 
+        // add any additional messages
+        foreach(string message in _additionalUIMessages)
+        {
+            UI_paragraph.GetComponent<TextMeshProUGUI>().text += message;
+        }
+        _additionalUIMessages.Clear();
+
+    }
+
+    public void addToContentText(string content)
+    {
+        Debug.Log("UI MANAGER ----- adding to content text list" + content);
+        _additionalUIMessages.Add("<i>" + contentManager.parseContent(content) + "</i>\n");
+    }
+
+    public void addLinkToContentText(string link)
+    {
+        Debug.Log("UI MANAGER ----- adding link to content text list" + link);
+        var linkMessage = "<color="+ globalConfig.UI.LinkHexColor +"><align=\"center\"><u><link=\""+ link +"\">View Details</link></u></align></color>\n";
+        _additionalUIMessages.Add(linkMessage);
     }
 
     public void updatePlayerNameText(string name) {

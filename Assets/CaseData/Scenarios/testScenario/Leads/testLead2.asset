@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f47d4bad16415ce4882ebf7c0aba482a, type: 3}
   m_Name: testLead2
   m_EditorClassIdentifier: 
+  _leadID: coworker
   _leadText: On the night of the murder, victim was covering a shift for a sick coworker.

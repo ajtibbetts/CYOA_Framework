@@ -1411,6 +1411,8 @@ MonoBehaviour:
   _characterOccupationText: {fileID: 2850623441415951914}
   _characterRelationshipText: {fileID: 3001571950056449500}
   _characterSummaryText: {fileID: 1539978258994379908}
+  _unknownPortraitSprite: {fileID: 21300000, guid: 8a0e46123a24921459ca69fd77cc1ed0,
+    type: 3}
 --- !u!1 &4859268051684358061
 GameObject:
   m_ObjectHideFlags: 0

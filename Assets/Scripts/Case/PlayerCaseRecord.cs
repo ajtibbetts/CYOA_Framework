@@ -11,6 +11,8 @@ public class PlayerCaseRecord : MonoBehaviour
 
     // events
     public static event Action OnCaseDataUpdated;
+    public static event Action<string> OnMessageToUI;
+    public static event Action<string> OnLinkToUI;
     
     [SerializeField] private VictimData _victim;
     [SerializeField] private List<ActiveLead> _leads = new List<ActiveLead>();
@@ -22,6 +24,8 @@ public class PlayerCaseRecord : MonoBehaviour
     
     [SerializeField] private CaseEvidence _nullEvidence;
     [SerializeField] private List<string> _customNotes = new List<string>();
+
+    [SerializeField] private List<ActiveLocation> _activeLocations = new List<ActiveLocation>();
     
     
     
@@ -53,14 +57,20 @@ public class PlayerCaseRecord : MonoBehaviour
     private void AddListeners()
     {
         caseEvents.onProfileAdded += AddProfile;
+        caseEvents.onProfileUpdated += DiscoverProfileData;
         caseEvents.onEvidenceAdded += AddEvidenceByID;
+        caseEvents.onLeadAdded += AddLeadByID;
+        caseEvents.onLeadResolved += ResolveLeadByID;
+        caseEvents.onLocationDiscovered += DiscoverLocation;
+        caseEvents.onLocationStatusUpdated += UpdateLocationStatus;
     }
 
     void SetTestData()
     {
         List<string> testCharacterProfiles = new List<String>();
         // testCharacterProfiles.Add("Chad Billingsworth");
-        testCharacterProfiles.Add("Pierre LeFou");
+        testCharacterProfiles.Add("pierreL");
+        // testCharacterProfiles.Add("chadB");
         // testCharacterProfiles.Add("Johnny Cyber");
         foreach(string name in testCharacterProfiles)
         {
@@ -108,6 +118,11 @@ public class PlayerCaseRecord : MonoBehaviour
         return _evidence;
     }
 
+    public List<ActiveLocation> GetActiveLocations()
+    {
+        return _activeLocations;
+    }
+
     public List<string> GetNotes()
     {
         return _customNotes;
@@ -120,6 +135,7 @@ public class PlayerCaseRecord : MonoBehaviour
         Debug.Log("Starting new case.");
         // ClearCollectionsForNewCase(); // remove for testing
         _victim = CaseManager.Instance.GetStartingVictimData();
+        SetStartingLocations();
         CaseManager.Instance.SetupCaseMap();
     }
 
@@ -155,60 +171,99 @@ public class PlayerCaseRecord : MonoBehaviour
     }
 
     
-    private void AddLead(CaseLead lead)
+    private void AddLeadByID(string leadID)
     {
-        ActiveLead newLead= new ActiveLead();
-        newLead.lead = lead;
-        newLead.isResolved = false;
-        _leads.Add(newLead);
-        OnCaseDataUpdated?.Invoke();
-    }
-
-    private void ResolveLead(CaseLead lead)
-    {
-        var matchedLead = _leads.Find(x => x.lead.GetLead() == lead.GetLead());
-        if(matchedLead.lead.GetLead() != null)
+        Debug.Log("adding lead by ID: " + leadID);
+        var availableLeads = CaseManager.Instance.GetAvailableLeads();
+        var leadToAdd = availableLeads.Find(x => x.GetLeadID() == leadID);
+        if(leadToAdd != null)
         {
-            matchedLead.isResolved = true;
+            ActiveLead newLead= new ActiveLead();
+            newLead.lead = leadToAdd;
+            newLead.isResolved = false;
+            _leads.Add(newLead);
+            OnMessageToUI?.Invoke("New Case Lead Added.");
+            OnLinkToUI?.Invoke("openLeads."+ leadToAdd.GetLeadID());
             OnCaseDataUpdated?.Invoke();
-        }
-    }
-
-    private void AddProfile(string characterName)
-    {
-        CharacterProfileData _newCharacterData = CaseManager.Instance.GetStartingCharacterProfileData(characterName);
-        // only add if not already in list
-        if(!_profiles.Exists(x => x.characterName.ToLower() == characterName.ToLower()))
-        {
-            _profiles.Add(_newCharacterData);
-            OnCaseDataUpdated?.Invoke();
-        }
-    }
-
-    private void DiscoverProfileData(string characterName, string propertyName)
-    {
-        var characterToUpdate = _profiles.Find(x => x.characterName == characterName);
-        
-        if(propertyName == "portrait")
-        {
-            characterToUpdate.portrait = CaseManager.Instance.UncoverCharacterPortrait(characterName);
-            OnCaseDataUpdated?.Invoke();
-            return;
         }
         else
         {
-            PropertyInfo propertyInfo = characterToUpdate.GetType().GetProperty(propertyName);
-            string DiscoveredValue = CaseManager.Instance.UncoverCharacterProperty(characterName,propertyName);
-            propertyInfo.SetValue(characterToUpdate, Convert.ChangeType(DiscoveredValue, propertyInfo.PropertyType), null);
-            OnCaseDataUpdated?.Invoke();
-            return;
+            Debug.LogError("PLAYER CASE RECORD ---- Failed to add lead by ID: " + leadID);
         }
+    }
+
+    private void ResolveLeadByID(string leadID)
+    {
+        var matchedLead = _leads.Find(x => x.lead.GetLeadID() == leadID);
+        if(matchedLead != null)
+        {            
+            matchedLead.isResolved = true;
+            OnMessageToUI?.Invoke("Case Lead Resolved.");
+            OnLinkToUI?.Invoke("openLeads."+ leadID);
+            OnCaseDataUpdated?.Invoke();
+        }
+        else
+        {
+            Debug.LogError("PLAYER CASE RECORD ---- Failed to resolve lead by ID: " + leadID);
+        }
+    }
+
+    private void AddProfile(string characterID)
+    {
+        CharacterProfileData _newCharacterData = CaseManager.Instance.GetStartingCharacterProfileData(characterID);
+        // only add if not already in list
+        if(!_profiles.Exists(x => x.characterID.ToLower() == characterID.ToLower()))
+        {
+            _profiles.Add(_newCharacterData);
+            OnMessageToUI?.Invoke("New Character Profile Added: " + _newCharacterData.characterName);
+            OnLinkToUI?.Invoke("openProfile."+_newCharacterData.characterID);
+            OnCaseDataUpdated?.Invoke();
+        }
+    }
+
+    private void DiscoverProfileData(string characterID, string propertyName)
+    {
+        Debug.Log($"Discovering profile data for {characterID}.{propertyName}");
+        var characterToUpdate = _profiles.Find(x => x.characterID == characterID);
+        if(characterToUpdate != null)
+        {
+            if(propertyName == "portrait")
+            {
+                characterToUpdate.portrait = CaseManager.Instance.UncoverCharacterPortrait(characterID);
+                OnMessageToUI?.Invoke("Character Profile Portrait Uncovered: " + characterToUpdate.characterName);
+                OnLinkToUI?.Invoke("openProfile."+characterToUpdate.characterID);
+                OnCaseDataUpdated?.Invoke();
+                return;
+            }
+            else
+            {
+                FieldInfo fieldInfo = characterToUpdate.GetType().GetField(propertyName, BindingFlags.Instance  | BindingFlags.Public);
+                string DiscoveredValue = CaseManager.Instance.UncoverCharacterProperty(characterID,propertyName);
+                fieldInfo.SetValue(characterToUpdate, Convert.ChangeType(DiscoveredValue, fieldInfo.FieldType));
+                if(propertyName == "characterName")
+                {
+                     OnMessageToUI?.Invoke($"Uncovered mystery profile name: {characterToUpdate.characterName}.");
+                }
+                else if (propertyName == "relationshipToVictim")
+                {
+                    OnMessageToUI?.Invoke($"Added {characterToUpdate.characterName}'s relationship to the victim to Case Profile.");
+                }
+                else 
+                {
+                    OnMessageToUI?.Invoke($"Added {characterToUpdate.characterName}'s {propertyName} to Case Profile.");
+                }
+                OnLinkToUI?.Invoke("openProfile."+characterToUpdate.characterID);
+                OnCaseDataUpdated?.Invoke();
+                return;
+            }
+        }
+        else Debug.LogError("CASE RECORD ---- FAILED TO DISCOVER PROFILE DATA.");
     }
 
     public void AddProfileToSuspects(CharacterProfileData characterProfile)
     {
         // first update character profile to suspect
-        var characterToUpdate = _profiles.Find(x => x.characterName == characterProfile.characterName);
+        var characterToUpdate = _profiles.Find(x => x.characterID == characterProfile.characterID);
         characterToUpdate.characterType = CharacterType.SUSPECT;
 
         // second check if suspect entry already exists in inactive
@@ -232,8 +287,8 @@ public class PlayerCaseRecord : MonoBehaviour
 
     public void RemoveProfileFromSuspects(CharacterProfileData characterProfile)
     {
-        var characterToUpdate = _profiles.Find(x => x.characterName == characterProfile.characterName);
-        var suspectToRemove = _suspects.Find(x => x.SuspectProfile.characterName == characterProfile.characterName);
+        var characterToUpdate = _profiles.Find(x => x.characterID == characterProfile.characterID);
+        var suspectToRemove = _suspects.Find(x => x.SuspectProfile.characterID == characterProfile.characterID);
         
         // update character profile back to neutral
         characterToUpdate.characterType = CharacterType.NEUTRAL;
@@ -249,12 +304,12 @@ public class PlayerCaseRecord : MonoBehaviour
 
     private bool isProfileAlreadyInactiveSuspect(CharacterProfileData characterProfile)
     {
-        return _inactiveSuspects.Find(x => x.SuspectProfile.characterName == characterProfile.characterName) != null;
+        return _inactiveSuspects.Find(x => x.SuspectProfile.characterID == characterProfile.characterID) != null;
     }
 
     private CaseSuspect GetInactiveSuspect(CharacterProfileData characterProfile)
     {
-        var _suspect = _inactiveSuspects.Find(x => x.SuspectProfile.characterName == characterProfile.characterName);
+        var _suspect = _inactiveSuspects.Find(x => x.SuspectProfile.characterID == characterProfile.characterID);
         _inactiveSuspects.Remove(_suspect);
         return _suspect;
     }
@@ -320,8 +375,75 @@ public class PlayerCaseRecord : MonoBehaviour
         if(!_evidence.Exists(x => x.GetEvidenceID().ToLower() == evidenceID.ToLower()))
         {
             _evidence.Add(evidenceToAdd);
+            OnMessageToUI?.Invoke("New Evidence Added: " + evidenceToAdd.GetEvidenceName());
+            OnLinkToUI?.Invoke("openEvidence."+ evidenceToAdd.GetEvidenceName());
             OnCaseDataUpdated?.Invoke();
         }
+    }
+
+    private void SetStartingLocations()
+    {
+        var locations = CaseManager.Instance.GetMapLocations();
+        foreach(MapLocationObject location in locations)
+        {
+            if(location.IsAvailableOnStart())
+            {
+                var newLocation = new ActiveLocation(location.GetAreaName(), LocationStatus.AVAILABLE);
+                _activeLocations.Add(newLocation);
+            }
+        }
+    }
+
+    public bool isLocationActive(string areaName)
+    {
+        var location = _activeLocations.Find(x => x.MapLocationAreaName == areaName);
+        if(location != null) return true;
+        else return false;
+    }
+
+    public LocationStatus GetActiveLocationStatus(string areaName)
+    {
+        var location = _activeLocations.Find(x => x.MapLocationAreaName == areaName);
+        if(location != null) return location.LocationStatus;
+        else 
+        {
+            Debug.LogError("PLAYER CASE RECORD ---- FAILED TO GET LOCATION STATUS FOR AREA: " + areaName);
+            return LocationStatus.UNDISCOVERED;
+        }
+    }
+
+    private void DiscoverLocation(string areaName)
+    {
+        var locations = CaseManager.Instance.GetMapLocations();
+        var locationToAdd = locations.Find(x => x.GetAreaName().ToLower() == areaName.ToLower());
+        if(locationToAdd != null)
+        {
+            var newLocation = new ActiveLocation(locationToAdd.GetAreaName(), LocationStatus.AVAILABLE);
+            if(!_activeLocations.Exists(x => x.MapLocationAreaName == newLocation.MapLocationAreaName))
+            {
+                _activeLocations.Add(newLocation);
+                OnMessageToUI?.Invoke("New Location Discovered: " + newLocation.MapLocationAreaName);
+                OnLinkToUI?.Invoke("openMap."+ newLocation.MapLocationAreaName);
+                OnCaseDataUpdated?.Invoke();
+            }
+        }
+        else 
+        {
+            Debug.LogError("PLAYER CASE RECORD ---- FAILED TO DISCOVER LOCATION BY AREA NAME: " + areaName);
+        }
+    }
+
+    private void UpdateLocationStatus(string areaName, LocationStatus status)
+    {
+        var locationToUpdate = _activeLocations.Find(x => x.MapLocationAreaName.ToLower() == areaName.ToLower());
+        if(locationToUpdate != null)
+        {
+            locationToUpdate.LocationStatus = status;
+            OnMessageToUI?.Invoke($"Location Now {status.ToString()}: " + locationToUpdate.MapLocationAreaName);
+            OnLinkToUI?.Invoke("openMap."+ locationToUpdate.MapLocationAreaName);
+            OnCaseDataUpdated?.Invoke();
+        }
+        else Debug.LogError("PLAYER CASE RECORD ---- FAILED TO UPDATE LOCATION STATUS: " + areaName);
     }
     
     private void SubmitProposedCase()
@@ -333,5 +455,5 @@ public class PlayerCaseRecord : MonoBehaviour
     {
         _customNotes.Add(note);
     }
-
+    
 }

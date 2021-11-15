@@ -123,10 +123,11 @@ public class SuspectsScreen : CaseScreen
     public void UpdateSuspectView(CaseSuspect suspectData)
     {
         var _suspects = _caseRecord.GetSuspects();
-        var suspectName = suspectData.SuspectProfile.characterName;
+        if(_suspects.Count == 0 || suspectData == null) return;
+        var suspectID = suspectData.SuspectProfile.characterID;
         
         // first check if primary and update title
-        if(suspectName == _caseRecord.GetPrimarySuspect().SuspectProfile.characterName)
+        if(suspectID == _caseRecord.GetPrimarySuspect().SuspectProfile.characterID)
         {
             _suspectHeaderText.text = "Primary Suspect";
             _primaryButton.SetActive(false);
@@ -141,7 +142,7 @@ public class SuspectsScreen : CaseScreen
             _navPrevImage.SetActive(true);
 
             // check if last suspect in list
-            if(suspectName == _suspects[_suspects.Count - 1].SuspectProfile.characterName)
+            if(suspectID == _suspects[_suspects.Count - 1].SuspectProfile.characterID)
             {
                 _navNextImage.SetActive(false);
             }
@@ -151,7 +152,7 @@ public class SuspectsScreen : CaseScreen
 
         _suspectPortrait.sprite = suspectData.SuspectProfile.portrait.portraitSprite;
 
-        _suspectNameText.text = suspectName;
+        _suspectNameText.text = suspectData.SuspectProfile.characterName;
         _suspectRelationshipText.text = suspectData.SuspectProfile.relationshipToVictim;
 
         UpdateEvidenceContainer(_meansContainer, suspectData.ProposedMeans, EvidenceType.MEANS);
@@ -180,8 +181,8 @@ public class SuspectsScreen : CaseScreen
         var _suspects = _caseRecord.GetSuspects();
         
         Debug.Log("Nav to suspect direction:" + indexDirection);
-        var currentSuspectIndex = _suspects.FindIndex(x => x.SuspectProfile.characterName == _activeSuspectProfile.characterName);
-        Debug.Log("Current Suspect name: " + _activeSuspectProfile.characterName);
+        var currentSuspectIndex = _suspects.FindIndex(x => x.SuspectProfile.characterID == _activeSuspectProfile.characterID);
+        Debug.Log("Current Suspect name: " + _activeSuspectProfile.characterID);
         var newSuspectIndex = currentSuspectIndex + indexDirection;
         Debug.Log("Trying to nav to suspect index:" + newSuspectIndex);
         UpdateSuspectView(_suspects[newSuspectIndex]);
@@ -189,7 +190,7 @@ public class SuspectsScreen : CaseScreen
 
     public void SetCurrentSuspectAsPrimary()
     {
-        var currentSuspectIndex = _caseRecord.GetSuspects().FindIndex(x => x.SuspectProfile.characterName == _activeSuspectProfile.characterName);
+        var currentSuspectIndex = _caseRecord.GetSuspects().FindIndex(x => x.SuspectProfile.characterID == _activeSuspectProfile.characterID);
         _caseRecord.SetPrimarySuspect(currentSuspectIndex);
         UpdateData();
     }
@@ -209,7 +210,7 @@ public class SuspectsScreen : CaseScreen
 
     public void OpenEvidenceScreen(EvidenceType type)
     {
-        var _activeSuspect = _caseRecord.GetSuspects().Find(x => x.SuspectProfile.characterName == _activeSuspectProfile.characterName);
+        var _activeSuspect = _caseRecord.GetSuspects().Find(x => x.SuspectProfile.characterID == _activeSuspectProfile.characterID);
         var _evidence = _caseRecord.GetEvidence();
         foreach(CaseEvidence evidence in _evidence)
         {
@@ -240,7 +241,7 @@ public class SuspectsScreen : CaseScreen
     public void AddOrUpdateEvidence(CaseEvidence evidenceData, EvidenceType type)
     {
         var _suspects = _caseRecord.GetSuspects();
-        var _suspectToUpate = _suspects.Find(x => x.SuspectProfile.characterName == _activeSuspectProfile.characterName);
+        var _suspectToUpate = _suspects.Find(x => x.SuspectProfile.characterID == _activeSuspectProfile.characterID);
         GameObject evidenceContainer = GetEvidenceContainer(type);
         
         // check if evidence is already assigned to a slot and empty existing slot if needed
@@ -346,9 +347,11 @@ public class SuspectsScreen : CaseScreen
     {
         if(!_isActiveScreen) return;
         
-        Debug.Log("Adding this character to suspects: " + characterProfile.characterName);
+        Debug.Log("Adding this character to suspects: " + characterProfile.characterID);
         _caseRecord.AddProfileToSuspects(characterProfile);
-        // characterProfile.characterType = CharacterType.SUSPECT;
         UpdateData();
+        var _suspects = _caseRecord.GetSuspects();
+        var _suspectToView = _suspects.Find(x => x.SuspectProfile.characterID == characterProfile.characterID);
+        UpdateSuspectView(_suspectToView);
     }
 }
