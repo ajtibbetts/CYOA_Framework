@@ -101,6 +101,7 @@ public class WorldNavigator : MonoBehaviour
     public void DisplayActiveNavObject()
     {
         // register event listener
+        UIManager.onOptionSelected -= NavigateToNavObject; // remove extra if any
         UIManager.onOptionSelected += NavigateToNavObject;
         
         Debug.Log($"WORLD NAVIGATOR ---- Displaying active world nav object: {ActiveNavObject.Name}");

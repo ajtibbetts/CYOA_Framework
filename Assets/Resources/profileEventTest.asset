@@ -52,30 +52,24 @@ MonoBehaviour:
   - BaseNodeGuid: d73a953a-2c8c-48e6-8509-19554b0b785c
     PortName: Already Triggered
     TargetNodeGuid: 822d6e9c-90d6-4705-9691-fb0731a1967c
-  - BaseNodeGuid: 822d6e9c-90d6-4705-9691-fb0731a1967c
-    PortName: Event Fired
-    TargetNodeGuid: 86e619fd-cb3a-4261-a926-646e6f2e2904
-  - BaseNodeGuid: 822d6e9c-90d6-4705-9691-fb0731a1967c
-    PortName: Already Triggered
-    TargetNodeGuid: 86e619fd-cb3a-4261-a926-646e6f2e2904
   - BaseNodeGuid: 86e619fd-cb3a-4261-a926-646e6f2e2904
     PortName: Event Fired
     TargetNodeGuid: bc4b1728-a2b1-4574-9669-906f745df3e8
   - BaseNodeGuid: 86e619fd-cb3a-4261-a926-646e6f2e2904
     PortName: Already Triggered
     TargetNodeGuid: bc4b1728-a2b1-4574-9669-906f745df3e8
+  - BaseNodeGuid: 822d6e9c-90d6-4705-9691-fb0731a1967c
+    PortName: Event Fired
+    TargetNodeGuid: 86e619fd-cb3a-4261-a926-646e6f2e2904
+  - BaseNodeGuid: 822d6e9c-90d6-4705-9691-fb0731a1967c
+    PortName: Already Triggered
+    TargetNodeGuid: 86e619fd-cb3a-4261-a926-646e6f2e2904
   - BaseNodeGuid: bc4b1728-a2b1-4574-9669-906f745df3e8
     PortName: Event Fired
     TargetNodeGuid: 6bec7f62-eb84-403d-aa46-a4da2eebbaf8
   - BaseNodeGuid: bc4b1728-a2b1-4574-9669-906f745df3e8
     PortName: Already Triggered
     TargetNodeGuid: 6bec7f62-eb84-403d-aa46-a4da2eebbaf8
-  - BaseNodeGuid: 6bec7f62-eb84-403d-aa46-a4da2eebbaf8
-    PortName: Event Fired
-    TargetNodeGuid: 8f59c2c0-4c8b-4729-b779-38ce0ce0e11c
-  - BaseNodeGuid: 6bec7f62-eb84-403d-aa46-a4da2eebbaf8
-    PortName: Already Triggered
-    TargetNodeGuid: 8f59c2c0-4c8b-4729-b779-38ce0ce0e11c
   DialogueNodeData:
   - Guid: 46a9c936-8589-4a99-a4ff-376aa4bd1061
     DialogueText: This dialogue will unlock character profile for johnny cyber and
@@ -125,10 +119,6 @@ MonoBehaviour:
     DialogueText: Event Node
     Position: {x: 2768, y: 142}
     nodeType: 1
-  - Guid: 8f59c2c0-4c8b-4729-b779-38ce0ce0e11c
-    DialogueText: profile unlock event test complete!
-    Position: {x: 3048, y: 189}
-    nodeType: 0
   ExposedProperties: []
   DialogueCheckData: []
   EventNodeData:
@@ -193,7 +183,7 @@ MonoBehaviour:
     EventValue: pierreL.relationship
     isRepeatable: 0
     hasFired: 0
-    ignoreDeadEnd: 1
+    ignoreDeadEnd: 0
     eventType: 5
   CheckNodeData: []
   EndpointNodeData: []

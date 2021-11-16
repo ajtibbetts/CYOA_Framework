@@ -367,31 +367,27 @@ public class UIManager : MonoBehaviour
     }
     public void updateContentText(string content) {
         Debug.Log("UI MANAGER ----- updating content text..");
-        resetScroll();
-        //string parsedContent = contentManager.parseContent(content);
-        
-        // UI_paragraph.GetComponent<TextMeshProUGUI>().text = content;
-        UI_paragraph.GetComponent<TextMeshProUGUI>().text = contentManager.parseContent(content) + "\n";
-
+        resetContent();
+        var contentText = UI_paragraph.GetComponent<TextMeshProUGUI>();
         // add any additional messages
         foreach(string message in _additionalUIMessages)
         {
-            UI_paragraph.GetComponent<TextMeshProUGUI>().text += message;
+            contentText.text += message;
         }
         _additionalUIMessages.Clear();
-
+        contentText.text += contentManager.parseContent(content) + "\n";
     }
 
     public void addToContentText(string content)
     {
         Debug.Log("UI MANAGER ----- adding to content text list" + content);
-        _additionalUIMessages.Add("<i>" + contentManager.parseContent(content) + "</i>\n");
+        _additionalUIMessages.Add("<color=" + globalConfig.UI.EventHexColor +"><align=\"center\"><i>" + contentManager.parseContent(content) + "</i></align></color>\n");
     }
 
     public void addLinkToContentText(string link)
     {
         Debug.Log("UI MANAGER ----- adding link to content text list" + link);
-        var linkMessage = "<color="+ globalConfig.UI.LinkHexColor +"><align=\"center\"><u><link=\""+ link +"\">View Details</link></u></align></color>\n";
+        var linkMessage = "<color="+ globalConfig.UI.LinkHexColor +"><align=\"center\"><u><link=\""+ link +"\">View Details</link></u></align></color>\n\n";
         _additionalUIMessages.Add(linkMessage);
     }
 
@@ -409,7 +405,8 @@ public class UIManager : MonoBehaviour
     }
 
 
-    public void resetScroll(){
+    public void resetContent(){
+        UI_paragraph.GetComponent<TextMeshProUGUI>().text = "";
         vertScrollBar.value = 1;
     }
 

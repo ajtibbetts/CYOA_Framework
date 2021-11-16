@@ -14,7 +14,8 @@ static public class globalConfig
         static public Color toggleInactiveBackgroundColor = new Color(0.1019608f,0.7176471f,0.8117647f); // cyan
         static public Color toggleSelectedBackgroundColor = new Color(0.8117647f,0.5098039f,0.1019607f); // orange
 
-        static public string LinkHexColor = "#e28743";
+        static public string EventHexColor = "#42ecf5"; // cyan
+        static public string LinkHexColor = "#e28743"; // orange
 
         static public class CaseUI 
         {

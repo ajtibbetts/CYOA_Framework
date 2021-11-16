@@ -40,12 +40,15 @@ public class DialogueParser : MonoBehaviour
 
         public void SetupNewDialogue(DialogueContainer newDialogue)
         {
+            Debug.Log("DIALOGE PARSER ---- ENABLED");
+            // UIManager.onOptionSelected -= ProceedToNarrative; // remove first if any
             UIManager.onOptionSelected += ProceedToNarrative;
             dialogue = newDialogue;
         }
 
         public void DisableDialogueParser()
         {
+            Debug.Log("DIALOGE PARSER ---- DISABLED");
             UIManager.onOptionSelected -= ProceedToNarrative;
         }
 
@@ -117,7 +120,7 @@ public class DialogueParser : MonoBehaviour
 
         private void ProcessEventNode(string narrativeDataGUID)
         {
-            Debug.Log("event node found!");
+            Debug.Log("DIALOGUE PARSER ---- Event node Found. GUID: "+ narrativeDataGUID);
             //bool eventAlreadyTriggered = false;
             var data = dialogue.EventNodeData.Find(x => x.nodeGuid == narrativeDataGUID);
             var outputs = dialogue.NodeLinks.Where(x => x.BaseNodeGuid == narrativeDataGUID);
@@ -128,7 +131,7 @@ public class DialogueParser : MonoBehaviour
             // add logic to check event specifics
             if(!data.hasFired || data.isRepeatable) {
                 // trigger event
-                Debug.Log("triggering event!");
+                Debug.Log("DIALOGUE PARSER ---- Triggering Event!");
                 onEventTriggered?.Invoke(data.eventType, data.EventName,data.EventValue);
                 
                 // route to next node if output is attached to another node
@@ -137,32 +140,45 @@ public class DialogueParser : MonoBehaviour
                     if(outputs.ElementAt(0) != null) 
                     {
                         // route from event triggered
+                        Debug.Log("DIALOGUE PARSER ---- Navigating to next node from 'Event Triggered' output!");
                         if(outputs.ElementAt(0).TargetNodeGuid != null) ProceedToNarrative(outputs.ElementAt(0).TargetNodeGuid);
                         return;
                     }
                 }
                 else if (!ignoreDeadEnd){
-                    onDialogueReachedDeadEnd?.Invoke();
+                    Debug.Log("DIALOGUE PARSER ---- Not ignoring dead end. Invoking DeadEnd.");
+                    ProcessEventDeadEnd();
                     return;
                 }
-                else return;
+                else {
+                    Debug.Log("DIALOGUE PARSER ---- Ignoring dead end. Returning without invocation.");
+                    DisableDialogueParser();
+                    return;
+                }
             }
             else {
+                Debug.Log("DIALOGUE PARSER ---- Event already triggered!");
                 if(outputs.Count() > 0)
                 {
                     if(outputs.ElementAt(1) != null) 
                     {
                         // route from event already triggered
+                        Debug.Log("DIALOGUE PARSER ---- Navigating to next node from 'Event Already Triggered' output!");
                         if(outputs.ElementAt(1).TargetNodeGuid != null) ProceedToNarrative(outputs.ElementAt(1).TargetNodeGuid);
 
                         return;
                     }
                 }
                 else if(!ignoreDeadEnd) {
-                    onDialogueReachedDeadEnd?.Invoke();
+                    Debug.Log("DIALOGUE PARSER ---- Not ignoring dead end. Invoking DeadEnd.");
+                    ProcessEventDeadEnd();
                     return;
                 }
-                else return;
+                else {
+                    Debug.Log("DIALOGUE PARSER ---- Ignoring dead end. Returning without invocation but will disable parser.");
+                    DisableDialogueParser();
+                    return;
+                }
             }
         }
 
@@ -221,6 +237,14 @@ public class DialogueParser : MonoBehaviour
             }
 
             
+        }
+
+        private void ProcessEventDeadEnd()
+        {
+            Debug.Log("DIALOGUE PARSER ---- Dead end reached on event node. Updating content and clearing exist buttons before invocation.");
+            controller.UIManager.updateContentText("");
+            controller.UIManager.ClearButtons();
+            onDialogueReachedDeadEnd?.Invoke();
         }
 
         private void ProcessEndpointNode(string narrativeDataGUID)
