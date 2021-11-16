@@ -19,16 +19,16 @@ public class VictimDataScreen : CaseScreen
 
     public override void UpdateData()
     {
-        _nameText.text = _caseRecord.GetVictim().VictimName;
-        _portrait.GetComponent<Image>().sprite = _caseRecord.GetVictim().VictimPortrait.portraitSprite;
-        _ageText.text = _caseRecord.GetVictim().VictimAge;
-        _residenceText.text = _caseRecord.GetVictim().VictimResidence;
-        _occupationText.text = _caseRecord.GetVictim().VictimOccupation;
-        _summaryText.text = _caseRecord.GetVictim().VictimSummary;
+        _nameText.text = _caseRecord.GetVictim().name;
+        _portrait.GetComponent<Image>().sprite = _caseRecord.GetVictim().portrait.portraitSprite;
+        _ageText.text = _caseRecord.GetVictim().age;
+        _residenceText.text = _caseRecord.GetVictim().residence;
+        _occupationText.text = _caseRecord.GetVictim().occupation;
+        _summaryText.text = _caseRecord.GetVictim().summary;
 
-        _codText.text = _caseRecord.GetVictim().CauseOfDeath;
-        _todText.text = _caseRecord.GetVictim().TimeofDeath;
-        _lodText.text = _caseRecord.GetVictim().LocationOfDeath;
+        _codText.text = _caseRecord.GetVictim().causeOfDeath;
+        _todText.text = _caseRecord.GetVictim().timeOfDeath;
+        _lodText.text = _caseRecord.GetVictim().locationOfDeath;
 
     }
 

@@ -31,7 +31,7 @@ public class CaseVictim : ScriptableObject {
 
     public CharacterPortrait GetVictimPortrait()
     {
-        return _portrait.startAsDiscovered ? _portrait.portrait : new CharacterPortrait();
+        return _portrait.startAsDiscovered ? _portrait.portrait : null;
     }
 
     public string GetVictimSummary()
@@ -86,6 +86,14 @@ public class CaseVictim : ScriptableObject {
     
     public string RevealVictimProperty(string propertyName)
     {
-        return this.GetType().GetProperty(propertyName).GetValue(this,null).ToString();
+        string fieldToFetch = "_"+propertyName;
+        // Debug.Log("CASE PROFILE ---- ATTEMPTING TO RETURN PROPERTY: " + fieldToFetch);
+        var propType = this.GetType();
+        // Debug.Log("CASE PROFILE ---- PROP TYPE: " + propType.ToString());
+        var propField = propType.GetField(fieldToFetch, BindingFlags.Instance | BindingFlags.NonPublic);
+        // Debug.Log("PROP FIELD: " + propField.ToString());
+        CaseProperty propValue = (CaseProperty)propField.GetValue(this);
+        Debug.Log("VICTIM PROFILE ---- VALUE: " + propValue.propertyValue);
+        return propValue.propertyValue;
     }
 }

@@ -15,17 +15,73 @@ MonoBehaviour:
   NodeLinks:
   - BaseNodeGuid: aa134aba-2efd-4dda-98c6-d0bc97660337
     PortName: Next
+    TargetNodeGuid: 76edbb11-57b4-4053-8444-091b1c4aa9a6
+  - BaseNodeGuid: 76edbb11-57b4-4053-8444-091b1c4aa9a6
+    PortName: Add Evidence!
     TargetNodeGuid: d002f613-a0cd-4d46-8b6e-531f88f9142b
+  - BaseNodeGuid: d002f613-a0cd-4d46-8b6e-531f88f9142b
+    PortName: Event Fired
+    TargetNodeGuid: f539e254-895e-4e3e-b47a-d5f3c19d9d36
+  - BaseNodeGuid: d002f613-a0cd-4d46-8b6e-531f88f9142b
+    PortName: Already Triggered
+    TargetNodeGuid: f539e254-895e-4e3e-b47a-d5f3c19d9d36
+  - BaseNodeGuid: f539e254-895e-4e3e-b47a-d5f3c19d9d36
+    PortName: Update evience!
+    TargetNodeGuid: 525ad719-0567-45a5-864b-8b547d17b637
+  - BaseNodeGuid: 525ad719-0567-45a5-864b-8b547d17b637
+    PortName: Event Fired
+    TargetNodeGuid: 3ffe6e6e-05ff-451d-b19b-1263196ddf9c
+  - BaseNodeGuid: 525ad719-0567-45a5-864b-8b547d17b637
+    PortName: Already Triggered
+    TargetNodeGuid: 3ffe6e6e-05ff-451d-b19b-1263196ddf9c
+  - BaseNodeGuid: 3ffe6e6e-05ff-451d-b19b-1263196ddf9c
+    PortName: remove evidence
+    TargetNodeGuid: dcd5c791-3fe0-4790-8d95-e81ae43400f9
   DialogueNodeData:
+  - Guid: 76edbb11-57b4-4053-8444-091b1c4aa9a6
+    DialogueText: This first event test will add tatoo gun to evidence profile.
+    Position: {x: 213, y: 200}
+    nodeType: 0
   - Guid: d002f613-a0cd-4d46-8b6e-531f88f9142b
     DialogueText: Event Node
-    Position: {x: 225, y: 215}
+    Position: {x: 605, y: 179}
+    nodeType: 1
+  - Guid: f539e254-895e-4e3e-b47a-d5f3c19d9d36
+    DialogueText: "Next event will update  the existing Lead Pipe\n evidence to a
+      new evidence."
+    Position: {x: 835, y: 179}
+    nodeType: 0
+  - Guid: 525ad719-0567-45a5-864b-8b547d17b637
+    DialogueText: Event Node
+    Position: {x: 1142, y: 179}
+    nodeType: 1
+  - Guid: 3ffe6e6e-05ff-451d-b19b-1263196ddf9c
+    DialogueText: The last test will remove the added tatoo gun from evidence.
+    Position: {x: 1374, y: 179}
+    nodeType: 0
+  - Guid: dcd5c791-3fe0-4790-8d95-e81ae43400f9
+    DialogueText: Event Node
+    Position: {x: 1746, y: 179}
     nodeType: 1
   ExposedProperties: []
   DialogueCheckData: []
   EventNodeData:
   - nodeGuid: d002f613-a0cd-4d46-8b6e-531f88f9142b
     EventName: addEvidence
+    EventValue: tatooGun
+    isRepeatable: 0
+    hasFired: 0
+    ignoreDeadEnd: 0
+    eventType: 5
+  - nodeGuid: 525ad719-0567-45a5-864b-8b547d17b637
+    EventName: upgradeEvidence
+    EventValue: leadPipe_a.leadPipe_b
+    isRepeatable: 0
+    hasFired: 0
+    ignoreDeadEnd: 0
+    eventType: 5
+  - nodeGuid: dcd5c791-3fe0-4790-8d95-e81ae43400f9
+    EventName: removeEvidence
     EventValue: tatooGun
     isRepeatable: 0
     hasFired: 0

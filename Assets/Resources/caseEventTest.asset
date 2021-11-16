@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9837df7c010b3346bca580cac5bac11, type: 3}
+  m_Name: caseEventTest
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGuid: 1cfc760c-8804-4677-9412-8488439457c8
+    PortName: Next
+    TargetNodeGuid: 312170db-f137-4696-bc72-13a3ffdc299c
+  - BaseNodeGuid: 312170db-f137-4696-bc72-13a3ffdc299c
+    PortName: Start case!
+    TargetNodeGuid: c8c22941-24d2-492a-af39-3cc9261edef5
+  - BaseNodeGuid: c8c22941-24d2-492a-af39-3cc9261edef5
+    PortName: Event Fired
+    TargetNodeGuid: 860d5ea9-854e-4680-a654-0c14949619d2
+  - BaseNodeGuid: c8c22941-24d2-492a-af39-3cc9261edef5
+    PortName: Already Triggered
+    TargetNodeGuid: 860d5ea9-854e-4680-a654-0c14949619d2
+  DialogueNodeData:
+  - Guid: 312170db-f137-4696-bc72-13a3ffdc299c
+    DialogueText: 'This event test will initialize and start.
+
+      Starting test
+      case "testCase01".'
+    Position: {x: 248, y: 179}
+    nodeType: 0
+  - Guid: c8c22941-24d2-492a-af39-3cc9261edef5
+    DialogueText: Event Node
+    Position: {x: 505, y: 173}
+    nodeType: 1
+  - Guid: 860d5ea9-854e-4680-a654-0c14949619d2
+    DialogueText: New case started! Get to investigating!
+    Position: {x: 742, y: 179}
+    nodeType: 0
+  ExposedProperties: []
+  DialogueCheckData: []
+  EventNodeData:
+  - nodeGuid: c8c22941-24d2-492a-af39-3cc9261edef5
+    EventName: startCase
+    EventValue: testCase01
+    isRepeatable: 0
+    hasFired: 0
+    ignoreDeadEnd: 1
+    eventType: 5
+  CheckNodeData: []
+  EndpointNodeData: []

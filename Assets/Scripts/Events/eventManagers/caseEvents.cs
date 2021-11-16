@@ -9,9 +9,12 @@ public static class caseEvents
     private static Dictionary<string, Action<string>> eventsDictionary = new Dictionary<string, Action<string>>();
 
     // events
+    public static event Action<string> onVictimUpdated;
     public static event Action<string> onProfileAdded;
     public static event Action<string, string> onProfileUpdated;
     public static event Action<string> onEvidenceAdded;
+    public static event Action<string, string> onEvidenceChanged;
+    public static event Action<string> onEvidenceRemoved;
     public static event Action<string> onLeadAdded;
     public static event Action<string> onLeadResolved;
 
@@ -20,9 +23,13 @@ public static class caseEvents
 
     static caseEvents()
     {
+        eventsDictionary.Add("startCase", StartCase);
+        eventsDictionary.Add("updateVictim", UpdateVictim);
         eventsDictionary.Add("addProfile", AddProfile);
         eventsDictionary.Add("updateProfile", UpdateProfile);
         eventsDictionary.Add("addEvidence", AddEvidence);
+        eventsDictionary.Add("removeEvidence", RemoveEvidence);
+        eventsDictionary.Add("upgradeEvidence", UpgradeEvidence);
         eventsDictionary.Add("addLead", AddLead);
         eventsDictionary.Add("resolveLead", ResolveLead);
         eventsDictionary.Add("addLocation", AddNewLocation);
@@ -39,6 +46,50 @@ public static class caseEvents
         {
             Debug.LogError("CASE EVENTS ---- Attempted to process event for key but missing key: " + eventName);
         }
+    }
+
+    // EVENTS
+
+    private static void StartCase(string caseID)
+    {
+        CaseManager.Instance.StartNewCase(caseID);
+    }
+
+    private static void UpdateVictim(string characterProperty)
+    {
+        switch(characterProperty)
+            {
+                case "portrait":
+                    onVictimUpdated?.Invoke("portrait");
+                break;
+                case "name":
+                    onVictimUpdated?.Invoke("name");
+                break;
+                case "age":
+                    onVictimUpdated?.Invoke("age");
+                break;
+                case "occupation":
+                    onVictimUpdated?.Invoke("occupation");
+                break;
+                case "residence":
+                    onVictimUpdated?.Invoke("residence");
+                break;
+                case "summary":
+                    onVictimUpdated?.Invoke("summary");
+                break;
+                case "cod":
+                    onVictimUpdated?.Invoke("causeOfDeath");
+                break;
+                case "tod":
+                    onVictimUpdated?.Invoke("timeOfDeath");
+                break;
+                case "lod":
+                    onVictimUpdated?.Invoke("locationOfDeath");
+                break;
+                default:
+                    Debug.LogError("CASE EVENTS ---- FAILED TO UPDATE CHARACTER PROFILE, INCORRECT PARAM VALUE: " + characterProperty);
+                break;
+            }
     }
 
     private static void AddProfile(string profileName)
@@ -89,6 +140,24 @@ public static class caseEvents
         onEvidenceAdded?.Invoke(evidenceID);
     }
 
+    private static void UpgradeEvidence(string eventValue)
+    {
+        var eventParams = eventValue.Split('.');
+        if(eventParams.Length == 2)
+        {
+            var oldEvidenceID = eventParams[0];
+            var newEvidenceID = eventParams[1];
+            onEvidenceChanged?.Invoke(oldEvidenceID,newEvidenceID);
+            
+        }
+        else Debug.LogError("CASE EVENTS ---- FAILED TO UPGRADE EVIDENCE, INCORRECT PARAMS LENGTH: " + eventParams.Length);
+    }
+
+    private static void RemoveEvidence(string evidenceID)
+    {
+        onEvidenceRemoved?.Invoke(evidenceID);
+    }
+
     private static void AddLead(string leadID)
     {
         onLeadAdded?.Invoke(leadID);
@@ -121,7 +190,6 @@ public static class caseEvents
             }
         }
         else Debug.LogError("CASE EVENTS ---- FAILED TO UPDATE LOCATION STATUS, INCORRECT PARAMS LENGTH: " + eventParams.Length);
-        
     }
 
 }

@@ -3741,6 +3741,7 @@ MonoBehaviour:
   controller: {fileID: 0}
   mainMenuUI: {fileID: 1510944315}
   startingMainMenuPosition: {x: -700, y: 0}
+  caseMenuIcon: {fileID: 1311036728}
   caseMenuUI: {fileID: 1388965097}
   startingCaseMenuPosition: {x: 700, y: 0}
   targetPosition: {x: 0, y: 0}
@@ -5434,18 +5435,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _victim:
-    VictimName: 
-    VictimPortrait:
+    name: 
+    portrait:
       portraitSprite: {fileID: 0}
       thumbNailOffsetX: 0
       thumbNailOffsetY: 0
-    VictimSummary: 
-    VictimAge: 
-    VictimResidence: 
-    VictimOccupation: 
-    CauseOfDeath: 
-    TimeofDeath: 
-    LocationOfDeath: 
+    summary: 
+    age: 
+    residence: 
+    occupation: 
+    causeOfDeath: 
+    timeOfDeath: 
+    locationOfDeath: 
     AdditionalInjuries: []
     AdditionalNotes: []
   _leads: []
@@ -5475,14 +5476,9 @@ MonoBehaviour:
     ProposedMeans: {fileID: 0}
     ProposedMotive: {fileID: 0}
     ProposedOpportunity: {fileID: 0}
-  _evidence:
-  - {fileID: 11400000, guid: f31b41f14424ee44fab4aa5951432156, type: 2}
-  - {fileID: 11400000, guid: cf059612f9caa7b4c8484eb2d406d61b, type: 2}
-  - {fileID: 11400000, guid: fc9fae3313687aa46ba40f7a38cd1680, type: 2}
+  _evidence: []
   _nullEvidence: {fileID: 11400000, guid: 54946fa96237b3946bdde8576ad73ead, type: 2}
-  _customNotes:
-  - This is a custom note you've added.
-  - This is another custom note you've added.
+  _customNotes: []
   _activeLocations: []
 --- !u!4 &1510813219
 Transform:
@@ -5895,7 +5891,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10873fb8f80ca3d4481b549aa37bcfa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _activeCase: {fileID: 11400000, guid: 0edb1ec0af7d88840afa39da5b84242d, type: 2}
+  _activeCase: {fileID: 0}
+  _availableCases:
+  - {fileID: 11400000, guid: 0edb1ec0af7d88840afa39da5b84242d, type: 2}
   _unknownPortrait:
     portraitSprite: {fileID: 21300000, guid: 8a0e46123a24921459ca69fd77cc1ed0, type: 3}
     thumbNailOffsetX: 0
@@ -10535,7 +10533,7 @@ PrefabInstance:
     - target: {fileID: 3411039601826948672, guid: 36cc43efa6153664892cfa5344bdcd4f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.00000821799
+      value: 0.0007552732
       objectReference: {fileID: 0}
     - target: {fileID: 3678416080291550324, guid: 36cc43efa6153664892cfa5344bdcd4f,
         type: 3}

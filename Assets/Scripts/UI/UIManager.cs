@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour
     [Header("Game Menus")]
     public RectTransform mainMenuUI;
     public Vector2 startingMainMenuPosition;
+    [SerializeField] private GameObject caseMenuIcon;
     public RectTransform caseMenuUI;
     public Vector2 startingCaseMenuPosition;
     public Vector2 targetPosition;
@@ -63,6 +64,7 @@ public class UIManager : MonoBehaviour
         SwipeDetector.OnSwipe += onSwipe;
         gameController.Instance.OnGameStateChanged += UpdateUIGameState;
         DialogueParser.onDialogueReachedDeadEnd += CreateEndDialogueButton;
+        PlayerCaseRecord.OnCaseEnabled += SetCaseMenuIconActive;
         PlayerCaseRecord.OnMessageToUI += addToContentText;
         PlayerCaseRecord.OnLinkToUI += addLinkToContentText;
         UIScreen.onCloseMenu += CloseUIMenu;
@@ -89,6 +91,8 @@ public class UIManager : MonoBehaviour
         
 
         _UISTATE = UISTATE.NORMALGAMEPLAY;
+        // turn off menu icons if need be
+        SetCaseMenuIconActive(PlayerCaseRecord.Instance.onActiveCase);
         
     }
 
@@ -209,6 +213,7 @@ public class UIManager : MonoBehaviour
 
     public void OpenCaseMenu()
     {
+        if(!PlayerCaseRecord.Instance.onActiveCase) return; // only open menu if a case is active
         Debug.Log("Case menu button touched. Opening main menu.");
         _UISTATE = UISTATE.CASEMENU;
         SlideInCaseMenu();
@@ -219,6 +224,11 @@ public class UIManager : MonoBehaviour
         Debug.Log("Case menu close button touched. Closing main menu.");
         _UISTATE = UISTATE.NORMALGAMEPLAY;
         SlideOutCaseMenu();
+    }
+
+    public void SetCaseMenuIconActive(bool isActive)
+    {
+        caseMenuIcon.SetActive(isActive);
     }
 
     public void CloseUIMenu(MENUTYPE menuType)

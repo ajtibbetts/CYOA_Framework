@@ -12,8 +12,10 @@ public class CaseManager : MonoBehaviour
 
 
     public static event Action<MapObject> OnNewCaseMap;
+    public static event Action OnNewCaseSet;
 
     [SerializeField] private CaseScenario _activeCase;
+    [SerializeField] private List<CaseScenario> _availableCases = new List<CaseScenario>();
     [SerializeField] private CharacterPortrait _unknownPortrait;
 
     private void Awake() {
@@ -34,10 +36,16 @@ public class CaseManager : MonoBehaviour
 
     }
 
-    public void GetNewCase(CaseScenario newScenario)
+    public void StartNewCase(string caseID)
     {
-        _activeCase = newScenario;
-        
+        var caseToStart = _availableCases.Find(x => x.GetCaseID().ToLower() == caseID.ToLower());
+        if(caseToStart != null)
+        {
+            _activeCase = caseToStart;
+            SetupCaseMap();
+            OnNewCaseSet?.Invoke();
+        }
+        else Debug.LogError("CASE MANAGER ---- FAILED TO START NEW CASEID: " + caseID);
     }
 
     public void SetupCaseMap()
@@ -63,15 +71,16 @@ public class CaseManager : MonoBehaviour
     public VictimData GetStartingVictimData()
     {
         VictimData _victimData = new VictimData();
-        _victimData.VictimName = _activeCase.GetVictim().GetVictimName();
-        _victimData.VictimPortrait = _activeCase.GetVictim().GetVictimPortrait();
-        _victimData.VictimSummary = _activeCase.GetVictim().GetVictimSummary();
-        _victimData.VictimAge = _activeCase.GetVictim().GetVictimAge();
-        _victimData.VictimResidence = _activeCase.GetVictim().GetVictimResidence();
-        _victimData.VictimOccupation = _activeCase.GetVictim().GetVictimOccupation();
-        _victimData.CauseOfDeath = _activeCase.GetVictim().GetCauseOfDeath();
-        _victimData.TimeofDeath = _activeCase.GetVictim().GetTimeOfDeath();
-        _victimData.LocationOfDeath = _activeCase.GetVictim().GetLocationOfDeath();
+        _victimData.name = _activeCase.GetVictim().GetVictimName();
+        if(_activeCase.GetVictim().GetVictimPortrait() == null) _victimData.portrait = _unknownPortrait;
+        else _victimData.portrait = _activeCase.GetVictim().GetVictimPortrait();
+        _victimData.summary = _activeCase.GetVictim().GetVictimSummary();
+        _victimData.age = _activeCase.GetVictim().GetVictimAge();
+        _victimData.residence = _activeCase.GetVictim().GetVictimResidence();
+        _victimData.occupation = _activeCase.GetVictim().GetVictimOccupation();
+        _victimData.causeOfDeath = _activeCase.GetVictim().GetCauseOfDeath();
+        _victimData.timeOfDeath = _activeCase.GetVictim().GetTimeOfDeath();
+        _victimData.locationOfDeath = _activeCase.GetVictim().GetLocationOfDeath();
         _victimData.AdditionalInjuries = _activeCase.GetVictim().GetAdditionalInjuries();
         _victimData.AdditionalNotes = _activeCase.GetVictim().GetAdditionalNotes();
         return _victimData;
@@ -87,10 +96,22 @@ public class CaseManager : MonoBehaviour
         return _activeCase.GetVictim().RevealVictimProperty(propertyName);
     }
 
+    public List<CharacterProfileData> GetStartingCharacterProfiles()
+    {
+        List<CharacterProfileData> startingProfiles = new List<CharacterProfileData>();
+        var startingProfilesFromScenario = _activeCase.GetStartingProfiles();
+        foreach(CaseCharacterProfile profile in startingProfilesFromScenario)
+        {
+            startingProfiles.Add(GetStartingCharacterProfileData(profile.GetCharacterID()));
+        }
+
+        return startingProfiles;
+    }
+
     public CharacterProfileData GetStartingCharacterProfileData(string characterID)
     {
         CharacterProfileData _characterData = new CharacterProfileData();
-        List<CaseCharacterProfile> _caseCharacters = _activeCase.GetCharacterProfiles();
+        List<CaseCharacterProfile> _caseCharacters = _activeCase.GetAvailableProfiles();
         // match to (hidden) character name and popualte starting values;
         var matchedCharacter = _caseCharacters.Find(x => x.GetCharacterID().ToLower() == characterID.ToLower());
         if(matchedCharacter != null)
@@ -118,21 +139,42 @@ public class CaseManager : MonoBehaviour
 
     public CharacterPortrait UncoverCharacterPortrait(string characterID)
     {
-        List<CaseCharacterProfile> _caseCharacters = _activeCase.GetCharacterProfiles();
+        List<CaseCharacterProfile> _caseCharacters = _activeCase.GetAvailableProfiles();
         var matchedCharacter = _caseCharacters.Find(x => x.GetCharacterID().ToLower() == characterID.ToLower());
         return matchedCharacter.RevealCharacterPortrait();
     }
 
     public string UncoverCharacterProperty(string characterID, string propertyName)
     {
-        List<CaseCharacterProfile> _caseCharacters = _activeCase.GetCharacterProfiles();
+        List<CaseCharacterProfile> _caseCharacters = _activeCase.GetAvailableProfiles();
         var matchedCharacter = _caseCharacters.Find(x => x.GetCharacterID().ToLower() == characterID.ToLower());
         return matchedCharacter.RevealCharacterProperty(propertyName);
+    }
+
+    public List<CaseEvidence> GetStartingEvidence()
+    {
+        return _activeCase.GetStartingEvidence();
     }
 
     public List<CaseEvidence> GetAvailableEvidence()
     {
         return _activeCase.GetAvailableEvidence();
+    }
+
+    public List<ActiveLead> GetStartingLeads()
+    {
+        List<ActiveLead> startingLeads = new List<ActiveLead>();
+        var initialLeads = _activeCase.GetStartingLeads();
+        foreach(CaseLead initialLead in initialLeads)
+        {
+            ActiveLead newLead= new ActiveLead();
+            newLead.lead = initialLead;
+            newLead.isResolved = false;
+            startingLeads.Add(newLead);
+        }
+
+
+        return startingLeads;
     }
 
     public List<CaseLead> GetAvailableLeads()
@@ -167,7 +209,7 @@ public class CaseManager : MonoBehaviour
 
     public void CompleteCase()
     {
-        
+
     }
 
    

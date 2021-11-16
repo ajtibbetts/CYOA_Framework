@@ -1,0 +1,178 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9837df7c010b3346bca580cac5bac11, type: 3}
+  m_Name: victimEventTest
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGuid: fc3eb68e-5cdf-45ad-87fb-7b3d2fb52ddd
+    PortName: Next
+    TargetNodeGuid: 837b90e2-ebba-4dea-80d0-e62b63de1d47
+  - BaseNodeGuid: 837b90e2-ebba-4dea-80d0-e62b63de1d47
+    PortName: Lets do it!
+    TargetNodeGuid: 8797ab2e-bd68-4d6f-9c3c-cceb436d28a9
+  - BaseNodeGuid: 8797ab2e-bd68-4d6f-9c3c-cceb436d28a9
+    PortName: Event Fired
+    TargetNodeGuid: 4fe0b494-3fe7-4be6-9514-b9c572419a9e
+  - BaseNodeGuid: 8797ab2e-bd68-4d6f-9c3c-cceb436d28a9
+    PortName: Already Triggered
+    TargetNodeGuid: 4fe0b494-3fe7-4be6-9514-b9c572419a9e
+  - BaseNodeGuid: 4fe0b494-3fe7-4be6-9514-b9c572419a9e
+    PortName: Event Fired
+    TargetNodeGuid: 79f505a6-5088-47d6-b379-c1deab4f7787
+  - BaseNodeGuid: 4fe0b494-3fe7-4be6-9514-b9c572419a9e
+    PortName: Already Triggered
+    TargetNodeGuid: 79f505a6-5088-47d6-b379-c1deab4f7787
+  - BaseNodeGuid: 79f505a6-5088-47d6-b379-c1deab4f7787
+    PortName: Event Fired
+    TargetNodeGuid: 81453a32-55c6-4617-89e0-5c77da3638e4
+  - BaseNodeGuid: 79f505a6-5088-47d6-b379-c1deab4f7787
+    PortName: Already Triggered
+    TargetNodeGuid: 81453a32-55c6-4617-89e0-5c77da3638e4
+  - BaseNodeGuid: 81453a32-55c6-4617-89e0-5c77da3638e4
+    PortName: Event Fired
+    TargetNodeGuid: 100173d1-ab5a-4718-9fb3-446b4332afd4
+  - BaseNodeGuid: 81453a32-55c6-4617-89e0-5c77da3638e4
+    PortName: Already Triggered
+    TargetNodeGuid: 100173d1-ab5a-4718-9fb3-446b4332afd4
+  - BaseNodeGuid: 100173d1-ab5a-4718-9fb3-446b4332afd4
+    PortName: Event Fired
+    TargetNodeGuid: c5950d2e-5c7e-45f3-b742-1c1c7ef5fbd5
+  - BaseNodeGuid: 100173d1-ab5a-4718-9fb3-446b4332afd4
+    PortName: Already Triggered
+    TargetNodeGuid: c5950d2e-5c7e-45f3-b742-1c1c7ef5fbd5
+  - BaseNodeGuid: c5950d2e-5c7e-45f3-b742-1c1c7ef5fbd5
+    PortName: Event Fired
+    TargetNodeGuid: 1a9dd419-ae56-4567-9a9b-3c3e5a2d9597
+  - BaseNodeGuid: c5950d2e-5c7e-45f3-b742-1c1c7ef5fbd5
+    PortName: Already Triggered
+    TargetNodeGuid: 1a9dd419-ae56-4567-9a9b-3c3e5a2d9597
+  - BaseNodeGuid: 1a9dd419-ae56-4567-9a9b-3c3e5a2d9597
+    PortName: Event Fired
+    TargetNodeGuid: 092da391-e467-4744-9747-a26639bd7973
+  - BaseNodeGuid: 1a9dd419-ae56-4567-9a9b-3c3e5a2d9597
+    PortName: Already Triggered
+    TargetNodeGuid: 092da391-e467-4744-9747-a26639bd7973
+  - BaseNodeGuid: 092da391-e467-4744-9747-a26639bd7973
+    PortName: Event Fired
+    TargetNodeGuid: 5c4e8255-e1d0-418b-bfb5-f5c66f1267f5
+  - BaseNodeGuid: 092da391-e467-4744-9747-a26639bd7973
+    PortName: Already Triggered
+    TargetNodeGuid: 5c4e8255-e1d0-418b-bfb5-f5c66f1267f5
+  DialogueNodeData:
+  - Guid: 837b90e2-ebba-4dea-80d0-e62b63de1d47
+    DialogueText: This event test will reveal all unknown data on the victim.
+    Position: {x: 233, y: 200}
+    nodeType: 0
+  - Guid: 8797ab2e-bd68-4d6f-9c3c-cceb436d28a9
+    DialogueText: Event Node
+    Position: {x: 604, y: 188}
+    nodeType: 1
+  - Guid: 4fe0b494-3fe7-4be6-9514-b9c572419a9e
+    DialogueText: Event Node
+    Position: {x: 819, y: 188}
+    nodeType: 1
+  - Guid: 79f505a6-5088-47d6-b379-c1deab4f7787
+    DialogueText: Event Node
+    Position: {x: 1036, y: 188}
+    nodeType: 1
+  - Guid: 81453a32-55c6-4617-89e0-5c77da3638e4
+    DialogueText: Event Node
+    Position: {x: 1260, y: 188}
+    nodeType: 1
+  - Guid: 100173d1-ab5a-4718-9fb3-446b4332afd4
+    DialogueText: Event Node
+    Position: {x: 1472, y: 188}
+    nodeType: 1
+  - Guid: c5950d2e-5c7e-45f3-b742-1c1c7ef5fbd5
+    DialogueText: Event Node
+    Position: {x: 1703, y: 188}
+    nodeType: 1
+  - Guid: 092da391-e467-4744-9747-a26639bd7973
+    DialogueText: Event Node
+    Position: {x: 2148, y: 188}
+    nodeType: 1
+  - Guid: 1a9dd419-ae56-4567-9a9b-3c3e5a2d9597
+    DialogueText: Event Node
+    Position: {x: 1927, y: 188}
+    nodeType: 1
+  - Guid: 5c4e8255-e1d0-418b-bfb5-f5c66f1267f5
+    DialogueText: Event Node
+    Position: {x: 2372, y: 188}
+    nodeType: 1
+  ExposedProperties: []
+  DialogueCheckData: []
+  EventNodeData:
+  - nodeGuid: 8797ab2e-bd68-4d6f-9c3c-cceb436d28a9
+    EventName: updateVictim
+    EventValue: name
+    isRepeatable: 0
+    hasFired: 0
+    ignoreDeadEnd: 1
+    eventType: 5
+  - nodeGuid: 4fe0b494-3fe7-4be6-9514-b9c572419a9e
+    EventName: updateVictim
+    EventValue: portrait
+    isRepeatable: 0
+    hasFired: 0
+    ignoreDeadEnd: 1
+    eventType: 5
+  - nodeGuid: 79f505a6-5088-47d6-b379-c1deab4f7787
+    EventName: updateVictim
+    EventValue: age
+    isRepeatable: 0
+    hasFired: 0
+    ignoreDeadEnd: 1
+    eventType: 5
+  - nodeGuid: 81453a32-55c6-4617-89e0-5c77da3638e4
+    EventName: updateVictim
+    EventValue: occupation
+    isRepeatable: 0
+    hasFired: 0
+    ignoreDeadEnd: 1
+    eventType: 5
+  - nodeGuid: 100173d1-ab5a-4718-9fb3-446b4332afd4
+    EventName: updateVictim
+    EventValue: residence
+    isRepeatable: 0
+    hasFired: 0
+    ignoreDeadEnd: 1
+    eventType: 5
+  - nodeGuid: c5950d2e-5c7e-45f3-b742-1c1c7ef5fbd5
+    EventName: updateVictim
+    EventValue: summary
+    isRepeatable: 0
+    hasFired: 0
+    ignoreDeadEnd: 1
+    eventType: 5
+  - nodeGuid: 092da391-e467-4744-9747-a26639bd7973
+    EventName: updateVictim
+    EventValue: tod
+    isRepeatable: 0
+    hasFired: 0
+    ignoreDeadEnd: 1
+    eventType: 5
+  - nodeGuid: 1a9dd419-ae56-4567-9a9b-3c3e5a2d9597
+    EventName: updateVictim
+    EventValue: cod
+    isRepeatable: 0
+    hasFired: 0
+    ignoreDeadEnd: 1
+    eventType: 5
+  - nodeGuid: 5c4e8255-e1d0-418b-bfb5-f5c66f1267f5
+    EventName: updateVictim
+    EventValue: lod
+    isRepeatable: 0
+    hasFired: 0
+    ignoreDeadEnd: 0
+    eventType: 5
+  CheckNodeData: []
+  EndpointNodeData: []

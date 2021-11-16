@@ -5,17 +5,24 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "CaseScenario", menuName = "CYOA/Case/CaseScenario", order = 0)]
 public class CaseScenario : ScriptableObject {
+    [SerializeField] private string _caseID;
     [SerializeField] private string _caseTitle;
     [SerializeField] [TextArea] private string _caseSummary;
     [SerializeField] private CaseVictim _caseVictim;
     [SerializeField] private CaseCulprit _caseCulprit;
     [SerializeField] private List<CaseLead> _startingLeads;
     [SerializeField] private List<CaseLead> _availableLeads;
-
-    [SerializeField] private List<CaseCharacterProfile> _characterProfiles;
+    [SerializeField] private List<CaseCharacterProfile> _startingCharacterProfiles;
+    [SerializeField] private List<CaseCharacterProfile> _availableCharacterProfiles;
+    [SerializeField] private List<CaseEvidence> _startingCaseEvidence;
     [SerializeField] private List<CaseEvidence> _availableCaseEvidence;
     [SerializeField] private MapObject _caseMap;
 
+
+    public string GetCaseID()
+    {
+        return _caseID;
+    }
 
     public string GetCaseTitle()
     {
@@ -47,9 +54,19 @@ public class CaseScenario : ScriptableObject {
         return _availableLeads;
     }
 
-    public List<CaseCharacterProfile> GetCharacterProfiles()
+    public List<CaseCharacterProfile> GetStartingProfiles()
     {
-        return _characterProfiles;
+        return _startingCharacterProfiles;
+    }
+
+    public List<CaseCharacterProfile> GetAvailableProfiles()
+    {
+        return _availableCharacterProfiles;
+    }
+
+    public List<CaseEvidence> GetStartingEvidence()
+    {
+        return _startingCaseEvidence;
     }
 
     public List<CaseEvidence> GetAvailableEvidence()

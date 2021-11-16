@@ -178,16 +178,16 @@ namespace CaseDataObjects
     public class VictimData
     {
         [Header("Victim Info")]
-        public string VictimName;
-        public CharacterPortrait VictimPortrait;
-        public string VictimSummary;
-        public string VictimAge;
-        public string VictimResidence;
-        public string VictimOccupation;
+        public string name;
+        public CharacterPortrait portrait;
+        public string summary;
+        public string age;
+        public string residence;
+        public string occupation;
         [Header("Homicide Info")]
-        public string CauseOfDeath;
-        public string TimeofDeath;
-        public string LocationOfDeath;
+        public string causeOfDeath;
+        public string timeOfDeath;
+        public string locationOfDeath;
         public List<String> AdditionalInjuries;
         public List<String> AdditionalNotes;
     }

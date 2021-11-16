@@ -10,6 +10,7 @@ public class PlayerCaseRecord : MonoBehaviour
     public static PlayerCaseRecord Instance { get { return _instance; } }
 
     // events
+    public static event Action<bool> OnCaseEnabled;
     public static event Action OnCaseDataUpdated;
     public static event Action<string> OnMessageToUI;
     public static event Action<string> OnLinkToUI;
@@ -28,7 +29,7 @@ public class PlayerCaseRecord : MonoBehaviour
     [SerializeField] private List<ActiveLocation> _activeLocations = new List<ActiveLocation>();
     
     
-    
+    public bool onActiveCase {get; private set;}
     
     private void Awake() {
         if (_instance != null && _instance != this)
@@ -47,18 +48,22 @@ public class PlayerCaseRecord : MonoBehaviour
     {
         // to test, setup new case
         _primarySuspect = null;
-        StartNewCase();
+        // StartNewCase(); // removed unless testing
 
 
         // setup test data for building UI.
-        SetTestData();
+        // SetTestData();
     }
 
     private void AddListeners()
     {
+        CaseManager.OnNewCaseSet += StartNewCase;
+        caseEvents.onVictimUpdated += DiscoverVictimData;
         caseEvents.onProfileAdded += AddProfile;
         caseEvents.onProfileUpdated += DiscoverProfileData;
         caseEvents.onEvidenceAdded += AddEvidenceByID;
+        caseEvents.onEvidenceRemoved += RemoveEvidenceByID;
+        caseEvents.onEvidenceChanged += UpgradeEvidenceByID;
         caseEvents.onLeadAdded += AddLeadByID;
         caseEvents.onLeadResolved += ResolveLeadByID;
         caseEvents.onLocationDiscovered += DiscoverLocation;
@@ -132,11 +137,23 @@ public class PlayerCaseRecord : MonoBehaviour
     // case functionality
     void StartNewCase()
     {
-        Debug.Log("Starting new case.");
-        // ClearCollectionsForNewCase(); // remove for testing
+        // Debug.Log("Starting new case.");
+        ClearCollectionsForNewCase(); // remove when testing with starting test data
+
+        // get starting victim data, starting profiles, leads, and evidence
         _victim = CaseManager.Instance.GetStartingVictimData();
+        _leads.AddRange(CaseManager.Instance.GetStartingLeads());
+        _profiles.AddRange(CaseManager.Instance.GetStartingCharacterProfiles());
+        _evidence.AddRange(CaseManager.Instance.GetStartingEvidence());
+
+        // get starting locations
         SetStartingLocations();
-        CaseManager.Instance.SetupCaseMap();
+
+        onActiveCase = true;
+        OnCaseEnabled?.Invoke(true);
+        OnMessageToUI?.Invoke("New Case Started.");
+        OnLinkToUI?.Invoke("openCase.null");
+        OnCaseDataUpdated?.Invoke();
     }
 
     void ClearCollectionsForNewCase()
@@ -156,15 +173,23 @@ public class PlayerCaseRecord : MonoBehaviour
     {
         if(propertyName == "portrait")
         {
-            _victim.VictimPortrait = CaseManager.Instance.UncoverVictimPortrait();
+            _victim.portrait = CaseManager.Instance.UncoverVictimPortrait();
+            OnMessageToUI?.Invoke("Victim's Portrait added to Victim Profile.");
+            OnLinkToUI?.Invoke("openVictim." + _victim.name);
             OnCaseDataUpdated?.Invoke();
             return;
         }
         else
         {
-            PropertyInfo propertyInfo = _victim.GetType().GetProperty(propertyName);
+            FieldInfo fieldInfo = _victim.GetType().GetField(propertyName, BindingFlags.Instance  | BindingFlags.Public);
             string DiscoveredValue = CaseManager.Instance.UncoverVictimProperty(propertyName);
-            propertyInfo.SetValue(_victim, Convert.ChangeType(DiscoveredValue, propertyInfo.PropertyType), null);
+            fieldInfo.SetValue(_victim, Convert.ChangeType(DiscoveredValue, fieldInfo.FieldType));
+            
+            // PropertyInfo propertyInfo = _victim.GetType().GetProperty(propertyName);
+            // string DiscoveredValue = CaseManager.Instance.UncoverVictimProperty(propertyName);
+            // propertyInfo.SetValue(_victim, Convert.ChangeType(DiscoveredValue, propertyInfo.PropertyType), null);
+            OnMessageToUI?.Invoke($"Added {_victim.name}'s {propertyName} to Case Profile.");
+            OnLinkToUI?.Invoke("openVictim." + _victim.name);
             OnCaseDataUpdated?.Invoke();
             return;
         }
@@ -363,11 +388,6 @@ public class PlayerCaseRecord : MonoBehaviour
         _suspects.Insert(0,_primarySuspect);
     }
     
-    private void AddEvidence(CaseEvidence evidence)
-    {
-        _evidence.Add(evidence);
-    }
-
     private void AddEvidenceByID(string evidenceID)
     {
         var availableEvidence = CaseManager.Instance.GetAvailableEvidence();
@@ -375,10 +395,42 @@ public class PlayerCaseRecord : MonoBehaviour
         if(!_evidence.Exists(x => x.GetEvidenceID().ToLower() == evidenceID.ToLower()))
         {
             _evidence.Add(evidenceToAdd);
-            OnMessageToUI?.Invoke("New Evidence Added: " + evidenceToAdd.GetEvidenceName());
+            OnMessageToUI?.Invoke($"Added {evidenceToAdd.GetEvidenceName()} to Evidence.");
             OnLinkToUI?.Invoke("openEvidence."+ evidenceToAdd.GetEvidenceName());
             OnCaseDataUpdated?.Invoke();
         }
+        else Debug.LogError("PLAYER CASE RECORD ---- FAILED TO ADD EVIDENCE BY ID: " + evidenceID);
+    }
+
+    private void RemoveEvidenceByID(string evidenceID)
+    {
+        var availableEvidence = CaseManager.Instance.GetAvailableEvidence();
+        var evidenceToRemove = _evidence.Find(x => x.GetEvidenceID().ToLower() == evidenceID.ToLower());
+        if(evidenceToRemove != null)
+        {
+            _evidence.Remove(evidenceToRemove);
+            OnMessageToUI?.Invoke($"Removed {evidenceToRemove.GetEvidenceName()} from Evidence.");
+            OnLinkToUI?.Invoke("openEvidence."+ evidenceToRemove.GetEvidenceName());
+            OnCaseDataUpdated?.Invoke();
+        }
+        else Debug.LogError("PLAYER CASE RECORD ---- FAILED TO REMOVE EVIDENCE BY ID: " + evidenceID);
+    }
+
+    private void UpgradeEvidenceByID(string oldEvidenceID, string newEvidenceID)
+    {
+        var availableEvidence = CaseManager.Instance.GetAvailableEvidence();
+        var evidenceToRemoveIndex = _evidence.FindIndex(x => x.GetEvidenceID().ToLower() == oldEvidenceID.ToLower());
+        var evidenceToAdd = availableEvidence.Find(x => x.GetEvidenceID().ToLower() == newEvidenceID.ToLower());
+        if(evidenceToRemoveIndex >= 0 && evidenceToAdd != null)
+        {
+            _evidence[evidenceToRemoveIndex] = evidenceToAdd;
+            // _evidence.Remove(evidenceToRemove);
+            // _evidence.Add(evidenceToAdd);
+            OnMessageToUI?.Invoke($"Updated {evidenceToAdd.GetEvidenceName()} in Evidence.");
+            OnLinkToUI?.Invoke("openEvidence."+ evidenceToAdd.GetEvidenceName());
+            OnCaseDataUpdated?.Invoke();
+        }
+        else Debug.LogError($"PLAYER CASE RECORD ---- FAILED TO UPGRADE EVIDENCE IDs (OLD:{oldEvidenceID}/NEW:{newEvidenceID})");
     }
 
     private void SetStartingLocations()

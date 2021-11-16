@@ -12,10 +12,12 @@ public class contentLinkManager : MonoBehaviour, IPointerClickHandler {
     private Dictionary<string, Action<string>> eventsDictionary = new Dictionary<string, Action<string>>();
 
     private void Awake() {
+        eventsDictionary.Add("openCase", OpenCaseSummary);
         eventsDictionary.Add("openProfile", OpenCaseProfile);
         eventsDictionary.Add("openEvidence", OpenEvidence);
         eventsDictionary.Add("openLeads",OpenLeads);
         eventsDictionary.Add("openMap",OpenMap);
+        eventsDictionary.Add("openVictim", OpenVictimProfile);
     }
 
     public void OnPointerClick(PointerEventData eventData) {
@@ -52,6 +54,22 @@ public class contentLinkManager : MonoBehaviour, IPointerClickHandler {
         {
             Debug.LogError("LINK MANAGER ---- Attempted to process event for key but missing key: " + eventName);
         }
+    }
+
+    // EVENTS
+
+    private void OpenCaseSummary(string notused)
+    {
+        Debug.Log("LINK MANAGER - OPENING CASE SUMMARY SCREEN. ");
+        OnOpenMenu?.Invoke(MENUTYPE.CASEMENU);
+        CaseMenu.Instance.OpenCaseSummaryScreen();
+    }
+
+    private void OpenVictimProfile(string victimName)
+    {
+        Debug.Log("LINK MANAGER - OPENING CASE PROFILE FOR: " + victimName);
+        OnOpenMenu?.Invoke(MENUTYPE.CASEMENU);
+        CaseMenu.Instance.OpenVictimDataScreen();
     }
 
     private void OpenCaseProfile(string characterID)

@@ -16,24 +16,24 @@ MonoBehaviour:
   _characterType: 1
   _characterName:
     propertyValue: Johnny Cyber
-    startAsDiscovered: 1
+    startAsDiscovered: 0
   _portrait:
     portrait:
       portraitSprite: {fileID: 21300000, guid: 2e1afda8f2a56ee44927613c08155a31, type: 3}
       thumbNailOffsetX: 13.7
       thumbNailOffsetY: 32.34
-    startAsDiscovered: 1
+    startAsDiscovered: 0
   thumbNailOffsetX: 0
   thumbNailOffsetY: 0
   _age:
     propertyValue: 25
     startAsDiscovered: 1
   _occupation:
-    propertyValue: Mechanic at Gearheads Automotive.
+    propertyValue: Bartender at End of Times.
     startAsDiscovered: 1
   _residence:
     propertyValue: 4758 Finch Ave Apt #3.
-    startAsDiscovered: 1
+    startAsDiscovered: 0
   _summary:
     propertyValue: Cyber enthusiast and street racer.
     startAsDiscovered: 1

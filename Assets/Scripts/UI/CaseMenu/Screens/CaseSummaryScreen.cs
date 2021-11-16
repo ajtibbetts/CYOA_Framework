@@ -35,6 +35,7 @@ public class CaseSummaryScreen : CaseScreen
     
     public override void UpdateData()
     {
+        if(!PlayerCaseRecord.Instance.onActiveCase) return; // exit if no case is active
         _caseTitle.text = CaseManager.Instance.GetActiveCaseTitle();
         _caseSummary.text = CaseManager.Instance.GetActiveCaseSummary();
 
@@ -46,16 +47,16 @@ public class CaseSummaryScreen : CaseScreen
     {
         if(_caseRecord.GetVictim() == null) return;
         
-        Sprite victimSprite = _caseRecord.GetVictim().VictimPortrait.portraitSprite;
-        float offsetX = _caseRecord.GetVictim().VictimPortrait.thumbNailOffsetX;
-        float offsetY = _caseRecord.GetVictim().VictimPortrait.thumbNailOffsetY;
+        Sprite victimSprite = _caseRecord.GetVictim().portrait.portraitSprite;
+        float offsetX = _caseRecord.GetVictim().portrait.thumbNailOffsetX;
+        float offsetY = _caseRecord.GetVictim().portrait.thumbNailOffsetY;
         SetPortraitThumbnail(_victimPortrait, victimSprite, offsetX, offsetY);   
         
         
-        _victimName.text = _caseRecord.GetVictim().VictimName;
-        _victimCOD.text = _caseRecord.GetVictim().CauseOfDeath;
-        _victimTOD.text = _caseRecord.GetVictim().TimeofDeath;
-        _victimLOD.text = _caseRecord.GetVictim().LocationOfDeath;
+        _victimName.text = _caseRecord.GetVictim().name;
+        _victimCOD.text = _caseRecord.GetVictim().causeOfDeath;
+        _victimTOD.text = _caseRecord.GetVictim().timeOfDeath;
+        _victimLOD.text = _caseRecord.GetVictim().locationOfDeath;
     }
 
     public void UpdateSuspectSummaryData()

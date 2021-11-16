@@ -26,22 +26,22 @@ MonoBehaviour:
     startAsDiscovered: 1
   _age:
     propertyValue: 23
-    startAsDiscovered: 1
+    startAsDiscovered: 0
   _residence:
     propertyValue: 54 Lawson Ave
-    startAsDiscovered: 1
+    startAsDiscovered: 0
   _occupation:
     propertyValue: Tatoo Artist at Inks R US
     startAsDiscovered: 1
   _causeOfDeath:
     propertyValue: Head trauma with blunt object.
-    startAsDiscovered: 1
+    startAsDiscovered: 0
   _timeOfDeath:
     propertyValue: April 4th at 23:24 hours.
-    startAsDiscovered: 1
+    startAsDiscovered: 0
   _locationOfDeath:
     propertyValue: Inks R Us
-    startAsDiscovered: 1
+    startAsDiscovered: 0
   _additionalInjuries:
   - Lacerations on right arm.
   - Defensive wounds on lower torso.
