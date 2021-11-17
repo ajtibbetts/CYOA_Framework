@@ -23,7 +23,12 @@ public class UIManager : MonoBehaviour
     public Vector2 startingCaseMenuPosition;
     public Vector2 targetPosition;
     public float animationTime;
+
+    [Header("Roll Screen")]
+    [SerializeField] private GameObject RollCanvas;
+
     [Header("Content")]
+    [SerializeField] private GameObject contentScrollParent;
     public GameObject contentScrollContainer;
     public Scrollbar vertScrollBar;
     public GameObject paragraphPrefab;
@@ -93,6 +98,7 @@ public class UIManager : MonoBehaviour
         _UISTATE = UISTATE.NORMALGAMEPLAY;
         // turn off menu icons if need be
         SetCaseMenuIconActive(PlayerCaseRecord.Instance.onActiveCase);
+        DisableRollScreen();
         
     }
 
@@ -254,6 +260,30 @@ public class UIManager : MonoBehaviour
                 OpenCaseMenu();
             break;
         }
+    }
+
+    public void ToggleRollScreen()
+    {
+        if(RollCanvas.GetComponent<Canvas>().enabled)
+        {
+            DisableRollScreen();
+        }
+        else EnableRollScreen();
+    }
+
+    [ContextMenu ("Enable Roll Screen")]
+    public void EnableRollScreen()
+    {
+        RollCanvas.GetComponent<Canvas>().enabled = true;
+        RollCanvas.SetActive(true);
+        contentScrollParent.SetActive(false);
+    }
+    [ContextMenu ("Disable Roll Screen")]
+    public void DisableRollScreen()
+    {
+        RollCanvas.GetComponent<Canvas>().enabled = false;
+        RollCanvas.SetActive(false);
+        contentScrollParent.SetActive(true);
     }
     /* GAME START BUTTONS / METHODS */
     
