@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class checkManager : MonoBehaviour
 {
+    private static checkManager _instance;
+    public static checkManager Instance { get { return _instance; } }
+    
     [HideInInspector] public gameController controller;
     [Tooltip("Enter a threshold value to check against 2d6 roll.")]
     
@@ -18,8 +21,14 @@ public class checkManager : MonoBehaviour
     public event Action onRollCheckFail;
     
     private void Awake() {
-            controller = GetComponent<gameController>();  
-            
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        } else {
+            _instance = this;
+        }
+
+        controller = GetComponent<gameController>();
     }
 
     
@@ -43,6 +52,22 @@ public class checkManager : MonoBehaviour
         Debug.Log("Total success counts:" + successCount);
         float probabilityTotal = successCount / 36.00f;
         Debug.Log($"Probability of rolling a {TestThreshHoldValue} or higher on (2d6 + {TestSkillValue}) is {probabilityTotal.ToString("p")}");
+    }
+
+    public static double GetProbability(int playerSkillValue, int difficultyValue)
+    {
+        int successCount = 0;
+        for(int i = 1; i <= 6; i++)
+        {
+            for(int j = 1; j <= 6; j++)
+            {
+                if(i + j + playerSkillValue > difficultyValue) successCount ++;
+            }
+        }
+        float probabilityTotal = successCount / 36.00f;
+        var result = Math.Round(probabilityTotal * 100, 0, MidpointRounding.AwayFromZero);
+        Debug.Log("probability result: " + result);
+        return result;
     }
 
     public bool RollCheck(string checkName, string checkValue)

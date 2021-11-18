@@ -123,10 +123,10 @@ namespace CaseDataObjects
         public CaseEvidence ProposedMotive;
         public CaseEvidence ProposedOpportunity;
 
-        public CaseSuspect(CharacterProfileData profile)
-        {
-            SuspectProfile = profile;
-        }
+        // public CaseSuspect(CharacterProfileData profile)
+        // {
+        //     SuspectProfile = profile;
+        // }
     }
 
     public class TheoryResults

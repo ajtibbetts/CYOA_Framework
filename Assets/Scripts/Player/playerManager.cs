@@ -27,29 +27,29 @@ public class playerManager : MonoBehaviour {
     }
     
 
-    public void SavePlayer()
-    {
+    // public void SavePlayer()
+    // {
         
-        Debug.Log("Saving player.");
-        _player.OutputData();
-        SaveSystem.SavePlayer(_player);
-    }
+    //     Debug.Log("Saving player.");
+    //     _player.OutputData();
+    //     SaveSystem.SavePlayer(_player);
+    // }
 
-    public void LoadPlayer()
-    {
-        Debug.Log("Loading player.");
-        PlayerData data = SaveSystem.LoadPlayer();
-        _player.Physical = data.Physical;
-        _player.Cognitive = data.Cognitive;
-        _player.Volitional = data.Volitional;
-        _player.Narrative = data.Narrative;
-        _player.Social = data.Social;
+    // public void LoadPlayer()
+    // {
+    //     Debug.Log("Loading player.");
+    //     PlayerData data = SaveSystem.LoadPlayer();
+    //     _player.Physical = data.Physical;
+    //     _player.Cognitive = data.Cognitive;
+    //     _player.Volitional = data.Volitional;
+    //     _player.Narrative = data.Narrative;
+    //     _player.Social = data.Social;
 
-        // level data
-        _player.CurrentScene = data.CurrentScene;
+    //     // level data
+    //     _player.CurrentScene = data.CurrentScene;
 
-        _player.OutputData();
-    }
+    //     _player.OutputData();
+    // }
  
     public void modifyPlayerHealth (int amount) {
         stats.currentHealth += amount;

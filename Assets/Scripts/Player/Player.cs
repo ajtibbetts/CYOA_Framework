@@ -91,6 +91,11 @@ public class Player : MonoBehaviour
         SetupSkillsDictionary();
     }
 
+    public void LoadSaveData(Player savedPlayerData)
+    {
+        _instance = savedPlayerData;
+    }
+
     public void addWorldNavObject(string GUID)
     {
         visitedWorldNavObjects.Add(GUID);

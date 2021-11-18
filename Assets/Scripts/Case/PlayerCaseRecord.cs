@@ -29,7 +29,7 @@ public class PlayerCaseRecord : MonoBehaviour
     [SerializeField] private List<ActiveLocation> _activeLocations = new List<ActiveLocation>();
     
     
-    public bool onActiveCase {get; private set;}
+    [ES3Serializable] public bool onActiveCase {get; private set;}
     
     private void Awake() {
         if (_instance != null && _instance != this)
@@ -68,6 +68,12 @@ public class PlayerCaseRecord : MonoBehaviour
         caseEvents.onLeadResolved += ResolveLeadByID;
         caseEvents.onLocationDiscovered += DiscoverLocation;
         caseEvents.onLocationStatusUpdated += UpdateLocationStatus;
+    }
+
+    public void LoadSaveData(PlayerCaseRecord savedRecord)
+    {
+        _instance = savedRecord;
+        OnCaseDataUpdated?.Invoke();
     }
 
     void SetTestData()
@@ -299,7 +305,8 @@ public class PlayerCaseRecord : MonoBehaviour
         }
         else
         {
-            CaseSuspect newSuspect = new CaseSuspect(characterProfile);
+            CaseSuspect newSuspect = new CaseSuspect();
+            newSuspect.SuspectProfile = characterProfile;
             UpdateSuspectProfile(newSuspect,null, EvidenceType.MEANS);
             UpdateSuspectProfile(newSuspect,null, EvidenceType.MOTIVE);
             UpdateSuspectProfile(newSuspect,null, EvidenceType.OPPORTUNITY);
