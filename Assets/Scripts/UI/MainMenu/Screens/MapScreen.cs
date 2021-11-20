@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using globalDataTypes;
 
 public class MapScreen : MenuScreen
 {

@@ -76,20 +76,20 @@ MonoBehaviour:
     isRepeatable: 0
     hasFired: 0
     ignoreDeadEnd: 1
-    eventType: 5
+    eventType: 6
   - nodeGuid: 645109da-ec83-4c37-b384-8b637971c1d3
     EventName: addLocation
     EventValue: centralPark
     isRepeatable: 0
     hasFired: 0
     ignoreDeadEnd: 1
-    eventType: 5
+    eventType: 6
   - nodeGuid: 4cfed1d0-eadc-4648-83c8-d500a3221091
     EventName: updateLocation
     EventValue: centralPark.lock
     isRepeatable: 0
     hasFired: 0
     ignoreDeadEnd: 1
-    eventType: 5
+    eventType: 6
   CheckNodeData: []
   EndpointNodeData: []

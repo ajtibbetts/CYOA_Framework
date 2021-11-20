@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using globalDataTypes;
 
 public class UIManager : MonoBehaviour
 {
@@ -363,14 +364,17 @@ public class UIManager : MonoBehaviour
     {
         Debug.Log("UI MANAGER ---- Checking this toggle");
         if(toggle.isOn) {
+            // // ensure all other toggles are off (USING TOGGLE GROUP ON CONTENT IN SCENE)
             
             _currentTargetNodeGUID = TargetNodeGuid;
             confirmActionButton.GetComponentInChildren<Text>().text = "Confirm";
+            confirmActionButton.GetComponentInChildren<Button>().interactable = true;
             toggle.GetComponent<Image>().color = globalConfig.UI.toggleSelectedBackgroundColor;
         }
         else {
             _currentTargetNodeGUID = null;
             confirmActionButton.GetComponentInChildren<Text>().text = "Select option then confirm.";
+            confirmActionButton.GetComponentInChildren<Button>().interactable = false;
             toggle.GetComponent<Image>().color = globalConfig.UI.toggleInactiveBackgroundColor;
         }
     }
@@ -462,6 +466,13 @@ public class UIManager : MonoBehaviour
             Debug.Log("New current guid: " + _currentTargetNodeGUID);
             confirmActionButton.GetComponentInChildren<Text>().text = _latestChoiceText;
             actionToggleButtons[0].SetActive(false);
+        }
+        else if (actionToggleButtons.Count > 1) {
+            // if not, disable the button initially forcing user to select an option.
+            confirmActionButton.GetComponentInChildren<Button>().interactable = false;
+        }
+        else {
+            Debug.LogError("UI MANAGER ---- ACTION TOGGLE BUTTON COUNT when checking for single option: " + actionToggleButtons.Count);
         }
     }
 

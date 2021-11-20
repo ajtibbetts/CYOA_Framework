@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using globalDataTypes;
 
 [RequireComponent(typeof(TMP_Text))]
 public class contentLinkManager : MonoBehaviour, IPointerClickHandler {

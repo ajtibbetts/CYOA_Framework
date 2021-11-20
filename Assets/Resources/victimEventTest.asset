@@ -117,62 +117,62 @@ MonoBehaviour:
     isRepeatable: 0
     hasFired: 0
     ignoreDeadEnd: 1
-    eventType: 5
+    eventType: 6
   - nodeGuid: 4fe0b494-3fe7-4be6-9514-b9c572419a9e
     EventName: updateVictim
     EventValue: portrait
     isRepeatable: 0
     hasFired: 0
     ignoreDeadEnd: 1
-    eventType: 5
+    eventType: 6
   - nodeGuid: 79f505a6-5088-47d6-b379-c1deab4f7787
     EventName: updateVictim
     EventValue: age
     isRepeatable: 0
     hasFired: 0
     ignoreDeadEnd: 1
-    eventType: 5
+    eventType: 6
   - nodeGuid: 81453a32-55c6-4617-89e0-5c77da3638e4
     EventName: updateVictim
     EventValue: occupation
     isRepeatable: 0
     hasFired: 0
     ignoreDeadEnd: 1
-    eventType: 5
+    eventType: 6
   - nodeGuid: 100173d1-ab5a-4718-9fb3-446b4332afd4
     EventName: updateVictim
     EventValue: residence
     isRepeatable: 0
     hasFired: 0
     ignoreDeadEnd: 1
-    eventType: 5
+    eventType: 6
   - nodeGuid: c5950d2e-5c7e-45f3-b742-1c1c7ef5fbd5
     EventName: updateVictim
     EventValue: summary
     isRepeatable: 0
     hasFired: 0
     ignoreDeadEnd: 1
-    eventType: 5
+    eventType: 6
   - nodeGuid: 092da391-e467-4744-9747-a26639bd7973
     EventName: updateVictim
     EventValue: tod
     isRepeatable: 0
     hasFired: 0
     ignoreDeadEnd: 1
-    eventType: 5
+    eventType: 6
   - nodeGuid: 1a9dd419-ae56-4567-9a9b-3c3e5a2d9597
     EventName: updateVictim
     EventValue: cod
     isRepeatable: 0
     hasFired: 0
     ignoreDeadEnd: 1
-    eventType: 5
+    eventType: 6
   - nodeGuid: 5c4e8255-e1d0-418b-bfb5-f5c66f1267f5
     EventName: updateVictim
     EventValue: lod
     isRepeatable: 0
     hasFired: 0
     ignoreDeadEnd: 0
-    eventType: 5
+    eventType: 6
   CheckNodeData: []
   EndpointNodeData: []

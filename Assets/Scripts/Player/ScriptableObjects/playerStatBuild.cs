@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using globalDataTypes;
 
 [CreateAssetMenu(menuName = "CYOA/Player/Stats")]
 public class playerStatBuild : ScriptableObject

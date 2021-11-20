@@ -22,7 +22,11 @@ MonoBehaviour:
       but to continue to world navigation.
     Position: {x: 283, y: 165}
     nodeType: 0
-  ExposedProperties: []
+  ExposedProperties:
+  - PropertyName: testProperty
+    PropertyValue: test value
+  - PropertyName: testProperty2
+    PropertyValue: another value
   DialogueCheckData: []
   EventNodeData: []
   CheckNodeData: []

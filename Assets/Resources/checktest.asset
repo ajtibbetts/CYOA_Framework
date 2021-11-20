@@ -95,7 +95,8 @@ MonoBehaviour:
     EventValue: -4
     isRepeatable: 1
     hasFired: 0
-    eventType: 0
+    ignoreDeadEnd: 0
+    eventType: 1
   CheckNodeData:
   - nodeGuid: 4b8d2462-db66-4af7-a6a3-4e3eb5c6eebd
     checkType: 1

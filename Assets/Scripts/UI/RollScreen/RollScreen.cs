@@ -33,6 +33,11 @@ public class RollScreen : MonoBehaviour
     [SerializeField] private Button rollButton;
     [SerializeField] private List<Sprite> diceSprites = new List<Sprite>();
 
+    [Header("Results Screen")]
+    [SerializeField] private GameObject resultsContainer;
+    [SerializeField] private TextMeshProUGUI resultsHeaderText;
+    [SerializeField] private TextMeshProUGUI resultsDetailsText;
+
     private void Awake() {
         if (_instance != null && _instance != this)
         {
@@ -58,6 +63,7 @@ public class RollScreen : MonoBehaviour
 
     public void StartTestRoll()
     {
+        resultsContainer.SetActive(false);
         TestSkillSetUI();
         StartCoroutine(StartRollSequence());
     }
@@ -70,7 +76,8 @@ public class RollScreen : MonoBehaviour
         int rightResult = rnd.Next(1,7);
         SetDiceImage(rightDice, rightResult);
         int totalRoll = leftResult+ rightResult + skillValue;
-        if(totalRoll > difficultyValue)
+        var passedCheck =  totalRoll > difficultyValue;
+        if(passedCheck)
         {
             Debug.Log($"ROLL PASSED. ROLLED: {leftResult} + {rightResult} + {skillValue} = {totalRoll}");
         }
@@ -78,6 +85,9 @@ public class RollScreen : MonoBehaviour
         {
             Debug.Log($"ROLL FAILED. ROLLED: {leftResult} + {rightResult} + {skillValue}  = {totalRoll}");
         }
+        leftDice.transform.rotation = Quaternion.Euler(0, 0, 0);
+        rightDice.transform.rotation = Quaternion.Euler(0, 0, 0);
+        showResults(passedCheck, leftResult, rightResult, skillValue);
         ToggleButton(true);
     }
 
@@ -115,9 +125,33 @@ public class RollScreen : MonoBehaviour
     void SetRandomDiceImages()
     {
         System.Random rnd = new System.Random();
+        leftDice.transform.rotation = Random.rotation;
+        rightDice.transform.rotation = Random.rotation;
         int leftResult = rnd.Next(1,7);
         SetDiceImage(leftDice, leftResult);
         int rightResult = rnd.Next(1,7);
         SetDiceImage(rightDice, rightResult);
+    }
+
+    void showResults(bool result, int leftVal, int rightVal, int skillVal)
+    {
+        resultsContainer.SetActive(true);
+        if(result)
+        {
+            resultsContainer.GetComponent<Image>().color = Color.green;
+            resultsHeaderText.text = "PASSED";
+        }
+        else{
+            resultsContainer.GetComponent<Image>().color = Color.red;
+            resultsHeaderText.text = "FAILED";
+        }
+
+        resultsDetailsText.text = $"Left:{leftVal}\nRight:{rightVal}\nSkill:{skillVal}\nTotal:{(leftVal+rightVal+skillVal)}";
+        Invoke("hideResults", 3.0f);
+    }
+
+    void hideResults()
+    {
+        resultsContainer.SetActive(false);
     }
 }

@@ -1,16 +1,15 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using globalDataTypes;
 
-public abstract class Interactable : MonoBehaviour
+public abstract class Interactable : NavObject
 {
     public static event Action<string> onLocalEventTriggered;
 
     
     [Header("Navigation")]
-    public string Name;
-    public string GUID = Guid.NewGuid().ToString();
+    // public string Name;
+    // public string GUID = Guid.NewGuid().ToString();
 
     [Header("Dialogue Display Text")]
     public DialogueContainer interactiveDialogue;
@@ -25,33 +24,40 @@ public abstract class Interactable : MonoBehaviour
         onLocalEventTriggered?.Invoke(eventName);
     }
 
-    public virtual void ActivateInteractable(gameController controller)
+    public override void ActivateNavObject()
     {
-        // add active object to player's data if not already in there
-        if(!controller.player._player.visitedInteractableObjects.Contains(GUID))
-        {
-            controller.player._player.visitedInteractableObjects.Add(GUID);
-        }
-        
+        base.ActivateNavObject();
+        ActivateInteractable();
+    }
+
+    public virtual void ActivateInteractable()
+    {
         onLocalEventTriggered += ProcessLocalEvent;
         DialogueParser.onDialogueReachedDeadEnd += DeactivateInteractable;
-        gameObject.name = gameObject.name + "-Active";
-        // INIT DIALOGUE HERE
     }
 
     public virtual void DeactivateInteractable()
     {
         onLocalEventTriggered -= ProcessLocalEvent;
         DialogueParser.onDialogueReachedDeadEnd -= DeactivateInteractable;
-        gameObject.name = gameObject.name.Substring(0,gameObject.name.LastIndexOf("-Active"));
+        DeactivateNavObject();
         // INIT DIALOGUE HERE
+    }
+
+    public override void AddNavObjectToPlayer()
+    {
+        // add active object to player's data if not already in there
+        if(!Player.Instance.visitedInteractableObjects.Contains(GUID))
+        {
+            Player.Instance.visitedInteractableObjects.Add(GUID);
+        }
     }
 
     public abstract void ProcessLocalEvent(string eventName);
 
-    public bool HasPlayerInteracted(gameController controller)
+    public override bool HasPlayerVisitedNavObject()
     {
-        return controller.player._player.visitedInteractableObjects.Contains(GUID);
+        return Player.Instance.visitedInteractableObjects.Contains(GUID);
     }
 
     public string GetNewOrReturnedText(bool hasInteracted)

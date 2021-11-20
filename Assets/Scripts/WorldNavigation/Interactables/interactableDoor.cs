@@ -22,11 +22,13 @@ public class interactableDoor : Interactable
         
     }
 
-    public override void ActivateInteractable(gameController controller)
+    public override void ActivateInteractable()
     {
-        base.ActivateInteractable(controller);
+        base.ActivateInteractable();
         WorldNavigator.OnNewNavObjectSet += DeactivateInteractable;
     }
+
+    
 
     public override void DeactivateInteractable()
     {

@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using globalDataTypes;
 
 public class WorldNavigator : MonoBehaviour
 {
     [HideInInspector] public gameController controller;
 
-    public static WorldNavObject ActiveNavObject {get; private set;}
+    public static WorldNavObject ActiveWorldNavObject {get; private set;}
+    private NavObject _activeNavObject;
 
     // events
     public static event Action<string> OnActiveNavObjectLoaded;
@@ -16,14 +18,8 @@ public class WorldNavigator : MonoBehaviour
     
 
     private void Awake() {
-        controller = GetComponent<gameController>();  
-        // var test = SubSceneManager.OnSceneLoaded.GetInvocationList();
-        
-            // Debug.Log("Subscene manager OnSceneLoaded is null.");
-        
-            SubSceneManager.OnSceneLoaded += SetupNewArea;
-        
-        
+        controller = GetComponent<gameController>();          
+        SubSceneManager.OnSceneLoaded += SetupNewArea;
         Debug.Log("WORLD NAVIGATOR ---- World Navigation manager setup.");
     }
     
@@ -33,17 +29,13 @@ public class WorldNavigator : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public static void NavigateToNewWorldNavObject(WorldNavObject navObject)
     {
-        ActiveNavObject.DeactivateNavObject();
-        ActiveNavObject = navObject;
-        ActiveNavObject.ActivateNavObject();
+        ActiveWorldNavObject.DeactivateNavObject();
+        ActiveWorldNavObject = navObject;
+        // _activeNavObject = navObject.GetComponent<NavObject>();
+        ActiveWorldNavObject.ActivateNavObject();
         OnActiveNavObjectLoaded?.Invoke(null);
         OnNewNavObjectSet?.Invoke();
     }
@@ -70,41 +62,28 @@ public class WorldNavigator : MonoBehaviour
 
             var rootObject = worldObjects[0].GetComponent<Transform>().root;
             Debug.Log("WORLD NAVIGATOR ---- Root object in this scene (top of hierarchy): " + rootObject.name);
-            ActiveNavObject = rootObject.GetComponent<WorldNavObject>();
-            ActiveNavObject.ActivateNavObject();
+            ActiveWorldNavObject = rootObject.GetComponent<WorldNavObject>();
+            ActiveWorldNavObject.ActivateNavObject();
 
             OnActiveNavObjectLoaded?.Invoke(sceneName);
         }
 
     }
 
-    public void AddActiveNavObjectToPlayer()
-    {
-        // add active nav object to player's data if not already in there
-        if(!controller.player._player.visitedWorldNavObjects.Contains(ActiveNavObject.GUID))
-        {
-            controller.player._player.visitedWorldNavObjects.Add(ActiveNavObject.GUID);
-        }
-    }
-
-    public bool HasPlayerVisitedNavObject(string objectGUID)
-    {
-        return controller.player._player.visitedWorldNavObjects.Contains(objectGUID);
-    }
-
+ 
     public DialogueContainer GetActiveDialogue()
     {
-        Debug.Log($"WORLD NAVIGATOR ---- Checking active nav object name: {ActiveNavObject.Name} for new or returning dialogue graph.");
-        return GetNewOrReturnedDialogue();
+        Debug.Log($"WORLD NAVIGATOR ---- Checking active nav object name: {ActiveWorldNavObject.Name} for new or returning dialogue graph.");
+        return ActiveWorldNavObject.GetNewOrReturnedDialogue();
     }
 
     public void DisplayActiveNavObject()
     {
         // register event listener
-        UIManager.onOptionSelected -= NavigateToNavObject; // remove extra if any
+        UIManager.onOptionSelected -= NavigateToNavObject; // remove extra listener if any
         UIManager.onOptionSelected += NavigateToNavObject;
         
-        Debug.Log($"WORLD NAVIGATOR ---- Displaying active world nav object: {ActiveNavObject.Name}");
+        Debug.Log($"WORLD NAVIGATOR ---- Displaying active world nav object: {ActiveWorldNavObject.Name}");
 
         // displays new or returned text
         DisplayActiveNavObjectText();
@@ -113,12 +92,14 @@ public class WorldNavigator : MonoBehaviour
         DisplayActiveNavObjectOptions();
 
         // add object to player data
-        AddActiveNavObjectToPlayer();
+        ActiveWorldNavObject.AddNavObjectToPlayer();
+        // AddActiveNavObjectToPlayer();
     }
 
     public void DisplayActiveNavObjectText()
     {
-        string displayText = GetNewOrReturnedText(ActiveNavObject, ActiveNavObject.displayTextOnNew, ActiveNavObject.displayTextOnReturn);
+        // string displayText = GetNewOrReturnedText(ActiveNavObject, ActiveNavObject.displayTextOnNew, ActiveNavObject.displayTextOnReturn);
+        string displayText = ActiveWorldNavObject.GetNewOrReturnedText(ActiveWorldNavObject.displayTextOnNew, ActiveWorldNavObject.displayTextOnReturn);
         controller.UIManager.updateContentText(displayText);
     }
 
@@ -128,25 +109,26 @@ public class WorldNavigator : MonoBehaviour
         controller.UIManager.ClearButtons();
 
         // list all child nav objects as options
-        List<WorldNavObject> childNavObjects = ActiveNavObject.ChildNavObjects;
+        List<WorldNavObject> childNavObjects = ActiveWorldNavObject.ChildNavObjects;
         foreach(WorldNavObject navObject in childNavObjects)
         {
-            string buttonDisplayText = GetNewOrReturnedText(navObject, navObject.buttonTextOnNew, navObject.buttonTextOnReturn);
+            // string buttonDisplayText = GetNewOrReturnedText(navObject, navObject.buttonTextOnNew, navObject.buttonTextOnReturn);
+            string buttonDisplayText = navObject.GetNewOrReturnedText(navObject.buttonTextOnNew, navObject.buttonTextOnReturn);
             controller.UIManager.CreateDialogueOptionButton(navObject.GUID, buttonDisplayText);
         }
 
         // list all interactable child objects
-        List<Interactable> childInteractables = ActiveNavObject.ChildInteractiveObjects;
+        List<Interactable> childInteractables = ActiveWorldNavObject.ChildInteractiveObjects;
         foreach(Interactable interactableObject in childInteractables)
         {
-            string buttonDisplayText = interactableObject.GetNewOrReturnedText(interactableObject.HasPlayerInteracted(controller));
+            string buttonDisplayText = interactableObject.GetNewOrReturnedText(interactableObject.HasPlayerVisitedNavObject());
             controller.UIManager.CreateDialogueOptionButton(interactableObject.GUID, buttonDisplayText);
         }
 
         // add choice to go back to parent or map if no parent
-        if(ActiveNavObject.ParentNavObject != null)
+        if(ActiveWorldNavObject.ParentNavObject != null)
         {
-            WorldNavObject parentNavObject = ActiveNavObject.ParentNavObject.GetComponent<WorldNavObject>();
+            WorldNavObject parentNavObject = ActiveWorldNavObject.ParentNavObject.GetComponent<WorldNavObject>();
             string buttonDisplayText = conditionManager.GetConditionalText(parentNavObject.buttonTextAsParent);
             controller.UIManager.CreateDialogueOptionButton("PARENT", buttonDisplayText);
         }
@@ -161,61 +143,7 @@ public class WorldNavigator : MonoBehaviour
         
     }
 
-    public string GetNewOrReturnedText(WorldNavObject navObject, conditionalText[] newConditions, conditionalText[] returningConditions)
-    {
-        // used for both buttons and display text
-        string displayText = "MISSING";
-        if(HasPlayerVisitedNavObject(navObject.GUID))
-        {
-            // Debug.Log($"WORLD NAVIGATOR ---- PLAYER HAS VISITED THIS NAV OBJECT");
-            if(returningConditions.Length > 0)
-            {
-                displayText = conditionManager.GetConditionalText(returningConditions);
-            }
-            else
-            {
-                Debug.Log($"WORLD NAVIGATOR ---- THIS NAV OBJECT DOES NOT HAVE RETURN TEXT SET: {navObject.Name}");
-            }
-
-        }
-        else 
-        {
-            // Debug.Log($"WORLD NAVIGATOR ---- PLAYER HAS NOT VISITED THIS NAV OBJECT");
-            if(newConditions.Length > 0)
-            {
-                displayText = conditionManager.GetConditionalText(newConditions);
-            }
-            else
-            {
-                Debug.Log($"WORLD NAVIGATOR ---- THIS NAV OBJECT DOES NOT HAVE NEW TEXT SET: {navObject.Name}");
-            }
-        }  
-
-        return displayText;
-    }
-
-    public DialogueContainer GetNewOrReturnedDialogue()
-    {
-        // used only on the activeNavObject
-        DialogueContainer dialogueToDisplay = null;
-        if(HasPlayerVisitedNavObject(ActiveNavObject.GUID))
-        {
-            // Debug.Log($"WORLD NAVIGATOR ---- PLAYER HAS VISITED THIS NAV OBJECT");
-            if(ActiveNavObject.dialogueOnReturn.Length > 0) dialogueToDisplay = conditionManager.GetConditionalDialogue(ActiveNavObject.dialogueOnReturn);
-        }
-        else 
-        {
-            // Debug.Log($"WORLD NAVIGATOR ---- PLAYER HAS NOT VISITED THIS NAV OBJECT");
-            if(ActiveNavObject.dialogueOnNew.Length > 0) dialogueToDisplay = conditionManager.GetConditionalDialogue(ActiveNavObject.dialogueOnNew);
-        }  
-
-        return dialogueToDisplay;
-    }
-
     
-
-    
-
     public void NavigateToNavObject(string GUID)
     {
         Debug.Log("WORLD NAVIGATOR ---- Navigating to next nav object.");
@@ -240,7 +168,7 @@ public class WorldNavigator : MonoBehaviour
     public void NavigateToChild(string childGUID)
     {
         Debug.Log("WORLD NAVIGATOR ---- Attempting to navigate to this object's child GUID: " + childGUID);
-        List<WorldNavObject> childNavObjects = ActiveNavObject.ChildNavObjects;
+        List<WorldNavObject> childNavObjects = ActiveWorldNavObject.ChildNavObjects;
         foreach(WorldNavObject navObject in childNavObjects)
         {
            if(navObject.GUID == childGUID)
@@ -255,13 +183,16 @@ public class WorldNavigator : MonoBehaviour
         }
 
         // if not a nav object, will be interactable
-        List<Interactable> childInteractables = ActiveNavObject.ChildInteractiveObjects;
+        List<Interactable> childInteractables = ActiveWorldNavObject.ChildInteractiveObjects;
         foreach(Interactable interactiveObject in childInteractables)
         {
             if(interactiveObject.GUID == childGUID)
             {
-                interactiveObject.ActivateInteractable(controller);
+                // ActiveNavObject.DeactivateNavObject(); // deactivate active nav object event
+                // interactiveObject.ActivateInteractable();
+                interactiveObject.ActivateNavObject();
                 OnNavInteractableLoaded?.Invoke(interactiveObject.interactiveDialogue);
+                interactiveObject.AddNavObjectToPlayer();
                 return;
             }
         }
@@ -270,11 +201,11 @@ public class WorldNavigator : MonoBehaviour
     public void NavigateToParent()
     {
         Debug.Log("WORLD NAVIGATOR ---- Attempting to navigate to this object's parent.");
-        if(ActiveNavObject !=null)
+        if(ActiveWorldNavObject !=null)
         {
-            if(ActiveNavObject.ParentNavObject != null)
+            if(ActiveWorldNavObject.ParentNavObject != null)
             {
-                var destinationNavObject = ActiveNavObject.ParentNavObject.GetComponent<WorldNavObject>();
+                var destinationNavObject = ActiveWorldNavObject.ParentNavObject.GetComponent<WorldNavObject>();
                 if(destinationNavObject != null)
                 {
                     // ActiveNavObject.DeactivateNavObject();

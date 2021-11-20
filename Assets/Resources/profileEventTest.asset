@@ -128,35 +128,35 @@ MonoBehaviour:
     isRepeatable: 0
     hasFired: 0
     ignoreDeadEnd: 0
-    eventType: 5
+    eventType: 6
   - nodeGuid: dfcf8ce2-1cd8-4a33-ac0d-2f3c577f0ccc
     EventName: addProfile
     EventValue: chadB
     isRepeatable: 0
     hasFired: 0
     ignoreDeadEnd: 1
-    eventType: 5
+    eventType: 6
   - nodeGuid: 4f4ccaaa-afdf-4bf8-9518-14d1641042b0
     EventName: updateProfile
     EventValue: pierreL.name
     isRepeatable: 0
     hasFired: 0
     ignoreDeadEnd: 1
-    eventType: 5
+    eventType: 6
   - nodeGuid: cee720f8-4084-4d0f-9eb5-9b472a54efce
     EventName: updateProfile
     EventValue: pierreL.portrait
     isRepeatable: 0
     hasFired: 0
     ignoreDeadEnd: 1
-    eventType: 5
+    eventType: 6
   - nodeGuid: d73a953a-2c8c-48e6-8509-19554b0b785c
     EventName: updateProfile
     EventValue: pierreL.age
     isRepeatable: 0
     hasFired: 0
     ignoreDeadEnd: 1
-    eventType: 5
+    eventType: 6
   - nodeGuid: 86e619fd-cb3a-4261-a926-646e6f2e2904
     EventName: updateProfile
     EventValue: pierreL.residence
@@ -170,20 +170,20 @@ MonoBehaviour:
     isRepeatable: 0
     hasFired: 0
     ignoreDeadEnd: 1
-    eventType: 5
+    eventType: 6
   - nodeGuid: bc4b1728-a2b1-4574-9669-906f745df3e8
     EventName: updateProfile
     EventValue: pierreL.summary
     isRepeatable: 0
     hasFired: 0
     ignoreDeadEnd: 1
-    eventType: 5
+    eventType: 6
   - nodeGuid: 6bec7f62-eb84-403d-aa46-a4da2eebbaf8
     EventName: updateProfile
     EventValue: pierreL.relationship
     isRepeatable: 0
     hasFired: 0
     ignoreDeadEnd: 0
-    eventType: 5
+    eventType: 6
   CheckNodeData: []
   EndpointNodeData: []

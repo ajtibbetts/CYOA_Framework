@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 using UnityEditor.Experimental.GraphView;
 using System.Linq;
+using globalDataTypes;
 
 
 public class GraphSaveUtility

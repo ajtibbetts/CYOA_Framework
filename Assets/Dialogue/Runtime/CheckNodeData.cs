@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using globalDataTypes;
 
 [Serializable]
 public class CheckNodeData

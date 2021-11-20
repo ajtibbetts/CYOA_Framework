@@ -68,20 +68,20 @@ MonoBehaviour:
     isRepeatable: 0
     hasFired: 0
     ignoreDeadEnd: 1
-    eventType: 5
+    eventType: 6
   - nodeGuid: 0cec0f0e-9fc6-4958-9746-c0495ece9551
     EventName: addLead
     EventValue: coworker
     isRepeatable: 0
     hasFired: 0
     ignoreDeadEnd: 1
-    eventType: 5
+    eventType: 6
   - nodeGuid: e51131ea-276e-43d6-aee5-91c7ea6588cc
     EventName: resolveLead
     EventValue: coworker
     isRepeatable: 0
     hasFired: 0
     ignoreDeadEnd: 1
-    eventType: 5
+    eventType: 6
   CheckNodeData: []
   EndpointNodeData: []

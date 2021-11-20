@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
+using globalDataTypes;
 
 public class NodeSearchWindow : ScriptableObject, ISearchWindowProvider
 {

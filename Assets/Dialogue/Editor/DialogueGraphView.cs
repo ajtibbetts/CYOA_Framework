@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 using System.Linq;
+using globalDataTypes;
 
 public class DialogueGraphView : GraphView
 {

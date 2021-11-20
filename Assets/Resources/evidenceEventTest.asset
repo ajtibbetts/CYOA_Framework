@@ -72,20 +72,20 @@ MonoBehaviour:
     isRepeatable: 0
     hasFired: 0
     ignoreDeadEnd: 0
-    eventType: 5
+    eventType: 6
   - nodeGuid: 525ad719-0567-45a5-864b-8b547d17b637
     EventName: upgradeEvidence
     EventValue: leadPipe_a.leadPipe_b
     isRepeatable: 0
     hasFired: 0
     ignoreDeadEnd: 0
-    eventType: 5
+    eventType: 6
   - nodeGuid: dcd5c791-3fe0-4790-8d95-e81ae43400f9
     EventName: removeEvidence
     EventValue: tatooGun
     isRepeatable: 0
     hasFired: 0
     ignoreDeadEnd: 0
-    eventType: 5
+    eventType: 6
   CheckNodeData: []
   EndpointNodeData: []

@@ -166,10 +166,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  conditionsToEnable: []
   Name: Large Room
   GUID: f375d4d5-a139-46a0-a25e-a2127d11baed
+  localProperties: []
+  conditionsToEnable: []
   ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
   ChildNavObjects: []
   ChildInteractiveObjects: []
   dialogueOnNew: []
@@ -193,13 +203,6 @@ MonoBehaviour:
   - conditions: []
     displayText: Check out the large room again.
   buttonTextAsParent: []
-  OnNavObjectActivated:
-    m_PersistentCalls:
-      m_Calls: []
-  OnNavObjectDeactivated:
-    m_PersistentCalls:
-      m_Calls: []
-  conditionalEvents: []
 --- !u!1 &179606277
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,6 +248,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   GUID: 202a82ce-fde9-460d-b194-5c32e0b5cd36
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
   interactiveDialogue: {fileID: 11400000, guid: 0cbe0abfb22ce6541b0d222dd49e5082,
     type: 2}
   buttonTextOnNew:
@@ -299,10 +314,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  conditionsToEnable: []
   Name: Small Room
   GUID: e9957af1-765c-4735-aeff-4f587a118cda
+  localProperties: []
+  conditionsToEnable: []
   ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
   ChildNavObjects: []
   ChildInteractiveObjects: []
   dialogueOnNew: []
@@ -326,13 +351,6 @@ MonoBehaviour:
   buttonTextAsParent:
   - conditions: []
     displayText: Go back into the small room.
-  OnNavObjectActivated:
-    m_PersistentCalls:
-      m_Calls: []
-  OnNavObjectDeactivated:
-    m_PersistentCalls:
-      m_Calls: []
-  conditionalEvents: []
 --- !u!1 &554879170
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,10 +394,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  conditionsToEnable: []
   Name: area2 child1
   GUID: 4d42d4e9-28ce-47a1-8914-e3e96deb16e7
+  localProperties: []
+  conditionsToEnable: []
   ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
   ChildNavObjects: []
   ChildInteractiveObjects: []
   dialogueOnNew: []
@@ -399,13 +427,6 @@ MonoBehaviour:
   - conditions: []
     displayText: Check out single room again.
   buttonTextAsParent: []
-  OnNavObjectActivated:
-    m_PersistentCalls:
-      m_Calls: []
-  OnNavObjectDeactivated:
-    m_PersistentCalls:
-      m_Calls: []
-  conditionalEvents: []
 --- !u!1 &564815489
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,10 +474,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  conditionsToEnable: []
   Name: Starting Area
   GUID: daef2800-8ed3-49c0-81ed-fe94dc81b14b
+  localProperties: []
+  conditionsToEnable: []
   ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
   ChildNavObjects: []
   ChildInteractiveObjects: []
   dialogueOnNew:
@@ -478,13 +509,6 @@ MonoBehaviour:
   buttonTextAsParent:
   - conditions: []
     displayText: Return to the starting area.
-  OnNavObjectActivated:
-    m_PersistentCalls:
-      m_Calls: []
-  OnNavObjectDeactivated:
-    m_PersistentCalls:
-      m_Calls: []
-  conditionalEvents: []
 --- !u!1 &1093402699
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,10 +538,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  conditionsToEnable: []
   Name: area2
   GUID: a6dfb3a8-f392-40f7-a828-f13fa09a74c3
+  localProperties: []
+  conditionsToEnable: []
   ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
   ChildNavObjects: []
   ChildInteractiveObjects: []
   dialogueOnNew:
@@ -537,13 +571,6 @@ MonoBehaviour:
   buttonTextAsParent:
   - conditions: []
     displayText: Return back to second starting area.
-  OnNavObjectActivated:
-    m_PersistentCalls:
-      m_Calls: []
-  OnNavObjectDeactivated:
-    m_PersistentCalls:
-      m_Calls: []
-  conditionalEvents: []
 --- !u!4 &1093402701
 Transform:
   m_ObjectHideFlags: 0
@@ -606,6 +633,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   GUID: 123425a4-79c4-4ee7-8da4-60818598a622
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
   interactiveDialogue: {fileID: 11400000, guid: ed931eff657890747b9cb35a98b47284,
     type: 2}
   buttonTextOnNew:
@@ -659,6 +698,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   GUID: 8a5c5cda-588f-453a-91df-ebaca7992727
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
   interactiveDialogue: {fileID: 11400000, guid: 0cbe0abfb22ce6541b0d222dd49e5082,
     type: 2}
   buttonTextOnNew:
@@ -712,10 +763,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  conditionsToEnable: []
   Name: Bathroom
   GUID: 9c9d5b17-b10a-4295-a46c-d0aa79e5a98c
+  localProperties: []
+  conditionsToEnable: []
   ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
   ChildNavObjects: []
   ChildInteractiveObjects: []
   dialogueOnNew: []
@@ -737,13 +798,6 @@ MonoBehaviour:
   - conditions: []
     displayText: Check out the bathroom again.
   buttonTextAsParent: []
-  OnNavObjectActivated:
-    m_PersistentCalls:
-      m_Calls: []
-  OnNavObjectDeactivated:
-    m_PersistentCalls:
-      m_Calls: []
-  conditionalEvents: []
 --- !u!1 &2059979820
 GameObject:
   m_ObjectHideFlags: 0
@@ -789,6 +843,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   GUID: eb03dcc2-b185-4f9b-808c-4fe540c89eba
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
   interactiveDialogue: {fileID: 11400000, guid: 015df797181d2d246b1aac60f82617c0,
     type: 2}
   buttonTextOnNew:

@@ -5,6 +5,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using globalDataTypes;
 
 public class DialogueParser : MonoBehaviour
     {
@@ -20,6 +21,8 @@ public class DialogueParser : MonoBehaviour
         // Events
         public event Action<eventType, string, string> onEventTriggered;
         public static event Action onDialogueReachedDeadEnd;
+
+        public static event Action<string,string> onExposedPropertyFound;
         // delegate
         public Func<string, string, bool> onPlayerSkillRoll;
 
@@ -53,6 +56,15 @@ public class DialogueParser : MonoBehaviour
         }
 
         public void InitDialogue() {
+
+            // check for exposed properties to use in nav object
+            if(dialogue.ExposedProperties.Count > 0)
+            {
+                foreach(ExposedProperty exposedProperty in dialogue.ExposedProperties)
+                {
+                    onExposedPropertyFound?.Invoke(exposedProperty.PropertyName, exposedProperty.PropertyValue);
+                }
+            }
             var narrativeData = dialogue.NodeLinks.First(); //Entrypoint node
             ProceedToNarrative(narrativeData.TargetNodeGuid);
         }
