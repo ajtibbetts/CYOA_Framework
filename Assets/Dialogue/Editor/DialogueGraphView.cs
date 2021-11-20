@@ -100,6 +100,9 @@ public class DialogueGraphView : GraphView
             case "Dialogue Node":
                 AddElement(CreateDialogueNode(nodeName, position));
             break;
+            case "Roll Node":
+                AddElement(CreateSkillRollNode(nodeName, position));
+            break;
             case "Event Node":
                 eventType eventType;
                 if(Enum.TryParse(enumType, out eventType))
@@ -210,6 +213,113 @@ public class DialogueGraphView : GraphView
         dialogueNode.SetPosition(new Rect(position, defaultNodeSize));
 
         return dialogueNode;
+    }
+
+    public RollNode CreateSkillRollNode(string dialogueText, Vector2 position, bool repeatable = false, string skillName = "skillName", string checkDiff = "difficulty")
+    {
+        Debug.Log("Creating new skill roll node");
+        
+        var rollNode = new RollNode
+        {
+            title = "Skill Roll Check Node",
+            GUID = Guid.NewGuid().ToString(),
+            DialogueText = dialogueText,
+            nodeType = nodeType.rollNode,
+            rollSkillName = skillName,
+            rollDifficulty = checkDiff,
+            isRepeatable = repeatable
+        };
+
+        // add input and style sheet
+        var inputPort = GeneratePort(rollNode, Direction.Input, Port.Capacity.Multi);
+        inputPort.portName = "Input";
+        rollNode.inputContainer.Add(inputPort);
+        rollNode.styleSheets.Add(Resources.Load<StyleSheet>("Node"));
+
+         // output ports for each outcome
+        var outputPortMasterPass = GeneratePort(rollNode, Direction.Output);
+        outputPortMasterPass.portName = "Master Pass";
+        rollNode.outputContainer.Add(outputPortMasterPass);
+
+        var outputPortMasterFumble = GeneratePort(rollNode, Direction.Output);
+        outputPortMasterFumble.portName = "Master Fumble";
+        rollNode.outputContainer.Add(outputPortMasterFumble);
+
+        var outputPortRegularPass = GeneratePort(rollNode, Direction.Output);
+        outputPortRegularPass.portName = "Regular Pass";
+        rollNode.outputContainer.Add(outputPortRegularPass);
+
+        var outputPortRegularFail = GeneratePort(rollNode, Direction.Output);
+        outputPortRegularFail.portName = "Regular Fail";
+        rollNode.outputContainer.Add(outputPortRegularFail);
+
+        var outputPortCriticalFail = GeneratePort(rollNode, Direction.Output);
+        outputPortCriticalFail.portName = "Critical Fail";
+        rollNode.outputContainer.Add(outputPortCriticalFail);
+
+        var outputPortAlreadyPassed = GeneratePort(rollNode, Direction.Output);
+        outputPortAlreadyPassed.portName = "Already Passed";
+        rollNode.outputContainer.Add(outputPortAlreadyPassed);
+
+        var outputPortAlreadyFailed = GeneratePort(rollNode, Direction.Output);
+        outputPortAlreadyFailed.portName = "Already Failed";
+        rollNode.outputContainer.Add(outputPortAlreadyFailed);
+
+        // setup event data container
+        var rollDataContainer = new VisualElement{
+            name = "RollDataContainer"
+        };
+        var skillNameContainer = new VisualElement();
+        var difficultyContainer = new VisualElement();
+        var rollToggleContainer = new VisualElement();
+
+        // add event name field
+        var textFieldSkillName = new TextField
+        {
+            name = "skillName",
+            value = skillName
+        };
+        textFieldSkillName.RegisterValueChangedCallback(evt => rollNode.rollSkillName = evt.newValue);
+        textFieldSkillName.SetValueWithoutNotify(rollNode.rollSkillName);
+        skillNameContainer.Add(new Label("Skill Name:"));
+        skillNameContainer.Add(textFieldSkillName);
+
+        // add event value field
+        var textFieldDifficultyValue = new TextField
+        {
+            name = "checkDifficulty",
+            value = checkDiff
+        };
+        textFieldDifficultyValue.RegisterValueChangedCallback(evt => rollNode.rollDifficulty = evt.newValue);
+        textFieldDifficultyValue.SetValueWithoutNotify(rollNode.rollDifficulty);
+        difficultyContainer.Add(new Label("Difficulty Value:"));
+        difficultyContainer.Add(textFieldDifficultyValue);
+
+        // add is repeatable
+        var toggleIsRepeatable = new Toggle 
+        {
+            name = "isRepeatable?",
+            value = repeatable
+        };
+        toggleIsRepeatable.RegisterValueChangedCallback(evt => rollNode.isRepeatable = evt.newValue);
+        toggleIsRepeatable.SetValueWithoutNotify(rollNode.isRepeatable);
+        rollToggleContainer.Add(new Label("Is Repeatable?"));
+        rollToggleContainer.Add(toggleIsRepeatable);
+
+
+
+
+        rollDataContainer.Add(skillNameContainer);
+        rollDataContainer.Add(difficultyContainer);
+        rollDataContainer.Add(rollToggleContainer);
+
+        rollNode.mainContainer.Add(rollDataContainer);
+
+        rollNode.RefreshExpandedState();
+        rollNode.RefreshPorts();
+        rollNode.SetPosition(new Rect(position, defaultNodeSize));
+
+        return rollNode;
     }
 
     public EventNode CreateEventNode(string nodeName, Vector2 position, eventType _eventType, string eventName = "", string eventValue = "", bool repeatable = false, bool fired = false, bool ignoreDeadend = true)

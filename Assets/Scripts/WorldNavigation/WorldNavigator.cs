@@ -189,7 +189,7 @@ public class WorldNavigator : MonoBehaviour
             if(interactiveObject.GUID == childGUID)
             {
                 // ActiveNavObject.DeactivateNavObject(); // deactivate active nav object event
-                // interactiveObject.ActivateInteractable();
+                ActiveWorldNavObject.StopPropertyListener(); // disable so duplicate properties aren't added.
                 interactiveObject.ActivateNavObject();
                 OnNavInteractableLoaded?.Invoke(interactiveObject.interactiveDialogue);
                 interactiveObject.AddNavObjectToPlayer();

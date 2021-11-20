@@ -107,6 +107,21 @@ public class GraphSaveUtility
 
             }
 
+            // check if node is a skill roll check node
+            if(dialogueNode.DialogueText.Contains("Roll Node"))
+            {
+                Debug.Log("found roll check node while saving!");
+                var rollCheckNode = (RollNode) dialogueNode;
+                dialogueContainer.RollNodeData.Add(new RollNodeData
+                {
+                    nodeGuid = dialogueNode.GUID,
+                    rollSkillName = rollCheckNode.rollSkillName,
+                    rollDifficulty = rollCheckNode.rollDifficulty,
+                    isRepeatable = rollCheckNode.isRepeatable,
+                    modifierTags = rollCheckNode.modifierTags
+                });
+            }
+
             // check if the node is a check type node
             if(dialogueNode.DialogueText.Contains("Check Node"))
             {
@@ -218,6 +233,18 @@ public class GraphSaveUtility
                 {
                     var tempNode = _targetGraphView.CreateEventNode(nodeData.DialogueText, Vector2.zero, _eventNodeData.eventType,
                         _eventNodeData.EventName, _eventNodeData.EventValue, _eventNodeData.isRepeatable, _eventNodeData.hasFired, _eventNodeData.ignoreDeadEnd);
+                    tempNode.GUID = nodeData.Guid;
+                    _targetGraphView.AddElement(tempNode);
+                }
+            }
+            else if(nodeData.DialogueText.Contains("Roll Node"))
+            {
+                var _rollNodeData = _containerCache.RollNodeData.FirstOrDefault(x => x.nodeGuid == nodeData.Guid);
+                if(_rollNodeData != null)
+                {
+                    var tempNode = _targetGraphView.CreateSkillRollNode(nodeData.DialogueText, Vector2.zero,
+                        _rollNodeData.isRepeatable, _rollNodeData.rollSkillName, _rollNodeData.rollDifficulty
+                    );
                     tempNode.GUID = nodeData.Guid;
                     _targetGraphView.AddElement(tempNode);
                 }

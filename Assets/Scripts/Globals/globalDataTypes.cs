@@ -32,8 +32,8 @@ namespace globalDataTypes {
                     case conditionType.worldProperty:
                         checkText = "World Flag";
                     break;
-                    case conditionType.questProperty:
-                        checkText = "Quest Flag";
+                    case conditionType.caseProperty:
+                        checkText = "Case Flag";
                     break;
                     default:
                     break;
@@ -80,7 +80,7 @@ namespace globalDataTypes {
         itemProperty,
         npcProperty,
         enemyProperty,
-        questProperty,
+        caseProperty,
         storyProperty,
         worldProperty,
         gameProperty,
@@ -94,7 +94,7 @@ namespace globalDataTypes {
         item,
         npc,
         enemy,
-        quest,
+        caseRecord,
         story,
         world,
         game
@@ -106,7 +106,9 @@ namespace globalDataTypes {
         dialogueNode,
         eventNode,
         checkNode,
-        endpointNode
+        endpointNode,
+        rollNode
+        
     }
 
     [Serializable]

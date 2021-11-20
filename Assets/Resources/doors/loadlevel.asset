@@ -30,6 +30,6 @@ MonoBehaviour:
     isRepeatable: 1
     hasFired: 0
     ignoreDeadEnd: 1
-    eventType: 8
+    eventType: 9
   CheckNodeData: []
   EndpointNodeData: []

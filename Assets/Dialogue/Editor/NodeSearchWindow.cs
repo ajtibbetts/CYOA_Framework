@@ -36,6 +36,10 @@ public class NodeSearchWindow : ScriptableObject, ISearchWindowProvider
             {
                userData = new DialogueNode(), level = 2
             },
+            new SearchTreeEntry(new GUIContent("Player Skill Roll",_indentationIcon))
+            {
+                userData = new RollNode(), level = 1
+            },
             new SearchTreeGroupEntry(new GUIContent("Check Nodes"), 1),
                 new SearchTreeEntry(new GUIContent("playerSkill",_indentationIcon))
                 {
@@ -53,7 +57,7 @@ public class NodeSearchWindow : ScriptableObject, ISearchWindowProvider
                 {
                     userData = new CheckNode(), level = 2
                 },
-                new SearchTreeEntry(new GUIContent("questProperty",_indentationIcon))
+                new SearchTreeEntry(new GUIContent("caseProperty",_indentationIcon))
                 {
                     userData = new CheckNode(), level = 2
                 },
@@ -90,7 +94,7 @@ public class NodeSearchWindow : ScriptableObject, ISearchWindowProvider
                 {
                     userData = new EventNode(), level = 2
                 },
-                new SearchTreeEntry(new GUIContent("quest",_indentationIcon))
+                new SearchTreeEntry(new GUIContent("caseRecord",_indentationIcon))
                 {
                     userData = new EventNode(), level = 2
                 },
@@ -159,6 +163,9 @@ public class NodeSearchWindow : ScriptableObject, ISearchWindowProvider
                     return false;
                 }
                 return false;
+            case RollNode rollNode:
+                _graphView.CreateNode("Roll Node", localMousePosition);
+            return true;
             case DialogueNode dialogueNode:
                 _graphView.CreateNode("Dialogue Node", localMousePosition);
                 return true;

@@ -95,6 +95,7 @@ public class WorldNavObject : NavObject
 
     public override void AddNavObjectToPlayer()
     {
+        base.AddNavObjectToPlayer();
         // add active nav object to player's data if not already in there
         if(!Player.Instance.visitedWorldNavObjects.Contains(GUID))
         {

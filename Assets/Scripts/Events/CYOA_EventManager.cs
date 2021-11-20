@@ -17,7 +17,7 @@ public class CYOA_EventManager : MonoBehaviour
     public event Action<string, string> onItemEvent;
     public event Action<string, string> onNPCEvent;
     public event Action<string, string> onEnemyEvent;
-    public event Action<string, string> onQuestEvent;
+    public event Action<string, string> onCaseEvent;
     public event Action<string, string> onStoryEvent;
     public event Action<string, string> onWorldEvent;
     // public event Action<string, string> onGameEvent;
@@ -59,8 +59,8 @@ public class CYOA_EventManager : MonoBehaviour
             case eventType.enemy:
                 onEnemyEvent?.Invoke(eventName, eventValue);
             break;
-            case eventType.quest:
-                onQuestEvent?.Invoke(eventName, eventValue);
+            case eventType.caseRecord:
+                onCaseEvent?.Invoke(eventName, eventValue);
                 caseEvents.ProcessEvent(eventName, eventValue);
             break;
             case eventType.story:

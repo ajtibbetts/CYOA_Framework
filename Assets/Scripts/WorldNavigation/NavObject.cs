@@ -43,7 +43,7 @@ public abstract class NavObject : MonoBehaviour
     public virtual void ActivateNavObject()
     {
         gameObject.name = gameObject.name + "-Active";
-        // DialogueParser.onExposedPropertyFound += AddLocalProperty;
+        DialogueParser.onExposedPropertyFound += AddLocalProperty;
         InitializeLocalProperties();
         if(eventOnActivation.eventType != eventType.none)
         {
@@ -52,18 +52,26 @@ public abstract class NavObject : MonoBehaviour
         }
     }
 
-    public abstract void AddNavObjectToPlayer();
+    public virtual void AddNavObjectToPlayer()
+    {
+        AddLocalProperty("hasPlayerVisited", "true");
+    }
     public abstract bool HasPlayerVisitedNavObject();
 
     public virtual void DeactivateNavObject()
     {
         gameObject.name = gameObject.name.Substring(0,gameObject.name.LastIndexOf("-Active"));
-        // DialogueParser.onExposedPropertyFound -= AddLocalProperty;
+        StopPropertyListener();
         if(eventOnDeactivation.eventType != eventType.none)
         {
             OnEventTriggered?.Invoke(eventOnDeactivation.eventType, 
             eventOnDeactivation.eventName, eventOnDeactivation.eventValue);
         }
+    }
+
+    public void StopPropertyListener()
+    {
+        DialogueParser.onExposedPropertyFound -= AddLocalProperty;
     }
 
     public void InitializeLocalProperties()
@@ -94,7 +102,8 @@ public abstract class NavObject : MonoBehaviour
             localProperties.Add(newLocalProperty);
         }
         else {
-            Debug.Log($"NAV OBJECT ---- Local property {propertyName} already exists on this nav object.");
+            Debug.Log($"NAV OBJECT ---- Local property {propertyName} already exists on this nav object. Updating value to {propertyValue}");
+            newLocalProperty.PropertyValue = propertyValue;
         }
     }
 

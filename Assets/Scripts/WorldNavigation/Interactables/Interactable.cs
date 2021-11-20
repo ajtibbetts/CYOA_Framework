@@ -46,6 +46,7 @@ public abstract class Interactable : NavObject
 
     public override void AddNavObjectToPlayer()
     {
+        base.AddNavObjectToPlayer();
         // add active object to player's data if not already in there
         if(!Player.Instance.visitedInteractableObjects.Contains(GUID))
         {
