@@ -9,6 +9,16 @@ using globalDataTypes;
 
 public class DialogueParser : MonoBehaviour
     {
+         // Events
+        public event Action<eventType, string, string> onEventTriggered;
+        public static event Action onDialogueReachedDeadEnd;
+
+        public static event Action<string,string> onExposedPropertyFound;
+        // delegate
+        public Func<string, string, bool> onPlayerSkillRoll;
+     
+     
+     
         [HideInInspector] public gameController controller;
         
         [SerializeField] private DialogueContainer dialogue;
@@ -16,17 +26,23 @@ public class DialogueParser : MonoBehaviour
         [SerializeField] private Button choicePrefab;
         [SerializeField] private Transform buttonContainer;
 
+        
+        [SerializeField] private List<dialogueHistory> _dialogueHistory = new List<dialogueHistory>();
+        [SerializeField] private dialogueHistory _currentNodeHistory;
+        private string _previousNodeGUID;
+        private string _currentNodeGUID;
         private string _pendingText = "";
 
-        // Events
-        public event Action<eventType, string, string> onEventTriggered;
-        public static event Action onDialogueReachedDeadEnd;
+        [Serializable]
+        private class dialogueHistory {
+            public string previousNodeGUID;
+            public string currentNodeGUID;
+            public string selectedOutputNodeGUID;
+            public nodeType nodeType;
 
-        public static event Action<string,string> onExposedPropertyFound;
-        // delegate
-        public Func<string, string, bool> onPlayerSkillRoll;
-
+        }
         
+
         private void Awake() {
             controller = GetComponent<gameController>();  
             controller.EventManager.onEventFinished += UpdatePendingText;
@@ -57,6 +73,9 @@ public class DialogueParser : MonoBehaviour
 
         public void InitDialogue() {
 
+            // clear old dialoge history
+            _dialogueHistory.Clear();
+            
             // check for exposed properties to use in nav object
             if(dialogue.ExposedProperties.Count > 0)
             {
@@ -66,6 +85,16 @@ public class DialogueParser : MonoBehaviour
                 }
             }
             var narrativeData = dialogue.NodeLinks.First(); //Entrypoint node
+
+            // setup first node dialoge history.
+            _currentNodeHistory = new dialogueHistory {
+                previousNodeGUID = "START",
+                currentNodeGUID = narrativeData.BaseNodeGuid,
+                selectedOutputNodeGUID = null
+            };
+            // _previousNodeGUID = narrativeData.TargetNodeGuid;
+            
+            
             ProceedToNarrative(narrativeData.TargetNodeGuid);
         }
 
@@ -75,13 +104,28 @@ public class DialogueParser : MonoBehaviour
             _pendingText += text;
         }
         
-
+        private void AddNodeToHistory(string selectedOutputGUID, nodeType nodeType)
+        {
+            _currentNodeHistory.selectedOutputNodeGUID = selectedOutputGUID;
+            _currentNodeHistory.nodeType = nodeType;
+            _dialogueHistory.Add(_currentNodeHistory);
+            _currentNodeHistory = new dialogueHistory {
+                previousNodeGUID = _dialogueHistory[_dialogueHistory.Count - 1].currentNodeGUID,
+                currentNodeGUID = selectedOutputGUID,
+                selectedOutputNodeGUID = null
+            };
+        }
 
         private void ProceedToNarrative(string narrativeDataGUID)
         {
             Debug.Log("DIALOGUE PARSER ---- Proceeding to next narrative node for GUID: " + narrativeDataGUID);
             var text = dialogue.DialogueNodeData.Find(x => x.Guid == narrativeDataGUID).DialogueText;
             var nodeType = dialogue.DialogueNodeData.Find(x => x.Guid == narrativeDataGUID).nodeType;
+
+            // setup the next history node data
+            AddNodeToHistory(narrativeDataGUID, nodeType);
+            // _previousNodeGUID = narrativeDataGUID;
+            // _previousNodeGUID = _dialogueHistory[_dialogueHistory.Count - 1].currentNodeGUID;
 
             switch(nodeType)
             {
@@ -128,6 +172,8 @@ public class DialogueParser : MonoBehaviour
             
             // finally create confirm button
             controller.UIManager.initConfirmActionButton();
+
+            
         }
 
         private void ProcessEventNode(string narrativeDataGUID)
@@ -274,4 +320,11 @@ public class DialogueParser : MonoBehaviour
             }
             return text;
         }
-    }
+
+        private string GetLastDialogueNodeGUID(string currentNodeGUID)
+        {
+
+
+            return null;
+        }
+}
