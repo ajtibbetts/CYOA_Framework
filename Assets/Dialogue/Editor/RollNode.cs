@@ -7,6 +7,7 @@ using globalDataTypes;
 public class RollNode : DialogueNode
 {
     public string rollSkillName;
+    public string rollDescription;
     public string rollDifficulty;
     public bool isRepeatable;  
 

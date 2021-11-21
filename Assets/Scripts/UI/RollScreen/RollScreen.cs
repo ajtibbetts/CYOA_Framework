@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,10 @@ public class RollScreen : MonoBehaviour
 {
     private static RollScreen _instance;
     public static RollScreen Instance { get { return _instance; } }
+
+
+    public static event Action onRollScreenReady;
+    public static event Action onRollScreenComplete;
 
     [Header("Test Values")]
     public string testSkillName;
@@ -45,6 +50,9 @@ public class RollScreen : MonoBehaviour
         } else {
             _instance = this;
         }
+
+        checkManager.onRollDataSet += SetRollScreenData;
+        checkManager.onRollResultSent += showResults;
     }
 
     [ContextMenu ("Test Skill Set UI")]
@@ -60,11 +68,36 @@ public class RollScreen : MonoBehaviour
         // formulaSubtitle.text = $"roll (2d6 + {testSkillValue}) to beat {testDifficultyValue}";
     }
 
+    public void SetRollScreenData(string skillName, string rollDescription, int rollDifficulty)
+    {
+        headerDifficulty.text = rollDifficulty.ToString();
+        headerDescription.text = rollDescription;
+        skillNameText.text = skillName;
+
+        var skillValue = Player.Instance.GetSkillValue(skillName);
+        skillValueText.text = skillValue.ToString();
+
+        var percentage = checkManager.GetProbability(skillValue, rollDifficulty);
+        chancePercentage.text = percentage.ToString() + "%";
+        SetDifficultyColor(percentage);
+
+        // initialize button
+        rollButton.onClick.RemoveAllListeners();
+        rollButton.onClick.AddListener(delegate { StartRollFromUI(); });
+        resultsContainer.SetActive(false);
+        onRollScreenReady?.Invoke();
+    }
+
 
     public void StartTestRoll()
     {
         resultsContainer.SetActive(false);
         TestSkillSetUI();
+        StartCoroutine(StartRollSequence());
+    }
+
+    public void StartRollFromUI()
+    {
         StartCoroutine(StartRollSequence());
     }
 
@@ -87,7 +120,7 @@ public class RollScreen : MonoBehaviour
         }
         leftDice.transform.rotation = Quaternion.Euler(0, 0, 0);
         rightDice.transform.rotation = Quaternion.Euler(0, 0, 0);
-        showResults(passedCheck, leftResult, rightResult, skillValue);
+        // showResults(passedCheck, leftResult, rightResult, skillValue);
         ToggleButton(true);
     }
 
@@ -109,11 +142,12 @@ public class RollScreen : MonoBehaviour
 
     IEnumerator StartRollSequence()
     {
-        ToggleButton(false);
-        InvokeRepeating("SetRandomDiceImages", 0f, 0.1f);
+        rollButton.interactable = false;
+        rollButton.GetComponentInChildren<TextMeshProUGUI>().text = "Wait";
+        InvokeRepeating("SetRandomDiceImages", 0f, 0.05f);
         yield return new WaitForSeconds(1);
         CancelInvoke();
-        RollDice(testSkillValue, testDifficultyValue);
+        checkManager.Instance.ProcessRollCheck(); // actual roll calculation here
     }
 
     void ToggleButton(bool isActive)
@@ -125,16 +159,22 @@ public class RollScreen : MonoBehaviour
     void SetRandomDiceImages()
     {
         System.Random rnd = new System.Random();
-        leftDice.transform.rotation = Random.rotation;
-        rightDice.transform.rotation = Random.rotation;
+        leftDice.transform.rotation = UnityEngine.Random.rotation;
+        rightDice.transform.rotation = UnityEngine.Random.rotation;
         int leftResult = rnd.Next(1,7);
         SetDiceImage(leftDice, leftResult);
         int rightResult = rnd.Next(1,7);
         SetDiceImage(rightDice, rightResult);
     }
 
-    void showResults(bool result, int leftVal, int rightVal, int skillVal)
+    void showResults(int leftVal, int rightVal, int skillVal, bool result)
     {
+        SetDiceImage(leftDice, leftVal);
+        SetDiceImage(rightDice, rightVal);
+        leftDice.transform.rotation = Quaternion.Euler(0, 0, 0);
+        rightDice.transform.rotation = Quaternion.Euler(0, 0, 0);
+        
+        
         resultsContainer.SetActive(true);
         if(result)
         {
@@ -147,7 +187,20 @@ public class RollScreen : MonoBehaviour
         }
 
         resultsDetailsText.text = $"Left:{leftVal}\nRight:{rightVal}\nSkill:{skillVal}\nTotal:{(leftVal+rightVal+skillVal)}";
-        Invoke("hideResults", 3.0f);
+        // Invoke("hideResults", 3.0f);
+
+        // initialize button
+        rollButton.onClick.RemoveAllListeners();
+        rollButton.GetComponentInChildren<TextMeshProUGUI>().text = "OK";
+        rollButton.onClick.AddListener(delegate { CloseRollScreen(); });
+        rollButton.interactable = true;
+    }
+
+    void CloseRollScreen()
+    {
+        Debug.Log("ROLL SCREEN ---- Closing Roll Screen");
+        onRollScreenComplete?.Invoke();
+        checkManager.Instance.CompleteRollSequence();
     }
 
     void hideResults()

@@ -10,6 +10,9 @@ public class UIManager : MonoBehaviour
 {
     [HideInInspector] public gameController controller;
 
+    private static UIManager _instance;
+    public static UIManager Instance { get { return _instance; } }
+
     // events
     public static event Action onGameStartSelected;
     public static event Action onDialogueEnded;
@@ -27,6 +30,8 @@ public class UIManager : MonoBehaviour
 
     [Header("Roll Screen")]
     [SerializeField] private GameObject RollCanvas;
+    public Vector2 startingRollScreenPosition;
+    public float rollScreenAnimationTime;
 
     [Header("Content")]
     [SerializeField] private GameObject contentScrollParent;
@@ -66,6 +71,14 @@ public class UIManager : MonoBehaviour
     private string _latestChoiceText;
 
     void Awake() {
+        //init singleton
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        } else {
+            _instance = this;
+        }
+
         // add event listener
         SwipeDetector.OnSwipe += onSwipe;
         gameController.Instance.OnGameStateChanged += UpdateUIGameState;
@@ -75,6 +88,9 @@ public class UIManager : MonoBehaviour
         PlayerCaseRecord.OnLinkToUI += addLinkToContentText;
         UIScreen.onCloseMenu += CloseUIMenu;
         contentLinkManager.OnOpenMenu += OpenUIMenu;
+
+        RollScreen.onRollScreenReady += EnableRollScreen;
+        RollScreen.onRollScreenComplete += SlideOutRollScreen;
 
         // set parent controller and child components
         controller = GetComponent<gameController>();
@@ -90,9 +106,9 @@ public class UIManager : MonoBehaviour
         
         // register event listeners
         
-        controller.CheckManager.onRollCheckStart += initRollUI;
-        controller.CheckManager.onRollCheckPass += initRollPassUI;
-        controller.CheckManager.onRollCheckFail += initRollFailUI;
+        // controller.CheckManager.onRollCheckStart += initRollUI;
+        // controller.CheckManager.onRollCheckPass += initRollPassUI;
+        // controller.CheckManager.onRollCheckFail += initRollFailUI;
         
         
 
@@ -277,14 +293,45 @@ public class UIManager : MonoBehaviour
     {
         RollCanvas.GetComponent<Canvas>().enabled = true;
         RollCanvas.SetActive(true);
+        SlideInRollScreen();
         contentScrollParent.SetActive(false);
     }
+
+    public void SlideInRollScreen()
+    {
+        iTween.ValueTo(RollCanvas.gameObject, iTween.Hash(
+            "from", RollCanvas.GetComponent<RectTransform>().anchoredPosition,
+            "to", targetPosition,
+            "time", rollScreenAnimationTime,
+            "onupdatetarget", this.gameObject, 
+            "onupdate", "MoveRollScreenUI"));
+    }
+
     [ContextMenu ("Disable Roll Screen")]
     public void DisableRollScreen()
     {
+        Debug.Log("UI Manager ---- Disabling Roll Screen");
+        contentScrollParent.SetActive(true);
+        Debug.Log("content screen active: " + contentScrollParent.activeSelf);
         RollCanvas.GetComponent<Canvas>().enabled = false;
         RollCanvas.SetActive(false);
         contentScrollParent.SetActive(true);
+    }
+
+    public void SlideOutRollScreen()
+    {
+        iTween.ValueTo(RollCanvas.gameObject, iTween.Hash(
+            "from", RollCanvas.GetComponent<RectTransform>().anchoredPosition,
+            "to", startingRollScreenPosition,
+            "time", rollScreenAnimationTime,
+            "onupdatetarget", this.gameObject, 
+            "onupdate", "MoveRollScreenUI",
+            "oncompletetarget", this.gameObject,
+            "oncomplete","DisableRollScreen"));
+    }
+
+    public void MoveRollScreenUI(Vector2 position) {
+        RollCanvas.GetComponent<RectTransform>().anchoredPosition = position;
     }
     /* GAME START BUTTONS / METHODS */
     

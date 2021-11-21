@@ -1,7 +1,5 @@
 using UnityEngine;
 using UnityEditor;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 
 public class SaveManager : MonoBehaviour
 {

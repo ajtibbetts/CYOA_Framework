@@ -48,6 +48,16 @@ namespace globalDataTypes {
         public string PropertyValue;
     }
 
+
+    [Serializable]
+    public class RollCheckEntry 
+    {
+        public string rollNodeGUID;
+        public string rollDescription;
+        public bool passedRoll;
+    }
+
+
     // ENUMS
     [Serializable]
     public enum GAMESTATE 
@@ -119,6 +129,16 @@ namespace globalDataTypes {
         isLessThanOrEqualTo,
         isGreaterThan,
         isGreaterThanOrEqualTo
+    }
+
+    [Serializable]
+    public enum rollCheckResultType {
+        NONE,
+        MASTERPASS,
+        MASTERFUMBLE,
+        PASS,
+        FAIL,
+        CRITICALFAIL
     }
 
     // STRUCTS

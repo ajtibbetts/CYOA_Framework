@@ -46,6 +46,7 @@ public class DialogueParser : MonoBehaviour
         private void Awake() {
             controller = GetComponent<gameController>();  
             controller.EventManager.onEventFinished += UpdatePendingText;
+            checkManager.onRollCheckComplete += ProcessRollResult;
             
         }
         
@@ -124,8 +125,10 @@ public class DialogueParser : MonoBehaviour
 
             // setup the next history node data
             AddNodeToHistory(narrativeDataGUID, nodeType);
-            // _previousNodeGUID = narrativeDataGUID;
-            // _previousNodeGUID = _dialogueHistory[_dialogueHistory.Count - 1].currentNodeGUID;
+            
+
+            // cache current node to be used in segmented methods
+            _currentNodeGUID = narrativeDataGUID;
 
             switch(nodeType)
             {
@@ -134,6 +137,9 @@ public class DialogueParser : MonoBehaviour
                 break;
                 case nodeType.eventNode:
                     ProcessEventNode(narrativeDataGUID);
+                break;
+                case nodeType.rollNode:
+                    ProcessRollNode(narrativeDataGUID);
                 break;
                 case nodeType.checkNode:
                     ProcessCheckNode(narrativeDataGUID);
@@ -174,6 +180,46 @@ public class DialogueParser : MonoBehaviour
             controller.UIManager.initConfirmActionButton();
 
             
+        }
+
+        private void ProcessRollNode(string narrativeDataGUID)
+        {
+            Debug.Log("DIALOGUE PARSER ---- Roll node Found. Guid: " + narrativeDataGUID);
+            var data = dialogue.RollNodeData.Find(x => x.nodeGuid == narrativeDataGUID);
+            var outputs = dialogue.NodeLinks.Where(x => x.BaseNodeGuid == narrativeDataGUID);
+            var rollSkillName = data.rollSkillName;
+            var rollDescription = data.rollDescription;
+            var rollDifficulty = data.rollDifficulty;
+            var isRepeatable = data.isRepeatable;
+
+
+            // initialize the roll check UI and process
+            checkManager.Instance.InitializeRollCheck(rollSkillName, rollDescription, rollDifficulty);
+        }
+
+        private void ProcessRollResult(bool rollResult, rollCheckResultType resultType)
+        {
+            var data = dialogue.RollNodeData.Find(x => x.nodeGuid == _currentNodeGUID);
+            var outputs = dialogue.NodeLinks.Where(x => x.BaseNodeGuid == _currentNodeGUID);
+
+            switch(resultType)
+            {
+                case rollCheckResultType.MASTERPASS:
+                    ProceedToNarrative(outputs.ElementAt(0).TargetNodeGuid);
+                break;
+                case rollCheckResultType.MASTERFUMBLE:
+                    ProceedToNarrative(outputs.ElementAt(1).TargetNodeGuid);
+                break;
+                case rollCheckResultType.PASS:
+                    ProceedToNarrative(outputs.ElementAt(2).TargetNodeGuid);
+                break;
+                case rollCheckResultType.FAIL:
+                    ProceedToNarrative(outputs.ElementAt(3).TargetNodeGuid);
+                break;
+                case rollCheckResultType.CRITICALFAIL:
+                    ProceedToNarrative(outputs.ElementAt(4).TargetNodeGuid);
+                break;
+            }
         }
 
         private void ProcessEventNode(string narrativeDataGUID)

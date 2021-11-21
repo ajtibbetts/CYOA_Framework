@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using globalDataTypes;
 
 [Serializable]
 public class Player : MonoBehaviour
@@ -69,6 +70,8 @@ public class Player : MonoBehaviour
     // skills retrieval
     private Dictionary<string, int> GetSkill = new Dictionary<string, int>();
 
+    [Header("Roll Check Data")]
+    public List<RollCheckEntry> rollCheckEntries = new List<RollCheckEntry>();
     // level data
     [Header("Level Data")]
     public string CurrentScene;
@@ -166,7 +169,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            Debug.Log($"{skillName} not found. Please check for typos or that skill exists.");
+            Debug.LogError($"{skillName} not found. Please check for typos or that skill exists.");
             return 0;
         }
     }

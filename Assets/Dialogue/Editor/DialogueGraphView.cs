@@ -215,7 +215,7 @@ public class DialogueGraphView : GraphView
         return dialogueNode;
     }
 
-    public RollNode CreateSkillRollNode(string dialogueText, Vector2 position, bool repeatable = false, string skillName = "skillName", string checkDiff = "difficulty")
+    public RollNode CreateSkillRollNode(string dialogueText, Vector2 position, bool repeatable = false, string skillName = "skillName", string checkDiff = "difficulty", string desc = "description")
     {
         Debug.Log("Creating new skill roll node");
         
@@ -226,6 +226,7 @@ public class DialogueGraphView : GraphView
             DialogueText = dialogueText,
             nodeType = nodeType.rollNode,
             rollSkillName = skillName,
+            rollDescription = desc,
             rollDifficulty = checkDiff,
             isRepeatable = repeatable
         };
@@ -270,10 +271,11 @@ public class DialogueGraphView : GraphView
             name = "RollDataContainer"
         };
         var skillNameContainer = new VisualElement();
+        var rollDescriptionContainer = new VisualElement();
         var difficultyContainer = new VisualElement();
         var rollToggleContainer = new VisualElement();
 
-        // add event name field
+        // add skill name field
         var textFieldSkillName = new TextField
         {
             name = "skillName",
@@ -284,7 +286,18 @@ public class DialogueGraphView : GraphView
         skillNameContainer.Add(new Label("Skill Name:"));
         skillNameContainer.Add(textFieldSkillName);
 
-        // add event value field
+        // add roll description field
+        var textFieldRollDescription = new TextField
+        {
+            name ="rollDescription",
+            value = desc
+        };
+        textFieldRollDescription.RegisterValueChangedCallback(evt => rollNode.rollDescription = evt.newValue);
+        textFieldRollDescription.SetValueWithoutNotify(rollNode.rollDescription);
+        rollDescriptionContainer.Add(new Label("Roll Description:"));
+        rollDescriptionContainer.Add(textFieldRollDescription);
+
+        // add roll difficulty field
         var textFieldDifficultyValue = new TextField
         {
             name = "checkDifficulty",
@@ -310,6 +323,7 @@ public class DialogueGraphView : GraphView
 
 
         rollDataContainer.Add(skillNameContainer);
+        rollDataContainer.Add(rollDescriptionContainer);
         rollDataContainer.Add(difficultyContainer);
         rollDataContainer.Add(rollToggleContainer);
 

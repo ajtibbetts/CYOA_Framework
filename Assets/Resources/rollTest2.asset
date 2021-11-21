@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9837df7c010b3346bca580cac5bac11, type: 3}
+  m_Name: rollTest2
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGuid: 2db786e7-5faf-457d-ac56-ac9d2a6a5c64
+    PortName: Master Pass
+    TargetNodeGuid: e135d371-5b8f-494d-a17d-c4810d027f61
+  - BaseNodeGuid: 7ae7a504-8c95-43c2-a64c-f33bbe0d6c81
+    PortName: Next
+    TargetNodeGuid: 50c3887b-789c-4097-aa71-026032094cdc
+  - BaseNodeGuid: 50c3887b-789c-4097-aa71-026032094cdc
+    PortName: Choice 1
+    TargetNodeGuid: 2db786e7-5faf-457d-ac56-ac9d2a6a5c64
+  DialogueNodeData:
+  - Guid: 2db786e7-5faf-457d-ac56-ac9d2a6a5c64
+    DialogueText: Roll Node
+    Position: {x: 593, y: 96}
+    nodeType: 4
+  - Guid: e135d371-5b8f-494d-a17d-c4810d027f61
+    DialogueText: Dialogue Node
+    Position: {x: 910, y: 102}
+    nodeType: 0
+  - Guid: 50c3887b-789c-4097-aa71-026032094cdc
+    DialogueText: Dialogue Node
+    Position: {x: 282, y: 200}
+    nodeType: 0
+  ExposedProperties: []
+  RollNodeData:
+  - nodeGuid: 2db786e7-5faf-457d-ac56-ac9d2a6a5c64
+    rollSkillName: skillName
+    rollDescription: description
+    rollDifficulty: difficulty
+    isRepeatable: 0
+    modifierTags: []
+  DialogueCheckData: []
+  EventNodeData: []
+  CheckNodeData: []
+  EndpointNodeData: []

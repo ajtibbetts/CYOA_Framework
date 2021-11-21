@@ -8,6 +8,7 @@ public class RollNodeData
 {
     public string nodeGuid;
     public string rollSkillName;
+    public string rollDescription;
     public string rollDifficulty;
     public bool isRepeatable;  
 

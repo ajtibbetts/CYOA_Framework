@@ -13,39 +13,77 @@ MonoBehaviour:
   m_Name: rollTest
   m_EditorClassIdentifier: 
   NodeLinks:
-  - BaseNodeGuid: 58c00758-41aa-4bd8-9eba-813da9ea9c33
+  - BaseNodeGuid: 4372fd4e-3c86-4c11-a205-15b71b593043
     PortName: Next
-    TargetNodeGuid: f9990b5b-52ce-4bb8-a956-dde80a53daeb
-  - BaseNodeGuid: f9990b5b-52ce-4bb8-a956-dde80a53daeb
+    TargetNodeGuid: 7a4b414d-8cc0-474e-8a21-d3685ddb04ff
+  - BaseNodeGuid: 7a4b414d-8cc0-474e-8a21-d3685ddb04ff
+    PortName: lets roll
+    TargetNodeGuid: 35497b64-c1d5-4e62-a51b-ee0c2e4f7037
+  - BaseNodeGuid: 35497b64-c1d5-4e62-a51b-ee0c2e4f7037
     PortName: Master Pass
-    TargetNodeGuid: 7ae7a504-8c95-43c2-a64c-f33bbe0d6c81
-  - BaseNodeGuid: 7ae7a504-8c95-43c2-a64c-f33bbe0d6c81
-    PortName: Master Pass
-    TargetNodeGuid: 75f3cfd9-e1ce-4e91-92fb-d5667249df0c
+    TargetNodeGuid: 9aa42302-3a73-4737-84f8-3d84cc9c3e8f
+  - BaseNodeGuid: 35497b64-c1d5-4e62-a51b-ee0c2e4f7037
+    PortName: Master Fumble
+    TargetNodeGuid: d386dbec-3d2c-4f27-b032-e54a3c081e59
+  - BaseNodeGuid: 35497b64-c1d5-4e62-a51b-ee0c2e4f7037
+    PortName: Regular Pass
+    TargetNodeGuid: 7d9b64cb-d59f-453f-a907-5190dcd69a9d
+  - BaseNodeGuid: 35497b64-c1d5-4e62-a51b-ee0c2e4f7037
+    PortName: Regular Fail
+    TargetNodeGuid: 2875b479-1be0-420e-9dfb-70419b781400
+  - BaseNodeGuid: 35497b64-c1d5-4e62-a51b-ee0c2e4f7037
+    PortName: Critical Fail
+    TargetNodeGuid: b7e744b5-4e90-4594-8565-a4c19d77f131
+  - BaseNodeGuid: 35497b64-c1d5-4e62-a51b-ee0c2e4f7037
+    PortName: Already Passed
+    TargetNodeGuid: 13f98290-a759-4c9e-8eca-3b7266c02a97
+  - BaseNodeGuid: 35497b64-c1d5-4e62-a51b-ee0c2e4f7037
+    PortName: Already Failed
+    TargetNodeGuid: d2e6f4fe-cd72-4bb0-8c94-1a1f2b441336
   DialogueNodeData:
-  - Guid: f9990b5b-52ce-4bb8-a956-dde80a53daeb
+  - Guid: 7a4b414d-8cc0-474e-8a21-d3685ddb04ff
+    DialogueText: this will start a roll check test
+    Position: {x: 224, y: 200}
+    nodeType: 0
+  - Guid: 35497b64-c1d5-4e62-a51b-ee0c2e4f7037
     DialogueText: Roll Node
-    Position: {x: 356, y: 127}
+    Position: {x: 486, y: 162}
     nodeType: 4
-  - Guid: 7ae7a504-8c95-43c2-a64c-f33bbe0d6c81
-    DialogueText: Roll Node
-    Position: {x: 687, y: 138}
-    nodeType: 4
-  - Guid: 75f3cfd9-e1ce-4e91-92fb-d5667249df0c
-    DialogueText: Dialogue Node
-    Position: {x: 924, y: 151}
+  - Guid: 9aa42302-3a73-4737-84f8-3d84cc9c3e8f
+    DialogueText: master passed!
+    Position: {x: 833, y: -59}
+    nodeType: 0
+  - Guid: d386dbec-3d2c-4f27-b032-e54a3c081e59
+    DialogueText: master fumbled!
+    Position: {x: 833, y: 64}
+    nodeType: 0
+  - Guid: 7d9b64cb-d59f-453f-a907-5190dcd69a9d
+    DialogueText: regular passed!
+    Position: {x: 833, y: 179}
+    nodeType: 0
+  - Guid: 2875b479-1be0-420e-9dfb-70419b781400
+    DialogueText: regular failed!
+    Position: {x: 833, y: 298}
+    nodeType: 0
+  - Guid: b7e744b5-4e90-4594-8565-a4c19d77f131
+    DialogueText: critically failed!
+    Position: {x: 833, y: 405}
+    nodeType: 0
+  - Guid: 13f98290-a759-4c9e-8eca-3b7266c02a97
+    DialogueText: already pased
+    Position: {x: 833, y: 503}
+    nodeType: 0
+  - Guid: d2e6f4fe-cd72-4bb0-8c94-1a1f2b441336
+    DialogueText: already failed
+    Position: {x: 833, y: 619}
     nodeType: 0
   ExposedProperties: []
   RollNodeData:
-  - nodeGuid: f9990b5b-52ce-4bb8-a956-dde80a53daeb
-    rollSkillName: skillName
-    rollDifficulty: difficulty
-    isRepeatable: 0
-    modifierTags: []
-  - nodeGuid: 7ae7a504-8c95-43c2-a64c-f33bbe0d6c81
-    rollSkillName: skillName
-    rollDifficulty: difficulty
-    isRepeatable: 0
+  - nodeGuid: 35497b64-c1d5-4e62-a51b-ee0c2e4f7037
+    rollSkillName: Wisdom
+    rollDescription: test this roll UI
+    rollDifficulty: 10
+    isRepeatable: 1
     modifierTags: []
   DialogueCheckData: []
   EventNodeData: []
