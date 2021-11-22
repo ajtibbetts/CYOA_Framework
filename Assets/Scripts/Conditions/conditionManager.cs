@@ -127,8 +127,8 @@ public static class conditionManager
     // old method logic, but keep for now to put together new condition checkers
     private static Boolean checkPlayerCondition(conditionalStatement condition, UIManager UIManager) {
         // get player property and value;
-        PropertyInfo propertyInfo = UIManager.controller.player.stats.GetType().GetProperty(condition.propertyName);
-        int currentValue = (int)propertyInfo.GetValue(UIManager.controller.player.stats, null);
+        PropertyInfo propertyInfo = Player.Instance.GetType().GetProperty(condition.propertyName);
+        int currentValue = (int)propertyInfo.GetValue(Player.Instance, null);
         int requiredValue = condition.valueInt;
         currentPropertyValue = currentValue.ToString();
         Debug.Log("Current property value:" + currentPropertyValue);

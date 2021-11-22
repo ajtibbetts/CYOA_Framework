@@ -55,8 +55,23 @@ public abstract class NavObject : MonoBehaviour
     public virtual void AddNavObjectToPlayer()
     {
         AddLocalProperty("hasPlayerVisited", "true");
+        // only add object if not already found 
+        if(!PlayerProgressTracker.Instance.NavObjectExistsInHistory(GUID))
+        {
+            PlayerProgressTracker.Instance.AddNavObject(
+                new NavObjectEntry{
+                    NavObjectGUID = GUID,
+                    NavObjectName = Name,
+                    NavObjectProperties = localProperties
+                }
+            );
+        }
+        
     }
-    public abstract bool HasPlayerVisitedNavObject();
+    public virtual bool HasPlayerVisitedNavObject()
+    {
+        return PlayerProgressTracker.Instance.NavObjectExistsInHistory(GUID);
+    }
 
     public virtual void DeactivateNavObject()
     {

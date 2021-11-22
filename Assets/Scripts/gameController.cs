@@ -14,7 +14,8 @@ public class gameController : MonoBehaviour
     private GAMESTATE _GAMESTATE;
     public event Action<GAMESTATE> OnGameStateChanged;
 
-    [HideInInspector] public playerManager player;
+    [HideInInspector] public Player _player;
+    [SerializeField] private PlayerProgressTracker _progressTracker;
     [HideInInspector] public UIManager UIManager;
     [HideInInspector] public DialogueParser DialogueParser;
     [HideInInspector] public CYOA_EventManager EventManager;
@@ -36,7 +37,9 @@ public class gameController : MonoBehaviour
         
         // init script components
         // player = GetComponent<playerManager>();
-        player = FindObjectOfType (typeof (playerManager)) as playerManager;
+        // player = FindObjectOfType (typeof (Player)) as Player;
+        _player = Player.Instance;
+        _progressTracker = PlayerProgressTracker.Instance;
         UIManager = GetComponent<UIManager>();
         DialogueParser = GetComponent<DialogueParser>();
         EventManager = GetComponent<CYOA_EventManager>();
@@ -63,19 +66,19 @@ public class gameController : MonoBehaviour
     {
         // test player saving
         //player.LoadPlayer();
-        if(player._player.CurrentScene == null)
+        if(_progressTracker.CurrentScene == null)
         {
             Debug.Log("GAME CONTROLLER ---- Current scene is not saved to player starting fresh.");
-             Player.Instance.CurrentScene = "testLevel";
+             _progressTracker.CurrentScene = "testLevel";
             // player._player.CurrentScene = "testLevel";
-            Player.Instance.CurrentAreaName = "detectiveHQ";
+            _progressTracker.CurrentAreaName = "detectiveHQ";
             SubSceneManager.AddScene("testLevel");
         }
         else
         {
             Debug.Log("GAME CONTROLLER ---- Loading from previously saved scene.");
-            SubSceneManager.AddScene(player._player.CurrentScene);
-            Player.Instance.CurrentAreaName = "detectiveHQ";
+            SubSceneManager.AddScene(_progressTracker.CurrentScene);
+            _progressTracker.CurrentAreaName = "detectiveHQ";
         }
     }
 
@@ -102,7 +105,7 @@ public class gameController : MonoBehaviour
 
     public void LoadNewScene(string unloadedSceneName, string newSceneName)
     {
-        player._player.CurrentScene = newSceneName;
+        _progressTracker.CurrentScene = newSceneName;
         SubSceneManager.AddScene(newSceneName);
     }
 
@@ -157,23 +160,23 @@ public class gameController : MonoBehaviour
     }
 
     public void UI_updatePlayerName(){
-        UIManager.updatePlayerNameText(player.stats.playerName);
+        // UIManager.updatePlayerNameText(_player.PlayerFirstName);
     }
 
     public void UI_updatePlayerHealth(){
-        string currentHealth = player.stats.currentHealth.ToString();
-        string maxHealth = player.stats.maxHealth.ToString();
+        // string currentHealth = player.stats.currentHealth.ToString();
+        // string maxHealth = player.stats.maxHealth.ToString();
 
-        UIManager.updatePlayerHealthText(currentHealth + "/" + maxHealth);
+        // UIManager.updatePlayerHealthText(currentHealth + "/" + maxHealth);
     }
     public void UI_updatePlayerEnergy(){
-        string currentEnergy = player.stats.currentEnergy.ToString();
-        string maxEnergy = player.stats.maxEnergy.ToString();
+        // string currentEnergy = player.stats.currentEnergy.ToString();
+        // string maxEnergy = player.stats.maxEnergy.ToString();
 
-        UIManager.updatePlayerEnergyText(currentEnergy + "/" + maxEnergy);
+        // UIManager.updatePlayerEnergyText(currentEnergy + "/" + maxEnergy);
     }
     public void UI_updatePlayerGold(){
-        UIManager.updatePlayerGoldText(player.stats.currentGold.ToString());
+        // UIManager.updatePlayerGoldText(player.stats.currentGold.ToString());
     }
 
     // Event Listeners

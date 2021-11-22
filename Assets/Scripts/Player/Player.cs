@@ -68,18 +68,9 @@ public class Player : MonoBehaviour
     public int StreetSavant = 0;
 
     // skills retrieval
-    private Dictionary<string, int> GetSkill = new Dictionary<string, int>();
+    // private Dictionary<string, int> GetSkill = new Dictionary<string, int>();
+    private Dictionary<string, Func<int>> _skillsDict = new Dictionary<string, Func<int>>();
 
-    [Header("Roll Check Data")]
-    public List<RollCheckEntry> rollCheckEntries = new List<RollCheckEntry>();
-    // level data
-    [Header("Level Data")]
-    public string CurrentScene;
-    public string CurrentAreaName;
-    public List<string> visitedWorldNavObjects = new List<string>();
-    public List<string> visitedInteractableObjects = new List<string>();
-
-    
 
     private void Awake() {
         //init singleton
@@ -97,16 +88,6 @@ public class Player : MonoBehaviour
     public void LoadSaveData(Player savedPlayerData)
     {
         _instance = savedPlayerData;
-    }
-
-    public void addWorldNavObject(string GUID)
-    {
-        visitedWorldNavObjects.Add(GUID);
-    }
-
-    public void addInteractableObject(string GUID)
-    {
-        visitedInteractableObjects.Add(GUID);
     }
     
 
@@ -135,38 +116,35 @@ public class Player : MonoBehaviour
 
     public void SetupSkillsDictionary()
     {
-        GetSkill.Add("Athletics",Physical + Athletics);
-        GetSkill.Add("Fortitude",Physical + Fortitude);
-        GetSkill.Add("Stealth",Physical + Stealth);
-        GetSkill.Add("HardboiledHotshot",Physical + HardboiledHotshot);
+        _skillsDict.Add("Athletics",()=> {return Physical + Athletics;});
+        _skillsDict.Add("Fortitude",()=> {return Physical + Fortitude;});
+        _skillsDict.Add("Stealth",()=> {return Physical + Stealth;});
+        _skillsDict.Add("HardboiledHotshot",()=> {return Physical + HardboiledHotshot;});
 
-        GetSkill.Add("Ballistics",Cognitive + Ballistics);
-        GetSkill.Add("Forensics",Cognitive + Forensics);
-        GetSkill.Add("Medicine",Cognitive + Medicine);
-        GetSkill.Add("CyberSleuth",Cognitive + CyberSleuth);
+        _skillsDict.Add("Ballistics",()=> {return Cognitive + Ballistics;});
+        _skillsDict.Add("Forensics",()=> {return Cognitive + Forensics;});
+        _skillsDict.Add("Medicine",()=> {return Cognitive + Medicine;});
+        _skillsDict.Add("CyberSleuth",()=> {return Cognitive + CyberSleuth;});
 
-        GetSkill.Add("Focus",Volitional + Focus);
-        GetSkill.Add("Tactics",Volitional + Tactics);
-        GetSkill.Add("GreySight",Volitional + GreySight);
-        GetSkill.Add("CaseChaser",Volitional + CaseChaser);
+        _skillsDict.Add("Focus",()=> {return Volitional + Focus;});
+        _skillsDict.Add("Tactics",()=> {return Volitional + Tactics;});
+        _skillsDict.Add("GreySight",()=> {return Volitional + GreySight;});
+        _skillsDict.Add("CaseChaser",()=> {return Volitional + CaseChaser;});
 
-        GetSkill.Add("Causality",Narrative + Causality);
-        GetSkill.Add("Reasoning",Narrative + Reasoning);
-        GetSkill.Add("Occult",Narrative + Occult);
-        GetSkill.Add("AceInspector",Narrative + AceInspector);
+        _skillsDict.Add("Causality",()=> {return Narrative + Causality;});
+        _skillsDict.Add("Reasoning",()=> {return Narrative + Reasoning;});
+        _skillsDict.Add("Occult",()=> {return Narrative + Occult;});
+        _skillsDict.Add("AceInspector",()=> {return Narrative + AceInspector;});
 
-        GetSkill.Add("Emotion",Social + Emotion);
-        GetSkill.Add("Confidence",Social + Confidence);
-        GetSkill.Add("Wisdom",Social + Wisdom);
-        GetSkill.Add("StreetSavant",Social + StreetSavant);
+        _skillsDict.Add("Emotion",()=> {return Social + Emotion;});
+        _skillsDict.Add("Confidence",()=> {return Social + Confidence;});
+        _skillsDict.Add("Wisdom",()=> {return Social + Wisdom;});
+        _skillsDict.Add("StreetSavant",()=> {return Social + StreetSavant;});
     }
 
     public int GetSkillValue(string skillName)
     {
-        if(GetSkill.ContainsKey(skillName))
-        {
-            return GetSkill[skillName];
-        }
+        if(_skillsDict.ContainsKey(skillName)) return _skillsDict[skillName]();
         else
         {
             Debug.LogError($"{skillName} not found. Please check for typos or that skill exists.");

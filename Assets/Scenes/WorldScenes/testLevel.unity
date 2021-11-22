@@ -492,7 +492,7 @@ MonoBehaviour:
   ChildInteractiveObjects: []
   dialogueOnNew:
   - conditions: []
-    dialogue: {fileID: 11400000, guid: d5a429a37ecfe3e47bd47c9def144eb5, type: 2}
+    dialogue: {fileID: 11400000, guid: 8cf3ece780864ce4ea0f3507308b068e, type: 2}
   dialogueOnReturn:
   - conditions: []
     dialogue: {fileID: 11400000, guid: d5a429a37ecfe3e47bd47c9def144eb5, type: 2}

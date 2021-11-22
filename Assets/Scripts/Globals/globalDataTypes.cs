@@ -1,4 +1,5 @@
-using System;   
+using System;  
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace globalDataTypes {
@@ -55,6 +56,14 @@ namespace globalDataTypes {
         public string rollNodeGUID;
         public string rollDescription;
         public bool passedRoll;
+    }
+
+    [Serializable]
+    public class NavObjectEntry 
+    {
+        public string NavObjectGUID;
+        public string NavObjectName;
+        public List<localProperty> NavObjectProperties;
     }
 
 

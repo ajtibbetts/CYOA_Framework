@@ -27,7 +27,7 @@ public class MapLocationElement : MonoBehaviour, IPointerClickHandler
         // set icon color based on whether current location or not
         var currentLocationColor = globalConfig.UI.toggleSelectedBackgroundColor;
         var notCurrentLocationColor = globalConfig.UI.toggleInactiveBackgroundColor;
-        var currentAreaName = Player.Instance.CurrentAreaName;
+        var currentAreaName = PlayerProgressTracker.Instance.CurrentAreaName;
         var colorToSet = currentAreaName == locationData.GetAreaName() ? currentLocationColor : notCurrentLocationColor;
         
         mapIcon.color = colorToSet;

@@ -44,22 +44,22 @@ public abstract class Interactable : NavObject
         // INIT DIALOGUE HERE
     }
 
-    public override void AddNavObjectToPlayer()
-    {
-        base.AddNavObjectToPlayer();
-        // add active object to player's data if not already in there
-        if(!Player.Instance.visitedInteractableObjects.Contains(GUID))
-        {
-            Player.Instance.visitedInteractableObjects.Add(GUID);
-        }
-    }
+    // public override void AddNavObjectToPlayer()
+    // {
+    //     base.AddNavObjectToPlayer();
+    //     // add active object to player's data if not already in there
+    //     if(!Player.Instance.visitedInteractableObjects.Contains(GUID))
+    //     {
+    //         Player.Instance.visitedInteractableObjects.Add(GUID);
+    //     }
+    // }
 
     public abstract void ProcessLocalEvent(string eventName);
 
-    public override bool HasPlayerVisitedNavObject()
-    {
-        return Player.Instance.visitedInteractableObjects.Contains(GUID);
-    }
+    // public override bool HasPlayerVisitedNavObject()
+    // {
+    //     return Player.Instance.visitedInteractableObjects.Contains(GUID);
+    // }
 
     public string GetNewOrReturnedText(bool hasInteracted)
     {

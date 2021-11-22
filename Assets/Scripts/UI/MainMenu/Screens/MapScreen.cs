@@ -116,7 +116,7 @@ public class MapScreen : MenuScreen
 
 
         // check if this location is current location or not world nav gamestate, or locked in the current story state
-        if(_confirmLocationData.GetAreaName() == Player.Instance.CurrentAreaName) _isCurrentLocationText.SetActive(true);
+        if(_confirmLocationData.GetAreaName() == PlayerProgressTracker.Instance.CurrentAreaName) _isCurrentLocationText.SetActive(true);
         else if (isLocked) _locationLockedText.SetActive(true);
         else if(gameController.Instance.GetGAMESTATE() != GAMESTATE.WORLDNAVIGATION) _fastTravelDisabledText.SetActive(true);
         else _confirmButton.SetActive(true);
@@ -132,7 +132,7 @@ public class MapScreen : MenuScreen
         // add code here to load level on event call
         gameController.Instance.SwitchToLevel(_confirmLocationData.GetLevelName());
         // set area and close map screen & main menu
-        Player.Instance.CurrentAreaName = _confirmLocationData.GetAreaName();
+        PlayerProgressTracker.Instance.CurrentAreaName = _confirmLocationData.GetAreaName();
         UpdateData();
         CloseMenu(MENUTYPE.MAINMENU);
     }

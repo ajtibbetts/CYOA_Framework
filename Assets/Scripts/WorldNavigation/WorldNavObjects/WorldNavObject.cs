@@ -93,20 +93,20 @@ public class WorldNavObject : NavObject
         SetupChildObjects();
     }
 
-    public override void AddNavObjectToPlayer()
-    {
-        base.AddNavObjectToPlayer();
-        // add active nav object to player's data if not already in there
-        if(!Player.Instance.visitedWorldNavObjects.Contains(GUID))
-        {
-            Player.Instance.visitedWorldNavObjects.Add(GUID);
-        }
-    }
+    // public override void AddNavObjectToPlayer()
+    // {
+    //     base.AddNavObjectToPlayer();
+    //     // add active nav object to player's data if not already in there
+    //     if(!Player.Instance.visitedWorldNavObjects.Contains(GUID))
+    //     {
+    //         Player.Instance.visitedWorldNavObjects.Add(GUID);
+    //     }
+    // }
 
-    public override bool HasPlayerVisitedNavObject()
-    {
-        return Player.Instance.visitedWorldNavObjects.Contains(GUID);
-    }
+    // public override bool HasPlayerVisitedNavObject()
+    // {
+    //     return Player.Instance.visitedWorldNavObjects.Contains(GUID);
+    // }
 
     public override void DeactivateNavObject()
     {

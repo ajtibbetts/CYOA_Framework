@@ -73,8 +73,8 @@ public class contentManager : MonoBehaviour
 
     public string getPlayerProperty(string propertyName) {
 
-        PropertyInfo propertyInfo = UIManager.controller.player.stats.GetType().GetProperty(propertyName);
-        string currentValue = propertyInfo.GetValue(UIManager.controller.player.stats, null).ToString();
+        PropertyInfo propertyInfo = Player.Instance.GetType().GetProperty(propertyName);
+        string currentValue = propertyInfo.GetValue(Player.Instance, null).ToString();
         Debug.Log("CONTENT MANAGER ---- Property value of " + propertyName + ": " + currentValue);
 
         return currentValue;
