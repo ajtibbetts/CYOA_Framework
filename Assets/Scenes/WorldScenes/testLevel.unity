@@ -559,7 +559,9 @@ MonoBehaviour:
   dialogueOnNew:
   - conditions: []
     dialogue: {fileID: 11400000, guid: dd2023a2259148149a4c8f99719ba1a8, type: 2}
-  dialogueOnReturn: []
+  dialogueOnReturn:
+  - conditions: []
+    dialogue: {fileID: 0}
   dialogueOnExit: []
   displayTextOnNew:
   - conditions: []

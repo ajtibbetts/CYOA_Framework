@@ -215,7 +215,9 @@ public class DialogueGraphView : GraphView
         return dialogueNode;
     }
 
-    public RollNode CreateSkillRollNode(string dialogueText, Vector2 position, bool repeatable = false, string skillName = "skillName", string checkDiff = "difficulty", string desc = "description")
+    public RollNode CreateSkillRollNode(string dialogueText, Vector2 position,
+        bool repeatable = false, string skillName = "skillName", string checkDiff = "difficulty",
+        string desc = "description", string groupID="groupID", string passDesc="passed text")
     {
         Debug.Log("Creating new skill roll node");
         
@@ -223,11 +225,13 @@ public class DialogueGraphView : GraphView
         {
             title = "Skill Roll Check Node",
             GUID = Guid.NewGuid().ToString(),
+            rollGroupTagID = groupID,
             DialogueText = dialogueText,
             nodeType = nodeType.rollNode,
             rollSkillName = skillName,
             rollDescription = desc,
             rollDifficulty = checkDiff,
+            passedDescription = passDesc,
             isRepeatable = repeatable
         };
 
@@ -270,10 +274,23 @@ public class DialogueGraphView : GraphView
         var rollDataContainer = new VisualElement{
             name = "RollDataContainer"
         };
+        var groupIDContainer = new VisualElement();
         var skillNameContainer = new VisualElement();
         var rollDescriptionContainer = new VisualElement();
         var difficultyContainer = new VisualElement();
+        var passedTextContainer = new VisualElement();
         var rollToggleContainer = new VisualElement();
+        
+        // add group id field
+        var textFieldGroupID = new TextField
+        {
+            name = "groupID",
+            value = groupID
+        };
+        textFieldGroupID.RegisterValueChangedCallback(evt => rollNode.rollGroupTagID = evt.newValue);
+        textFieldGroupID.SetValueWithoutNotify(rollNode.rollGroupTagID);
+        groupIDContainer.Add(new Label("Group ID:"));
+        groupIDContainer.Add(textFieldGroupID);
 
         // add skill name field
         var textFieldSkillName = new TextField
@@ -308,6 +325,19 @@ public class DialogueGraphView : GraphView
         difficultyContainer.Add(new Label("Difficulty Value:"));
         difficultyContainer.Add(textFieldDifficultyValue);
 
+        // add passed text container
+        // add roll difficulty field
+        var textFieldPassedText = new TextField
+        {
+            name = "passedText",
+            value = passDesc
+        };
+        textFieldPassedText.RegisterValueChangedCallback(evt => rollNode.passedDescription = evt.newValue);
+        textFieldPassedText.SetValueWithoutNotify(rollNode.passedDescription);
+        passedTextContainer.Add(new Label("Passed Text:"));
+        passedTextContainer.Add(textFieldPassedText);
+
+
         // add is repeatable
         var toggleIsRepeatable = new Toggle 
         {
@@ -321,10 +351,11 @@ public class DialogueGraphView : GraphView
 
 
 
-
+        rollDataContainer.Add(groupIDContainer);
         rollDataContainer.Add(skillNameContainer);
         rollDataContainer.Add(rollDescriptionContainer);
         rollDataContainer.Add(difficultyContainer);
+        rollDataContainer.Add(passedTextContainer);
         rollDataContainer.Add(rollToggleContainer);
 
         rollNode.mainContainer.Add(rollDataContainer);

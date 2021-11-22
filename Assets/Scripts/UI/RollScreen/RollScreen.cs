@@ -12,6 +12,7 @@ public class RollScreen : MonoBehaviour
 
 
     public static event Action onRollScreenReady;
+    public static event Action onRollScreenCancelled;
     public static event Action onRollScreenComplete;
 
     [Header("Test Values")]
@@ -36,6 +37,7 @@ public class RollScreen : MonoBehaviour
     [SerializeField] private Image leftDice;
     [SerializeField] private Image rightDice;
     [SerializeField] private Button rollButton;
+    [SerializeField] private Button goBackButton;
     [SerializeField] private List<Sprite> diceSprites = new List<Sprite>();
 
     [Header("Results Screen")]
@@ -81,10 +83,14 @@ public class RollScreen : MonoBehaviour
         chancePercentage.text = percentage.ToString() + "%";
         SetDifficultyColor(percentage);
 
-        // initialize button
+        // initialize buttons
+        goBackButton.interactable = true;
+        goBackButton.gameObject.SetActive(true);
         rollButton.onClick.RemoveAllListeners();
         rollButton.onClick.AddListener(delegate { StartRollFromUI(); });
+        rollButton.GetComponentInChildren<TextMeshProUGUI>().text = "Roll";
         resultsContainer.SetActive(false);
+        
         onRollScreenReady?.Invoke();
     }
 
@@ -142,6 +148,8 @@ public class RollScreen : MonoBehaviour
 
     IEnumerator StartRollSequence()
     {
+        goBackButton.gameObject.SetActive(false);
+        goBackButton.interactable = false;
         rollButton.interactable = false;
         rollButton.GetComponentInChildren<TextMeshProUGUI>().text = "Wait";
         InvokeRepeating("SetRandomDiceImages", 0f, 0.05f);
@@ -201,6 +209,13 @@ public class RollScreen : MonoBehaviour
         Debug.Log("ROLL SCREEN ---- Closing Roll Screen");
         onRollScreenComplete?.Invoke();
         checkManager.Instance.CompleteRollSequence();
+    }
+
+    public void CancelRollScreen()
+    {
+        Debug.Log("ROLL SCREEN ---- Cancelling Roll Screen");
+        onRollScreenCancelled?.Invoke();
+        UIManager.Instance.SlideOutRollScreen();
     }
 
     void hideResults()

@@ -48,6 +48,11 @@ public class CaseManager : MonoBehaviour
         else Debug.LogError("CASE MANAGER ---- FAILED TO START NEW CASEID: " + caseID);
     }
 
+    public string GetActiveCaseID()
+    {
+        return _activeCase.GetCaseID();
+    }
+
     public void SetupCaseMap()
     {
         OnNewCaseMap?.Invoke(_activeCase.GetCaseMap());

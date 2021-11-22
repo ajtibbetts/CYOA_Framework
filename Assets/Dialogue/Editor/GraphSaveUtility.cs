@@ -115,9 +115,11 @@ public class GraphSaveUtility
                 dialogueContainer.RollNodeData.Add(new RollNodeData
                 {
                     nodeGuid = dialogueNode.GUID,
+                    rollGroupTagID = rollCheckNode.rollGroupTagID,
                     rollSkillName = rollCheckNode.rollSkillName,
                     rollDescription = rollCheckNode.rollDescription,
                     rollDifficulty = rollCheckNode.rollDifficulty,
+                    passedDescription = rollCheckNode.passedDescription,
                     isRepeatable = rollCheckNode.isRepeatable,
                     modifierTags = rollCheckNode.modifierTags
                 });
@@ -245,7 +247,7 @@ public class GraphSaveUtility
                 {
                     var tempNode = _targetGraphView.CreateSkillRollNode(nodeData.DialogueText, Vector2.zero,
                         _rollNodeData.isRepeatable, _rollNodeData.rollSkillName, _rollNodeData.rollDifficulty,
-                        _rollNodeData.rollDescription
+                        _rollNodeData.rollDescription, _rollNodeData.rollGroupTagID, _rollNodeData.passedDescription
                     );
                     tempNode.GUID = nodeData.Guid;
                     _targetGraphView.AddElement(tempNode);

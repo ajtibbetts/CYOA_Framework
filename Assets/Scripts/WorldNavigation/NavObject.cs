@@ -103,6 +103,13 @@ public abstract class NavObject : MonoBehaviour
         else {
             Debug.Log("NAV OBJECT ---- Default 'hasPlayerVisited' property already on object.");
         }
+
+        // check for any prexisting saved properties
+        if(PlayerProgressTracker.Instance.NavObjectExistsInHistory(GUID))
+        {
+            var savedProperties = PlayerProgressTracker.Instance.GetNavObjectProperties(GUID);
+            localProperties = savedProperties; 
+        }
     }
 
     public void AddLocalProperty(string propertyName, string propertyValue)
@@ -129,6 +136,9 @@ public abstract class NavObject : MonoBehaviour
         {
             Debug.Log($"NAV OBJECT ----  Updating local property {propertyName} with value {propertyValue}");
             localProperties[updateIndex].PropertyValue = propertyValue;
+
+            // add updated properties to tracker
+            PlayerProgressTracker.Instance.UpdateNavObjectProperties(GUID, localProperties);
         }
         else {
             Debug.LogError($"NAV OBJECT ---- Local property {propertyName} not found.");

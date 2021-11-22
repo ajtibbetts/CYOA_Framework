@@ -96,6 +96,14 @@ namespace CaseDataObjects
     ***/
 
     [Serializable]
+    public class caseRecordEntry
+    {
+        public string caseID;
+        public VictimData victimData;
+        public CaseSuspect primarySuspect; 
+    }
+
+    [Serializable]
     public class ActiveLocation
     {
         public String MapLocationAreaName;

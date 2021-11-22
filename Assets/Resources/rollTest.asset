@@ -17,8 +17,32 @@ MonoBehaviour:
     PortName: Next
     TargetNodeGuid: 7a4b414d-8cc0-474e-8a21-d3685ddb04ff
   - BaseNodeGuid: 7a4b414d-8cc0-474e-8a21-d3685ddb04ff
-    PortName: lets roll
+    PortName: try and speak reason
     TargetNodeGuid: 35497b64-c1d5-4e62-a51b-ee0c2e4f7037
+  - BaseNodeGuid: 7a4b414d-8cc0-474e-8a21-d3685ddb04ff
+    PortName: try and dodge
+    TargetNodeGuid: 30a4400e-dac9-4b8b-adb7-b9817dd3c712
+  - BaseNodeGuid: 30a4400e-dac9-4b8b-adb7-b9817dd3c712
+    PortName: Master Pass
+    TargetNodeGuid: 9aa42302-3a73-4737-84f8-3d84cc9c3e8f
+  - BaseNodeGuid: 30a4400e-dac9-4b8b-adb7-b9817dd3c712
+    PortName: Master Fumble
+    TargetNodeGuid: d386dbec-3d2c-4f27-b032-e54a3c081e59
+  - BaseNodeGuid: 30a4400e-dac9-4b8b-adb7-b9817dd3c712
+    PortName: Regular Pass
+    TargetNodeGuid: 7d9b64cb-d59f-453f-a907-5190dcd69a9d
+  - BaseNodeGuid: 30a4400e-dac9-4b8b-adb7-b9817dd3c712
+    PortName: Regular Fail
+    TargetNodeGuid: 2875b479-1be0-420e-9dfb-70419b781400
+  - BaseNodeGuid: 30a4400e-dac9-4b8b-adb7-b9817dd3c712
+    PortName: Critical Fail
+    TargetNodeGuid: b7e744b5-4e90-4594-8565-a4c19d77f131
+  - BaseNodeGuid: 30a4400e-dac9-4b8b-adb7-b9817dd3c712
+    PortName: Already Passed
+    TargetNodeGuid: 13f98290-a759-4c9e-8eca-3b7266c02a97
+  - BaseNodeGuid: 30a4400e-dac9-4b8b-adb7-b9817dd3c712
+    PortName: Already Failed
+    TargetNodeGuid: d2e6f4fe-cd72-4bb0-8c94-1a1f2b441336
   - BaseNodeGuid: 35497b64-c1d5-4e62-a51b-ee0c2e4f7037
     PortName: Master Pass
     TargetNodeGuid: 9aa42302-3a73-4737-84f8-3d84cc9c3e8f
@@ -41,14 +65,6 @@ MonoBehaviour:
     PortName: Already Failed
     TargetNodeGuid: d2e6f4fe-cd72-4bb0-8c94-1a1f2b441336
   DialogueNodeData:
-  - Guid: 7a4b414d-8cc0-474e-8a21-d3685ddb04ff
-    DialogueText: this will start a roll check test
-    Position: {x: 224, y: 200}
-    nodeType: 0
-  - Guid: 35497b64-c1d5-4e62-a51b-ee0c2e4f7037
-    DialogueText: Roll Node
-    Position: {x: 486, y: 162}
-    nodeType: 4
   - Guid: 9aa42302-3a73-4737-84f8-3d84cc9c3e8f
     DialogueText: master passed!
     Position: {x: 833, y: -59}
@@ -77,12 +93,34 @@ MonoBehaviour:
     DialogueText: already failed
     Position: {x: 833, y: 619}
     nodeType: 0
+  - Guid: 7a4b414d-8cc0-474e-8a21-d3685ddb04ff
+    DialogueText: this will start a roll check test
+    Position: {x: 226, y: 200}
+    nodeType: 0
+  - Guid: 30a4400e-dac9-4b8b-adb7-b9817dd3c712
+    DialogueText: Roll Node
+    Position: {x: 539, y: 355}
+    nodeType: 4
+  - Guid: 35497b64-c1d5-4e62-a51b-ee0c2e4f7037
+    DialogueText: Roll Node
+    Position: {x: 539, y: -89}
+    nodeType: 4
   ExposedProperties: []
   RollNodeData:
-  - nodeGuid: 35497b64-c1d5-4e62-a51b-ee0c2e4f7037
-    rollSkillName: Wisdom
-    rollDescription: test this roll UI
+  - nodeGuid: 30a4400e-dac9-4b8b-adb7-b9817dd3c712
+    rollGroupTagID: rollTest01
+    rollSkillName: Athletics
+    rollDescription: try and dodge the bullet
     rollDifficulty: 10
+    passedDescription: Proceed past check.
+    isRepeatable: 1
+    modifierTags: []
+  - nodeGuid: 35497b64-c1d5-4e62-a51b-ee0c2e4f7037
+    rollGroupTagID: rollTest01
+    rollSkillName: Wisdom
+    rollDescription: speak wise truths
+    rollDifficulty: 10
+    passedDescription: Proceed past check.
     isRepeatable: 1
     modifierTags: []
   DialogueCheckData: []

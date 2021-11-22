@@ -78,7 +78,7 @@ public class checkManager : MonoBehaviour
         {
             for(int j = 1; j <= 6; j++)
             {
-                if(i + j + playerSkillValue > difficultyValue) successCount ++;
+                if(i + j + playerSkillValue >= difficultyValue) successCount ++;
             }
         }
         float probabilityTotal = successCount / 36.00f;
@@ -93,7 +93,7 @@ public class checkManager : MonoBehaviour
         _leftResult = rnd.Next(1,7);
         _rightResult = rnd.Next(1,7);
         int totalRoll = _leftResult + _rightResult + _rollSkillValue;
-        _passedCheck =  totalRoll > _rollDifficulty;
+        _passedCheck =  totalRoll >= _rollDifficulty;
         onRollResultSent?.Invoke(_leftResult, _rightResult, _rollSkillValue, _passedCheck);
     }
 
@@ -134,7 +134,7 @@ public class checkManager : MonoBehaviour
         if(_leftResult + _rightResult == 2 && _passedCheck) return rollCheckResultType.MASTERFUMBLE;
         
         // check master pass 
-        if(_rollSkillValue + 2 > _rollDifficulty) return rollCheckResultType.MASTERPASS;
+        if(_rollSkillValue + 2 >= _rollDifficulty) return rollCheckResultType.MASTERPASS;
 
         // check regular pass
         if(_passedCheck) return rollCheckResultType.PASS;

@@ -17,6 +17,8 @@ static public class globalConfig
         static public string EventHexColor = "#42ecf5"; // cyan
         static public string LinkHexColor = "#e28743"; // orange
 
+        static public string SkillTextHexColor = "#f8fc03";
+
         static public class CaseUI 
         {
             static public Color profileAllyBackgroundColor = new Color(0.7989943f,0.990566f,0.8437973f); // green

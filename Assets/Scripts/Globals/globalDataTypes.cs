@@ -53,9 +53,12 @@ namespace globalDataTypes {
     [Serializable]
     public class RollCheckEntry 
     {
-        public string rollNodeGUID;
+        public string rollNodeGUID; // this roll's node guid
+        public string rollGroupTagID; // non-unique. used to group different checks together under one outcome
         public string rollDescription;
         public bool passedRoll;
+        public string passedDescription; // if passed, this will update all nodes in the group with that checks roll description.
+        public bool isRepeatable;
     }
 
     [Serializable]
@@ -126,7 +129,8 @@ namespace globalDataTypes {
         eventNode,
         checkNode,
         endpointNode,
-        rollNode
+        rollNode,
+        unknown
         
     }
 

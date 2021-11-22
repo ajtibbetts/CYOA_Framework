@@ -14,6 +14,10 @@ public class PlayerCaseRecord : MonoBehaviour
     public static event Action OnCaseDataUpdated;
     public static event Action<string> OnMessageToUI;
     public static event Action<string> OnLinkToUI;
+
+    
+    [ES3Serializable] public bool onActiveCase {get; private set;}
+    public string activeCaseID;
     
     [SerializeField] private VictimData _victim;
     [SerializeField] private List<ActiveLead> _leads = new List<ActiveLead>();
@@ -29,7 +33,7 @@ public class PlayerCaseRecord : MonoBehaviour
     [SerializeField] private List<ActiveLocation> _activeLocations = new List<ActiveLocation>();
     
     
-    [ES3Serializable] public bool onActiveCase {get; private set;}
+    
     
     private void Awake() {
         if (_instance != null && _instance != this)
@@ -147,6 +151,7 @@ public class PlayerCaseRecord : MonoBehaviour
         ClearCollectionsForNewCase(); // remove when testing with starting test data
 
         // get starting victim data, starting profiles, leads, and evidence
+        activeCaseID = CaseManager.Instance.GetActiveCaseID();
         _victim = CaseManager.Instance.GetStartingVictimData();
         _leads.AddRange(CaseManager.Instance.GetStartingLeads());
         _profiles.AddRange(CaseManager.Instance.GetStartingCharacterProfiles());
