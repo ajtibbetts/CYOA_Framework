@@ -33,6 +33,8 @@ public class DialogueParser : MonoBehaviour
         private string _currentNodeGUID;
         private string _pendingText = "";
 
+        private List<NodeLinkData> _pendingAdditiveChoices = new List<NodeLinkData>();
+
         [Serializable]
         private class dialogueHistory {
             public string previousNodeGUID;
@@ -42,13 +44,17 @@ public class DialogueParser : MonoBehaviour
 
         }
         
+        private PlayerProgressTracker _playerProgress;
 
         private void Awake() {
             controller = GetComponent<gameController>();  
+            _playerProgress = PlayerProgressTracker.Instance;
+
             controller.EventManager.onEventFinished += UpdatePendingText;
             checkManager.onRollCheckComplete += ProcessRollResult;
             RollScreen.onRollScreenCancelled += BacktrackToLastDialogueNodeInHistory;
             UIManager.onDialogueEnded += ClearDialogueHistory;
+            
             
         }
         
@@ -137,7 +143,8 @@ public class DialogueParser : MonoBehaviour
             switch(nodeType)
             {
                 case nodeType.dialogueNode:
-                    ProcessDialogueNode(narrativeDataGUID, text);
+                    if(text.Contains("Additive Choice Node")) ProcessAdditiveChoiceNode(narrativeDataGUID);
+                    else ProcessDialogueNode(narrativeDataGUID, text); // regular dialogue node
                 break;
                 case nodeType.eventNode:
                     ProcessEventNode(narrativeDataGUID);
@@ -158,24 +165,30 @@ public class DialogueParser : MonoBehaviour
         private void ProcessDialogueNode(string narrativeDataGUID, string text)
         {
             Debug.Log("DIALOGUE PARSER ---- Setting up new Dialogue Node with Choices");
-            var choices = dialogue.NodeLinks.Where(x => x.BaseNodeGuid == narrativeDataGUID);
+            var choices = dialogue.NodeLinks.Where(x => x.BaseNodeGuid == narrativeDataGUID).ToList();
             controller.UIManager.updateContentText(_pendingText + text);
             _pendingText = "";
-            Debug.Log("DIALOGUE PARSER ---- number of choices: " + choices.Count());
+            // Debug.Log("DIALOGUE PARSER ---- number of choices: " + choices.Count());
             
-            
-            // instead destroy from UI
+            // clear existing buttons and recreate
             controller.UIManager.ClearButtons();
-            
-            // if there are no dialogue choices left/ flag end reached
-            if(choices.Count() < 1) 
+
+            // add any pending additive choices and clear list
+            if(_pendingAdditiveChoices.Count > 0)
             {
-                onDialogueReachedDeadEnd?.Invoke();
-                return;
+                choices.AddRange(_pendingAdditiveChoices);
+                _pendingAdditiveChoices.Clear();
             }
 
+            ProcessDialogueChoicesAndConfirm(choices);
+            
+        }
+
+        private void ProcessDialogueChoicesAndConfirm(IEnumerable<NodeLinkData> choices)
+        {
             // flag to catch any passed roll checks within a single groupTagID in this dialogue node
             bool hasPassedGroupTagID = false;
+            int buttonCreatedCount = 0;
 
             foreach (var choice in choices)
             {
@@ -191,31 +204,60 @@ public class DialogueParser : MonoBehaviour
                     var rollDifficulty = rollData.rollDifficulty;
                     var skillHex = globalConfig.UI.SkillTextHexColor;
 
-                    // check if player has passed one of any roll checks within this groupTagID
-                    if(PlayerProgressTracker.Instance.hasPlayerPassedRollCheck(rollData.rollGroupTagID))
+                    var fancyButton = $"[ROLL <size=25%><color={skillHex}>{skillPrefix}</color></size>] <i>(Difficulty: {rollDifficulty})</i>\n<b>{buttonText}</b>";
+
+                    // first check if player has attempted check before
+                    if(_playerProgress.RollCheckGroupEntryExists(rollData.rollGroupTagID))
                     {
-                        hasPassedGroupTagID = true; // set flag to avoid duplicate entries
-                        buttonText = "<b>[PASSED]</b> " + rollData.passedDescription;
+                        // check if player has passed one of any roll checks within this groupTagID
+                        if(_playerProgress.hasPlayerPassedRollCheck(rollData.rollGroupTagID))
+                        {
+                            hasPassedGroupTagID = true; // set flag to avoid duplicate entries
+                            buttonText = "<b>[PASSED]</b> " + rollData.passedDescription;
+                        }
+                        else if (rollData.isRepeatable) // failed but can repeat
+                        {
+                            buttonText = fancyButton;
+                        }
+                        else 
+                        {
+                            continue; // if failed and not repeatable, remove the option. BE SURE TO ADD OTHER OPTIONS. 
+                        }
                     }
                     else
                     {
                         // otherwise setup the fancy roll check button
-                        buttonText = $"[ROLL <size=25%><color={skillHex}>{skillPrefix}</color></size>] <i>(Difficulty: {rollDifficulty})</i>\n<b>{buttonText}</b>";
+                        buttonText = fancyButton;
                     }
-
-
-                    
                 }
                 
                 // let UI manager handle button creation and logic for any standard non-roll choices
                 controller.UIManager.CreateDialogueOptionButton(choice.TargetNodeGuid, buttonText);
+                buttonCreatedCount++;
                 
             }
-            
+
+            // if there are no dialogue choices left/ flag end reached
+            if(choices.Count() < 1 || buttonCreatedCount < 1)  
+            {
+                onDialogueReachedDeadEnd?.Invoke();
+                return;
+            }
+
             // finally create confirm button
             controller.UIManager.initConfirmActionButton();
+        }
 
-            
+        private void ProcessAdditiveChoiceNode(string narrativeDataGUID)
+        {
+            var choices = dialogue.NodeLinks.Where(x => x.BaseNodeGuid == narrativeDataGUID);
+            string targetDialogueGUID = choices.ToList().Find(x => x.PortName.Contains("Dialogue Node To Add To")).TargetNodeGuid;
+            foreach(var choice in choices)
+            {
+                if(!choice.PortName.Contains("Dialogue Node To Add To")) _pendingAdditiveChoices.Add(choice);
+            }
+            // once looped, proceed to the next node.
+            ProceedToNarrative(targetDialogueGUID);
         }
 
         private void ProcessRollNode(string narrativeDataGUID)
@@ -230,30 +272,36 @@ public class DialogueParser : MonoBehaviour
             var isRepeatable = data.isRepeatable;
 
             // first check if roll group tag exists in history and roll is not repeatable
-            if(PlayerProgressTracker.Instance.RollCheckGroupEntryExists(rollGroupTagID))
+            if(_playerProgress.RollCheckGroupEntryExists(rollGroupTagID))
             {
-                var historyData = PlayerProgressTracker.Instance.GetRollCheckEntry(data.nodeGuid);
-                if(historyData != null)
-                {
-                    if(historyData.passedRoll)
-                    {
-                        ProceedToNarrative(outputs.ElementAt(5).TargetNodeGuid); // already passed, can't repeat
-                    }
-                    else if(!isRepeatable)
-                    {
-                        ProceedToNarrative(outputs.ElementAt(6).TargetNodeGuid); // already failed, can't repeat
-                    }
-                    else 
-                    {
-                        // initialize the roll check UI and process, failed before but can repeat
-                        checkManager.Instance.InitializeRollCheck(rollSkillName, rollDescription, rollDifficulty);
-                    }
-                }
-                else
-                {
-                    // otherwise we know roll has not passed yet, so start a roll
-                    checkManager.Instance.InitializeRollCheck(rollSkillName, rollDescription, rollDifficulty);
-                }
+                var hasPassed = _playerProgress.hasPlayerPassedRollCheck(rollGroupTagID);
+
+                if(hasPassed) ProceedToNarrative(outputs.ElementAt(5).TargetNodeGuid); // already passed, can't repeat
+                else if (!isRepeatable) ProceedToNarrative(outputs.ElementAt(6).TargetNodeGuid); // already failed, can't repeat
+                else checkManager.Instance.InitializeRollCheck(rollSkillName, rollDescription, rollDifficulty); // can repeat after fail
+                
+                // var historyData = _playerProgress.GetRollCheckEntry(data.nodeGuid);
+                // if(historyData != null)
+                // {
+                //     if(historyData.passedRoll)
+                //     {
+                //         ProceedToNarrative(outputs.ElementAt(5).TargetNodeGuid); // already passed, can't repeat
+                //     }
+                //     else if(!isRepeatable)
+                //     {
+                //         ProceedToNarrative(outputs.ElementAt(6).TargetNodeGuid); // already failed, can't repeat
+                //     }
+                //     else 
+                //     {
+                //         // initialize the roll check UI and process, failed before but can repeat
+                //         checkManager.Instance.InitializeRollCheck(rollSkillName, rollDescription, rollDifficulty);
+                //     }
+                // }
+                // else
+                // {
+                //     // otherwise we know roll has not passed yet, so start a roll
+                //     checkManager.Instance.InitializeRollCheck(rollSkillName, rollDescription, rollDifficulty);
+                // }
                 
             }
             else 
@@ -269,7 +317,7 @@ public class DialogueParser : MonoBehaviour
             var outputs = dialogue.NodeLinks.Where(x => x.BaseNodeGuid == _currentNodeGUID);
 
             // add record to player progress
-            PlayerProgressTracker.Instance.AddRollCheckEntry(
+            _playerProgress.AddRollCheckEntry(
                 new RollCheckEntry {
                     rollNodeGUID = data.nodeGuid,
                     rollGroupTagID = data.rollGroupTagID,
@@ -281,7 +329,7 @@ public class DialogueParser : MonoBehaviour
             );
 
             // if passed, update all roll records under this group id
-            if(rollResult) PlayerProgressTracker.Instance.PassAllRollChecksByGroupTagID(data.rollGroupTagID);
+            if(rollResult) _playerProgress.PassAllRollChecksByGroupTagID(data.rollGroupTagID);
             
 
             switch(resultType)

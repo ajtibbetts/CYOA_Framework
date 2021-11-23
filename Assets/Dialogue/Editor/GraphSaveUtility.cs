@@ -277,6 +277,21 @@ public class GraphSaveUtility
                     _targetGraphView.AddElement(tempNode);
                 }
             }
+            else if(nodeData.DialogueText.Contains("Additive Choice Node"))
+            {
+                var tempNode = _targetGraphView.CreateAdditiveChoiceNode(nodeData.DialogueText, Vector2.zero);
+                tempNode.GUID = nodeData.Guid;
+                _targetGraphView.AddElement(tempNode);
+
+                var nodePorts = _containerCache.NodeLinks.Where(x => x.BaseNodeGuid == nodeData.Guid).ToList();
+                nodePorts.ForEach(x =>
+                {
+                    if(x.PortName != "Dialogue Node To Add To")
+                    {
+                        _targetGraphView.AddChoicePort(tempNode,x.PortName);
+                    }
+                });
+            }
             else
             {
                 

@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9837df7c010b3346bca580cac5bac11, type: 3}
+  m_Name: additiveChoiceTest
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGuid: 16fdfe62-0180-458a-b245-65a7494c31b2
+    PortName: Next
+    TargetNodeGuid: 2eb7a61f-186b-4582-bc30-ffa2c72783d0
+  - BaseNodeGuid: 2eb7a61f-186b-4582-bc30-ffa2c72783d0
+    PortName: add 3 choices
+    TargetNodeGuid: 66f542a8-0d99-4ab4-90f5-340b448750af
+  - BaseNodeGuid: 2eb7a61f-186b-4582-bc30-ffa2c72783d0
+    PortName: don't add any
+    TargetNodeGuid: 8fca36de-0b5e-4a93-831e-917c232fa785
+  - BaseNodeGuid: 66f542a8-0d99-4ab4-90f5-340b448750af
+    PortName: Dialogue Node To Add To
+    TargetNodeGuid: 8fca36de-0b5e-4a93-831e-917c232fa785
+  - BaseNodeGuid: 66f542a8-0d99-4ab4-90f5-340b448750af
+    PortName: dead end 2
+    TargetNodeGuid: 5c67f229-0695-4f8d-b750-e34b8573ef13
+  - BaseNodeGuid: 66f542a8-0d99-4ab4-90f5-340b448750af
+    PortName: dead end 3
+    TargetNodeGuid: 3c459061-d8a1-4d7a-890f-b78c6a0fdc39
+  - BaseNodeGuid: 66f542a8-0d99-4ab4-90f5-340b448750af
+    PortName: back to start 4
+    TargetNodeGuid: 2eb7a61f-186b-4582-bc30-ffa2c72783d0
+  - BaseNodeGuid: 8fca36de-0b5e-4a93-831e-917c232fa785
+    PortName: back to start
+    TargetNodeGuid: 2eb7a61f-186b-4582-bc30-ffa2c72783d0
+  DialogueNodeData:
+  - Guid: 2eb7a61f-186b-4582-bc30-ffa2c72783d0
+    DialogueText: test to add choices to next node
+    Position: {x: 257, y: 170}
+    nodeType: 0
+  - Guid: 66f542a8-0d99-4ab4-90f5-340b448750af
+    DialogueText: Additive Choice Node
+    Position: {x: 523, y: 254}
+    nodeType: 0
+  - Guid: 8fca36de-0b5e-4a93-831e-917c232fa785
+    DialogueText: any added choices are shown here
+    Position: {x: 774, y: -69}
+    nodeType: 0
+  - Guid: 5c67f229-0695-4f8d-b750-e34b8573ef13
+    DialogueText: added choice 2 dead end
+    Position: {x: 1044, y: 170}
+    nodeType: 0
+  - Guid: 3c459061-d8a1-4d7a-890f-b78c6a0fdc39
+    DialogueText: added choice 3 dead end
+    Position: {x: 1044, y: 292}
+    nodeType: 0
+  ExposedProperties: []
+  RollNodeData: []
+  DialogueCheckData: []
+  EventNodeData: []
+  CheckNodeData: []
+  EndpointNodeData: []

@@ -32,10 +32,14 @@ public class NodeSearchWindow : ScriptableObject, ISearchWindowProvider
        {
             new SearchTreeGroupEntry(new GUIContent("Create Elements"), 0),
             new SearchTreeGroupEntry(new GUIContent("Dialogue"), 1),
-            new SearchTreeEntry(new GUIContent("Dialogue Node",_indentationIcon))
-            {
-               userData = new DialogueNode(), level = 2
-            },
+                new SearchTreeEntry(new GUIContent("Dialogue Node",_indentationIcon))
+                {
+                userData = new DialogueNode(), level = 2
+                },
+                new SearchTreeEntry(new GUIContent("Additive Choice Node",_indentationIcon))
+                {
+                userData = new DialogueNode(), level = 2
+                },
             new SearchTreeEntry(new GUIContent("Player Skill Roll",_indentationIcon))
             {
                 userData = new RollNode(), level = 1
@@ -167,7 +171,22 @@ public class NodeSearchWindow : ScriptableObject, ISearchWindowProvider
                 _graphView.CreateNode("Roll Node", localMousePosition);
             return true;
             case DialogueNode dialogueNode:
-                _graphView.CreateNode("Dialogue Node", localMousePosition);
+                // switch on different types of dialogue nodes.
+                Debug.Log("Creating dialogue node from name: " + nodeName);
+                switch(nodeName)
+                {
+                    case "Dialogue Node": // regular dialogue node
+                        _graphView.CreateNode("Dialogue Node", localMousePosition);
+                    break;
+                    case "Speaker Node": // dialogue nodes with a speaker name
+
+                    break;
+                    case "Additive Choice Node": // additive choice nodes that are added to next dialogue node
+                        _graphView.CreateNode("Additive Choice Node", localMousePosition);
+                    break;
+                }
+                
+                
                 return true;
             default:
                 return false;
