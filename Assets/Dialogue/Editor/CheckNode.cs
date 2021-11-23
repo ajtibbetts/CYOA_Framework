@@ -10,9 +10,7 @@ public class CheckNode : DialogueNode
 
     public string checkName;
     public string checkValue;
-    public bool isRepeatable = true;  
-    public bool isRollable = false;  
-    public bool alreadyPassed = false;
+    public string comparisonOperator;
 
     public void setType(conditionType type)
     {

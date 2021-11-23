@@ -490,12 +490,10 @@ MonoBehaviour:
   conditionalEvents: []
   ChildNavObjects: []
   ChildInteractiveObjects: []
-  dialogueOnNew:
-  - conditions: []
-    dialogue: {fileID: 11400000, guid: 8cf3ece780864ce4ea0f3507308b068e, type: 2}
+  dialogueOnNew: []
   dialogueOnReturn:
   - conditions: []
-    dialogue: {fileID: 11400000, guid: 65f978ecded123d4a8d762d6afaf5010, type: 2}
+    dialogue: {fileID: 11400000, guid: 2953edc46faeaef40b2f9f32a9ed0224, type: 2}
   dialogueOnExit: []
   displayTextOnNew:
   - conditions: []
@@ -649,7 +647,7 @@ MonoBehaviour:
     eventName: 
     eventValue: 
   conditionalEvents: []
-  interactiveDialogue: {fileID: 11400000, guid: ed931eff657890747b9cb35a98b47284,
+  interactiveDialogue: {fileID: 11400000, guid: 2953edc46faeaef40b2f9f32a9ed0224,
     type: 2}
   buttonTextOnNew:
   - conditions: []

@@ -1,6 +1,15 @@
+
 DialogueNode #title{
     background-color: green;
     
+}
+
+DialogueNode.additive #title {
+    background-color: rgb(176, 107, 4);
+}
+
+RollNode #title {
+    background-color: rgb(4, 58, 176);
 }
 
 EventNode #title{

@@ -51,7 +51,7 @@ public class DialogueParser : MonoBehaviour
             _playerProgress = PlayerProgressTracker.Instance;
 
             controller.EventManager.onEventFinished += UpdatePendingText;
-            checkManager.onRollCheckComplete += ProcessRollResult;
+            checkRollManager.onRollCheckComplete += ProcessRollResult;
             RollScreen.onRollScreenCancelled += BacktrackToLastDialogueNodeInHistory;
             UIManager.onDialogueEnded += ClearDialogueHistory;
             
@@ -278,36 +278,13 @@ public class DialogueParser : MonoBehaviour
 
                 if(hasPassed) ProceedToNarrative(outputs.ElementAt(5).TargetNodeGuid); // already passed, can't repeat
                 else if (!isRepeatable) ProceedToNarrative(outputs.ElementAt(6).TargetNodeGuid); // already failed, can't repeat
-                else checkManager.Instance.InitializeRollCheck(rollSkillName, rollDescription, rollDifficulty); // can repeat after fail
-                
-                // var historyData = _playerProgress.GetRollCheckEntry(data.nodeGuid);
-                // if(historyData != null)
-                // {
-                //     if(historyData.passedRoll)
-                //     {
-                //         ProceedToNarrative(outputs.ElementAt(5).TargetNodeGuid); // already passed, can't repeat
-                //     }
-                //     else if(!isRepeatable)
-                //     {
-                //         ProceedToNarrative(outputs.ElementAt(6).TargetNodeGuid); // already failed, can't repeat
-                //     }
-                //     else 
-                //     {
-                //         // initialize the roll check UI and process, failed before but can repeat
-                //         checkManager.Instance.InitializeRollCheck(rollSkillName, rollDescription, rollDifficulty);
-                //     }
-                // }
-                // else
-                // {
-                //     // otherwise we know roll has not passed yet, so start a roll
-                //     checkManager.Instance.InitializeRollCheck(rollSkillName, rollDescription, rollDifficulty);
-                // }
+                else checkRollManager.Instance.InitializeRollCheck(rollSkillName, rollDescription, rollDifficulty); // can repeat after fail
                 
             }
             else 
             {
                 // initialize the roll check UI and process for first time
-                checkManager.Instance.InitializeRollCheck(rollSkillName, rollDescription, rollDifficulty);
+                checkRollManager.Instance.InitializeRollCheck(rollSkillName, rollDescription, rollDifficulty);
             }
         }
 
@@ -422,6 +399,8 @@ public class DialogueParser : MonoBehaviour
             var outputs = dialogue.NodeLinks.Where(x => x.BaseNodeGuid == narrativeDataGUID);
             var checkName = data.checkName;
             var checkValue = data.checkValue;
+            var checkType = data.checkType;
+            var comparisonOperator = data.comparisonOperator;
             // if dead end, call and return
             if(outputs.Count() < 1) {
                 Debug.Log("Check node found with no outputs. Please check this dialogue graph.");
@@ -431,44 +410,9 @@ public class DialogueParser : MonoBehaviour
                 return;
             }
 
-            // if check already passed, route to success path
-            if(data.alreadyPassed) 
-            {
-                if(outputs.ElementAt(0) != null) 
-                    {
-                        // route from event triggered
-                        if(outputs.ElementAt(0).TargetNodeGuid != null) ProceedToNarrative(outputs.ElementAt(0).TargetNodeGuid);
-                        return;
-                    }
-            }
-
-            // check for rollable check (mostly player skill)
-            if(data.isRollable)
-            {
-                if(data.checkType == conditionType.playerSkill)
-                {
-                    Debug.Log("Processing player skill check roll.");
-                    Debug.Log("FUNC: " + onPlayerSkillRoll);
-                    if(onPlayerSkillRoll != null)
-                    {
-                        var passedRoll = onPlayerSkillRoll(checkName, checkValue);
-                        Debug.Log("Passed roll: " + passedRoll);
-                        if(passedRoll)
-                        {
-                            Debug.Log("Skill check passed. Routing...");
-                            // set passed
-                            data.alreadyPassed = true;
-                            if(outputs.ElementAt(0).TargetNodeGuid != null) ProceedToNarrative(outputs.ElementAt(0).TargetNodeGuid);
-                        }
-                        else 
-                        {
-                            Debug.Log("Skill check FAILED. Routing...");
-                            if(outputs.ElementAt(1).TargetNodeGuid != null) ProceedToNarrative(outputs.ElementAt(1).TargetNodeGuid);
-                        }
-                    }
-                }
-
-            }
+            var result = checkManager.GetCheckResult(checkType, checkName, checkValue,comparisonOperator);
+            if(result) ProceedToNarrative(outputs.ElementAt(0).TargetNodeGuid);
+            else ProceedToNarrative(outputs.ElementAt(1).TargetNodeGuid);
         }
 
         private void ProcessEventDeadEnd()

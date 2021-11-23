@@ -20,7 +20,9 @@ public class PlayerProgressTracker : MonoBehaviour
     [Header("Case Data")]
     [SerializeField] private List<caseRecordEntry> _completedCaseRecords = new List<caseRecordEntry>();
 
-     
+    [Header("Progression Flags")]
+    [SerializeField] private List<string> _storyFlagIDs = new List<string>();
+    [SerializeField] private List<string> _worldFlagIDs = new List<string>();
 
 
     // accessor properties
@@ -158,5 +160,42 @@ public class PlayerProgressTracker : MonoBehaviour
             return null;
         }
 
+    }
+
+
+    // STORY & WORLD FLAGS
+
+    public void AddStoryFlag(string flagID)
+    {
+        if(!_storyFlagIDs.Contains(flagID)) _storyFlagIDs.Add(flagID);
+        else Debug.Log("PLAYER PROGRESS ---- Story flag already added: " + flagID);
+    }
+
+    public void RemoveStoryFlag(string flagID)
+    {
+        if(_storyFlagIDs.Contains(flagID)) _storyFlagIDs.Remove(flagID);
+        else Debug.Log("PLAYER PROGRESS ---- Story flag does not exist. Cannot remove: " + flagID);
+    }
+
+    public bool HasStoryFlag(string flagID)
+    {
+        return _storyFlagIDs.Contains(flagID);
+    }
+
+    public void AddWorldFlag(string flagID)
+    {
+        if(!_storyFlagIDs.Contains(flagID)) _storyFlagIDs.Add(flagID);
+        else Debug.Log("PLAYER PROGRESS ---- Story flag already added: " + flagID);
+    }
+
+    public void RemoveWorldFlag(string flagID)
+    {
+        if(_storyFlagIDs.Contains(flagID)) _storyFlagIDs.Remove(flagID);
+        else Debug.Log("PLAYER PROGRESS ---- Story flag does not exist. Cannot remove: " + flagID);
+    }
+
+    public bool HasWorldFlag(string flagID)
+    {
+        return _storyFlagIDs.Contains(flagID);
     }
 }

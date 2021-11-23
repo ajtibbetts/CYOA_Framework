@@ -19,7 +19,7 @@ public class gameController : MonoBehaviour
     [HideInInspector] public UIManager UIManager;
     [HideInInspector] public DialogueParser DialogueParser;
     [HideInInspector] public CYOA_EventManager EventManager;
-    [HideInInspector] public checkManager CheckManager;
+    [HideInInspector] public checkRollManager CheckRollManager;
     [HideInInspector] public WorldNavigator worldNavigator;
 
 
@@ -43,7 +43,7 @@ public class gameController : MonoBehaviour
         UIManager = GetComponent<UIManager>();
         DialogueParser = GetComponent<DialogueParser>();
         EventManager = GetComponent<CYOA_EventManager>();
-        CheckManager = GetComponent<checkManager>();
+        CheckRollManager = GetComponent<checkRollManager>();
         worldNavigator = GetComponent<WorldNavigator>();
     }
 

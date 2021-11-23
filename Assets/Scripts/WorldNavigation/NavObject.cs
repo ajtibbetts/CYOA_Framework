@@ -145,10 +145,11 @@ public abstract class NavObject : MonoBehaviour
         }
     }
 
-    public string GetLocalProperty(string propertyName)
+    public string GetLocalPropertyValue(string propertyName)
     {
+        Debug.Log("Nav object ---- Getting local property by name: " + propertyName);
         var localProperty = localProperties.Find(x => x.PropertyName.ToLower() == propertyName.ToLower());
-        if(localProperty != null) return localProperty.PropertyName;
+        if(localProperty != null) return localProperty.PropertyValue;
         else 
         {
             Debug.LogError("NAV OBJECT ---- COULD NOT FIND PROPERTY NAME: " + propertyName);

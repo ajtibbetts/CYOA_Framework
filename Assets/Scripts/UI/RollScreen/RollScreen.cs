@@ -53,8 +53,8 @@ public class RollScreen : MonoBehaviour
             _instance = this;
         }
 
-        checkManager.onRollDataSet += SetRollScreenData;
-        checkManager.onRollResultSent += showResults;
+        checkRollManager.onRollDataSet += SetRollScreenData;
+        checkRollManager.onRollResultSent += showResults;
     }
 
     [ContextMenu ("Test Skill Set UI")]
@@ -63,7 +63,7 @@ public class RollScreen : MonoBehaviour
         skillNameText.text = testSkillName;
         skillValueText.text = "+"+testSkillValue.ToString();
 
-        var percentage = checkManager.GetProbability(testSkillValue, testDifficultyValue);
+        var percentage = checkRollManager.GetProbability(testSkillValue, testDifficultyValue);
         chancePercentage.text = percentage.ToString() + "%";
         SetDifficultyColor(percentage);
 
@@ -79,7 +79,7 @@ public class RollScreen : MonoBehaviour
         var skillValue = Player.Instance.GetSkillValue(skillName);
         skillValueText.text = skillValue.ToString();
 
-        var percentage = checkManager.GetProbability(skillValue, rollDifficulty);
+        var percentage = checkRollManager.GetProbability(skillValue, rollDifficulty);
         chancePercentage.text = percentage.ToString() + "%";
         SetDifficultyColor(percentage);
 
@@ -155,7 +155,7 @@ public class RollScreen : MonoBehaviour
         InvokeRepeating("SetRandomDiceImages", 0f, 0.05f);
         yield return new WaitForSeconds(1);
         CancelInvoke();
-        checkManager.Instance.ProcessRollCheck(); // actual roll calculation here
+        checkRollManager.Instance.ProcessRollCheck(); // actual roll calculation here
     }
 
     void ToggleButton(bool isActive)
@@ -208,7 +208,7 @@ public class RollScreen : MonoBehaviour
     {
         Debug.Log("ROLL SCREEN ---- Closing Roll Screen");
         onRollScreenComplete?.Invoke();
-        checkManager.Instance.CompleteRollSequence();
+        checkRollManager.Instance.CompleteRollSequence();
     }
 
     public void CancelRollScreen()

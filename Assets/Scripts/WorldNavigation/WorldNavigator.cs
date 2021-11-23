@@ -6,6 +6,9 @@ using globalDataTypes;
 
 public class WorldNavigator : MonoBehaviour
 {
+    private static WorldNavigator _instance;
+    public static WorldNavigator Instance { get { return _instance; } }
+
     [HideInInspector] public gameController controller;
 
     public static WorldNavObject ActiveWorldNavObject {get; private set;}
@@ -18,6 +21,14 @@ public class WorldNavigator : MonoBehaviour
     
 
     private void Awake() {
+        //init singleton
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        } else {
+            _instance = this;
+        }
+
         controller = GetComponent<gameController>();          
         SubSceneManager.OnSceneLoaded += SetupNewArea;
         Debug.Log("WORLD NAVIGATOR ---- World Navigation manager setup.");
@@ -77,6 +88,19 @@ public class WorldNavigator : MonoBehaviour
         return ActiveWorldNavObject.GetNewOrReturnedDialogue();
     }
 
+    public string GetActiveNavObjectProperty(string propertyName)
+    {
+        if(_activeNavObject != null)
+        {
+            return _activeNavObject.GetLocalPropertyValue(propertyName);
+        }
+        else 
+        {
+            Debug.LogError($"WORLD NAVIGATOR ---- Tried to get property name {propertyName} but activeNavObject is null");
+            return null;
+        }
+    }
+
     public void DisplayActiveNavObject()
     {
         // register event listener
@@ -84,7 +108,7 @@ public class WorldNavigator : MonoBehaviour
         UIManager.onOptionSelected += NavigateToNavObject;
         
         Debug.Log($"WORLD NAVIGATOR ---- Displaying active world nav object: {ActiveWorldNavObject.Name}");
-
+        _activeNavObject = ActiveWorldNavObject;
         // displays new or returned text
         DisplayActiveNavObjectText();
 
@@ -191,6 +215,7 @@ public class WorldNavigator : MonoBehaviour
                 // ActiveNavObject.DeactivateNavObject(); // deactivate active nav object event
                 ActiveWorldNavObject.StopPropertyListener(); // disable so duplicate properties aren't added.
                 interactiveObject.ActivateNavObject();
+                _activeNavObject = interactiveObject;
                 OnNavInteractableLoaded?.Invoke(interactiveObject.interactiveDialogue);
                 interactiveObject.AddNavObjectToPlayer();
                 return;

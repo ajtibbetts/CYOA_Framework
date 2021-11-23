@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +15,7 @@ public class Player : MonoBehaviour
     [Header("Player Name")]
     public string PlayerFirstName;
     public string PlayerLastName;
-    public string PlayerGender;
+    public int Gender; // 0 male, 1 female, 2 n/a
 
 
     [Header("Player Experience")]
@@ -42,30 +43,30 @@ public class Player : MonoBehaviour
     // skills
     [Header("Player Skills")]
     //physical
-    public int Athletics = 0;
-    public int Fortitude = 0;
-    public int Stealth = 0;
-    public int HardboiledHotshot = 0;
+    private int Athletics = 0;
+    private int Fortitude = 0;
+    private int Stealth = 0;
+    private int HardboiledHotshot = 0;
     //cognitive
-    public int Ballistics = 0;
-    public int Forensics = 0;
-    public int Medicine = 0;
-    public int CyberSleuth = 0;
+    private int Ballistics = 0;
+    private int Forensics = 0;
+    private int Medicine = 0;
+    private int CyberSleuth = 0;
     //volitional
-    public int Focus = 0;
+    private int Focus = 0;
     public int Tactics = 0;
-    public int GreySight = 0;
-    public int CaseChaser = 0;
+    private int GreySight = 0;
+    private int CaseChaser = 0;
     //narrative
-    public int Causality = 0;
-    public int Reasoning = 0;
-    public int Occult = 0;
-    public int AceInspector = 0;
+    private int Causality = 0;
+    private int Reasoning = 0;
+    private int Occult = 0;
+    private int AceInspector = 0;
     // social
-    public int Emotion = 0;
-    public int Confidence = 0;
-    public int Wisdom = 0;
-    public int StreetSavant = 0;
+    private int Emotion = 0;
+    private int Confidence = 0;
+    private int Wisdom = 0;
+    private int StreetSavant = 0;
 
     // skills retrieval
     // private Dictionary<string, int> GetSkill = new Dictionary<string, int>();
@@ -96,7 +97,7 @@ public class Player : MonoBehaviour
         // Debug.Log($"Setting test data!");
         PlayerFirstName = "Jane";
         PlayerLastName = "Falco";
-        PlayerGender = "female";
+        Gender = 1;
         CurrentRank = 1;
         ExperienceToNextRank = 100;
         MaxHealth = 25;
@@ -140,6 +141,16 @@ public class Player : MonoBehaviour
         _skillsDict.Add("Confidence",()=> {return Social + Confidence;});
         _skillsDict.Add("Wisdom",()=> {return Social + Wisdom;});
         _skillsDict.Add("StreetSavant",()=> {return Social + StreetSavant;});
+    }
+
+    public int GetFieldValue(string fieldName)
+    {
+        var propType = this.GetType();
+        var propField = propType.GetField(fieldName, BindingFlags.Instance | BindingFlags.Public);
+
+        int propValue = Int32.Parse(propField.GetValue(this).ToString());
+        Debug.Log($"Player ---- Getting field value name {fieldName} | value: {propValue}");
+        return propValue;
     }
 
     public int GetSkillValue(string skillName)

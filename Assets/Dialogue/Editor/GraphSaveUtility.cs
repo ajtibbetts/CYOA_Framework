@@ -136,9 +136,7 @@ public class GraphSaveUtility
                     checkType = checkNode.checkType,
                     checkName = checkNode.checkName,
                     checkValue = checkNode.checkValue,
-                    isRepeatable = checkNode.isRepeatable,
-                    isRollable = checkNode.isRollable,
-                    alreadyPassed = checkNode.alreadyPassed
+                    comparisonOperator = checkNode.comparisonOperator
                 });
             }
 
@@ -171,7 +169,8 @@ public class GraphSaveUtility
                         failPortName = _failPort.portName,
                         content = _content,
                         skillName = _skillName,
-                        checkValue = _checkValue
+                        checkValue = _checkValue,
+                        
                     });   
                 }
             }
@@ -260,8 +259,7 @@ public class GraphSaveUtility
                 {
                     var tempNode = _targetGraphView.CreateCheckNode(nodeData.DialogueText, Vector2.zero,
                         dataFormatter.getConditionText(_checkNodeData.checkType), _checkNodeData.checkType,
-                        _checkNodeData.checkName, _checkNodeData.checkValue,
-                        _checkNodeData.isRepeatable, _checkNodeData.isRollable, _checkNodeData.alreadyPassed
+                        _checkNodeData.checkName, _checkNodeData.checkValue, _checkNodeData.comparisonOperator
                     );
                     tempNode.GUID = nodeData.Guid;
                     _targetGraphView.AddElement(tempNode);

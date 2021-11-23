@@ -234,6 +234,8 @@ public class DialogueGraphView : GraphView
         inputPort.portName = "Input";
         dialogueNode.inputContainer.Add(inputPort);
         dialogueNode.styleSheets.Add(Resources.Load<StyleSheet>("Node"));
+        dialogueNode.AddToClassList("additive");
+        dialogueNode.name = "Additive";
 
         // output port that connects to the dialogue node to add these choices to.
         var outputPort = GeneratePort(dialogueNode, Direction.Output);
@@ -513,7 +515,8 @@ public class DialogueGraphView : GraphView
         return eventNode;
     }
 
-    public CheckNode CreateCheckNode(string nodeName, Vector2 position, string nodePrefix="", conditionType _checkType = conditionType.none, string _checkName = "", string _checkValue = "", bool repeatable = false, bool rollable = true, bool passed = false)
+    public CheckNode CreateCheckNode(string nodeName, Vector2 position, string nodePrefix="",
+        conditionType _checkType = conditionType.none, string _checkName = "", string _checkValue = "", string comparison = "==")
     {
         //Debug.Log("creating event node!");
         var checkNode = new CheckNode
@@ -524,9 +527,7 @@ public class DialogueGraphView : GraphView
             DialogueText = nodePrefix + " " + nodeName,
             checkName = _checkName,
             checkValue = _checkValue,
-            isRepeatable = repeatable,
-            isRollable = rollable,
-            alreadyPassed = passed,
+            comparisonOperator = comparison,
             nodeType = nodeType.checkNode
         };
         
@@ -554,7 +555,7 @@ public class DialogueGraphView : GraphView
         };
         var eventNameContainer = new VisualElement();
         var eventValueContainer = new VisualElement();
-        var eventToggleContainer = new VisualElement();
+        var checkSelectContainer = new VisualElement();
 
         // add event name field
         var textFieldEventName = new TextField
@@ -578,40 +579,19 @@ public class DialogueGraphView : GraphView
         eventValueContainer.Add(new Label("Parameter Value:"));
         eventValueContainer.Add(textFieldEventValue);
 
-        // add is repeatable
-        var toggleIsRepeatable = new Toggle 
-        {
-            name = "isRepeatable?",
-            value = repeatable
-        };
-        toggleIsRepeatable.RegisterValueChangedCallback(evt => checkNode.isRepeatable = evt.newValue);
-        toggleIsRepeatable.SetValueWithoutNotify(checkNode.isRepeatable);
-        eventToggleContainer.Add(new Label("Is Repeatable?"));
-        eventToggleContainer.Add(toggleIsRepeatable);
-
-        // check if node check type is a rollable type
-        var toggleIsRollable = new Toggle 
-            {
-                name = "isRepeatable?",
-                value = repeatable
-        };
-        if(checkNode.checkType == conditionType.playerProperty || checkNode.checkType == conditionType.playerSkill || checkNode.checkType == conditionType.npcProperty || checkNode.checkType == conditionType.enemyProperty)
-        {
-            
-            // add is rollable option
-            checkNode.isRollable = true;
-            toggleIsRollable.RegisterValueChangedCallback(evt => checkNode.isRollable = evt.newValue);
-            toggleIsRollable.SetValueWithoutNotify(checkNode.isRollable);
-            eventToggleContainer.Add(new Label("Is Rollable?"));
-            eventToggleContainer.Add(toggleIsRollable);
-        }
+        List<string> choices = new List<string>{"==","!=",">=","<=",">","<"};
+        var testSelect = new DropdownField("Comparison",choices,0);
+        testSelect.RegisterValueChangedCallback(evt => checkNode.comparisonOperator = evt.newValue);
+        testSelect.SetValueWithoutNotify(checkNode.comparisonOperator);
+        checkSelectContainer.Add(testSelect);
+       
         
         
         
 
         eventDataContainer.Add(eventNameContainer);
         eventDataContainer.Add(eventValueContainer);
-        eventDataContainer.Add(eventToggleContainer);
+        eventDataContainer.Add(checkSelectContainer);
 
         // var checkTypeSelect = new DropdownMenu();
         // eventDataContainer.Add(checkTypeSelect);

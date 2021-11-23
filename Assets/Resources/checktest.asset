@@ -15,103 +15,115 @@ MonoBehaviour:
   NodeLinks:
   - BaseNodeGuid: 78e4b63e-879d-4884-95e6-1761ff38b34e
     PortName: Next
-    TargetNodeGuid: 4b8d2462-db66-4af7-a6a3-4e3eb5c6eebd
-  - BaseNodeGuid: 4b8d2462-db66-4af7-a6a3-4e3eb5c6eebd
+    TargetNodeGuid: 5844c89c-d8b4-40ad-ae85-5ccb9b31fb21
+  - BaseNodeGuid: 5844c89c-d8b4-40ad-ae85-5ccb9b31fb21
+    PortName: check athletics
+    TargetNodeGuid: cf79092c-288f-4ef7-98d9-9288d9723549
+  - BaseNodeGuid: 3b1fd76d-ba00-4d20-9de7-b15fb5ff467d
+    PortName: check female
+    TargetNodeGuid: d2868884-5482-47b3-b536-17a632942abe
+  - BaseNodeGuid: cf79092c-288f-4ef7-98d9-9288d9723549
     PortName: Passed
-    TargetNodeGuid: 83302503-d57f-48fc-bbe8-28e8bde414f3
-  - BaseNodeGuid: 4b8d2462-db66-4af7-a6a3-4e3eb5c6eebd
+    TargetNodeGuid: d2ab0dd1-e6b8-4abc-8a24-fdc911ca923f
+  - BaseNodeGuid: cf79092c-288f-4ef7-98d9-9288d9723549
     PortName: Failed
-    TargetNodeGuid: 4919a61d-f6bc-4f51-9cdb-fca4d3ea69c4
-  - BaseNodeGuid: 40c82b22-537d-46c1-b4d5-f00aef7a5bd5
-    PortName: Event Fired
-    TargetNodeGuid: 4f3ddd3c-4d9a-41b0-8ddf-b1fcf91f24dc
-  - BaseNodeGuid: 40c82b22-537d-46c1-b4d5-f00aef7a5bd5
-    PortName: Already Triggered
-    TargetNodeGuid: 3d46a004-f4cc-4ad1-b15b-91a4d882f64b
-  - BaseNodeGuid: 83302503-d57f-48fc-bbe8-28e8bde414f3
-    PortName: give me money!
-    TargetNodeGuid: b62abd2d-d9ac-4031-8a09-edc23b6377a4
-  - BaseNodeGuid: 83302503-d57f-48fc-bbe8-28e8bde414f3
-    PortName: 'Don''t be. '
-    TargetNodeGuid: 826f345c-edfc-4bf0-8496-1830031afc64
-  - BaseNodeGuid: b62abd2d-d9ac-4031-8a09-edc23b6377a4
+    TargetNodeGuid: 3b1fd76d-ba00-4d20-9de7-b15fb5ff467d
+  - BaseNodeGuid: d2ab0dd1-e6b8-4abc-8a24-fdc911ca923f
+    PortName: check female
+    TargetNodeGuid: d2868884-5482-47b3-b536-17a632942abe
+  - BaseNodeGuid: d2868884-5482-47b3-b536-17a632942abe
     PortName: Passed
-    TargetNodeGuid: 35770c17-fd19-4b04-9d8d-01b0958d462e
-  - BaseNodeGuid: b62abd2d-d9ac-4031-8a09-edc23b6377a4
+    TargetNodeGuid: d7007b43-9f45-4c62-8fd0-1d2807893aa7
+  - BaseNodeGuid: d2868884-5482-47b3-b536-17a632942abe
     PortName: Failed
-    TargetNodeGuid: 1652a450-5219-49bc-bee8-89b561b46bb1
-  - BaseNodeGuid: 4919a61d-f6bc-4f51-9cdb-fca4d3ea69c4
-    PortName: Sorry, let's continue.
-    TargetNodeGuid: 40c82b22-537d-46c1-b4d5-f00aef7a5bd5
+    TargetNodeGuid: 619cd335-050e-4e3b-b0d6-7972b8bd4810
+  - BaseNodeGuid: d7007b43-9f45-4c62-8fd0-1d2807893aa7
+    PortName: check!
+    TargetNodeGuid: 338dfe33-b465-4eaa-a4a5-eeb8e2a8b166
+  - BaseNodeGuid: 619cd335-050e-4e3b-b0d6-7972b8bd4810
+    PortName: check!
+    TargetNodeGuid: 338dfe33-b465-4eaa-a4a5-eeb8e2a8b166
+  - BaseNodeGuid: 338dfe33-b465-4eaa-a4a5-eeb8e2a8b166
+    PortName: Passed
+    TargetNodeGuid: c523317b-7957-47de-bb82-837f2f10c344
+  - BaseNodeGuid: 338dfe33-b465-4eaa-a4a5-eeb8e2a8b166
+    PortName: Failed
+    TargetNodeGuid: de4ba1e6-d524-4a4d-9cea-659843a8febf
   DialogueNodeData:
-  - Guid: 4b8d2462-db66-4af7-a6a3-4e3eb5c6eebd
-    DialogueText: Skill Skill Skill Skill Skill Skill Check Node
-    Position: {x: 232, y: 200}
+  - Guid: 5844c89c-d8b4-40ad-ae85-5ccb9b31fb21
+    DialogueText: this will check player athletics to start
+    Position: {x: 240, y: 200}
+    nodeType: 0
+  - Guid: 3b1fd76d-ba00-4d20-9de7-b15fb5ff467d
+    DialogueText: 'athletics is less than 4
+
+      next will check if player is female'
+    Position: {x: 838, y: 249}
+    nodeType: 0
+  - Guid: cf79092c-288f-4ef7-98d9-9288d9723549
+    DialogueText: Skill Skill Skill Check Node
+    Position: {x: 537, y: 157}
     nodeType: 2
-  - Guid: 40c82b22-537d-46c1-b4d5-f00aef7a5bd5
-    DialogueText: Event Node
-    Position: {x: 817, y: 199}
-    nodeType: 1
-  - Guid: 4f3ddd3c-4d9a-41b0-8ddf-b1fcf91f24dc
-    DialogueText: no, you must pay!
-    Position: {x: 1064, y: 188}
+  - Guid: d2ab0dd1-e6b8-4abc-8a24-fdc911ca923f
+    DialogueText: 'athletics is >= 4
+
+      next will check if player is female'
+    Position: {x: 838, y: 127}
     nodeType: 0
-  - Guid: 83302503-d57f-48fc-bbe8-28e8bde414f3
-    DialogueText: I am scared!
-    Position: {x: 463, y: -112}
-    nodeType: 0
-  - Guid: b62abd2d-d9ac-4031-8a09-edc23b6377a4
-    DialogueText: NPC Stat NPC Stat NPC Stat NPC Stat NPC Stat NPC Stat Check Node
-    Position: {x: 867, y: -87}
+  - Guid: d2868884-5482-47b3-b536-17a632942abe
+    DialogueText: Player Stat Player Stat Check Node
+    Position: {x: 1108, y: 150}
     nodeType: 2
-  - Guid: 826f345c-edfc-4bf0-8496-1830031afc64
-    DialogueText: you're very kind
-    Position: {x: 878, y: -306}
-    nodeType: 0
-  - Guid: 3d46a004-f4cc-4ad1-b15b-91a4d882f64b
-    DialogueText: ENDPOINT
-    Position: {x: 1225, y: 427}
-    nodeType: 3
-  - Guid: 35770c17-fd19-4b04-9d8d-01b0958d462e
-    DialogueText: take my money!
-    Position: {x: 1445, y: -161}
-    nodeType: 0
-  - Guid: 1652a450-5219-49bc-bee8-89b561b46bb1
-    DialogueText: please I am broke!
-    Position: {x: 1445, y: 37}
-    nodeType: 0
-  - Guid: 4919a61d-f6bc-4f51-9cdb-fca4d3ea69c4
-    DialogueText: 'You don''t scare me!
+  - Guid: d7007b43-9f45-4c62-8fd0-1d2807893aa7
+    DialogueText: 'player is FEMALE
 
 
-      I am super tough!'
-    Position: {x: 509, y: 252}
+      last will check local property
+
+      hasPlayerVisited
+      is true'
+    Position: {x: 1402, y: 90}
+    nodeType: 0
+  - Guid: 619cd335-050e-4e3b-b0d6-7972b8bd4810
+    DialogueText: 'player is not female
+
+
+      last will check local property
+
+      hasPlayerVisited
+      is true'
+    Position: {x: 1402, y: 240}
+    nodeType: 0
+  - Guid: 338dfe33-b465-4eaa-a4a5-eeb8e2a8b166
+    DialogueText: Story Flag Check Node
+    Position: {x: 1653, y: 127}
+    nodeType: 2
+  - Guid: c523317b-7957-47de-bb82-837f2f10c344
+    DialogueText: player has visited!
+    Position: {x: 1977, y: 90}
+    nodeType: 0
+  - Guid: de4ba1e6-d524-4a4d-9cea-659843a8febf
+    DialogueText: player has not visited!
+    Position: {x: 1977, y: 227}
     nodeType: 0
   ExposedProperties: []
+  RollNodeData: []
   DialogueCheckData: []
-  EventNodeData:
-  - nodeGuid: 40c82b22-537d-46c1-b4d5-f00aef7a5bd5
-    EventName: playerhealth
-    EventValue: -4
-    isRepeatable: 1
-    hasFired: 0
-    ignoreDeadEnd: 0
-    eventType: 1
+  EventNodeData: []
   CheckNodeData:
-  - nodeGuid: 4b8d2462-db66-4af7-a6a3-4e3eb5c6eebd
+  - nodeGuid: cf79092c-288f-4ef7-98d9-9288d9723549
     checkType: 1
-    checkName: intimidation
+    checkName: Athletics
     checkValue: 4
-    isRepeatable: 1
-    isRollable: 1
-    alreadyPassed: 0
-  - nodeGuid: b62abd2d-d9ac-4031-8a09-edc23b6377a4
-    checkType: 2
-    checkName: coward
-    checkValue: 5
-    isRepeatable: 0
-    isRollable: 1
-    alreadyPassed: 0
-  EndpointNodeData:
-  - nodeGuid: 3d46a004-f4cc-4ad1-b15b-91a4d882f64b
-    exitText: 
+    comparisonOperator: '>='
+  - nodeGuid: d2868884-5482-47b3-b536-17a632942abe
+    checkType: 0
+    checkName: Gender
+    checkValue: 1
+    comparisonOperator: ==
+  - nodeGuid: 338dfe33-b465-4eaa-a4a5-eeb8e2a8b166
+    checkType: 6
+    checkName: local
+    checkValue: hasPlayerVisited.true
+    comparisonOperator: ==
+  EndpointNodeData: []
