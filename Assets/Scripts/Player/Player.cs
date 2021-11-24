@@ -143,6 +143,16 @@ public class Player : MonoBehaviour
         _skillsDict.Add("StreetSavant",()=> {return Social + StreetSavant;});
     }
 
+    public List<string> GetSkillNames()
+    {
+        var keys = _skillsDict.Keys;
+        var keyList = new List<string>();
+        foreach(var key in keys)
+        {
+            keyList.Add(key);
+        }
+        return keyList;
+    }
     public int GetFieldValue(string fieldName)
     {
         var propType = this.GetType();

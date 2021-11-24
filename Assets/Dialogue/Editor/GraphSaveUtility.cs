@@ -275,6 +275,12 @@ public class GraphSaveUtility
                     _targetGraphView.AddElement(tempNode);
                 }
             }
+            else if(nodeData.nodeType == nodeType.additiveDialogue)
+            {
+                var tempNode = _targetGraphView.CreateAdditiveDialogueNode(nodeData.DialogueText, Vector2.zero);
+                tempNode.GUID = nodeData.Guid;
+                _targetGraphView.AddElement(tempNode);
+            }
             else if(nodeData.DialogueText.Contains("Additive Choice Node"))
             {
                 var tempNode = _targetGraphView.CreateAdditiveChoiceNode(nodeData.DialogueText, Vector2.zero);

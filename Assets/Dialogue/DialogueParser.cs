@@ -54,6 +54,7 @@ public class DialogueParser : MonoBehaviour
             checkRollManager.onRollCheckComplete += ProcessRollResult;
             RollScreen.onRollScreenCancelled += BacktrackToLastDialogueNodeInHistory;
             UIManager.onDialogueEnded += ClearDialogueHistory;
+            UIManager.onProceedToNextNode += ProceedToNextNode;
             
             
         }
@@ -70,14 +71,14 @@ public class DialogueParser : MonoBehaviour
         {
             Debug.Log("DIALOGE PARSER ---- ENABLED");
             // UIManager.onOptionSelected -= ProceedToNarrative; // remove first if any
-            UIManager.onOptionSelected += ProceedToNarrative;
+            UIManager.onOptionSelected += ClearContentAndProceedToNode;
             dialogue = newDialogue;
         }
 
         public void DisableDialogueParser()
         {
             Debug.Log("DIALOGE PARSER ---- DISABLED");
-            UIManager.onOptionSelected -= ProceedToNarrative;
+            UIManager.onOptionSelected -= ClearContentAndProceedToNode;
         }
 
         public void InitDialogue() {
@@ -105,7 +106,7 @@ public class DialogueParser : MonoBehaviour
             // _previousNodeGUID = narrativeData.TargetNodeGuid;
             
             
-            ProceedToNarrative(narrativeData.TargetNodeGuid);
+            ClearContentAndProceedToNode(narrativeData.TargetNodeGuid);
         }
 
         public void UpdatePendingText(string text)
@@ -127,6 +128,13 @@ public class DialogueParser : MonoBehaviour
             };
         }
 
+        private void ClearContentAndProceedToNode(string narrativeDataGUID)
+        {
+            // clear existing buttons and recreate
+            controller.UIManager.ClearContentAndButtons();
+            ProceedToNarrative(narrativeDataGUID);
+        }
+
         private void ProceedToNarrative(string narrativeDataGUID)
         {
             Debug.Log("DIALOGUE PARSER ---- Proceeding to next narrative node for GUID: " + narrativeDataGUID);
@@ -142,6 +150,9 @@ public class DialogueParser : MonoBehaviour
 
             switch(nodeType)
             {
+                case nodeType.additiveDialogue:
+                    ProcessAdditiveParagraphNode(narrativeDataGUID, text);
+                break;
                 case nodeType.dialogueNode:
                     if(text.Contains("Additive Choice Node")) ProcessAdditiveChoiceNode(narrativeDataGUID);
                     else ProcessDialogueNode(narrativeDataGUID, text); // regular dialogue node
@@ -166,12 +177,13 @@ public class DialogueParser : MonoBehaviour
         {
             Debug.Log("DIALOGUE PARSER ---- Setting up new Dialogue Node with Choices");
             var choices = dialogue.NodeLinks.Where(x => x.BaseNodeGuid == narrativeDataGUID).ToList();
-            controller.UIManager.updateContentText(_pendingText + text);
+            // controller.UIManager.updateContentText(_pendingText + text);
             _pendingText = "";
             // Debug.Log("DIALOGUE PARSER ---- number of choices: " + choices.Count());
             
-            // clear existing buttons and recreate
-            controller.UIManager.ClearButtons();
+            // // clear existing buttons and recreate
+            // controller.UIManager.ClearContentAndButtons();
+            UIManager.Instance.CreateContentParagraph(text);
 
             // add any pending additive choices and clear list
             if(_pendingAdditiveChoices.Count > 0)
@@ -246,6 +258,25 @@ public class DialogueParser : MonoBehaviour
 
             // finally create confirm button
             controller.UIManager.initConfirmActionButton();
+        }
+
+        private void ProcessAdditiveParagraphNode(string narrativeDataGUID, string text)
+        {
+            var choices = dialogue.NodeLinks.Where(x => x.BaseNodeGuid == narrativeDataGUID);
+            // simply add the paragraph, "continue dialogue "button, and proceed to next node
+            UIManager.Instance.CreateContentParagraph(text);
+
+            // add logic to create / call continue button here
+
+            // then proceed to next node
+            // ProceedToNarrative(choices.ElementAt(0).TargetNodeGuid);
+            UIManager.Instance.SetAdditiveDialogueState(); // UI will handle the rest from here.
+        }
+
+        private void ProceedToNextNode()
+        {
+            var choices = dialogue.NodeLinks.Where(x => x.BaseNodeGuid == _currentNodeGUID);
+            ProceedToNarrative(choices.ElementAt(0).TargetNodeGuid);
         }
 
         private void ProcessAdditiveChoiceNode(string narrativeDataGUID)
@@ -418,8 +449,8 @@ public class DialogueParser : MonoBehaviour
         private void ProcessEventDeadEnd()
         {
             Debug.Log("DIALOGUE PARSER ---- Dead end reached on event node. Updating content and clearing exist buttons before invocation.");
-            controller.UIManager.updateContentText("");
-            controller.UIManager.ClearButtons();
+            // controller.UIManager.updateContentText("");
+            controller.UIManager.ClearContentAndButtons();
             onDialogueReachedDeadEnd?.Invoke();
         }
 

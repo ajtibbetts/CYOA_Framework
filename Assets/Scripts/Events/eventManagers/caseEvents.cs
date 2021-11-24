@@ -58,38 +58,38 @@ public static class caseEvents
     private static void UpdateVictim(string characterProperty)
     {
         switch(characterProperty)
-            {
-                case "portrait":
-                    onVictimUpdated?.Invoke("portrait");
-                break;
-                case "name":
-                    onVictimUpdated?.Invoke("name");
-                break;
-                case "age":
-                    onVictimUpdated?.Invoke("age");
-                break;
-                case "occupation":
-                    onVictimUpdated?.Invoke("occupation");
-                break;
-                case "residence":
-                    onVictimUpdated?.Invoke("residence");
-                break;
-                case "summary":
-                    onVictimUpdated?.Invoke("summary");
-                break;
-                case "cod":
-                    onVictimUpdated?.Invoke("causeOfDeath");
-                break;
-                case "tod":
-                    onVictimUpdated?.Invoke("timeOfDeath");
-                break;
-                case "lod":
-                    onVictimUpdated?.Invoke("locationOfDeath");
-                break;
-                default:
-                    Debug.LogError("CASE EVENTS ---- FAILED TO UPDATE CHARACTER PROFILE, INCORRECT PARAM VALUE: " + characterProperty);
-                break;
-            }
+        {
+            case "portrait":
+                onVictimUpdated?.Invoke("portrait");
+            break;
+            case "name":
+                onVictimUpdated?.Invoke("name");
+            break;
+            case "age":
+                onVictimUpdated?.Invoke("age");
+            break;
+            case "occupation":
+                onVictimUpdated?.Invoke("occupation");
+            break;
+            case "residence":
+                onVictimUpdated?.Invoke("residence");
+            break;
+            case "summary":
+                onVictimUpdated?.Invoke("summary");
+            break;
+            case "cod":
+                onVictimUpdated?.Invoke("causeOfDeath");
+            break;
+            case "tod":
+                onVictimUpdated?.Invoke("timeOfDeath");
+            break;
+            case "lod":
+                onVictimUpdated?.Invoke("locationOfDeath");
+            break;
+            default:
+                Debug.LogError("CASE EVENTS ---- FAILED TO UPDATE CHARACTER PROFILE, INCORRECT PARAM VALUE: " + characterProperty);
+            break;
+        }
     }
 
     private static void AddProfile(string profileName)

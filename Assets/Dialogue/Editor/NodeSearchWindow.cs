@@ -40,6 +40,10 @@ public class NodeSearchWindow : ScriptableObject, ISearchWindowProvider
                 {
                 userData = new DialogueNode(), level = 2
                 },
+                new SearchTreeEntry(new GUIContent("Additive Dialogue Node",_indentationIcon))
+                {
+                userData = new DialogueNode(), level = 2
+                },
             new SearchTreeEntry(new GUIContent("Player Skill Roll",_indentationIcon))
             {
                 userData = new RollNode(), level = 1
@@ -183,6 +187,9 @@ public class NodeSearchWindow : ScriptableObject, ISearchWindowProvider
                     break;
                     case "Additive Choice Node": // additive choice nodes that are added to next dialogue node
                         _graphView.CreateNode("Additive Choice Node", localMousePosition);
+                    break;
+                    case "Additive Dialogue Node":
+                        _graphView.CreateNode("Additive Dialogue Node", localMousePosition);
                     break;
                 }
                 

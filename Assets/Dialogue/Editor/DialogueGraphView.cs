@@ -103,6 +103,9 @@ public class DialogueGraphView : GraphView
             case "Additive Choice Node":
                 AddElement(CreateAdditiveChoiceNode(nodeName, position));
             break;
+            case "Additive Dialogue Node":
+                AddElement(CreateAdditiveDialogueNode(nodeName, position));
+            break;
             case "Roll Node":
                 AddElement(CreateSkillRollNode(nodeName, position));
             break;
@@ -258,6 +261,51 @@ public class DialogueGraphView : GraphView
         // });
         // textField.SetValueWithoutNotify(dialogueNode.DialogueText);
         // dialogueNode.mainContainer.Add(textField);
+
+
+        dialogueNode.RefreshExpandedState();
+        dialogueNode.RefreshPorts();
+        dialogueNode.SetPosition(new Rect(position, defaultNodeSize));
+
+        return dialogueNode;
+    }
+
+    public DialogueNode CreateAdditiveDialogueNode(string dialogueText, Vector2 position)
+    {
+        Debug.Log("Creating additive dualogue node");
+        var dialogueNode = new DialogueNode
+        {
+            title = "Additive Dialogue Node",
+            GUID = Guid.NewGuid().ToString(),
+            DialogueText = dialogueText,
+            nodeType = nodeType.additiveDialogue
+        };
+
+        // add input and style sheet
+        var inputPort = GeneratePort(dialogueNode, Direction.Input, Port.Capacity.Multi);
+        inputPort.portName = "Input";
+        dialogueNode.inputContainer.Add(inputPort);
+        dialogueNode.styleSheets.Add(Resources.Load<StyleSheet>("Node"));
+        dialogueNode.AddToClassList("additive");
+        dialogueNode.name = "Additive";
+
+        // output port will proceed to next node when tapped on screen
+        var outputPort = GeneratePort(dialogueNode, Direction.Output);
+        outputPort.portName = "Output";
+        dialogueNode.outputContainer.Add(outputPort);
+
+
+        // dialogue to add
+        var textField = new TextField(string.Empty){
+            multiline = true
+        };
+        textField.RegisterValueChangedCallback(evt => 
+        { 
+            dialogueNode.DialogueText = evt.newValue;
+           // dialogueNode.title = evt.newValue;
+        });
+        textField.SetValueWithoutNotify(dialogueNode.DialogueText);
+        dialogueNode.mainContainer.Add(textField);
 
 
         dialogueNode.RefreshExpandedState();

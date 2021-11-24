@@ -101,4 +101,22 @@ public class CaseCharacterProfile : ScriptableObject {
         Debug.Log("CASE CHARACTER PROFILE ---- VALUE: " + propValue.propertyValue);
         return propValue.propertyValue;
     }
+
+    public CharacterProfileData GetFullData()
+    {
+        CharacterProfileData profileData = new CharacterProfileData
+        {
+            characterID = _characterID,
+            characterName = _characterName.propertyValue,
+            portrait = _portrait.portrait,
+            age = _age.propertyValue,
+            occupation = _occupation.propertyValue,
+            residence = _residence.propertyValue,
+            summary = _summary.propertyValue,
+            relationshipToVictim = _relationshipToVictim.propertyValue,
+            additionalNotes = _additionalNotes
+        };
+
+        return profileData;
+    }
 }

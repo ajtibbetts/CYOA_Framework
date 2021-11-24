@@ -130,6 +130,7 @@ namespace globalDataTypes {
         checkNode,
         endpointNode,
         rollNode,
+        additiveDialogue,
         unknown
         
     }

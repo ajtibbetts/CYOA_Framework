@@ -206,7 +206,7 @@ public class PlayerCaseRecord : MonoBehaviour
         }
     }
 
-    
+    // LEADS
     private void AddLeadByID(string leadID)
     {
         Debug.Log("adding lead by ID: " + leadID);
@@ -243,6 +243,24 @@ public class PlayerCaseRecord : MonoBehaviour
             Debug.LogError("PLAYER CASE RECORD ---- Failed to resolve lead by ID: " + leadID);
         }
     }
+
+    public bool isLeadInRecord(string leadID)
+    {
+        return _leads.Exists(x => x.lead.GetLeadID() == leadID);
+    }
+
+    public bool isLeadResolved(string leadID)
+    {
+        var matchedLead = _leads.Find(x => x.lead.GetLeadID() == leadID);
+        if(matchedLead != null) return matchedLead.isResolved;
+        else 
+        {
+            Debug.LogError("CASE RECORD ---- Lead ID not found: " + leadID);
+            return false;
+        }
+    }
+
+    // PROFILES
 
     private void AddProfile(string characterID)
     {
@@ -296,6 +314,18 @@ public class PlayerCaseRecord : MonoBehaviour
         else Debug.LogError("CASE RECORD ---- FAILED TO DISCOVER PROFILE DATA.");
     }
 
+    public CharacterProfileData GetProfileByID(string characterID)
+    {
+        var matchedProfile = _profiles.Find(x => x.characterID.ToLower() == characterID.ToLower());
+        if(matchedProfile != null) return matchedProfile;
+        else
+        {
+            Debug.LogError("CASE RECORD ---- Unable to find profile by ID: " + characterID);
+            return null;
+        }
+    }
+
+    // SUSPECTS
     public void AddProfileToSuspects(CharacterProfileData characterProfile)
     {
         // first update character profile to suspect
@@ -400,6 +430,19 @@ public class PlayerCaseRecord : MonoBehaviour
         _suspects.Insert(0,_primarySuspect);
     }
     
+    public bool isCharacterASuspect(string characterID)
+    {
+        // first check if primary
+        if(_primarySuspect.SuspectProfile.characterID.ToLower() == characterID.ToLower()) return true;
+        else
+        {
+            var matchedSuspect = _suspects.Find(x => x.SuspectProfile.characterID.ToLower() == characterID.ToLower());
+            if (matchedSuspect != null) return true;
+            else return false;
+        }
+    }
+
+    // EVIDENCE
     private void AddEvidenceByID(string evidenceID)
     {
         var availableEvidence = CaseManager.Instance.GetAvailableEvidence();
@@ -445,6 +488,12 @@ public class PlayerCaseRecord : MonoBehaviour
         else Debug.LogError($"PLAYER CASE RECORD ---- FAILED TO UPGRADE EVIDENCE IDs (OLD:{oldEvidenceID}/NEW:{newEvidenceID})");
     }
 
+    public bool isEvidenceInRecord(string evidenceID)
+    {
+        return _evidence.Exists(x => x.GetEvidenceID() == evidenceID);
+    }
+
+    // LOCATIONS
     private void SetStartingLocations()
     {
         var locations = CaseManager.Instance.GetMapLocations();

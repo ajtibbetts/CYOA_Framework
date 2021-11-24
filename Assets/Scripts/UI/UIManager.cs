@@ -18,6 +18,8 @@ public class UIManager : MonoBehaviour
     public static event Action onDialogueEnded;
     public static event Action<string> onOptionSelected;
 
+    public static event Action onProceedToNextNode;
+
     // UI elements
     [Header("Game Menus")]
     public RectTransform mainMenuUI;
@@ -49,6 +51,7 @@ public class UIManager : MonoBehaviour
     public GameObject playerActionOptionBtnPrefab;
     public ToggleGroup toggleGroup;
     public GameObject togglePrefab;
+    public GameObject additiveContinueBtnPrefab;
 
     // internal components
     // [HideInInspector] public conditionManager conditionChecker;
@@ -56,6 +59,8 @@ public class UIManager : MonoBehaviour
     
     private UISTATE _UISTATE;
 
+    private List<GameObject> _contentParagraphs = new List<GameObject>();
+    private GameObject _additiveContinueButton;
     private GameObject UI_paragraph;
     private GameObject UI_contentImage;
     private List<String> _additionalUIMessages = new List<string>();
@@ -69,6 +74,8 @@ public class UIManager : MonoBehaviour
     
     private string _latestTargetGUID;
     private string _latestChoiceText;
+
+    private bool _inAdditiveDialogueState = false;
 
     void Awake() {
         //init singleton
@@ -88,6 +95,7 @@ public class UIManager : MonoBehaviour
         PlayerCaseRecord.OnLinkToUI += addLinkToContentText;
         UIScreen.onCloseMenu += CloseUIMenu;
         contentLinkManager.OnOpenMenu += OpenUIMenu;
+        UIViewport.onViewPortTapped += CheckAdditiveState;
 
         RollScreen.onRollScreenReady += EnableRollScreen;
         RollScreen.onRollScreenComplete += SlideOutRollScreen;
@@ -99,7 +107,8 @@ public class UIManager : MonoBehaviour
         // set initials content prefabs
         UI_contentImage = GameObject.Instantiate(imagePrefab, Vector3.zero, Quaternion.identity, contentScrollContainer.transform);
         UI_contentImage.SetActive(false);
-        UI_paragraph = GameObject.Instantiate(paragraphPrefab, Vector3.zero, Quaternion.identity, contentScrollContainer.transform);
+        // UI_paragraph = GameObject.Instantiate(paragraphPrefab, Vector3.zero, Quaternion.identity, contentScrollContainer.transform);
+        CreateContentParagraph("");
     }
 
     void Start(){
@@ -335,6 +344,45 @@ public class UIManager : MonoBehaviour
     }
     /* GAME START BUTTONS / METHODS */
     
+    public void CreateContentParagraph(string contentToAdd)
+    {
+        Debug.Log("UI Manager --- Adding content paragraph with text: " + contentToAdd);
+        var newParagraph = GameObject.Instantiate(paragraphPrefab, Vector3.zero, Quaternion.identity, contentScrollContainer.transform);
+        var contentText = newParagraph.GetComponent<TextMeshProUGUI>();
+        contentText.text = "";
+        // add any additional messages
+        foreach(string message in _additionalUIMessages)
+        {
+            contentText.text += message;
+        }
+        _additionalUIMessages.Clear();
+        contentText.text += contentManager.parseContent(contentToAdd) + "\n";
+
+        _contentParagraphs.Add(newParagraph);
+    }
+
+    public void SetAdditiveDialogueState()
+    {
+        // first create content paragraph with continue text
+        if(_additiveContinueButton != null)
+        {
+            Destroy(_additiveContinueButton.gameObject);
+        }
+        _additiveContinueButton = GameObject.Instantiate(additiveContinueBtnPrefab, Vector3.zero, Quaternion.identity, contentScrollContainer.transform);
+        _additiveContinueButton.GetComponentInChildren<Button>().onClick.AddListener(delegate { CheckAdditiveState(); });
+        _inAdditiveDialogueState = true;
+    }
+
+    public void CheckAdditiveState()
+    {
+        if(_inAdditiveDialogueState)
+        {
+            Debug.Log("UI Manager ---- Viewport tapped while in additive state. proceeding to next node");
+            _inAdditiveDialogueState = false;
+            onProceedToNextNode?.Invoke();
+        }
+    }
+
     public void initGameStartButton()
     {   
         Debug.Log("UI MANAGER ---- Adding game start button.");
@@ -368,8 +416,14 @@ public class UIManager : MonoBehaviour
     }
 
 
-    public void ClearButtons()
+    public void ClearContentAndButtons()
     {
+        foreach(var paragraph in _contentParagraphs)
+        {
+            Destroy(paragraph);
+        }
+        _contentParagraphs.Clear();
+        
         var toggles = contentScrollContainer.GetComponentsInChildren<Toggle>();
         Debug.Log("UI MANAGER ---- Clearing Buttons. Current button count: " + toggles.Length);
         for (int i = 0; i < toggles.Length; i++)
@@ -386,6 +440,11 @@ public class UIManager : MonoBehaviour
         if(endDialogueButton != null)
         {
             Destroy(endDialogueButton.gameObject);
+        }
+
+        if(_additiveContinueButton != null)
+        {
+            Destroy(_additiveContinueButton.gameObject);
         }
     }
 
@@ -513,6 +572,8 @@ public class UIManager : MonoBehaviour
             Debug.Log("New current guid: " + _currentTargetNodeGUID);
             confirmActionButton.GetComponentInChildren<Text>().text = _latestChoiceText;
             actionToggleButtons[0].SetActive(false);
+            // try destroying instead
+            Destroy(actionToggleButtons[0]);
         }
         else if (actionToggleButtons.Count > 1) {
             // if not, disable the button initially forcing user to select an option.

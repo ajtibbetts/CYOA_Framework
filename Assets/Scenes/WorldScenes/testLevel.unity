@@ -490,10 +490,12 @@ MonoBehaviour:
   conditionalEvents: []
   ChildNavObjects: []
   ChildInteractiveObjects: []
-  dialogueOnNew: []
+  dialogueOnNew:
+  - conditions: []
+    dialogue: {fileID: 11400000, guid: 8cf3ece780864ce4ea0f3507308b068e, type: 2}
   dialogueOnReturn:
   - conditions: []
-    dialogue: {fileID: 11400000, guid: 2953edc46faeaef40b2f9f32a9ed0224, type: 2}
+    dialogue: {fileID: 11400000, guid: 6a8326be752ccd245a2dce08c53b2de3, type: 2}
   dialogueOnExit: []
   displayTextOnNew:
   - conditions: []
@@ -557,9 +559,7 @@ MonoBehaviour:
   dialogueOnNew:
   - conditions: []
     dialogue: {fileID: 11400000, guid: dd2023a2259148149a4c8f99719ba1a8, type: 2}
-  dialogueOnReturn:
-  - conditions: []
-    dialogue: {fileID: 0}
+  dialogueOnReturn: []
   dialogueOnExit: []
   displayTextOnNew:
   - conditions: []
@@ -655,6 +655,7 @@ MonoBehaviour:
   buttonTextOnReturn:
   - conditions: []
     displayText: Speak to this NPC again.
+  _characterProfile: {fileID: 0}
 --- !u!1 &1496206282
 GameObject:
   m_ObjectHideFlags: 0

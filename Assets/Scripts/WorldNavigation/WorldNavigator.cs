@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using globalDataTypes;
+using CaseDataObjects;
 
 public class WorldNavigator : MonoBehaviour
 {
@@ -101,6 +102,21 @@ public class WorldNavigator : MonoBehaviour
         }
     }
 
+    public CharacterProfileData GetActiveNPCData()
+    {
+        try
+        {
+            var serializedParent = Newtonsoft.Json.JsonConvert.SerializeObject(_activeNavObject); 
+            interactableNPC npcObject  = Newtonsoft.Json.JsonConvert.DeserializeObject<interactableNPC>(serializedParent);
+            return npcObject.GetProfileData();
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("WORLD NAVIGATIOR ---- FAILED TO CAST NAV OBJECT TO NPC. Exception displays: " + e);
+            return null;
+        }
+    }
+
     public void DisplayActiveNavObject()
     {
         // register event listener
@@ -109,6 +125,10 @@ public class WorldNavigator : MonoBehaviour
         
         Debug.Log($"WORLD NAVIGATOR ---- Displaying active world nav object: {ActiveWorldNavObject.Name}");
         _activeNavObject = ActiveWorldNavObject;
+
+        // clear existing buttons first
+        controller.UIManager.ClearContentAndButtons();
+
         // displays new or returned text
         DisplayActiveNavObjectText();
 
@@ -124,14 +144,12 @@ public class WorldNavigator : MonoBehaviour
     {
         // string displayText = GetNewOrReturnedText(ActiveNavObject, ActiveNavObject.displayTextOnNew, ActiveNavObject.displayTextOnReturn);
         string displayText = ActiveWorldNavObject.GetNewOrReturnedText(ActiveWorldNavObject.displayTextOnNew, ActiveWorldNavObject.displayTextOnReturn);
-        controller.UIManager.updateContentText(displayText);
+        // controller.UIManager.updateContentText(displayText);
+        controller.UIManager.CreateContentParagraph(displayText);
     }
 
     public void DisplayActiveNavObjectOptions()
     {
-        // clear existing buttons first
-        controller.UIManager.ClearButtons();
-
         // list all child nav objects as options
         List<WorldNavObject> childNavObjects = ActiveWorldNavObject.ChildNavObjects;
         foreach(WorldNavObject navObject in childNavObjects)
