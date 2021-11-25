@@ -39,6 +39,7 @@ public class MapScreen : MenuScreen
     void Start()
     {
         MapLocationElement.onElementTapped += OpenConfirmLocationScreen;
+        SetNoCaseScreen();
     }
 
     public override void UpdateData()
@@ -51,6 +52,10 @@ public class MapScreen : MenuScreen
             SetupMapLocations();
             GoBacktoMainMapScreen();
         }
+        else 
+        {
+            SetNoCaseScreen();
+        }
     }
 
     public void ResetScreen()
@@ -62,6 +67,8 @@ public class MapScreen : MenuScreen
         _locationUIObjects.Clear();
     }
 
+    
+
     public void LoadMap(MapObject newMap)
     {
         Debug.Log("Loading new map!");
@@ -69,7 +76,11 @@ public class MapScreen : MenuScreen
         UpdateData();
     }
 
-
+    public void SetNoCaseScreen()
+    {
+        _mapTitleText.text = "Map Unavailable";
+        _confirmLocationContainer.SetActive(false);
+    }
 
     public void SetMapImage()
     {

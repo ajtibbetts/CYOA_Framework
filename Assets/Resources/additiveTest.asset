@@ -16,40 +16,115 @@ MonoBehaviour:
   - BaseNodeGuid: fa647639-805b-4b77-987c-ee0963d1a16c
     PortName: Next
     TargetNodeGuid: 2752ea10-74f3-4a56-9ba1-f34c7e84dcf7
-  - BaseNodeGuid: 1bc4869e-074d-4c81-ba0d-4d7c1fac174a
-    PortName: Output
-    TargetNodeGuid: 81984665-6836-40e2-9f60-3f55a32ebdcd
   - BaseNodeGuid: 2752ea10-74f3-4a56-9ba1-f34c7e84dcf7
     PortName: Output
     TargetNodeGuid: 1bc4869e-074d-4c81-ba0d-4d7c1fac174a
+  - BaseNodeGuid: 1bc4869e-074d-4c81-ba0d-4d7c1fac174a
+    PortName: Output
+    TargetNodeGuid: e57bac85-942a-42c2-bfba-31cddc9a7100
+  - BaseNodeGuid: e57bac85-942a-42c2-bfba-31cddc9a7100
+    PortName: Output
+    TargetNodeGuid: 81984665-6836-40e2-9f60-3f55a32ebdcd
   DialogueNodeData:
   - Guid: 2752ea10-74f3-4a56-9ba1-f34c7e84dcf7
-    DialogueText: "Nisi vitae suscipit tellus mauris. Commodo odio aenean sed adipiscing.\nMassa
-      enim nec dui nunc. Amet mauris commodo quis imperdiet.\nPurus faucibus ornare
-      suspendisse sed nisi. Nunc eget lorem dolor sed viverra ipsum nunc aliquet.\nOrci
-      dapibus ultrices in iaculis nunc sed augue lacus. \n\nTincidunt nunc pulvinar
-      sapien et ligula. Tellus id interdum velit laoreet.\nunc non blandit massa
-      enim nec dui nunc mattis. Vitae et leo duis ut diam quam nulla."
+    DialogueText: "<h1>This is a first header</h1>\nNisi vitae suscipit tellus mauris.
+      Commodo odio aenean sed adipiscing.\nMassa enim nec dui nunc. Amet mauris commodo
+      quis imperdiet.\nPurus faucibus ornare suspendisse sed nisi. Nunc eget lorem
+      dolor sed viverra ipsum nunc aliquet.\nOrci dapibus ultrices in iaculis nunc
+      sed augue lacus. \nNisi vitae suscipit tellus mauris. Commodo odio aenean sed
+      adipiscing.\nMassa enim nec dui nunc. Amet mauris commodo quis imperdiet.\nPurus
+      faucibus ornare suspendisse sed nisi. Nunc eget lorem dolor sed viverra ipsum
+      nunc aliquet.\nOrci dapibus ultrices in iaculis nunc sed augue lacus. \nNisi
+      vitae suscipit tellus mauris. Commodo odio aenean sed adipiscing.\nMassa enim
+      nec dui nunc. Amet mauris commodo quis imperdiet.\nPurus faucibus ornare suspendisse
+      sed nisi. Nunc eget lorem dolor sed viverra ipsum nunc aliquet.\nOrci dapibus
+      ultrices in iaculis nunc sed augue lacus. \n\nTincidunt nunc pulvinar sapien
+      et ligula. Tellus id interdum velit laoreet.\nunc non blandit massa enim nec
+      dui nunc mattis. Vitae et leo duis ut diam quam nulla.\n\nTHIS IS THE END OF
+      THIS first ADDITIVE"
     Position: {x: 304, y: 61}
     nodeType: 5
   - Guid: 1bc4869e-074d-4c81-ba0d-4d7c1fac174a
-    DialogueText: 'Mattis nunc sed blandit libero volutpat sed cras ornare arcu.
-
-      Egestas
-      fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate.
-      Fermentum et sollicitudin ac orci phasel
-
-
-      Pellentesque pulvinar pellentesque
-      habitant morbi tristique senectus.
-
-      Eu lobortis elementum nibh tellus
-      molestie nunc non blandit massa.'
-    Position: {x: 1014, y: 99}
+    DialogueText: "<h1>This is a second header</h1>\nMattis nunc sed blandit libero
+      volutpat sed cras ornare arcu.\nEgestas fringilla phasellus faucibus scelerisque
+      eleifend donec pretium vulputate. Fermentum et sollicitudin ac orci phasel\nNisi
+      vitae suscipit tellus mauris. Commodo odio aenean sed adipiscing.\nMassa enim
+      nec dui nunc. Amet mauris commodo quis imperdiet.\nPurus faucibus ornare suspendisse
+      sed nisi. Nunc eget lorem dolor sed viverra ipsum nunc aliquet.\nOrci dapibus
+      ultrices in iaculis nunc sed augue lacus. \nNisi vitae suscipit tellus mauris.
+      Commodo odio aenean sed adipiscing.\nMassa enim nec dui nunc. Amet mauris commodo
+      quis imperdiet.\nPurus faucibus ornare suspendisse sed nisi. Nunc eget lorem
+      dolor sed viverra ipsum nunc aliquet.\nOrci dapibus ultrices in iaculis nunc
+      sed augue lacus. \nNisi vitae suscipit tellus mauris. Commodo odio aenean sed
+      adipiscing.\nMassa enim nec dui nunc. Amet mauris commodo quis imperdiet.\nPurus
+      faucibus ornare suspendisse sed nisi. Nunc eget lorem dolor sed viverra ipsum
+      nunc aliquet.\nOrci dapibus ultrices in iaculis nunc sed augue lacus. \nPurus
+      faucibus ornare suspendisse sed nisi. Nunc eget lorem dolor sed viverra ipsum
+      nunc aliquet.\nOrci dapibus ultrices in iaculis nunc sed augue lacus. \nNisi
+      vitae suscipit tellus mauris. Commodo odio aenean sed adipiscing.\nMassa enim
+      nec dui nunc. Amet mauris commodo quis imperdiet.\nPurus faucibus ornare suspendisse
+      sed nisi. Nunc eget lorem dolor sed viverra ipsum nunc aliquet.\nOrci dapibus
+      ultrices in iaculis nunc sed augue lacus. \nNisi vitae suscipit tellus mauris.
+      Commodo odio aenean sed adipiscing.\nMassa enim nec dui nunc. Amet mauris commodo
+      quis imperdiet.\nPurus faucibus ornare suspendisse sed nisi. Nunc eget lorem
+      dolor sed viverra ipsum nunc aliquet.\nOrci dapibus ultrices in iaculis nunc
+      sed augue lacus. \nPurus faucibus ornare suspendisse sed nisi. Nunc eget lorem
+      dolor sed viverra ipsum nunc aliquet.\nOrci dapibus ultrices in iaculis nunc
+      sed augue lacus. \nNisi vitae suscipit tellus mauris. Commodo odio aenean sed
+      adipiscing.\nMassa enim nec dui nunc. Amet mauris commodo quis imperdiet.\nPurus
+      faucibus ornare suspendisse sed nisi. Nunc eget lorem dolor sed viverra ipsum
+      nunc aliquet.\nOrci dapibus ultrices in iaculis nunc sed augue lacus. \nNisi
+      vitae suscipit tellus mauris. Commodo odio aenean sed adipiscing.\nMassa enim
+      nec dui nunc. Amet mauris commodo quis imperdiet.\nPurus faucibus ornare suspendisse
+      sed nisi. Nunc eget lorem dolor sed viverra ipsum nunc aliquet.\nOrci dapibus
+      ultrices in iaculis nunc sed augue lacus. \n\nTincidunt nunc pulvinar sapien
+      et ligula. Tellus id interdum velit laoreet.\nunc non blandit massa enim nec
+      dui nunc mattis. Vitae et leo duis ut diam quam nulla.\n\nTHIS IS THE END OF
+      THIS second ADDITIVE"
+    Position: {x: 948, y: 72}
+    nodeType: 5
+  - Guid: e57bac85-942a-42c2-bfba-31cddc9a7100
+    DialogueText: "<h1>This is a third header</h1>\nMattis nunc sed blandit libero
+      volutpat sed cras ornare arcu.\nEgestas fringilla phasellus faucibus scelerisque
+      eleifend donec pretium vulputate. Fermentum et sollicitudin ac orci phasel\nNisi
+      vitae suscipit tellus mauris. Commodo odio aenean sed adipiscing.\nMassa enim
+      nec dui nunc. Amet mauris commodo quis imperdiet.\nPurus faucibus ornare suspendisse
+      sed nisi. Nunc eget lorem dolor sed viverra ipsum nunc aliquet.\nOrci dapibus
+      ultrices in iaculis nunc sed augue lacus. \nNisi vitae suscipit tellus mauris.
+      Commodo odio aenean sed adipiscing.\nMassa enim nec dui nunc. Amet mauris commodo
+      quis imperdiet.\nPurus faucibus ornare suspendisse sed nisi. Nunc eget lorem
+      dolor sed viverra ipsum nunc aliquet.\nOrci dapibus ultrices in iaculis nunc
+      sed augue lacus. \nNisi vitae suscipit tellus mauris. Commodo odio aenean sed
+      adipiscing.\nMassa enim nec dui nunc. Amet mauris commodo quis imperdiet.\nPurus
+      faucibus ornare suspendisse sed nisi. Nunc eget lorem dolor sed viverra ipsum
+      nunc aliquet.\nOrci dapibus ultrices in iaculis nunc sed augue lacus. \nPurus
+      faucibus ornare suspendisse sed nisi. Nunc eget lorem dolor sed viverra ipsum
+      nunc aliquet.\nOrci dapibus ultrices in iaculis nunc sed augue lacus. \nNisi
+      vitae suscipit tellus mauris. Commodo odio aenean sed adipiscing.\nMassa enim
+      nec dui nunc. Amet mauris commodo quis imperdiet.\nPurus faucibus ornare suspendisse
+      sed nisi. Nunc eget lorem dolor sed viverra ipsum nunc aliquet.\nOrci dapibus
+      ultrices in iaculis nunc sed augue lacus. \nNisi vitae suscipit tellus mauris.
+      Commodo odio aenean sed adipiscing.\nMassa enim nec dui nunc. Amet mauris commodo
+      quis imperdiet.\nPurus faucibus ornare suspendisse sed nisi. Nunc eget lorem
+      dolor sed viverra ipsum nunc aliquet.\nOrci dapibus ultrices in iaculis nunc
+      sed augue lacus. \nPurus faucibus ornare suspendisse sed nisi. Nunc eget lorem
+      dolor sed viverra ipsum nunc aliquet.\nOrci dapibus ultrices in iaculis nunc
+      sed augue lacus. \nNisi vitae suscipit tellus mauris. Commodo odio aenean sed
+      adipiscing.\nMassa enim nec dui nunc. Amet mauris commodo quis imperdiet.\nPurus
+      faucibus ornare suspendisse sed nisi. Nunc eget lorem dolor sed viverra ipsum
+      nunc aliquet.\nOrci dapibus ultrices in iaculis nunc sed augue lacus. \nNisi
+      vitae suscipit tellus mauris. Commodo odio aenean sed adipiscing.\nMassa enim
+      nec dui nunc. Amet mauris commodo quis imperdiet.\nPurus faucibus ornare suspendisse
+      sed nisi. Nunc eget lorem dolor sed viverra ipsum nunc aliquet.\nOrci dapibus
+      ultrices in iaculis nunc sed augue lacus. \n\nTincidunt nunc pulvinar sapien
+      et ligula. Tellus id interdum velit laoreet.\nunc non blandit massa enim nec
+      dui nunc mattis. Vitae et leo duis ut diam quam nulla.\n\nTHIS IS THE END OF
+      THIS third ADDITIVE"
+    Position: {x: 1772, y: 72}
     nodeType: 5
   - Guid: 81984665-6836-40e2-9f60-3f55a32ebdcd
     DialogueText: finally there is a dialogue node
-    Position: {x: 1789, y: 133}
+    Position: {x: 2715, y: 123}
     nodeType: 0
   ExposedProperties: []
   RollNodeData: []

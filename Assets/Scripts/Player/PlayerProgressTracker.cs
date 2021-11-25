@@ -23,6 +23,8 @@ public class PlayerProgressTracker : MonoBehaviour
     [Header("Progression Flags")]
     [SerializeField] private List<string> _storyFlagIDs = new List<string>();
     [SerializeField] private List<string> _worldFlagIDs = new List<string>();
+    [Header("Event Entries")]
+    [SerializeField] private List<EventNodeData> _eventHistory = new List<EventNodeData>();
 
 
     // accessor properties
@@ -197,5 +199,34 @@ public class PlayerProgressTracker : MonoBehaviour
     public bool HasWorldFlag(string flagID)
     {
         return _storyFlagIDs.Contains(flagID);
+    }
+
+    // Events
+
+    public void AddEventEntry(EventNodeData newEntry)
+    {
+        // currently we only care about non-repeatable events for entry
+        if(newEntry.isRepeatable) return;
+
+        var existingEntry = _eventHistory.Find(x => x.nodeGuid == newEntry.nodeGuid);
+        if(existingEntry == null)
+        {
+            Debug.Log("Progress Tracker --- Adding new event entry.");
+            _eventHistory.Add(newEntry);
+        }
+        else Debug.Log("Progress Tracker ---- Event entry already exists for GUID: " + newEntry.nodeGuid);
+    }
+    public bool hasEventTriggeredAlready(string eventGUID)
+    {
+        var existingEntry = _eventHistory.Find(x => x.nodeGuid == eventGUID);
+        if(existingEntry != null) return true;
+        return false;
+    }
+
+    public bool isEventRepeatable(string eventGUID)
+    {
+        var existingEntry = _eventHistory.Find(x => x.nodeGuid == eventGUID);
+        if(existingEntry != null) return existingEntry.isRepeatable;
+        return false;
     }
 }

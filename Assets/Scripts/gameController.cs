@@ -183,6 +183,9 @@ public class gameController : MonoBehaviour
     public void BeginWorldNavigation()
     {
         Debug.Log("GAME CONTROLLER ---- End of dialogue graph reached. Moving to active World Nav Object.");
+        // first will want to check for returning dialogue on the nav object, can just process new scene
+        // ProcessNewScene(null);
+
         SetGAMESTATE(GAMESTATE.WORLDNAVIGATION);
         DialogueParser.DisableDialogueParser();
         worldNavigator.DisplayActiveNavObject();

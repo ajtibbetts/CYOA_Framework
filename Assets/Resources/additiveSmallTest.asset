@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9837df7c010b3346bca580cac5bac11, type: 3}
+  m_Name: additiveSmallTest
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGuid: 67649007-aeae-4488-8ceb-d864f446ce47
+    PortName: Next
+    TargetNodeGuid: 00ef6673-d297-442b-a6ec-4d069c068c17
+  - BaseNodeGuid: 00ef6673-d297-442b-a6ec-4d069c068c17
+    PortName: Output
+    TargetNodeGuid: 50017452-9eda-49da-a7b5-f741a0909028
+  - BaseNodeGuid: 50017452-9eda-49da-a7b5-f741a0909028
+    PortName: Output
+    TargetNodeGuid: 212143fb-65ee-4668-bfa4-763075acb0c5
+  - BaseNodeGuid: 212143fb-65ee-4668-bfa4-763075acb0c5
+    PortName: Output
+    TargetNodeGuid: 644befce-04ea-4232-933e-ac5195825556
+  - BaseNodeGuid: 644befce-04ea-4232-933e-ac5195825556
+    PortName: Choice 1
+    TargetNodeGuid: fcbf115f-03b8-42f4-85fd-8cfb6bbbca05
+  - BaseNodeGuid: 644befce-04ea-4232-933e-ac5195825556
+    PortName: Choice 2
+    TargetNodeGuid: fcbf115f-03b8-42f4-85fd-8cfb6bbbca05
+  DialogueNodeData:
+  - Guid: 00ef6673-d297-442b-a6ec-4d069c068c17
+    DialogueText: this is a small additive line
+    Position: {x: 294, y: 221}
+    nodeType: 5
+  - Guid: 50017452-9eda-49da-a7b5-f741a0909028
+    DialogueText: a second small additive line
+    Position: {x: 525, y: 221}
+    nodeType: 5
+  - Guid: 212143fb-65ee-4668-bfa4-763075acb0c5
+    DialogueText: a third small additive line
+    Position: {x: 759, y: 221}
+    nodeType: 5
+  - Guid: 644befce-04ea-4232-933e-ac5195825556
+    DialogueText: end of additives
+    Position: {x: 995, y: 221}
+    nodeType: 0
+  - Guid: fcbf115f-03b8-42f4-85fd-8cfb6bbbca05
+    DialogueText: Dialogue Node
+    Position: {x: 1235, y: 247}
+    nodeType: 0
+  ExposedProperties: []
+  RollNodeData: []
+  DialogueCheckData: []
+  EventNodeData: []
+  CheckNodeData: []
+  EndpointNodeData: []

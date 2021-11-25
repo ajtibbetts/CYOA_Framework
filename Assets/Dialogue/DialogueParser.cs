@@ -369,11 +369,18 @@ public class DialogueParser : MonoBehaviour
             var eventName = data.EventName;
             var eventValue = data.EventValue;
             var ignoreDeadEnd = data.ignoreDeadEnd;
+
+            // check player progess to see if event is already entered
+            var hasTriggeredAlready = PlayerProgressTracker.Instance.hasEventTriggeredAlready(data.nodeGuid);
             
             // add logic to check event specifics
-            if(!data.hasFired || data.isRepeatable) {
+            if(!hasTriggeredAlready || data.isRepeatable) {
                 // trigger event
                 Debug.Log("DIALOGUE PARSER ---- Triggering Event!");
+
+                // add event to history (progress will ignore if entry exists already)
+                PlayerProgressTracker.Instance.AddEventEntry(data);
+
                 onEventTriggered?.Invoke(data.eventType, data.EventName,data.EventValue);
                 
                 // route to next node if output is attached to another node

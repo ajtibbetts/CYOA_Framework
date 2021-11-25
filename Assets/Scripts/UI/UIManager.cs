@@ -36,6 +36,9 @@ public class UIManager : MonoBehaviour
     public float rollScreenAnimationTime;
 
     [Header("Content")]
+
+    [Tooltip("Speed that game will auto scroll scroll to additive paragarphs.")]
+    public float autoScrollSpeed = 5f;
     [SerializeField] private GameObject contentScrollParent;
     public GameObject contentScrollContainer;
     public Scrollbar vertScrollBar;
@@ -359,6 +362,45 @@ public class UIManager : MonoBehaviour
         contentText.text += contentManager.parseContent(contentToAdd) + "\n";
 
         _contentParagraphs.Add(newParagraph);
+
+        
+
+        // if we have more than two paragraphs (i.e additive content, scroll to start of new paragraph)
+        if(_contentParagraphs.Count >= 2)
+        {
+            StartCoroutine(SetScrollHeight());
+        }
+    }
+
+    private IEnumerator SetScrollHeight()
+    {
+        yield return new WaitForEndOfFrame(); // wait for UI to draw everything
+        var isScrollBarActive = vertScrollBar.isActiveAndEnabled;
+        Debug.Log("Scroll bar currently enabled: " + isScrollBarActive);
+        var contentPanel = contentScrollContainer.GetComponent<RectTransform>();
+        var scrollRect = contentScrollParent.GetComponent<ScrollRect>();
+        // set content posY to equal the heigh of all paragarphs combined not counting last one
+        float totalHeight = 0f;
+        foreach(var item in _contentParagraphs)
+        {
+            if(_contentParagraphs.IndexOf(item) == _contentParagraphs.Count - 1) continue; // ignore most recent entry
+            totalHeight += item.GetComponent<RectTransform>().rect.height;
+        }
+
+        var targetPosition = new Vector2(0, totalHeight + 25f); // 50 for spacing offset from vertical layout group
+        Debug.Log("target pos y: " + targetPosition.y);
+        
+        // then set the posY of scroll rect
+        // contentPanel.anchoredPosition = targetPosition; 
+        while(contentPanel.anchoredPosition.y < targetPosition.y && isScrollBarActive) // only scroll if scroll bar is active
+        {
+            var currentYPos = contentPanel.anchoredPosition.y;
+            Debug.Log("target pos y: " + targetPosition.y);
+            Debug.Log("current pos y: "+ currentYPos);
+            contentPanel.anchoredPosition = new Vector2(0, currentYPos + (Time.deltaTime * autoScrollSpeed));
+            if(scrollRect.verticalNormalizedPosition <= 0) break; // stop scrolling if we've hit the end of scrollbar/scrollrect
+            yield return null;
+        }
     }
 
     public void SetAdditiveDialogueState()
@@ -379,6 +421,10 @@ public class UIManager : MonoBehaviour
         {
             Debug.Log("UI Manager ---- Viewport tapped while in additive state. proceeding to next node");
             _inAdditiveDialogueState = false;
+            if(_additiveContinueButton != null)
+            {
+                Destroy(_additiveContinueButton.gameObject);
+            }
             onProceedToNextNode?.Invoke();
         }
     }
@@ -406,6 +452,7 @@ public class UIManager : MonoBehaviour
         confirmActionButton.GetComponentInChildren<Text>().text = "Select option then confirm.";
 
         checkForSingleOption();
+        // StopAllCoroutines(); // stop any auto scrolling
     }
 
     public void CreateEndDialogueButton()
@@ -413,6 +460,7 @@ public class UIManager : MonoBehaviour
         endDialogueButton = GameObject.Instantiate(playerActionOptionBtnPrefab, Vector3.zero, Quaternion.identity, contentScrollContainer.transform);
         endDialogueButton.GetComponentInChildren<Button>().onClick.AddListener(() => onDialogueEnded?.Invoke());
         endDialogueButton.GetComponentInChildren<Text>().text = "Proceed.";
+        // StopAllCoroutines(); // stop any auto scrolling
     }
 
 

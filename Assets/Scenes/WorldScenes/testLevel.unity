@@ -183,7 +183,9 @@ MonoBehaviour:
   ChildNavObjects: []
   ChildInteractiveObjects: []
   dialogueOnNew: []
-  dialogueOnReturn: []
+  dialogueOnReturn:
+  - conditions: []
+    dialogue: {fileID: 11400000, guid: 47cf8c7dbc0c84540ada92990f10f3a8, type: 2}
   dialogueOnExit: []
   displayTextOnNew:
   - conditions: []
@@ -559,7 +561,9 @@ MonoBehaviour:
   dialogueOnNew:
   - conditions: []
     dialogue: {fileID: 11400000, guid: dd2023a2259148149a4c8f99719ba1a8, type: 2}
-  dialogueOnReturn: []
+  dialogueOnReturn:
+  - conditions: []
+    dialogue: {fileID: 11400000, guid: dd2023a2259148149a4c8f99719ba1a8, type: 2}
   dialogueOnExit: []
   displayTextOnNew:
   - conditions: []
