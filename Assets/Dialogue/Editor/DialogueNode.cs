@@ -9,6 +9,8 @@ public class DialogueNode : Node
 {
     public string GUID;
 
+    public string characterID = null;
+
     public string DialogueText;
 
     public bool EntryPoint = false;

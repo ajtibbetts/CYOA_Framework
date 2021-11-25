@@ -156,6 +156,24 @@ public class CaseManager : MonoBehaviour
         return matchedCharacter.RevealCharacterProperty(propertyName);
     }
 
+    public CharacterProfileData GetProfileByID(string characterID)
+    {
+        CharacterProfileData _characterData = new CharacterProfileData();
+        List<CaseCharacterProfile> _caseCharacters = _activeCase.GetAvailableProfiles();
+        // match to (hidden) character name and popualte starting values;
+        var matchedCharacter = _caseCharacters.Find(x => x.GetCharacterID().ToLower() == characterID.ToLower());
+        if(matchedCharacter != null)
+        {
+            _characterData = matchedCharacter.GetFullData();
+            return _characterData;
+        }
+        else
+        {
+            Debug.LogError("CASE MANAGER --- FAILED to get data for charID: " + characterID);
+            return null;
+        }
+    }
+
     public List<CaseEvidence> GetStartingEvidence()
     {
         return _activeCase.GetStartingEvidence();

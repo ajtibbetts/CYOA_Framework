@@ -8,6 +8,10 @@ DialogueNode.additive #title {
     background-color: rgb(176, 107, 4);
 }
 
+DialogueNode.speaker #title {
+    background-color: blue;
+}
+
 RollNode #title {
     background-color: rgb(4, 58, 176);
 }

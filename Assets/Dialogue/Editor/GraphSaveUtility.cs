@@ -87,7 +87,8 @@ public class GraphSaveUtility
                 Guid = dialogueNode.GUID,
                 DialogueText = dialogueNode.DialogueText,
                 Position = dialogueNode.GetPosition().position,
-                nodeType = dialogueNode.nodeType
+                nodeType = dialogueNode.nodeType,
+                characterID = dialogueNode.characterID
             });
 
             // check if this node is event node and add data to save
@@ -302,7 +303,12 @@ public class GraphSaveUtility
                 // for all base Dialogue nodes and add saved choice output ports
             
                 // we set position later, so send vec2 zero for now
-                var tempNode = _targetGraphView.CreateDialogueNode(nodeData.DialogueText, Vector2.zero);
+                
+                var isSpeaker = nodeData.characterID != null;
+                if(isSpeaker) isSpeaker = nodeData.characterID.Length > 0;
+                Debug.Log("Is speaker: " + isSpeaker);
+                Debug.Log("speaker length: " + nodeData.characterID.Length);
+                var tempNode = _targetGraphView.CreateDialogueNode(nodeData.DialogueText, Vector2.zero, isSpeaker, nodeData.characterID);
                 tempNode.GUID = nodeData.Guid;
                 _targetGraphView.AddElement(tempNode);
 

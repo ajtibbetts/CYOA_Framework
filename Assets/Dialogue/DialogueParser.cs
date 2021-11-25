@@ -140,6 +140,7 @@ public class DialogueParser : MonoBehaviour
             Debug.Log("DIALOGUE PARSER ---- Proceeding to next narrative node for GUID: " + narrativeDataGUID);
             var text = dialogue.DialogueNodeData.Find(x => x.Guid == narrativeDataGUID).DialogueText;
             var nodeType = dialogue.DialogueNodeData.Find(x => x.Guid == narrativeDataGUID).nodeType;
+            var characterID = dialogue.DialogueNodeData.Find(x => x.Guid == narrativeDataGUID).characterID;
 
             // setup the next history node data
             AddNodeToHistory(narrativeDataGUID, nodeType);
@@ -155,7 +156,7 @@ public class DialogueParser : MonoBehaviour
                 break;
                 case nodeType.dialogueNode:
                     if(text.Contains("Additive Choice Node")) ProcessAdditiveChoiceNode(narrativeDataGUID);
-                    else ProcessDialogueNode(narrativeDataGUID, text); // regular dialogue node
+                    else ProcessDialogueNode(narrativeDataGUID, text, characterID); // regular dialogue node
                 break;
                 case nodeType.eventNode:
                     ProcessEventNode(narrativeDataGUID);
@@ -173,7 +174,7 @@ public class DialogueParser : MonoBehaviour
             
         }
 
-        private void ProcessDialogueNode(string narrativeDataGUID, string text)
+        private void ProcessDialogueNode(string narrativeDataGUID, string text, string characterID)
         {
             Debug.Log("DIALOGUE PARSER ---- Setting up new Dialogue Node with Choices");
             var choices = dialogue.NodeLinks.Where(x => x.BaseNodeGuid == narrativeDataGUID).ToList();
@@ -183,7 +184,20 @@ public class DialogueParser : MonoBehaviour
             
             // // clear existing buttons and recreate
             // controller.UIManager.ClearContentAndButtons();
-            UIManager.Instance.CreateContentParagraph(text);
+            if(characterID.Length > 0)
+            {
+                var charProfile = CaseManager.Instance.GetProfileByID(characterID);
+                if(charProfile != null)
+                {
+                    var speakerName = $"<style=h3>{charProfile.characterName}</style>\n";
+                    UIManager.Instance.CreateContentPortraitParagraph(speakerName + text, charProfile.portrait.portraitSprite);
+                }
+            }
+            else
+            {
+                UIManager.Instance.CreateContentParagraph(text);
+            }
+            
 
             // add any pending additive choices and clear list
             if(_pendingAdditiveChoices.Count > 0)

@@ -39,10 +39,12 @@ public class UIManager : MonoBehaviour
 
     [Tooltip("Speed that game will auto scroll scroll to additive paragarphs.")]
     public float autoScrollSpeed = 5f;
+    private bool isAutoScrolling;
     [SerializeField] private GameObject contentScrollParent;
     public GameObject contentScrollContainer;
     public Scrollbar vertScrollBar;
     public GameObject paragraphPrefab;
+    public GameObject paragraphPortraitPrefab;
     public GameObject imagePrefab;
     [SerializeField] GameObject _bottonMenuBar;
     [Header("Player Stats")]
@@ -364,12 +366,36 @@ public class UIManager : MonoBehaviour
         _contentParagraphs.Add(newParagraph);
 
         
+        CheckForAutoScroll();
+        
+    }
 
+    public void CreateContentPortraitParagraph(string contentToAdd, Sprite portraitSprite)
+    {
+        Debug.Log("UI Manager --- Adding portrait paragraph with text: " + contentToAdd);
+        var newPortraitParagraph = GameObject.Instantiate(paragraphPortraitPrefab, Vector3.zero, Quaternion.identity, contentScrollContainer.transform);
+        var portraitMgr = newPortraitParagraph.GetComponent<UIPortraitParagraph>();
+        var contentText = contentManager.parseContent(contentToAdd) + "\n";
+        portraitMgr.UpdateText(contentText);
+        portraitMgr.UpdatePortrait(portraitSprite);
+        portraitMgr.UpdatePreferredHeight();
+
+        _contentParagraphs.Add(newPortraitParagraph);
+
+        // check for any additional UI messages and create content paragraph for those.
+        if(_additionalUIMessages.Count > 0) CreateContentParagraph("");
+        CheckForAutoScroll();
+    }
+
+    private void CheckForAutoScroll()
+    {
         // if we have more than two paragraphs (i.e additive content, scroll to start of new paragraph)
-        if(_contentParagraphs.Count >= 2)
+        if(_contentParagraphs.Count >= 2 && !isAutoScrolling)
         {
+            isAutoScrolling = true;
             StartCoroutine(SetScrollHeight());
         }
+        else contentScrollParent.GetComponent<ScrollRect>().verticalNormalizedPosition = 1;
     }
 
     private IEnumerator SetScrollHeight()
@@ -401,6 +427,8 @@ public class UIManager : MonoBehaviour
             if(scrollRect.verticalNormalizedPosition <= 0) break; // stop scrolling if we've hit the end of scrollbar/scrollrect
             yield return null;
         }
+
+        isAutoScrolling = false;
     }
 
     public void SetAdditiveDialogueState()
@@ -452,7 +480,6 @@ public class UIManager : MonoBehaviour
         confirmActionButton.GetComponentInChildren<Text>().text = "Select option then confirm.";
 
         checkForSingleOption();
-        // StopAllCoroutines(); // stop any auto scrolling
     }
 
     public void CreateEndDialogueButton()
@@ -460,7 +487,6 @@ public class UIManager : MonoBehaviour
         endDialogueButton = GameObject.Instantiate(playerActionOptionBtnPrefab, Vector3.zero, Quaternion.identity, contentScrollContainer.transform);
         endDialogueButton.GetComponentInChildren<Button>().onClick.AddListener(() => onDialogueEnded?.Invoke());
         endDialogueButton.GetComponentInChildren<Text>().text = "Proceed.";
-        // StopAllCoroutines(); // stop any auto scrolling
     }
 
 

@@ -100,6 +100,9 @@ public class DialogueGraphView : GraphView
             case "Dialogue Node":
                 AddElement(CreateDialogueNode(nodeName, position));
             break;
+            case "Speaker Node":
+                AddElement(CreateDialogueNode(nodeName, position, true));
+            break;
             case "Additive Choice Node":
                 AddElement(CreateAdditiveChoiceNode(nodeName, position));
             break;
@@ -175,14 +178,15 @@ public class DialogueGraphView : GraphView
     }
 
 
-    public DialogueNode CreateDialogueNode(string dialogueText, Vector2 position)
+    public DialogueNode CreateDialogueNode(string dialogueText, Vector2 position, bool isSpeaker = false, string charID = null)
     {
         var dialogueNode = new DialogueNode
         {
             title = "Dialogue Node",
             GUID = Guid.NewGuid().ToString(),
             DialogueText = dialogueText,
-            nodeType = nodeType.dialogueNode
+            nodeType = nodeType.dialogueNode,
+            characterID = charID
         };
 
         // add input and style sheet
@@ -201,6 +205,20 @@ public class DialogueGraphView : GraphView
         // var button2 = new Button(()=>{AddCheckPorts(dialogueNode);});
         // button2.text = "+ Check";
         // dialogueNode.titleContainer.Add(button2);
+        
+        // check if this is a speaker node
+        if(isSpeaker)
+        {
+            var charIDField = new TextField(string.Empty)
+            {
+
+            };
+            charIDField.RegisterValueChangedCallback(evt => dialogueNode.characterID = evt.newValue);
+            charIDField.SetValueWithoutNotify(dialogueNode.characterID);
+            dialogueNode.mainContainer.Add(new Label("Character ID:"));
+            dialogueNode.mainContainer.Add(charIDField);
+            dialogueNode.AddToClassList("speaker");
+        }
 
         var textField = new TextField(string.Empty){
             multiline = true
@@ -211,6 +229,7 @@ public class DialogueGraphView : GraphView
            // dialogueNode.title = evt.newValue;
         });
         textField.SetValueWithoutNotify(dialogueNode.DialogueText);
+        dialogueNode.mainContainer.Add(new Label("Dialogue Text:"));
         dialogueNode.mainContainer.Add(textField);
 
 
