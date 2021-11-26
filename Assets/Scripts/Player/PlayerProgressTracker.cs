@@ -14,6 +14,9 @@ public class PlayerProgressTracker : MonoBehaviour
     [SerializeField] private string _currentAreaName;
     [SerializeField] private List<NavObjectEntry> _visitedNavObjects = new List<NavObjectEntry>();
 
+    [Header("Dialoge Data")]
+    [SerializeField] private List<DialogueNodeData> _dialogueNodeEntries = new List<DialogueNodeData>();
+
     [Header("Roll Check Data")]
     public List<RollCheckEntry> _rollCheckEntries = new List<RollCheckEntry>();   
 
@@ -73,6 +76,19 @@ public class PlayerProgressTracker : MonoBehaviour
             return null;
         }
     }
+
+    // dialogue node
+    public void AddDialogueEntry(DialogueNodeData nodeData)
+    {
+        var exisitingEntry = _dialogueNodeEntries.Find(x => x.Guid == nodeData.Guid);
+        if(exisitingEntry == null) _dialogueNodeEntries.Add(nodeData);
+    }
+
+    public bool DialogueEntryExists(string nodeGUID)
+    {
+        return _dialogueNodeEntries.Exists(x => x.Guid == nodeGUID);
+    }
+
 
     // ROLL CHECKS
     public void AddRollCheckEntry(RollCheckEntry newRollCheckEntry)

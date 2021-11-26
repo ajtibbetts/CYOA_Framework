@@ -103,6 +103,9 @@ public class DialogueGraphView : GraphView
             case "Speaker Node":
                 AddElement(CreateDialogueNode(nodeName, position, true));
             break;
+            case "Additive Speaker Node":
+                AddElement(CreateAdditiveDialogueNode(nodeName, position, true));
+            break;
             case "Additive Choice Node":
                 AddElement(CreateAdditiveChoiceNode(nodeName, position));
             break;
@@ -209,6 +212,8 @@ public class DialogueGraphView : GraphView
         // check if this is a speaker node
         if(isSpeaker)
         {
+            dialogueNode.title = "Speaker Node";
+            
             var charIDField = new TextField(string.Empty)
             {
 
@@ -289,7 +294,7 @@ public class DialogueGraphView : GraphView
         return dialogueNode;
     }
 
-    public DialogueNode CreateAdditiveDialogueNode(string dialogueText, Vector2 position)
+    public DialogueNode CreateAdditiveDialogueNode(string dialogueText, Vector2 position, bool isSpeaker = false, string charID = null)
     {
         Debug.Log("Creating additive dualogue node");
         var dialogueNode = new DialogueNode
@@ -297,7 +302,8 @@ public class DialogueGraphView : GraphView
             title = "Additive Dialogue Node",
             GUID = Guid.NewGuid().ToString(),
             DialogueText = dialogueText,
-            nodeType = nodeType.additiveDialogue
+            nodeType = nodeType.additiveDialogue,
+            characterID = charID
         };
 
         // add input and style sheet
@@ -314,6 +320,22 @@ public class DialogueGraphView : GraphView
         dialogueNode.outputContainer.Add(outputPort);
 
 
+        // check if this is a speaker node
+        if(isSpeaker)
+        {
+            dialogueNode.title = "Additive Speaker Node";
+            
+            var charIDField = new TextField(string.Empty)
+            {
+
+            };
+            charIDField.RegisterValueChangedCallback(evt => dialogueNode.characterID = evt.newValue);
+            charIDField.SetValueWithoutNotify(dialogueNode.characterID);
+            dialogueNode.mainContainer.Add(new Label("Character ID:"));
+            dialogueNode.mainContainer.Add(charIDField);
+            dialogueNode.AddToClassList("speaker");
+        }
+
         // dialogue to add
         var textField = new TextField(string.Empty){
             multiline = true
@@ -324,6 +346,7 @@ public class DialogueGraphView : GraphView
            // dialogueNode.title = evt.newValue;
         });
         textField.SetValueWithoutNotify(dialogueNode.DialogueText);
+        dialogueNode.mainContainer.Add(new Label("Dialogue Text:"));
         dialogueNode.mainContainer.Add(textField);
 
 

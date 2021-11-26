@@ -13,34 +13,22 @@ MonoBehaviour:
   m_Name: speakerTest
   m_EditorClassIdentifier: 
   NodeLinks:
-  - BaseNodeGuid: 9fcdb9bf-9146-4df6-b3c8-3d37f5a25ae3
+  - BaseNodeGuid: 7773790f-9f12-4ad5-8363-aef0728bd3e0
     PortName: Next
-    TargetNodeGuid: 209ced20-788b-4384-ae1d-42e960268632
-  - BaseNodeGuid: 209ced20-788b-4384-ae1d-42e960268632
-    PortName: Choice 1
-    TargetNodeGuid: 09fe04df-786c-478b-a064-e47ee0255cee
-  - BaseNodeGuid: 09fe04df-786c-478b-a064-e47ee0255cee
-    PortName: hi chad
-    TargetNodeGuid: 88e9a38b-cf98-445b-b05a-f0db07b853dd
-  - BaseNodeGuid: 09fe04df-786c-478b-a064-e47ee0255cee
-    PortName: fuck off chad
-    TargetNodeGuid: 88e9a38b-cf98-445b-b05a-f0db07b853dd
+    TargetNodeGuid: 6da6ee8a-73be-4fe1-a810-e052fd648ab2
+  - BaseNodeGuid: 6da6ee8a-73be-4fe1-a810-e052fd648ab2
+    PortName: Nice to meet you. | Hello again.
+    TargetNodeGuid: b5f44785-9f45-4f81-805f-112c79150dc5
   DialogueNodeData:
-  - Guid: 209ced20-788b-4384-ae1d-42e960268632
-    characterID: 
-    DialogueText: this is regular dialogue
-    Position: {x: 302, y: 212}
+  - Guid: 6da6ee8a-73be-4fe1-a810-e052fd648ab2
+    characterID: johnnyC
+    DialogueText: Hello, I am Johnny C. | Hello again.
+    Position: {x: 323, y: 191}
     nodeType: 0
-  - Guid: 09fe04df-786c-478b-a064-e47ee0255cee
-    characterID: pierreL
-    DialogueText: this is Pierre speaking. Here's a bunch of fuckin words for me
-      to say. blah blah blah I'm the killer you got me oooohhh noooooooooooooo.
-    Position: {x: 609, y: 200}
-    nodeType: 0
-  - Guid: 88e9a38b-cf98-445b-b05a-f0db07b853dd
-    characterID: 
-    DialogueText: Dialogue Node
-    Position: {x: 882, y: 221}
+  - Guid: b5f44785-9f45-4f81-805f-112c79150dc5
+    characterID: johnnyC
+    DialogueText: I have to go now.
+    Position: {x: 701, y: 191}
     nodeType: 0
   ExposedProperties: []
   RollNodeData: []

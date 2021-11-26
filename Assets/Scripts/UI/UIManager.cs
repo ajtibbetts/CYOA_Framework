@@ -364,10 +364,9 @@ public class UIManager : MonoBehaviour
         contentText.text += contentManager.parseContent(contentToAdd) + "\n";
 
         _contentParagraphs.Add(newParagraph);
+        SetPreviousParagraphsColor();
 
-        
         CheckForAutoScroll();
-        
     }
 
     public void CreateContentPortraitParagraph(string contentToAdd, Sprite portraitSprite)
@@ -381,6 +380,7 @@ public class UIManager : MonoBehaviour
         portraitMgr.UpdatePreferredHeight();
 
         _contentParagraphs.Add(newPortraitParagraph);
+        SetPreviousParagraphsColor();
 
         // check for any additional UI messages and create content paragraph for those.
         if(_additionalUIMessages.Count > 0) CreateContentParagraph("");
@@ -441,6 +441,28 @@ public class UIManager : MonoBehaviour
         _additiveContinueButton = GameObject.Instantiate(additiveContinueBtnPrefab, Vector3.zero, Quaternion.identity, contentScrollContainer.transform);
         _additiveContinueButton.GetComponentInChildren<Button>().onClick.AddListener(delegate { CheckAdditiveState(); });
         _inAdditiveDialogueState = true;
+
+        
+    }
+
+    private void SetPreviousParagraphsColor()
+    {
+        if(_contentParagraphs.Count < 2) return; // only concerned with > 2 paragraphs
+        // set all but current paragraph text to gray
+        foreach(var paragraph in _contentParagraphs)
+        {
+            if(_contentParagraphs.IndexOf(paragraph) == _contentParagraphs.Count - 1) continue;
+            var text = paragraph.GetComponent<TextMeshProUGUI>();
+            if(text != null) text.color = globalConfig.UI.OldParagraphTextColor;
+            else 
+            {
+                var texts = paragraph.GetComponentsInChildren<TextMeshProUGUI>();
+                foreach(var t in texts)
+                {
+                    t.color = globalConfig.UI.OldParagraphTextColor;
+                }
+            }
+        }
     }
 
     public void CheckAdditiveState()

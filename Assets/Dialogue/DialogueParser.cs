@@ -138,13 +138,16 @@ public class DialogueParser : MonoBehaviour
         private void ProceedToNarrative(string narrativeDataGUID)
         {
             Debug.Log("DIALOGUE PARSER ---- Proceeding to next narrative node for GUID: " + narrativeDataGUID);
-            var text = dialogue.DialogueNodeData.Find(x => x.Guid == narrativeDataGUID).DialogueText;
-            var nodeType = dialogue.DialogueNodeData.Find(x => x.Guid == narrativeDataGUID).nodeType;
-            var characterID = dialogue.DialogueNodeData.Find(x => x.Guid == narrativeDataGUID).characterID;
+            var data = dialogue.DialogueNodeData.Find(x => x.Guid == narrativeDataGUID);
+            var text = data.DialogueText;
+            var nodeType = data.nodeType;
+            var characterID = data.characterID;
 
             // setup the next history node data
             AddNodeToHistory(narrativeDataGUID, nodeType);
             
+            // check for any 'returned' text.
+            text = GetReturnedText(narrativeDataGUID, text);
 
             // cache current node to be used in segmented methods
             _currentNodeGUID = narrativeDataGUID;
@@ -152,11 +155,13 @@ public class DialogueParser : MonoBehaviour
             switch(nodeType)
             {
                 case nodeType.additiveDialogue:
-                    ProcessAdditiveParagraphNode(narrativeDataGUID, text);
+                    ProcessAdditiveParagraphNode(narrativeDataGUID, text, characterID);
+                    PlayerProgressTracker.Instance.AddDialogueEntry(data);
                 break;
                 case nodeType.dialogueNode:
                     if(text.Contains("Additive Choice Node")) ProcessAdditiveChoiceNode(narrativeDataGUID);
                     else ProcessDialogueNode(narrativeDataGUID, text, characterID); // regular dialogue node
+                    PlayerProgressTracker.Instance.AddDialogueEntry(data);
                 break;
                 case nodeType.eventNode:
                     ProcessEventNode(narrativeDataGUID);
@@ -178,27 +183,11 @@ public class DialogueParser : MonoBehaviour
         {
             Debug.Log("DIALOGUE PARSER ---- Setting up new Dialogue Node with Choices");
             var choices = dialogue.NodeLinks.Where(x => x.BaseNodeGuid == narrativeDataGUID).ToList();
-            // controller.UIManager.updateContentText(_pendingText + text);
             _pendingText = "";
             // Debug.Log("DIALOGUE PARSER ---- number of choices: " + choices.Count());
+        
             
-            // // clear existing buttons and recreate
-            // controller.UIManager.ClearContentAndButtons();
-            if(characterID.Length > 0)
-            {
-                var charProfile = CaseManager.Instance.GetProfileByID(characterID);
-                if(charProfile != null)
-                {
-                    var speakerName = $"<style=h3>{charProfile.characterName}</style>\n";
-                    UIManager.Instance.CreateContentPortraitParagraph(speakerName + text, charProfile.portrait.portraitSprite);
-                }
-            }
-            else
-            {
-                UIManager.Instance.CreateContentParagraph(text);
-            }
-            
-
+            AddTextToUI(text, characterID);
             // add any pending additive choices and clear list
             if(_pendingAdditiveChoices.Count > 0)
             {
@@ -207,6 +196,9 @@ public class DialogueParser : MonoBehaviour
             }
 
             ProcessDialogueChoicesAndConfirm(choices);
+
+            // finally add node to player progress.
+            
             
         }
 
@@ -218,10 +210,11 @@ public class DialogueParser : MonoBehaviour
 
             foreach (var choice in choices)
             {
-                var buttonText = choice.PortName;
+                var buttonText = GetReturnedText(choice.TargetNodeGuid, choice.PortName); // check for any 'returning' text set with | delimiter
+                
                 // check if target is a roll node, and if so add skill prefix
                 if(dialogue.RollNodeData.Exists( x => x.nodeGuid == choice.TargetNodeGuid))
-                {
+                { 
                     // if we've already found a matched success, exit early.
                     if(hasPassedGroupTagID) continue;
                     
@@ -274,17 +267,51 @@ public class DialogueParser : MonoBehaviour
             controller.UIManager.initConfirmActionButton();
         }
 
-        private void ProcessAdditiveParagraphNode(string narrativeDataGUID, string text)
+        private void ProcessAdditiveParagraphNode(string narrativeDataGUID, string text, string characterID)
         {
-            var choices = dialogue.NodeLinks.Where(x => x.BaseNodeGuid == narrativeDataGUID);
+            // var choices = dialogue.NodeLinks.Where(x => x.BaseNodeGuid == narrativeDataGUID);
             // simply add the paragraph, "continue dialogue "button, and proceed to next node
-            UIManager.Instance.CreateContentParagraph(text);
+            // UIManager.Instance.CreateContentParagraph(text);
+             AddTextToUI(text, characterID);
 
             // add logic to create / call continue button here
 
-            // then proceed to next node
-            // ProceedToNarrative(choices.ElementAt(0).TargetNodeGuid);
+
             UIManager.Instance.SetAdditiveDialogueState(); // UI will handle the rest from here.
+        }
+
+        private string GetReturnedText(string nodeGUID, string text)
+        {
+            // check for | delimiter for returned text
+            if(text.Contains("|"))
+            {
+                var pos = text.IndexOf("|"); // if in history, return after | delimiter.
+                if(PlayerProgressTracker.Instance.DialogueEntryExists(nodeGUID)) return text.Substring(pos + 1);
+                else return text.Substring(0, pos); // if not, return first portion up to delimiter.
+            }
+            return text; // if none found or not in history, return normal text before | delimiter.
+        }
+
+        private void AddTextToUI(string text, string characterID)
+        {
+            
+
+            if(characterID != null)
+            {
+                if(characterID.Length > 0)
+                {
+                    var charProfile = CaseManager.Instance.GetProfileByID(characterID);
+                    if(charProfile != null)
+                    {
+                        var speakerName = $"<style=h3>{charProfile.characterName}</style>\n";
+                        UIManager.Instance.CreateContentPortraitParagraph(speakerName + text, charProfile.portrait.portraitSprite);
+                        return;
+                    }
+                }
+            }
+            // if neither is true, craete regular paragraph
+            UIManager.Instance.CreateContentParagraph(text);
+            
         }
 
         private void ProceedToNextNode()

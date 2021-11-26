@@ -19,6 +19,9 @@ static public class globalConfig
 
         static public string SkillTextHexColor = "#f8fc03";
 
+        static public Color CurrentParagraphTextColor = Color.white;
+        static public Color OldParagraphTextColor = new Color(0.7f,0.7f,0.7f); // gray
+
         static public class CaseUI 
         {
             static public Color profileAllyBackgroundColor = new Color(0.7989943f,0.990566f,0.8437973f); // green

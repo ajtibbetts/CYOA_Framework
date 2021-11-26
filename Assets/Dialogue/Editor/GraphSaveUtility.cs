@@ -153,28 +153,28 @@ public class GraphSaveUtility
             }
 
             // Check this nodes ports for any skill checks to save
-            foreach (Port outputPort in dialogueNode.outputContainer.Children())
-            {
-                if(outputPort.portName.Contains("Chk.Pass"))
-                {
-                    var _passPort = outputPort;
-                    var _failPort = ((Port)dialogueNode.outputContainer.ElementAt(dialogueNode.outputContainer.IndexOf(outputPort) + 1));
-                    var _content = ((TextField)_passPort.contentContainer.ElementAt(3)).value;
-                    var _skillName = ((TextField)_failPort.contentContainer.ElementAt(2)).value;
-                    var _checkValue = ((TextField)_failPort.contentContainer.ElementAt(4)).value;
+            // foreach (Port outputPort in dialogueNode.outputContainer.Children())
+            // {
+            //     if(outputPort.portName.Contains("Chk.Pass"))
+            //     {
+            //         var _passPort = outputPort;
+            //         var _failPort = ((Port)dialogueNode.outputContainer.ElementAt(dialogueNode.outputContainer.IndexOf(outputPort) + 1));
+            //         var _content = ((TextField)_passPort.contentContainer.ElementAt(3)).value;
+            //         var _skillName = ((TextField)_failPort.contentContainer.ElementAt(2)).value;
+            //         var _checkValue = ((TextField)_failPort.contentContainer.ElementAt(4)).value;
    
-                    dialogueContainer.DialogueCheckData.Add(new DialogueCheckData
-                    {
-                        BaseNodeGuid = dialogueNode.GUID,
-                        passPortName = _passPort.portName,
-                        failPortName = _failPort.portName,
-                        content = _content,
-                        skillName = _skillName,
-                        checkValue = _checkValue,
+            //         dialogueContainer.DialogueCheckData.Add(new DialogueCheckData
+            //         {
+            //             BaseNodeGuid = dialogueNode.GUID,
+            //             passPortName = _passPort.portName,
+            //             failPortName = _failPort.portName,
+            //             content = _content,
+            //             skillName = _skillName,
+            //             checkValue = _checkValue,
                         
-                    });   
-                }
-            }
+            //         });   
+            //     }
+            // }
         }
 
         return true;
@@ -278,7 +278,9 @@ public class GraphSaveUtility
             }
             else if(nodeData.nodeType == nodeType.additiveDialogue)
             {
-                var tempNode = _targetGraphView.CreateAdditiveDialogueNode(nodeData.DialogueText, Vector2.zero);
+                var isSpeaker = nodeData.characterID != null;
+                if(isSpeaker) isSpeaker = nodeData.characterID.Length > 0;
+                var tempNode = _targetGraphView.CreateAdditiveDialogueNode(nodeData.DialogueText, Vector2.zero, isSpeaker, nodeData.characterID);
                 tempNode.GUID = nodeData.Guid;
                 _targetGraphView.AddElement(tempNode);
             }

@@ -40,6 +40,10 @@ public class NodeSearchWindow : ScriptableObject, ISearchWindowProvider
                 {
                 userData = new DialogueNode(), level = 2
                 },
+                new SearchTreeEntry(new GUIContent("Additive Speaker Node",_indentationIcon))
+                {
+                userData = new DialogueNode(), level = 2
+                },
                 new SearchTreeEntry(new GUIContent("Additive Choice Node",_indentationIcon))
                 {
                 userData = new DialogueNode(), level = 2
@@ -194,6 +198,9 @@ public class NodeSearchWindow : ScriptableObject, ISearchWindowProvider
                     break;
                     case "Additive Dialogue Node":
                         _graphView.CreateNode("Additive Dialogue Node", localMousePosition);
+                    break;
+                     case "Additive Speaker Node":
+                        _graphView.CreateNode("Additive Speaker Node", localMousePosition);
                     break;
                 }
                 
