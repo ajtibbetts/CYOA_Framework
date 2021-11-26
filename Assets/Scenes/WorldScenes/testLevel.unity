@@ -180,14 +180,15 @@ MonoBehaviour:
     eventName: 
     eventValue: 
   conditionalEvents: []
+  _additionalDialogues: []
   ChildNavObjects: []
   ChildInteractiveObjects: []
   dialogueOnNew:
   - conditions: []
-    dialogue: {fileID: 11400000, guid: bbaa82f517cc4554d8cb229e05fac8fc, type: 2}
+    dialogue: {fileID: 0}
   dialogueOnReturn:
   - conditions: []
-    dialogue: {fileID: 11400000, guid: bbaa82f517cc4554d8cb229e05fac8fc, type: 2}
+    dialogue: {fileID: 0}
   dialogueOnExit: []
   displayTextOnNew:
   - conditions: []
@@ -264,6 +265,7 @@ MonoBehaviour:
     eventName: 
     eventValue: 
   conditionalEvents: []
+  _additionalDialogues: []
   interactiveDialogue: {fileID: 11400000, guid: 0cbe0abfb22ce6541b0d222dd49e5082,
     type: 2}
   buttonTextOnNew:
@@ -332,6 +334,7 @@ MonoBehaviour:
     eventName: 
     eventValue: 
   conditionalEvents: []
+  _additionalDialogues: []
   ChildNavObjects: []
   ChildInteractiveObjects: []
   dialogueOnNew: []
@@ -412,6 +415,7 @@ MonoBehaviour:
     eventName: 
     eventValue: 
   conditionalEvents: []
+  _additionalDialogues: []
   ChildNavObjects: []
   ChildInteractiveObjects: []
   dialogueOnNew: []
@@ -492,6 +496,7 @@ MonoBehaviour:
     eventName: 
     eventValue: 
   conditionalEvents: []
+  _additionalDialogues: []
   ChildNavObjects: []
   ChildInteractiveObjects: []
   dialogueOnNew:
@@ -556,6 +561,7 @@ MonoBehaviour:
     eventName: 
     eventValue: 
   conditionalEvents: []
+  _additionalDialogues: []
   ChildNavObjects: []
   ChildInteractiveObjects: []
   dialogueOnNew:
@@ -651,14 +657,18 @@ MonoBehaviour:
     eventName: 
     eventValue: 
   conditionalEvents: []
-  interactiveDialogue: {fileID: 0}
+  _additionalDialogues:
+  - {fileID: 11400000, guid: 25c0eb8444c2aa844b3f5dc4a127e824, type: 2}
+  - {fileID: 11400000, guid: c873e43f638de314988daae0ad69fa29, type: 2}
+  interactiveDialogue: {fileID: 11400000, guid: bbaa82f517cc4554d8cb229e05fac8fc,
+    type: 2}
   buttonTextOnNew:
   - conditions: []
     displayText: Speak to this NPC for first time.
   buttonTextOnReturn:
   - conditions: []
     displayText: Speak to this NPC again.
-  _characterProfile: {fileID: 0}
+  _characterProfile: {fileID: 11400000, guid: e85ebb3080915e8489fa48fdb9c62325, type: 2}
 --- !u!1 &1496206282
 GameObject:
   m_ObjectHideFlags: 0
@@ -716,6 +726,7 @@ MonoBehaviour:
     eventName: 
     eventValue: 
   conditionalEvents: []
+  _additionalDialogues: []
   interactiveDialogue: {fileID: 11400000, guid: 0cbe0abfb22ce6541b0d222dd49e5082,
     type: 2}
   buttonTextOnNew:
@@ -783,6 +794,7 @@ MonoBehaviour:
     eventName: 
     eventValue: 
   conditionalEvents: []
+  _additionalDialogues: []
   ChildNavObjects: []
   ChildInteractiveObjects: []
   dialogueOnNew: []
@@ -861,6 +873,7 @@ MonoBehaviour:
     eventName: 
     eventValue: 
   conditionalEvents: []
+  _additionalDialogues: []
   interactiveDialogue: {fileID: 11400000, guid: 015df797181d2d246b1aac60f82617c0,
     type: 2}
   buttonTextOnNew:

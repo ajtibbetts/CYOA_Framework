@@ -31,6 +31,7 @@ public class GraphSaveUtility
     {
         
         var dialogueContainer = ScriptableObject.CreateInstance<DialogueContainer>();
+        dialogueContainer.DialogueName = fileName;
         if(!SaveNodes(dialogueContainer)) return;
         SaveExposedProperties(dialogueContainer);
 
@@ -308,8 +309,7 @@ public class GraphSaveUtility
                 
                 var isSpeaker = nodeData.characterID != null;
                 if(isSpeaker) isSpeaker = nodeData.characterID.Length > 0;
-                Debug.Log("Is speaker: " + isSpeaker);
-                Debug.Log("speaker length: " + nodeData.characterID.Length);
+                
                 var tempNode = _targetGraphView.CreateDialogueNode(nodeData.DialogueText, Vector2.zero, isSpeaker, nodeData.characterID);
                 tempNode.GUID = nodeData.Guid;
                 _targetGraphView.AddElement(tempNode);

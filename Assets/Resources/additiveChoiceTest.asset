@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9837df7c010b3346bca580cac5bac11, type: 3}
   m_Name: additiveChoiceTest
   m_EditorClassIdentifier: 
+  DialogueName: additiveChoiceTest
   NodeLinks:
   - BaseNodeGuid: 16fdfe62-0180-458a-b245-65a7494c31b2
     PortName: Next
@@ -39,22 +40,27 @@ MonoBehaviour:
     TargetNodeGuid: 2eb7a61f-186b-4582-bc30-ffa2c72783d0
   DialogueNodeData:
   - Guid: 2eb7a61f-186b-4582-bc30-ffa2c72783d0
+    characterID: 
     DialogueText: test to add choices to next node
     Position: {x: 257, y: 170}
     nodeType: 0
   - Guid: 66f542a8-0d99-4ab4-90f5-340b448750af
+    characterID: 
     DialogueText: Additive Choice Node
     Position: {x: 523, y: 254}
     nodeType: 0
   - Guid: 8fca36de-0b5e-4a93-831e-917c232fa785
+    characterID: 
     DialogueText: any added choices are shown here
     Position: {x: 774, y: -69}
     nodeType: 0
   - Guid: 5c67f229-0695-4f8d-b750-e34b8573ef13
+    characterID: 
     DialogueText: added choice 2 dead end
     Position: {x: 1044, y: 170}
     nodeType: 0
   - Guid: 3c459061-d8a1-4d7a-890f-b78c6a0fdc39
+    characterID: 
     DialogueText: added choice 3 dead end
     Position: {x: 1044, y: 292}
     nodeType: 0

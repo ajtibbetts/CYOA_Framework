@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9837df7c010b3346bca580cac5bac11, type: 3}
   m_Name: caseEventTest
   m_EditorClassIdentifier: 
+  DialogueName: caseEventTest
   NodeLinks:
   - BaseNodeGuid: 1cfc760c-8804-4677-9412-8488439457c8
     PortName: Next
@@ -27,6 +28,7 @@ MonoBehaviour:
     TargetNodeGuid: 860d5ea9-854e-4680-a654-0c14949619d2
   DialogueNodeData:
   - Guid: 312170db-f137-4696-bc72-13a3ffdc299c
+    characterID: 
     DialogueText: 'This event test will initialize and start.
 
       Starting test
@@ -34,14 +36,17 @@ MonoBehaviour:
     Position: {x: 248, y: 179}
     nodeType: 0
   - Guid: c8c22941-24d2-492a-af39-3cc9261edef5
+    characterID: 
     DialogueText: Event Node
     Position: {x: 505, y: 173}
     nodeType: 1
   - Guid: 860d5ea9-854e-4680-a654-0c14949619d2
+    characterID: 
     DialogueText: New case started! Get to investigating!
     Position: {x: 742, y: 179}
     nodeType: 0
   ExposedProperties: []
+  RollNodeData: []
   DialogueCheckData: []
   EventNodeData:
   - nodeGuid: c8c22941-24d2-492a-af39-3cc9261edef5

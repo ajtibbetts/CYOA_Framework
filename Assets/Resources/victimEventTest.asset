@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9837df7c010b3346bca580cac5bac11, type: 3}
   m_Name: victimEventTest
   m_EditorClassIdentifier: 
+  DialogueName: victimEventTest
   NodeLinks:
   - BaseNodeGuid: fc3eb68e-5cdf-45ad-87fb-7b3d2fb52ddd
     PortName: Next
@@ -69,46 +70,57 @@ MonoBehaviour:
     TargetNodeGuid: 5c4e8255-e1d0-418b-bfb5-f5c66f1267f5
   DialogueNodeData:
   - Guid: 837b90e2-ebba-4dea-80d0-e62b63de1d47
+    characterID: 
     DialogueText: This event test will reveal all unknown data on the victim.
     Position: {x: 233, y: 200}
     nodeType: 0
   - Guid: 8797ab2e-bd68-4d6f-9c3c-cceb436d28a9
+    characterID: 
     DialogueText: Event Node
     Position: {x: 604, y: 188}
     nodeType: 1
   - Guid: 4fe0b494-3fe7-4be6-9514-b9c572419a9e
+    characterID: 
     DialogueText: Event Node
     Position: {x: 819, y: 188}
     nodeType: 1
   - Guid: 79f505a6-5088-47d6-b379-c1deab4f7787
+    characterID: 
     DialogueText: Event Node
     Position: {x: 1036, y: 188}
     nodeType: 1
   - Guid: 81453a32-55c6-4617-89e0-5c77da3638e4
+    characterID: 
     DialogueText: Event Node
     Position: {x: 1260, y: 188}
     nodeType: 1
   - Guid: 100173d1-ab5a-4718-9fb3-446b4332afd4
+    characterID: 
     DialogueText: Event Node
     Position: {x: 1472, y: 188}
     nodeType: 1
   - Guid: c5950d2e-5c7e-45f3-b742-1c1c7ef5fbd5
+    characterID: 
     DialogueText: Event Node
     Position: {x: 1703, y: 188}
     nodeType: 1
   - Guid: 092da391-e467-4744-9747-a26639bd7973
+    characterID: 
     DialogueText: Event Node
     Position: {x: 2148, y: 188}
     nodeType: 1
   - Guid: 1a9dd419-ae56-4567-9a9b-3c3e5a2d9597
+    characterID: 
     DialogueText: Event Node
     Position: {x: 1927, y: 188}
     nodeType: 1
   - Guid: 5c4e8255-e1d0-418b-bfb5-f5c66f1267f5
+    characterID: 
     DialogueText: Event Node
     Position: {x: 2372, y: 188}
     nodeType: 1
   ExposedProperties: []
+  RollNodeData: []
   DialogueCheckData: []
   EventNodeData:
   - nodeGuid: 8797ab2e-bd68-4d6f-9c3c-cceb436d28a9

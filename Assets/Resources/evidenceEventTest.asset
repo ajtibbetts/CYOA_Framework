@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9837df7c010b3346bca580cac5bac11, type: 3}
   m_Name: evidenceEventTest
   m_EditorClassIdentifier: 
+  DialogueName: evidenceEventTest
   NodeLinks:
   - BaseNodeGuid: aa134aba-2efd-4dda-98c6-d0bc97660337
     PortName: Next
@@ -39,31 +40,38 @@ MonoBehaviour:
     TargetNodeGuid: dcd5c791-3fe0-4790-8d95-e81ae43400f9
   DialogueNodeData:
   - Guid: 76edbb11-57b4-4053-8444-091b1c4aa9a6
+    characterID: 
     DialogueText: This first event test will add tatoo gun to evidence profile.
     Position: {x: 213, y: 200}
     nodeType: 0
   - Guid: d002f613-a0cd-4d46-8b6e-531f88f9142b
+    characterID: 
     DialogueText: Event Node
     Position: {x: 605, y: 179}
     nodeType: 1
   - Guid: f539e254-895e-4e3e-b47a-d5f3c19d9d36
+    characterID: 
     DialogueText: "Next event will update  the existing Lead Pipe\n evidence to a
       new evidence."
     Position: {x: 835, y: 179}
     nodeType: 0
   - Guid: 525ad719-0567-45a5-864b-8b547d17b637
+    characterID: 
     DialogueText: Event Node
     Position: {x: 1142, y: 179}
     nodeType: 1
   - Guid: 3ffe6e6e-05ff-451d-b19b-1263196ddf9c
+    characterID: 
     DialogueText: The last test will remove the added tatoo gun from evidence.
     Position: {x: 1374, y: 179}
     nodeType: 0
   - Guid: dcd5c791-3fe0-4790-8d95-e81ae43400f9
+    characterID: 
     DialogueText: Event Node
     Position: {x: 1746, y: 179}
     nodeType: 1
   ExposedProperties: []
+  RollNodeData: []
   DialogueCheckData: []
   EventNodeData:
   - nodeGuid: d002f613-a0cd-4d46-8b6e-531f88f9142b

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9837df7c010b3346bca580cac5bac11, type: 3}
   m_Name: leadEventTest
   m_EditorClassIdentifier: 
+  DialogueName: leadEventTest
   NodeLinks:
   - BaseNodeGuid: f1eca8db-df29-4bb5-aa06-2e7f50c69df8
     PortName: Next
@@ -39,27 +40,33 @@ MonoBehaviour:
     TargetNodeGuid: 3cfa5380-ca77-4b74-b03c-3550cba447ba
   DialogueNodeData:
   - Guid: 6f3ad977-fa65-470e-845a-54cc8303eeb7
+    characterID: 
     DialogueText: This event will add 2 leads by ID boyfriend and coworker, and resolve
       the coworker lead..
     Position: {x: 219, y: 200}
     nodeType: 0
   - Guid: 4ac58496-c02e-44d0-b35d-7498b588fde2
+    characterID: 
     DialogueText: Event Node
     Position: {x: 804, y: 200}
     nodeType: 1
   - Guid: 0cec0f0e-9fc6-4958-9746-c0495ece9551
+    characterID: 
     DialogueText: Event Node
     Position: {x: 1033, y: 200}
     nodeType: 1
   - Guid: e51131ea-276e-43d6-aee5-91c7ea6588cc
+    characterID: 
     DialogueText: Event Node
     Position: {x: 1279, y: 200}
     nodeType: 1
   - Guid: 3cfa5380-ca77-4b74-b03c-3550cba447ba
+    characterID: 
     DialogueText: Lead event test complete!
     Position: {x: 1510, y: 210}
     nodeType: 0
   ExposedProperties: []
+  RollNodeData: []
   DialogueCheckData: []
   EventNodeData:
   - nodeGuid: 4ac58496-c02e-44d0-b35d-7498b588fde2

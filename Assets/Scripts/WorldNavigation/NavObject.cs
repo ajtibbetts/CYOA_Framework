@@ -7,6 +7,7 @@ using globalDataTypes;
 public abstract class NavObject : MonoBehaviour
 {
     public static event Action<eventType, string, string> OnEventTriggered;
+    public static event Action<DialogueContainer, string, string> OnSkipToDialogue;
     
     
 
@@ -30,7 +31,9 @@ public abstract class NavObject : MonoBehaviour
     [SerializeField] private actionEvent eventOnDeactivation;
     public conditionalEvent[] conditionalEvents; // these are called on attached dialogue graphs generally
 
-
+    [Header("Additional Dialogues")]
+    [Tooltip("these are dialogues that can be accessed by events")]
+    [SerializeField] private List<DialogueContainer> _additionalDialogues; // these are dialogues that can be accessed by events
     
     // context creation objects
     [ContextMenu ("Generate new GUID")]
@@ -39,6 +42,9 @@ public abstract class NavObject : MonoBehaviour
         GUID = Guid.NewGuid().ToString();
     }
 
+    public virtual void Awake() {
+        gameEvents.OnDialogueSkipCalled += SkipToDialogue;
+    }
 
     public virtual void ActivateNavObject()
     {
@@ -155,6 +161,34 @@ public abstract class NavObject : MonoBehaviour
             Debug.LogError("NAV OBJECT ---- COULD NOT FIND PROPERTY NAME: " + propertyName);
             return "ERROR";
         }
+    }
+
+
+    public void SkipToDialogue(string dialogueContainerName, string optionalTargetNodeGUID = null)
+    {
+        if(dialogueContainerName == "previous")
+        {
+            OnSkipToDialogue?.Invoke(null, optionalTargetNodeGUID, "previous");
+            return;
+        }
+        else if (dialogueContainerName == "home")
+        {
+            OnSkipToDialogue?.Invoke(null, optionalTargetNodeGUID, "home");
+            return;
+        }
+        // search through additional dialogues for a match
+        DialogueContainer dialogueToInitiate = null;
+        foreach(var dialogue in _additionalDialogues)
+        {
+            if(dialogue.DialogueName == dialogueContainerName)
+            {
+                dialogueToInitiate = dialogue;
+                OnSkipToDialogue?.Invoke(dialogueToInitiate, optionalTargetNodeGUID, "n/a");
+                return;
+            }
+        }
+
+        Debug.LogError("NAV OBJECT ---- FAILED TO SKIP TO DIALOGUE NAME: " + dialogueContainerName);
     }
 
 }

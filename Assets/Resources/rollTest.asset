@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9837df7c010b3346bca580cac5bac11, type: 3}
   m_Name: rollTest
   m_EditorClassIdentifier: 
+  DialogueName: rollTest
   NodeLinks:
   - BaseNodeGuid: 4372fd4e-3c86-4c11-a205-15b71b593043
     PortName: Next
@@ -66,42 +67,52 @@ MonoBehaviour:
     TargetNodeGuid: d2e6f4fe-cd72-4bb0-8c94-1a1f2b441336
   DialogueNodeData:
   - Guid: 9aa42302-3a73-4737-84f8-3d84cc9c3e8f
+    characterID: 
     DialogueText: master passed!
     Position: {x: 833, y: -59}
     nodeType: 0
   - Guid: d386dbec-3d2c-4f27-b032-e54a3c081e59
+    characterID: 
     DialogueText: master fumbled!
     Position: {x: 833, y: 64}
     nodeType: 0
   - Guid: 7d9b64cb-d59f-453f-a907-5190dcd69a9d
+    characterID: 
     DialogueText: regular passed!
     Position: {x: 833, y: 179}
     nodeType: 0
   - Guid: 2875b479-1be0-420e-9dfb-70419b781400
+    characterID: 
     DialogueText: regular failed!
     Position: {x: 833, y: 298}
     nodeType: 0
   - Guid: b7e744b5-4e90-4594-8565-a4c19d77f131
+    characterID: 
     DialogueText: critically failed!
     Position: {x: 833, y: 405}
     nodeType: 0
   - Guid: 13f98290-a759-4c9e-8eca-3b7266c02a97
+    characterID: 
     DialogueText: already pased
     Position: {x: 833, y: 503}
     nodeType: 0
   - Guid: d2e6f4fe-cd72-4bb0-8c94-1a1f2b441336
+    characterID: 
     DialogueText: already failed
     Position: {x: 833, y: 619}
     nodeType: 0
   - Guid: 7a4b414d-8cc0-474e-8a21-d3685ddb04ff
+    characterID: 
     DialogueText: this will start a roll check test
     Position: {x: 226, y: 200}
     nodeType: 0
   - Guid: 30a4400e-dac9-4b8b-adb7-b9817dd3c712
+    characterID: 
     DialogueText: Roll Node
     Position: {x: 539, y: 355}
     nodeType: 4
   - Guid: 35497b64-c1d5-4e62-a51b-ee0c2e4f7037
+    characterID: 
     DialogueText: Roll Node
     Position: {x: 539, y: -89}
     nodeType: 4

@@ -49,7 +49,8 @@ public class WorldNavObject : NavObject
 
     //public static event Action OnObjectsLoaded;
 
-    private void Awake() {
+    public override void Awake() {
+        base.Awake();
         SubSceneManager.OnSceneMarkedForUnload += PrepareForUnload;
         //Debug.Log("World nav object loaded: " + gameObject.name);
     }

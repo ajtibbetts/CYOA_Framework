@@ -33,6 +33,10 @@ public class DialogueParser : MonoBehaviour
         private string _currentNodeGUID;
         private string _pendingText = "";
 
+        // for 'skipping to dialogue' stuff
+        private DialogueContainer _homeDialogue;
+        private DialogueContainer _previousDialogue;
+
         private List<NodeLinkData> _pendingAdditiveChoices = new List<NodeLinkData>();
 
         [Serializable]
@@ -55,6 +59,7 @@ public class DialogueParser : MonoBehaviour
             RollScreen.onRollScreenCancelled += BacktrackToLastDialogueNodeInHistory;
             UIManager.onDialogueEnded += ClearDialogueHistory;
             UIManager.onProceedToNextNode += ProceedToNextNode;
+            NavObject.OnSkipToDialogue += SkipToDialogue;
             
             
         }
@@ -70,9 +75,12 @@ public class DialogueParser : MonoBehaviour
         public void SetupNewDialogue(DialogueContainer newDialogue)
         {
             Debug.Log("DIALOGE PARSER ---- ENABLED");
-            // UIManager.onOptionSelected -= ProceedToNarrative; // remove first if any
+            // UIManager.onOptionSelected -= ClearContentAndProceedToNode; // remove first if any
             UIManager.onOptionSelected += ClearContentAndProceedToNode;
             dialogue = newDialogue;
+            // clear any previous 'skip' stuff
+            _homeDialogue = null;
+            _previousDialogue = null;
         }
 
         public void DisableDialogueParser()
@@ -81,7 +89,7 @@ public class DialogueParser : MonoBehaviour
             UIManager.onOptionSelected -= ClearContentAndProceedToNode;
         }
 
-        public void InitDialogue() {
+        public void InitDialogue(string optionalTargetNodeGUID = null) {
 
             // clear old dialoge history
             _dialogueHistory.Clear();
@@ -105,8 +113,33 @@ public class DialogueParser : MonoBehaviour
             };
             // _previousNodeGUID = narrativeData.TargetNodeGuid;
             
-            
-            ClearContentAndProceedToNode(narrativeData.TargetNodeGuid);
+            if(optionalTargetNodeGUID == null)
+            {
+                ClearContentAndProceedToNode(narrativeData.TargetNodeGuid);
+            }
+            else
+            {
+                ClearContentAndProceedToNode(optionalTargetNodeGUID);
+            }
+        }
+
+        public void SkipToDialogue(DialogueContainer newDialogue, string optionalTargetNodeGUID = null, string baseFlag = "")
+        {
+            if(newDialogue == null)
+            {
+                // SetupNewDialogue(_previousDialogue);
+                if(baseFlag == "previous") dialogue = _previousDialogue;
+                else if (baseFlag == "home") dialogue = _homeDialogue;
+            }
+            else
+            {
+                // if this is first 'skip', set current dialogue to home
+                if(_homeDialogue == null) _homeDialogue = dialogue;
+                _previousDialogue = dialogue;
+                // SetupNewDialogue(newDialogue);
+                dialogue = newDialogue;
+            }
+            InitDialogue(optionalTargetNodeGUID);
         }
 
         public void UpdatePendingText(string text)
@@ -442,7 +475,7 @@ public class DialogueParser : MonoBehaviour
                 }
                 else {
                     Debug.Log("DIALOGUE PARSER ---- Ignoring dead end. Returning without invocation.");
-                    DisableDialogueParser();
+                    if(eventName != "skiptodialogue") DisableDialogueParser(); // do not disable when skipping to dialogue
                     return;
                 }
             }

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9837df7c010b3346bca580cac5bac11, type: 3}
   m_Name: locationEventTest
   m_EditorClassIdentifier: 
+  DialogueName: locationEventTest
   NodeLinks:
   - BaseNodeGuid: a006c375-b02a-4714-94c4-ba5227b1e747
     PortName: Next
@@ -42,32 +43,39 @@ MonoBehaviour:
     TargetNodeGuid: 1529dcd6-802f-4ad0-b221-fbfdcc3f339e
   DialogueNodeData:
   - Guid: ff4f2fc8-7c40-4f50-b49b-e5e2955c3f7a
+    characterID: 
     DialogueText: This event will unlock two locations (East Port & Central Park)
     Position: {x: 215, y: 200}
     nodeType: 0
   - Guid: 408e86f6-165c-4419-a215-a13fec9b4584
+    characterID: 
     DialogueText: Event Node
     Position: {x: 625, y: 191}
     nodeType: 1
   - Guid: 645109da-ec83-4c37-b384-8b637971c1d3
+    characterID: 
     DialogueText: Event Node
     Position: {x: 857, y: 200}
     nodeType: 1
   - Guid: 77871684-6218-4226-b48b-411e489867bb
+    characterID: 
     DialogueText: 'locations Added! now next event will
 
       lock central park.'
     Position: {x: 1076, y: 215}
     nodeType: 0
   - Guid: 4cfed1d0-eadc-4648-83c8-d500a3221091
+    characterID: 
     DialogueText: Event Node
     Position: {x: 1344, y: 215}
     nodeType: 1
   - Guid: 1529dcd6-802f-4ad0-b221-fbfdcc3f339e
+    characterID: 
     DialogueText: Central Park now locked!
     Position: {x: 1568, y: 230}
     nodeType: 0
   ExposedProperties: []
+  RollNodeData: []
   DialogueCheckData: []
   EventNodeData:
   - nodeGuid: 408e86f6-165c-4419-a215-a13fec9b4584

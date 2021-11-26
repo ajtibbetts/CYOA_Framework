@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9837df7c010b3346bca580cac5bac11, type: 3}
   m_Name: profileEventTest
   m_EditorClassIdentifier: 
+  DialogueName: profileEventTest
   NodeLinks:
   - BaseNodeGuid: ea102dfb-1949-4e20-9552-1b8f5ff76f3b
     PortName: Next
@@ -72,19 +73,23 @@ MonoBehaviour:
     TargetNodeGuid: 6bec7f62-eb84-403d-aa46-a4da2eebbaf8
   DialogueNodeData:
   - Guid: 46a9c936-8589-4a99-a4ff-376aa4bd1061
+    characterID: 
     DialogueText: This dialogue will unlock character profile for johnny cyber and
       chad
     Position: {x: 218, y: 179}
     nodeType: 0
   - Guid: 9640a791-38b0-4867-8175-36773f863dd9
+    characterID: 
     DialogueText: Event Node
     Position: {x: 615, y: 168}
     nodeType: 1
   - Guid: dfcf8ce2-1cd8-4a33-ac0d-2f3c577f0ccc
+    characterID: 
     DialogueText: Event Node
     Position: {x: 854, y: 158}
     nodeType: 1
   - Guid: ae00b103-51d1-45cd-86d6-7f034bcba01d
+    characterID: 
     DialogueText: 'both profiles unlocked. the next events
 
       will unlock hidden
@@ -92,34 +97,42 @@ MonoBehaviour:
     Position: {x: 1092, y: 169}
     nodeType: 0
   - Guid: 4f4ccaaa-afdf-4bf8-9518-14d1641042b0
+    characterID: 
     DialogueText: Event Node
     Position: {x: 1396, y: 142}
     nodeType: 1
   - Guid: cee720f8-4084-4d0f-9eb5-9b472a54efce
+    characterID: 
     DialogueText: Event Node
     Position: {x: 1616, y: 142}
     nodeType: 1
   - Guid: d73a953a-2c8c-48e6-8509-19554b0b785c
+    characterID: 
     DialogueText: Event Node
     Position: {x: 1844, y: 142}
     nodeType: 1
   - Guid: 86e619fd-cb3a-4261-a926-646e6f2e2904
+    characterID: 
     DialogueText: Event Node
     Position: {x: 2311, y: 142}
     nodeType: 1
   - Guid: 822d6e9c-90d6-4705-9691-fb0731a1967c
+    characterID: 
     DialogueText: Event Node
     Position: {x: 2079, y: 142}
     nodeType: 1
   - Guid: bc4b1728-a2b1-4574-9669-906f745df3e8
+    characterID: 
     DialogueText: Event Node
     Position: {x: 2534, y: 142}
     nodeType: 1
   - Guid: 6bec7f62-eb84-403d-aa46-a4da2eebbaf8
+    characterID: 
     DialogueText: Event Node
     Position: {x: 2768, y: 142}
     nodeType: 1
   ExposedProperties: []
+  RollNodeData: []
   DialogueCheckData: []
   EventNodeData:
   - nodeGuid: 9640a791-38b0-4867-8175-36773f863dd9

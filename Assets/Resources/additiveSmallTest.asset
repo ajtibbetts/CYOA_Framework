@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9837df7c010b3346bca580cac5bac11, type: 3}
   m_Name: additiveSmallTest
   m_EditorClassIdentifier: 
+  DialogueName: additiveSmallTest
   NodeLinks:
   - BaseNodeGuid: 67649007-aeae-4488-8ceb-d864f446ce47
     PortName: Next
@@ -33,22 +34,27 @@ MonoBehaviour:
     TargetNodeGuid: fcbf115f-03b8-42f4-85fd-8cfb6bbbca05
   DialogueNodeData:
   - Guid: 00ef6673-d297-442b-a6ec-4d069c068c17
+    characterID: 
     DialogueText: this is a small additive line
     Position: {x: 294, y: 221}
     nodeType: 5
   - Guid: 50017452-9eda-49da-a7b5-f741a0909028
+    characterID: 
     DialogueText: a second small additive line
     Position: {x: 525, y: 221}
     nodeType: 5
   - Guid: 212143fb-65ee-4668-bfa4-763075acb0c5
+    characterID: 
     DialogueText: a third small additive line
     Position: {x: 759, y: 221}
     nodeType: 5
   - Guid: 644befce-04ea-4232-933e-ac5195825556
+    characterID: 
     DialogueText: end of additives
     Position: {x: 995, y: 221}
     nodeType: 0
   - Guid: fcbf115f-03b8-42f4-85fd-8cfb6bbbca05
+    characterID: 
     DialogueText: Dialogue Node
     Position: {x: 1235, y: 247}
     nodeType: 0

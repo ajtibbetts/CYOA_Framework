@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9837df7c010b3346bca580cac5bac11, type: 3}
   m_Name: speakerTest
   m_EditorClassIdentifier: 
+  DialogueName: speakerTest
   NodeLinks:
   - BaseNodeGuid: 7773790f-9f12-4ad5-8363-aef0728bd3e0
     PortName: Next
@@ -19,6 +20,9 @@ MonoBehaviour:
   - BaseNodeGuid: 6da6ee8a-73be-4fe1-a810-e052fd648ab2
     PortName: Nice to meet you. | Hello again.
     TargetNodeGuid: b5f44785-9f45-4f81-805f-112c79150dc5
+  - BaseNodeGuid: 6da6ee8a-73be-4fe1-a810-e052fd648ab2
+    PortName: skip to dialogue
+    TargetNodeGuid: d79df7bf-7dda-4c67-b91d-8e7bef9e6f10
   DialogueNodeData:
   - Guid: 6da6ee8a-73be-4fe1-a810-e052fd648ab2
     characterID: johnnyC
@@ -28,11 +32,23 @@ MonoBehaviour:
   - Guid: b5f44785-9f45-4f81-805f-112c79150dc5
     characterID: johnnyC
     DialogueText: I have to go now.
-    Position: {x: 701, y: 191}
+    Position: {x: 715, y: 66}
     nodeType: 0
+  - Guid: d79df7bf-7dda-4c67-b91d-8e7bef9e6f10
+    characterID: 
+    DialogueText: Event Node
+    Position: {x: 715, y: 257}
+    nodeType: 1
   ExposedProperties: []
   RollNodeData: []
   DialogueCheckData: []
-  EventNodeData: []
+  EventNodeData:
+  - nodeGuid: d79df7bf-7dda-4c67-b91d-8e7bef9e6f10
+    EventName: skiptodialogue
+    EventValue: skipTest1
+    isRepeatable: 1
+    hasFired: 0
+    ignoreDeadEnd: 1
+    eventType: 9
   CheckNodeData: []
   EndpointNodeData: []

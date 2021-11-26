@@ -12,16 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9837df7c010b3346bca580cac5bac11, type: 3}
   m_Name: doorsample
   m_EditorClassIdentifier: 
+  DialogueName: doorsample
   NodeLinks:
   - BaseNodeGuid: 63cd39b5-ca5c-4935-a78d-2821818c836a
     PortName: Next
     TargetNodeGuid: 845e50d4-cc13-40d1-b448-d701f74ad6fa
   DialogueNodeData:
   - Guid: 845e50d4-cc13-40d1-b448-d701f74ad6fa
+    characterID: 
     DialogueText: Event Node
     Position: {x: 386, y: 158}
     nodeType: 1
   ExposedProperties: []
+  RollNodeData: []
   DialogueCheckData: []
   EventNodeData:
   - nodeGuid: 845e50d4-cc13-40d1-b448-d701f74ad6fa

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9837df7c010b3346bca580cac5bac11, type: 3}
   m_Name: additiveTest
   m_EditorClassIdentifier: 
+  DialogueName: additiveTest
   NodeLinks:
   - BaseNodeGuid: fa647639-805b-4b77-987c-ee0963d1a16c
     PortName: Next
