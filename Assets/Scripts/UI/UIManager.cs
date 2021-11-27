@@ -46,6 +46,7 @@ public class UIManager : MonoBehaviour
     public GameObject paragraphPrefab;
     public GameObject paragraphPortraitPrefab;
     public GameObject imagePrefab;
+    [SerializeField] GameObject _topMenuBar;
     [SerializeField] GameObject _bottonMenuBar;
     [Header("Player Stats")]
     public GameObject playerNameText;
@@ -146,9 +147,13 @@ public class UIManager : MonoBehaviour
         {
             case GAMESTATE.WORLDNAVIGATION:
                 gameStateText.text = "Navigating\n(Fast Travel Available)";
+                _topMenuBar.GetComponent<Image>().color = globalConfig.UI.Gameplay.menuBarWorldNavColor;
+                _bottonMenuBar.GetComponent<Image>().color = globalConfig.UI.Gameplay.menuBarWorldNavColor;
             break;
             case GAMESTATE.DIALOGUE:
                 gameStateText.text = "Dialogue\n(Fast Travel Unavailable)";
+                _topMenuBar.GetComponent<Image>().color = globalConfig.UI.Gameplay.menuBarDialogueColor;
+                _bottonMenuBar.GetComponent<Image>().color = globalConfig.UI.Gameplay.menuBarDialogueColor;
             break;
             case GAMESTATE.INVESTIGATING:
                 gameStateText.text = "Investigating\n(Fast Travel Unavailable)";

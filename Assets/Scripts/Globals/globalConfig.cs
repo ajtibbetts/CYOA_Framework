@@ -22,6 +22,12 @@ static public class globalConfig
         static public Color CurrentParagraphTextColor = Color.white;
         static public Color OldParagraphTextColor = new Color(0.7f,0.7f,0.7f); // gray
 
+        static public class Gameplay
+        {
+            static public Color menuBarWorldNavColor = new Color(0.1568628f,0.1686275f,0.1882353f); // dark grey
+            static public Color menuBarDialogueColor = new Color(0f,0.8227348f,1f); // cyan blue
+        }
+
         static public class CaseUI 
         {
             static public Color profileAllyBackgroundColor = new Color(0.7989943f,0.990566f,0.8437973f); // green

@@ -39,7 +39,7 @@ public class CaseManager : MonoBehaviour
     public void StartNewCase(string caseID)
     {
         var caseToStart = _availableCases.Find(x => x.GetCaseID().ToLower() == caseID.ToLower());
-        if(caseToStart != null)
+        if(caseToStart != null && _activeCase == null) // only start if no case is active
         {
             _activeCase = caseToStart;
             SetupCaseMap();

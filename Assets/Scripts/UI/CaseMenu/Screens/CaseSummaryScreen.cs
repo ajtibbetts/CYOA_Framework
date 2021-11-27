@@ -32,6 +32,20 @@ public class CaseSummaryScreen : CaseScreen
     [SerializeField] private Image _suspectOpportunityImage;
     [SerializeField] private TextMeshProUGUI _suspectOpportunityText;
 
+    [Header("Warrant")]
+    [SerializeField] private GameObject _requestWarrantButton;
+    [SerializeField] private GameObject _warrantRequestScreen;
+    [SerializeField] private Toggle _codToggle;
+    [SerializeField] private Toggle _todToggle;
+    [SerializeField] private Toggle _lodToggle;
+    [SerializeField] private Toggle _suspectToggle;
+    [SerializeField] private Toggle _meansToggle;
+    [SerializeField] private Toggle _motiveToggle;
+    [SerializeField] private Toggle _opportunityToggle;
+    [SerializeField] private GameObject _submitRequestButton;
+    [SerializeField] private GameObject _cancelRequestButton;
+    private bool _isWarrantRequestMatched;
+
     
     public override void UpdateData()
     {
@@ -41,6 +55,7 @@ public class CaseSummaryScreen : CaseScreen
 
         UpdateVictimSummaryData();
         UpdateSuspectSummaryData();
+        CloseRequestWarrantScreen();
     }
 
     public void UpdateVictimSummaryData()
@@ -96,4 +111,81 @@ public class CaseSummaryScreen : CaseScreen
         Debug.Log("Jumping to screen: " + screenNameToJumpTo);
     }
 
+
+
+    // Warrant Screen Methods
+
+    public void OpenRequestWarrantScreen()
+    {
+        CheckWarrantCriteria();
+        _warrantRequestScreen.SetActive(true);
+    }
+
+    public void CheckWarrantCriteria()
+    {
+        bool warrantCriteriaMet = false;
+
+        bool codDetermined = false;
+        bool todDetermined = false;
+        bool lodDetermined = false;
+
+        bool suspectDetermined = false;
+        bool meansDetermined = false;
+        bool motiveDetermined = false;
+        bool opportunityDetermined = false;
+        
+        if(_caseRecord.GetVictim() == null)
+        {
+            warrantCriteriaMet = false;
+            _codToggle.isOn = false;
+            _todToggle.isOn = false;
+            _lodToggle.isOn = false;
+        }
+        else 
+        {
+            codDetermined = _caseRecord.GetVictim().causeOfDeath != "???";
+            _codToggle.isOn = codDetermined;
+
+            todDetermined = _caseRecord.GetVictim().timeOfDeath != "???";
+            _todToggle.isOn = todDetermined;
+
+            lodDetermined = _caseRecord.GetVictim().locationOfDeath != "???";
+            _lodToggle.isOn = lodDetermined;
+        }
+
+    
+
+        // suspect
+        if(_caseRecord.GetPrimarySuspect() == null)
+        {
+            warrantCriteriaMet = false;
+            _suspectToggle.isOn = false;
+            _meansToggle.isOn = false;
+            _motiveToggle.isOn = false;
+            _opportunityToggle.isOn = false;
+        }
+        else 
+        {
+            suspectDetermined = true;
+            _suspectToggle.isOn = true;
+            meansDetermined = _caseRecord.GetPrimarySuspect().ProposedMeans.GetEvidenceID() != "unassigned";
+            _meansToggle.isOn = meansDetermined;
+            motiveDetermined = _caseRecord.GetPrimarySuspect().ProposedMotive.GetEvidenceID() != "unassigned";
+            _motiveToggle.isOn = motiveDetermined;
+            opportunityDetermined = _caseRecord.GetPrimarySuspect().ProposedOpportunity.GetEvidenceID() != "unassigned";
+            _opportunityToggle.isOn = opportunityDetermined;
+        }
+
+        // check all criteria is met
+        warrantCriteriaMet = codDetermined && todDetermined && lodDetermined && 
+                             suspectDetermined && meansDetermined && motiveDetermined && opportunityDetermined;
+
+        _submitRequestButton.SetActive(warrantCriteriaMet);
+
+    }
+
+    public void CloseRequestWarrantScreen()
+    {
+        _warrantRequestScreen.SetActive(false);
+    }
 }

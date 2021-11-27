@@ -137,13 +137,19 @@ public class WorldNavObject : NavObject
         {
             // Debug.Log($"WORLD NAVIGATOR ---- PLAYER HAS VISITED THIS NAV OBJECT");
             if(dialogueOnReturn.Length > 0) dialogueToDisplay = conditionManager.GetConditionalDialogue(dialogueOnReturn);
+            
         }
         else 
         {
             // Debug.Log($"WORLD NAVIGATOR ---- PLAYER HAS NOT VISITED THIS NAV OBJECT");
             if(dialogueOnNew.Length > 0) dialogueToDisplay = conditionManager.GetConditionalDialogue(dialogueOnNew);
+            else
+            {
+                // if no attached new dialogue, check for a returned dialogue (treated as default)
+                if(dialogueOnReturn.Length > 0) dialogueToDisplay = conditionManager.GetConditionalDialogue(dialogueOnReturn);
+            }
         }  
-
+        // otherwise return null
         return dialogueToDisplay;
     }
 
