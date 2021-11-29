@@ -120,6 +120,9 @@ public class WorldNavObject : NavObject
     
     public void SetupChildObjects()
     {
+        ChildNavObjects.Clear();
+        ChildInteractiveObjects.Clear();
+
         foreach (Transform child in transform)
         {
             // cache child world nav objects / interactables seprately

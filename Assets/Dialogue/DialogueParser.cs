@@ -21,12 +21,15 @@ public class DialogueParser : MonoBehaviour
      
         [HideInInspector] public gameController controller;
         
+        [Header("Dialogue Elements")]
         [SerializeField] private DialogueContainer dialogue;
         [SerializeField] private TextMeshProUGUI dialogueText;
         [SerializeField] private Button choicePrefab;
         [SerializeField] private Transform buttonContainer;
+        [Header("Dialogue Speakers")]
+        [SerializeField] private List<DialogueSpeaker> _commonSpeakers = new List<DialogueSpeaker>(); // speakers available at any time (not profiles)
 
-        
+        [Header("Dialogue History")]
         [SerializeField] private List<dialogueHistory> _dialogueHistory = new List<dialogueHistory>();
         [SerializeField] private dialogueHistory _currentNodeHistory;
         private string _previousNodeGUID;
@@ -333,6 +336,16 @@ public class DialogueParser : MonoBehaviour
             {
                 if(characterID.Length > 0)
                 {
+                    // first check for common speakers
+                    if(_commonSpeakers.Exists(x => x.characterID == characterID))
+                    {
+                        var speaker = _commonSpeakers.Find(x => x.characterID == characterID);
+                        var speakerName = $"<style=h3>{speaker.speakerName}</style>\n";
+                        UIManager.Instance.CreateContentPortraitParagraph(speakerName + text, speaker.speakerPortrait);
+                        return;
+                    }
+                    
+                    // otherwise check active case profile
                     var charProfile = CaseManager.Instance.GetProfileByID(characterID);
                     if(charProfile != null)
                     {

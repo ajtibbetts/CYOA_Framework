@@ -1,0 +1,155 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9837df7c010b3346bca580cac5bac11, type: 3}
+  m_Name: requestWarrant
+  m_EditorClassIdentifier: 
+  DialogueName: requestWarrant
+  NodeLinks:
+  - BaseNodeGuid: a438a5d2-8eb1-415e-9b9c-e5cd7cdef28d
+    PortName: Next
+    TargetNodeGuid: c31b9a5f-afba-4c13-a371-cc8c2385a097
+  - BaseNodeGuid: 6f6c8ad5-eede-4682-8e8c-456f45a3c05a
+    PortName: Output
+    TargetNodeGuid: 3893b626-232c-411a-8939-7820cc065721
+  - BaseNodeGuid: 0ef6f084-4f1e-4d83-b407-7ec433fb5579
+    PortName: Evidence is correct, yes.
+    TargetNodeGuid: 043c6e69-37a3-49ad-91df-873e1fe2cf9d
+  - BaseNodeGuid: 0ef6f084-4f1e-4d83-b407-7ec433fb5579
+    PortName: No, the evidence is incorrect.
+    TargetNodeGuid: 6f6c8ad5-eede-4682-8e8c-456f45a3c05a
+  - BaseNodeGuid: c31b9a5f-afba-4c13-a371-cc8c2385a097
+    PortName: I need an arrest warrant.
+    TargetNodeGuid: 10c79d37-dd56-4c28-84a6-bc46a4fd2037
+  - BaseNodeGuid: c31b9a5f-afba-4c13-a371-cc8c2385a097
+    PortName: Nevermind.
+    TargetNodeGuid: 3893b626-232c-411a-8939-7820cc065721
+  - BaseNodeGuid: 10c79d37-dd56-4c28-84a6-bc46a4fd2037
+    PortName: Yes, that is correct.
+    TargetNodeGuid: 0ef6f084-4f1e-4d83-b407-7ec433fb5579
+  - BaseNodeGuid: 10c79d37-dd56-4c28-84a6-bc46a4fd2037
+    PortName: No, the suspect name is wrong.
+    TargetNodeGuid: 6f6c8ad5-eede-4682-8e8c-456f45a3c05a
+  - BaseNodeGuid: dc9be278-3f31-4da9-9d22-7d0a0d35b048
+    PortName: Event Fired
+    TargetNodeGuid: 06721aa6-7487-42ed-823e-df6025f29268
+  - BaseNodeGuid: dc9be278-3f31-4da9-9d22-7d0a0d35b048
+    PortName: Already Triggered
+    TargetNodeGuid: 06721aa6-7487-42ed-823e-df6025f29268
+  - BaseNodeGuid: 043c6e69-37a3-49ad-91df-873e1fe2cf9d
+    PortName: Proceed with request.
+    TargetNodeGuid: dc9be278-3f31-4da9-9d22-7d0a0d35b048
+  - BaseNodeGuid: 043c6e69-37a3-49ad-91df-873e1fe2cf9d
+    PortName: Wait, I need to change something.
+    TargetNodeGuid: 6f6c8ad5-eede-4682-8e8c-456f45a3c05a
+  DialogueNodeData:
+  - Guid: 3893b626-232c-411a-8939-7820cc065721
+    characterID: warrantOperator
+    DialogueText: 'Thank you for using the warrant request line.
+
+
+      Have a great
+      day!'
+    Position: {x: 1331, y: 628}
+    nodeType: 0
+  - Guid: 6f6c8ad5-eede-4682-8e8c-456f45a3c05a
+    characterID: warrantOperator
+    DialogueText: Of course.  Please review and verify your information, and contact
+      us again when you are ready to submit your request.
+    Position: {x: 1572, y: 373}
+    nodeType: 5
+  - Guid: 0ef6f084-4f1e-4d83-b407-7ec433fb5579
+    characterID: warrantOperator
+    DialogueText: 'We are noting the following evidence attached for this warrant
+      request for a one {c.suspect}:
+
+
+      Means: {c.means}
+
+      Motive: {c.motive}
+
+      Opportunity:
+      {c.opportunity}
+
+
+      Is this correct?'
+    Position: {x: 1234, y: -23}
+    nodeType: 0
+  - Guid: c31b9a5f-afba-4c13-a371-cc8c2385a097
+    characterID: warrantOperator
+    DialogueText: 'Welcome to the Arrest Warrant request line.
+
+      Please state
+      your business.'
+    Position: {x: 353, y: 238}
+    nodeType: 0
+  - Guid: 10c79d37-dd56-4c28-84a6-bc46a4fd2037
+    characterID: warrantOperator
+    DialogueText: 'Very well, we see you are requesting an arrest warrant for:
+
+
+      {c.suspect}
+
+
+      Is
+      this correct?'
+    Position: {x: 759, y: 122}
+    nodeType: 0
+  - Guid: dc9be278-3f31-4da9-9d22-7d0a0d35b048
+    characterID: 
+    DialogueText: Event Node
+    Position: {x: 2534, y: 3}
+    nodeType: 1
+  - Guid: 06721aa6-7487-42ed-823e-df6025f29268
+    characterID: 
+    DialogueText: 'THIS STARTS THE WARRANT PROCESS TEST:
+
+
+      SUSPECT: {w.suspect}
+
+      MEANS:
+      {w.means}
+
+      MOTIVE: {w.motive}
+
+      OPP: {w.opportunity}
+
+'
+    Position: {x: 2844, y: 3}
+    nodeType: 0
+  - Guid: 043c6e69-37a3-49ad-91df-873e1fe2cf9d
+    characterID: warrantOperator
+    DialogueText: 'Before submitting your request, please note the Agency does not
+      enjoy wasting time.
+
+      Failure to provide proper and correct information
+      may result in a penalty.
+
+      Be sure you are confident in your suspect choice
+      and evidence before submission.
+
+
+      Do you wish to proceed?'
+    Position: {x: 1833, y: -7}
+    nodeType: 0
+  ExposedProperties: []
+  RollNodeData: []
+  DialogueCheckData: []
+  EventNodeData:
+  - nodeGuid: dc9be278-3f31-4da9-9d22-7d0a0d35b048
+    EventName: warrant
+    EventValue: setResults
+    isRepeatable: 1
+    hasFired: 0
+    ignoreDeadEnd: 0
+    eventType: 6
+  CheckNodeData: []
+  EndpointNodeData: []

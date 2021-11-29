@@ -12,6 +12,10 @@ public class PlayerProgressTracker : MonoBehaviour
     [Header("World Level Data")]
     [SerializeField] private string _currentScene;
     [SerializeField] private string _currentAreaName;
+    [SerializeField] private string _currentNavObjectGUID;
+    [SerializeField] private string _previousScene;
+    [SerializeField] private string _previousAreaName;
+    [SerializeField] private string _previousNavObjectGUID;
     [SerializeField] private List<NavObjectEntry> _visitedNavObjects = new List<NavObjectEntry>();
 
     [Header("Dialoge Data")]
@@ -33,6 +37,13 @@ public class PlayerProgressTracker : MonoBehaviour
     // accessor properties
     public string CurrentScene { get { return _currentScene; } set { _currentScene = value; } }
     public string CurrentAreaName { get { return _currentAreaName; } set { _currentAreaName = value; } }
+    public string CurrentNavObjectGUID {get {return _currentNavObjectGUID;} set {_currentNavObjectGUID = value;}}
+
+    public string PreviousScene {get {return _previousScene;} set {_previousScene = value;}}
+    public string PreviousAreaName {get{return _previousAreaName;}set{_previousAreaName = value;}}
+    public string PreviousNavObjectGUID {get{return _previousNavObjectGUID;}set{_previousNavObjectGUID = value;}}
+
+    
 
     private void Awake() {
         //init singleton

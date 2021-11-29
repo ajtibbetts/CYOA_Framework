@@ -104,6 +104,11 @@ public static class checkManager
             return CompareProfileProperty(suspectProfile, checkValue);
         }
 
+        if (checkName == "warrant")
+        {
+
+        }
+
         
         // for all others get the check params from checkValue format of propname.checkvalue
         var checkParams = checkValue.Split('.');
@@ -246,6 +251,17 @@ public static class checkManager
         }
 
         Debug.LogError("CHECK MANAGER --- Unknown location check value: " + checkValue);
+        return false;
+    }
+
+    private static bool CompareWarrantProperty(string warrantProperty)
+    {
+        switch(warrantProperty.ToLower())
+        {
+            case "istheoryvalid":
+                return CaseManager.Instance.isWarrantTheoryValid();
+        }
+
         return false;
     }
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using globalDataTypes;
 
 public class CaseSummaryScreen : CaseScreen
 {
@@ -187,5 +188,18 @@ public class CaseSummaryScreen : CaseScreen
     public void CloseRequestWarrantScreen()
     {
         _warrantRequestScreen.SetActive(false);
+    }
+
+    public void RequestArrestWarrant()
+    {
+        if(gameController.Instance.GetGameState() == GAMESTATE.DIALOGUE)
+        {
+            Debug.Log("WARRANT SCREEN ---- Cannot Request Warrant while in Dialogue");
+            return;
+        }
+        Debug.Log("WARRANT SCREEN ---- Submitting request for warrant!");
+        WorldNavigator.Instance.GetActiveNavObject().DeactivateNavObject();
+        gameController.Instance.SwitchToLevel("warrantRequest");
+        CloseMenu(MENUTYPE.CASEMENU);
     }
 }

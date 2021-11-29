@@ -69,6 +69,14 @@ namespace globalDataTypes {
         public List<localProperty> NavObjectProperties;
     }
 
+    [Serializable]
+    public class DialogueSpeaker
+    {
+        public string characterID;
+        public string speakerName;
+        public Sprite speakerPortrait;
+    }
+
 
     // ENUMS
     [Serializable]

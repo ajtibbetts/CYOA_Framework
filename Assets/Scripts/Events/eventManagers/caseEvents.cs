@@ -34,6 +34,7 @@ public static class caseEvents
         eventsDictionary.Add("resolveLead", ResolveLead);
         eventsDictionary.Add("addLocation", AddNewLocation);
         eventsDictionary.Add("updateLocation", UpdateLocationStatus);
+        eventsDictionary.Add("warrant", WarrantEvent);
     }
 
     public static void ProcessEvent(string eventName, string eventValue)
@@ -192,4 +193,12 @@ public static class caseEvents
         else Debug.LogError("CASE EVENTS ---- FAILED TO UPDATE LOCATION STATUS, INCORRECT PARAMS LENGTH: " + eventParams.Length);
     }
 
+
+    private static void WarrantEvent(string eventValue)
+    {
+        if(eventValue == "setResults")
+        {
+            CaseManager.Instance.SetWarrantResults(PlayerCaseRecord.Instance.GetPrimarySuspect());
+        }
+    }
 }

@@ -27,7 +27,7 @@ public class CaseManager : MonoBehaviour
         }
 
         // add listener for warrant proposal results
-        CaseCulprit.OnCulpritTheoryAssessed += OutputWarrantResults;
+        // CaseCulprit.OnCulpritTheoryAssessed += OutputWarrantResults;
     }
     
     // Start is called before the first frame update
@@ -131,6 +131,10 @@ public class CaseManager : MonoBehaviour
             _characterData.occupation = matchedCharacter.GetOccupation();
             _characterData.relationshipToVictim = matchedCharacter.GetRelationShipToVictim();
             _characterData.characterType = matchedCharacter.GetCharacterType();
+
+            _characterData.AsCulpritCompleteResponse = matchedCharacter.AsCulpritCompleteResponse;
+            _characterData.AsCulpritPartialResponse = matchedCharacter.AsCulpritPartialResponse;
+            _characterData.AsInnocentResponse = matchedCharacter.AsInnocentResponse;
     
             return _characterData;
         }
@@ -205,18 +209,22 @@ public class CaseManager : MonoBehaviour
         return _activeCase.GetAvailableLeads();
     }
 
-    public bool ValidateArrestWarrant(CaseSuspect suspect)
+
+    public void SetWarrantResults(CaseSuspect suspect)
     {
-        // check if suspect and evidence is match
-        // add additional events/penalties as needed based on success/failure
-        if(_activeCase.GetCulprit().IsCulpritTheoryValid(suspect))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        } 
+        var caseCulprit = _activeCase.GetCulprit();
+        caseCulprit.SetSuspectTheoryResults(suspect);
+    }
+
+    public bool isWarrantTheoryValid()
+    {
+        return _activeCase.GetCulprit().GetTheoryResults();
+    }
+
+    public string GetWarrantResponse(EvidenceType evidenceType)
+    {
+        var caseCulprit = _activeCase.GetCulprit();
+        return caseCulprit.GetTheoryResponse(evidenceType);
     }
 
      public void OutputWarrantResults(List<string> resultsText)

@@ -78,7 +78,7 @@ namespace CaseDataObjects
     }
 
     [Serializable]
-    public struct SuspectTheory
+    public class SuspectTheory
     {
         public List<CaseTheory> ValidTheories;
         public List<CaseTheory> InvalidTheories;
@@ -139,14 +139,41 @@ namespace CaseDataObjects
 
     public class TheoryResults
     {
-        public bool MatchedSuspect;
-        public bool MatchedMeans;
-        public bool MatchedMotive;
-        public bool MatchedOpportunity;
+        public bool MatchedSuspect = false;
+        public string ResponseSuspect;
+        public bool MatchedMeans = false;
+        public string ResponseMeans;
+        public bool MatchedMotive = false;
+        public string ResponseMotive;
+        public bool MatchedOpportunity = false;
+        public string ResponseOpportunity;
 
         public bool IsTheoryValid()
         {
             return MatchedSuspect && MatchedMeans && MatchedMotive && MatchedOpportunity;
+        }
+
+        public void SetTheoryResult(EvidenceType type, bool result, string response)
+        {
+            switch(type)
+            {
+                case EvidenceType.MEANS:
+                    MatchedMeans = result;
+                    ResponseMeans = response;
+                    return;
+                case EvidenceType.MOTIVE:
+                    MatchedMotive = result;
+                    ResponseMotive = response;
+                    return;
+                case EvidenceType.OPPORTUNITY:
+                    MatchedOpportunity = result;
+                    ResponseOpportunity = response;
+                    return;
+                default:
+                    MatchedSuspect = result;
+                    ResponseSuspect = response;
+                    return;
+            }
         }
     }
 

@@ -12,21 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 182f594f925491f4aa6aa6b69fb155b0, type: 3}
   m_Name: testCulprit
   m_EditorClassIdentifier: 
-  _suspectProfile: {fileID: 0}
+  _suspectProfile: {fileID: 11400000, guid: 4f61461d4a4b16140a4f5ea2f3414164, type: 2}
   _means:
     ValidTheories:
-    - evidence: {fileID: 11400000, guid: cf059612f9caa7b4c8484eb2d406d61b, type: 2}
+    - evidence: {fileID: 11400000, guid: fc9fae3313687aa46ba40f7a38cd1680, type: 2}
       response: This is a solid means for murder!
     InvalidTheories: []
   _motive:
     ValidTheories:
-    - evidence: {fileID: 11400000, guid: f31b41f14424ee44fab4aa5951432156, type: 2}
+    - evidence: {fileID: 11400000, guid: 8d528698680df7d4daf454657d7733b7, type: 2}
       response: Yes this is a solid motive.
     InvalidTheories: []
   _opportunity:
     ValidTheories:
-    - evidence: {fileID: 11400000, guid: fc9fae3313687aa46ba40f7a38cd1680, type: 2}
+    - evidence: {fileID: 11400000, guid: cf059612f9caa7b4c8484eb2d406d61b, type: 2}
       response: This certainly fits the profile.
     InvalidTheories:
     - evidence: {fileID: 11400000, guid: 8d528698680df7d4daf454657d7733b7, type: 2}
       response: I'm not really sure how this evidence fits the claim.
+  _genericFailResponse: I don't know how this evidence would factor in at all.

@@ -23,7 +23,7 @@ public class gameController : MonoBehaviour
     [HideInInspector] public WorldNavigator worldNavigator;
 
 
-
+    private string _optionalTargetNavObjectGUID = null;
     
     void Awake()
     {
@@ -94,9 +94,28 @@ public class gameController : MonoBehaviour
         // DialogueParser.onDialogueReachedDeadEnd += ResetDialogueRoute;
     }
 
+    public GAMESTATE GetGameState()
+    {
+        return _GAMESTATE;
+    }
+
     public void SwitchToLevel(string newSceneName)
     {
+        // first check if we need to get previous scene
+        if(newSceneName == "previousScene") 
+        {
+            newSceneName = _progressTracker.PreviousScene;
+            _optionalTargetNavObjectGUID = _progressTracker.PreviousNavObjectGUID;
+        }
+        
+        // cache current valuest to previous before swapping.
         string currentLevelName = SubSceneManager.GetCurrentSceneName();
+        string currentNavObjectGUID = WorldNavigator.Instance.GetActiveNavObject().GUID;
+        _progressTracker.PreviousScene = currentLevelName;
+        _progressTracker.PreviousNavObjectGUID = currentNavObjectGUID;
+        _progressTracker.PreviousAreaName = _progressTracker.CurrentAreaName;
+       
+        
 
         Debug.Log($"GAME CONTROLLER ---- Switching from current level {currentLevelName} to new level {newSceneName}.");
         SubSceneManager.RemoveScene(currentLevelName, newSceneName);
@@ -111,6 +130,14 @@ public class gameController : MonoBehaviour
 
     void ProcessNewScene(string sceneName)
     {
+        // first check for any previous target nav object nodes to hit.
+        if(_optionalTargetNavObjectGUID != null)
+        {
+            Debug.Log("GAME CONTROLLER ---- Optional target nav found -- skipping to: " + _optionalTargetNavObjectGUID);
+            worldNavigator.SkipToNavObjectByGUID(_optionalTargetNavObjectGUID);
+            _optionalTargetNavObjectGUID = null;
+        }
+        
         Debug.Log("GAME CONTROLLER ---- Game manager processing new scene.");
         // check for starting dialogue, otherwise display nav object
         var dialogue = worldNavigator.GetActiveDialogue();

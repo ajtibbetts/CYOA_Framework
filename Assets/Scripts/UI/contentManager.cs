@@ -4,6 +4,8 @@ using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CaseDataObjects;
+using globalDataTypes;
 
 public class contentManager : MonoBehaviour
 {
@@ -28,6 +30,8 @@ public class contentManager : MonoBehaviour
         dict_functions.Add("e", getEnemyProperty);
         dict_functions.Add("s", getStoryProperty);
         dict_functions.Add("i", getItemProperty);
+        dict_functions.Add("c", getCaseProperty);
+        dict_functions.Add("w", getWarrantProperty);
     }
 
     private string getVariableText(Match m)
@@ -98,6 +102,48 @@ public class contentManager : MonoBehaviour
     public string getItemProperty(string propertyName) {
 
         return null;
+    }
+
+    public string getCaseProperty(string propertyName)
+    {
+        switch(propertyName.ToLower())
+        {
+            case "suspect":
+                return PlayerCaseRecord.Instance.GetPrimarySuspect().SuspectProfile.characterName;
+            case "means":
+                return PlayerCaseRecord.Instance.GetPrimarySuspect().ProposedMeans.GetEvidenceName();
+            case "motive":
+                return PlayerCaseRecord.Instance.GetPrimarySuspect().ProposedMotive.GetEvidenceName();
+            case "opportunity":
+                return PlayerCaseRecord.Instance.GetPrimarySuspect().ProposedOpportunity.GetEvidenceName();
+
+        }
+
+        Debug.LogError("CONTENT MANAGER ---- Could not find case property: " + propertyName);
+        return null;
+    }
+
+    public string getWarrantProperty(string propertyName)
+    {   
+        var suspect = PlayerCaseRecord.Instance.GetPrimarySuspect();
+        var caseManager = CaseManager.Instance;
+        if( suspect != null)
+        {
+            switch(propertyName.ToLower())
+            {
+                case "suspect":
+                    return caseManager.GetWarrantResponse(EvidenceType.UNASSIGNED);
+                case "means":
+                    return caseManager.GetWarrantResponse(EvidenceType.MEANS);
+                case "motive":
+                    return caseManager.GetWarrantResponse(EvidenceType.MOTIVE);
+                case "opportunity":
+                    return caseManager.GetWarrantResponse(EvidenceType.OPPORTUNITY);
+            }
+        }
+
+        return "NOT FOUND";
+        
     }
 
 

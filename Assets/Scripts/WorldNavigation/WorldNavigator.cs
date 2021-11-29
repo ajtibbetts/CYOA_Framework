@@ -41,6 +41,10 @@ public class WorldNavigator : MonoBehaviour
         
     }
 
+    public NavObject GetActiveNavObject()
+    {
+        return _activeNavObject;
+    }
 
     public static void NavigateToNewWorldNavObject(WorldNavObject navObject)
     {
@@ -80,6 +84,20 @@ public class WorldNavigator : MonoBehaviour
             OnActiveNavObjectLoaded?.Invoke(sceneName);
         }
 
+    }
+
+    public void SkipToNavObjectByGUID(string navObjectGUID)
+    {
+        Debug.Log("WORLD NAVIGATOR ---- Skipping to nav object in scene with guid: " + navObjectGUID);
+        var navObjects = FindObjectsOfType<NavObject>();
+        foreach(var navObject in navObjects)
+        {
+            if (navObject.GUID == navObjectGUID)
+            {
+                ActiveWorldNavObject = navObject.GetComponent<WorldNavObject>();
+                navObject.ActivateNavObject();
+            }
+        }
     }
 
  
