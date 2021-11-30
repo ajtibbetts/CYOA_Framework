@@ -196,9 +196,15 @@ public static class caseEvents
 
     private static void WarrantEvent(string eventValue)
     {
-        if(eventValue == "setResults")
+        switch(eventValue)
         {
-            CaseManager.Instance.SetWarrantResults(PlayerCaseRecord.Instance.GetPrimarySuspect());
+            case "setResults":
+                CaseManager.Instance.SetWarrantResults(PlayerCaseRecord.Instance.GetPrimarySuspect());
+            break;
+            case "grantWarrant":
+                PlayerCaseRecord.Instance.GrantWarrant();
+            break;
         }
+
     }
 }

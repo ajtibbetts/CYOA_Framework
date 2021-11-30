@@ -150,6 +150,7 @@ namespace CaseDataObjects
 
         public bool IsTheoryValid()
         {
+            Debug.Log($"Theory Results: Means: {MatchedMeans}, Motive: {MatchedMotive}, Opp: {MatchedOpportunity}, Suspect: {MatchedSuspect}");
             return MatchedSuspect && MatchedMeans && MatchedMotive && MatchedOpportunity;
         }
 

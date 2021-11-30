@@ -17,8 +17,9 @@ public class UIManager : MonoBehaviour
     public static event Action onGameStartSelected;
     public static event Action onDialogueEnded;
     public static event Action<string> onOptionSelected;
-
     public static event Action onProceedToNextNode;
+    public static event Action onMainMenuOpened;
+    public static event Action onCaseMenuOpened;
 
     // UI elements
     [Header("Game Menus")]
@@ -243,6 +244,7 @@ public class UIManager : MonoBehaviour
     {
         Debug.Log("Main menu button touched. Opening main menu.");
         _UISTATE = UISTATE.MAINMENU;
+        onMainMenuOpened?.Invoke();
         SlideInMainMenu();
     }
 
@@ -258,6 +260,7 @@ public class UIManager : MonoBehaviour
         if(!PlayerCaseRecord.Instance.onActiveCase) return; // only open menu if a case is active
         Debug.Log("Case menu button touched. Opening main menu.");
         _UISTATE = UISTATE.CASEMENU;
+        onCaseMenuOpened?.Invoke();
         SlideInCaseMenu();
     }
 
@@ -419,15 +422,15 @@ public class UIManager : MonoBehaviour
         }
 
         var targetPosition = new Vector2(0, totalHeight + 25f); // 50 for spacing offset from vertical layout group
-        Debug.Log("target pos y: " + targetPosition.y);
+        // Debug.Log("target pos y: " + targetPosition.y);
         
         // then set the posY of scroll rect
         // contentPanel.anchoredPosition = targetPosition; 
         while(contentPanel.anchoredPosition.y < targetPosition.y && isScrollBarActive) // only scroll if scroll bar is active
         {
             var currentYPos = contentPanel.anchoredPosition.y;
-            Debug.Log("target pos y: " + targetPosition.y);
-            Debug.Log("current pos y: "+ currentYPos);
+            // Debug.Log("target pos y: " + targetPosition.y);
+            // Debug.Log("current pos y: "+ currentYPos);
             contentPanel.anchoredPosition = new Vector2(0, currentYPos + (Time.deltaTime * autoScrollSpeed));
             if(scrollRect.verticalNormalizedPosition <= 0) break; // stop scrolling if we've hit the end of scrollbar/scrollrect
             yield return null;

@@ -57,6 +57,21 @@ public class CaseSummaryScreen : CaseScreen
         UpdateVictimSummaryData();
         UpdateSuspectSummaryData();
         CloseRequestWarrantScreen();
+        SetWarrantButton();
+    }
+
+    public void SetWarrantButton()
+    {
+        if(gameController.Instance.GetGameState() == GAMESTATE.WORLDNAVIGATION)
+        {
+            _requestWarrantButton.GetComponentInChildren<TextMeshProUGUI>().text = "Request Arrest Warrant";
+            _requestWarrantButton.GetComponent<Button>().interactable = true;
+        }
+        else 
+        {
+            _requestWarrantButton.GetComponentInChildren<TextMeshProUGUI>().text = "Warrant Request Unavailable";
+            _requestWarrantButton.GetComponent<Button>().interactable = false;
+        }
     }
 
     public void UpdateVictimSummaryData()

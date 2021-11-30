@@ -33,7 +33,7 @@ public class PlayerCaseRecord : MonoBehaviour
     [SerializeField] private List<ActiveLocation> _activeLocations = new List<ActiveLocation>();
     
     
-    
+    private bool _hasArrestWarrant;
     
     private void Awake() {
         if (_instance != null && _instance != this)
@@ -176,6 +176,7 @@ public class PlayerCaseRecord : MonoBehaviour
         _primarySuspect = null;
         _evidence.Clear();
         _customNotes.Clear();
+        _hasArrestWarrant = false;
     }
 
 
@@ -559,14 +560,24 @@ public class PlayerCaseRecord : MonoBehaviour
         else Debug.LogError("PLAYER CASE RECORD ---- FAILED TO UPDATE LOCATION STATUS: " + areaName);
     }
     
-    private void SubmitProposedCase()
-    {
-        // add stuff here tomorrow
-    }
-
     private void AddCustomNote(string note)
     {
         _customNotes.Add(note);
     }
     
+
+    public void GrantWarrant()
+    {
+        Debug.Log("CASE RECROD ---- WARRANT GRANTED.");
+        _hasArrestWarrant = true;
+        
+        OnMessageToUI?.Invoke($"Arrest Warrant for {_primarySuspect.SuspectProfile.characterName} added to Case Profile.");
+        OnLinkToUI?.Invoke("openCase.null");
+        OnCaseDataUpdated?.Invoke();
+    }
+
+    public bool hasArrestWarrant()
+    {
+        return _hasArrestWarrant;
+    }
 }

@@ -219,11 +219,6 @@ public class gameController : MonoBehaviour
     }
 
 
-    public GAMESTATE GetGAMESTATE()
-    {
-        return _GAMESTATE;
-    }
-
     private void SetGAMESTATE(GAMESTATE newState)
     {
         _GAMESTATE = newState;

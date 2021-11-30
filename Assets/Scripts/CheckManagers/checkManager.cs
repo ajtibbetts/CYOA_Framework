@@ -28,8 +28,7 @@ public static class checkManager
 
             break;
             case conditionType.caseProperty:
-
-            break;
+                return CompareCaseProperty(checkName, checkValue, comparisonOperator);
             case conditionType.storyProperty:
                 return CompareStoryProperty(checkName, checkValue, comparisonOperator);
             case conditionType.worldProperty:
@@ -106,7 +105,7 @@ public static class checkManager
 
         if (checkName == "warrant")
         {
-
+            return CompareWarrantProperty(checkValue);
         }
 
         
@@ -256,6 +255,7 @@ public static class checkManager
 
     private static bool CompareWarrantProperty(string warrantProperty)
     {
+        Debug.Log("CHECK MANAGER --- Checking warrant property: " + warrantProperty);
         switch(warrantProperty.ToLower())
         {
             case "istheoryvalid":

@@ -63,6 +63,7 @@ public class CaseMenu : UIMenu
         helpScreen.SetActive(false);
 
         PlayerCaseRecord.OnCaseDataUpdated += UpdateActiveData;
+        UIManager.onCaseMenuOpened += UpdateActiveData;
     }
     void Start()
     {

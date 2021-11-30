@@ -129,7 +129,7 @@ public class MapScreen : MenuScreen
         // check if this location is current location or not world nav gamestate, or locked in the current story state
         if(_confirmLocationData.GetAreaName() == PlayerProgressTracker.Instance.CurrentAreaName) _isCurrentLocationText.SetActive(true);
         else if (isLocked) _locationLockedText.SetActive(true);
-        else if(gameController.Instance.GetGAMESTATE() != GAMESTATE.WORLDNAVIGATION) _fastTravelDisabledText.SetActive(true);
+        else if(gameController.Instance.GetGameState() != GAMESTATE.WORLDNAVIGATION) _fastTravelDisabledText.SetActive(true);
         else _confirmButton.SetActive(true);
 
         

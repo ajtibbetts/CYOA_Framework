@@ -32,6 +32,7 @@ public class CaseCulprit : ScriptableObject {
 
     public bool GetTheoryResults()
     {
+        Debug.Log("Getting Theory results.");
         return _warrantResults.IsTheoryValid();
     }
 
