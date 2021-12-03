@@ -15,6 +15,14 @@ namespace CaseDataObjects
     /
     ***/
 
+    public enum CaseStatus 
+    {
+        PENDING_WARRANT,
+        PENDING_ARREST,
+        PENDING_CONFESSION,
+        COMPLETE
+    }
+
     public enum CharacterType 
     {
         ALLY,

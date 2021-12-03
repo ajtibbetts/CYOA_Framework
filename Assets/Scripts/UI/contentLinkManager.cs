@@ -19,6 +19,7 @@ public class contentLinkManager : MonoBehaviour, IPointerClickHandler {
         eventsDictionary.Add("openLeads",OpenLeads);
         eventsDictionary.Add("openMap",OpenMap);
         eventsDictionary.Add("openVictim", OpenVictimProfile);
+        eventsDictionary.Add("openWarrant", OpenWarrant);
     }
 
     public void OnPointerClick(PointerEventData eventData) {
@@ -105,6 +106,13 @@ public class contentLinkManager : MonoBehaviour, IPointerClickHandler {
         Debug.Log("LINK MANAGER - OPENING MAP FOR AREA NAME: " + areaName);
         OnOpenMenu?.Invoke(MENUTYPE.MAINMENU);
         MainMenu.Instance.OpenMapScreen(areaName);
+    }
+
+    private void OpenWarrant(string notused)
+    {
+        Debug.Log("LINK MANAGER - OPENING WARRANT SCREEN. ");
+        OnOpenMenu?.Invoke(MENUTYPE.CASEMENU);
+        CaseMenu.Instance.OpenWarrantScreen();
     }
 
 }

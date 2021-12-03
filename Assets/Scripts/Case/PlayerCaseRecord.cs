@@ -18,6 +18,8 @@ public class PlayerCaseRecord : MonoBehaviour
     
     [ES3Serializable] public bool onActiveCase {get; private set;}
     public string activeCaseID;
+
+    public CaseStatus caseStatus;
     
     [SerializeField] private VictimData _victim;
     [SerializeField] private List<ActiveLead> _leads = new List<ActiveLead>();
@@ -161,6 +163,7 @@ public class PlayerCaseRecord : MonoBehaviour
         SetStartingLocations();
 
         onActiveCase = true;
+        caseStatus = CaseStatus.PENDING_WARRANT;
         OnCaseEnabled?.Invoke(true);
         OnMessageToUI?.Invoke("New Case Started.");
         OnLinkToUI?.Invoke("openCase.null");
@@ -570,9 +573,10 @@ public class PlayerCaseRecord : MonoBehaviour
     {
         Debug.Log("CASE RECROD ---- WARRANT GRANTED.");
         _hasArrestWarrant = true;
+        caseStatus = CaseStatus.PENDING_ARREST;
         
         OnMessageToUI?.Invoke($"Arrest Warrant for {_primarySuspect.SuspectProfile.characterName} added to Case Profile.");
-        OnLinkToUI?.Invoke("openCase.null");
+        OnLinkToUI?.Invoke("openWarrant.null");
         OnCaseDataUpdated?.Invoke();
     }
 

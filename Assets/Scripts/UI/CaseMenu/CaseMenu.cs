@@ -18,7 +18,7 @@ public class CaseMenu : UIMenu
     [SerializeField] private GameObject evidenceButton;
     [SerializeField] private GameObject profilesButton;
     [SerializeField] private GameObject suspectsButton;
-    [SerializeField] private GameObject notesButton;
+    [SerializeField] private GameObject warrantButton;
     [SerializeField] private GameObject helpButton;
 
     [Header("Content Screen")]
@@ -29,7 +29,7 @@ public class CaseMenu : UIMenu
     public GameObject evidenceScreen;
     public GameObject profilesScreen;
     public GameObject suspectsScreen;
-    public GameObject notesScreen;
+    public GameObject warrantScreen;
     public GameObject helpScreen;
 
     // data managers
@@ -39,6 +39,7 @@ public class CaseMenu : UIMenu
     private EvidenceScreen _evidenceManager;
     private ProfilesScreen _profilesManager;
     private SuspectsScreen _suspectsManager;
+    private WarrantScreen _warrantManager;
 
 
     private PlayerCaseRecord _caseRecord;
@@ -59,7 +60,7 @@ public class CaseMenu : UIMenu
         evidenceScreen.SetActive(false);
         profilesScreen.SetActive(false);
         suspectsScreen.SetActive(false);
-        notesScreen.SetActive(false);
+        warrantScreen.SetActive(false);
         helpScreen.SetActive(false);
 
         PlayerCaseRecord.OnCaseDataUpdated += UpdateActiveData;
@@ -93,6 +94,10 @@ public class CaseMenu : UIMenu
         _suspectsManager = suspectsScreen.GetComponent<SuspectsScreen>();
         _suspectsManager.SetCaseRecord(_caseRecord);
         _suspectsManager.onGoToProfile += GoToCharacterProfile;
+
+        _warrantManager = warrantScreen.GetComponent<WarrantScreen>();
+        _warrantManager.SetCaseRecord(_caseRecord);
+        WarrantScreen.OnButtonPressed += JumpToScreenFromSubMenu;
     }
 
     public void OpenCaseSummaryScreen()
@@ -125,9 +130,10 @@ public class CaseMenu : UIMenu
         _suspectsManager.UpdateData();
         SetActiveScreen(suspectsScreen, suspectsButton);
     }
-    public void OpenNotesScreen()
+    public void OpenWarrantScreen()
     {
-        SetActiveScreen(notesScreen, notesButton);
+        _warrantManager.UpdateData();
+        SetActiveScreen(warrantScreen, warrantButton);
     }
     public void OpenHelpScreen()
     {
