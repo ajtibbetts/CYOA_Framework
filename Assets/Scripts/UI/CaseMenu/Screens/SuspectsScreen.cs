@@ -12,6 +12,8 @@ public class SuspectsScreen : CaseScreen
     
     [SerializeField] private GameObject _activeSuspectsContainer;
     [SerializeField] private GameObject _noSuspectsContainer;
+    [SerializeField] private GameObject _addSuspectButton;
+    [SerializeField] private GameObject _removeSuspectButton;
 
     [Header("Suspect View")]
     [SerializeField] private TextMeshProUGUI _suspectHeaderText;
@@ -92,6 +94,7 @@ public class SuspectsScreen : CaseScreen
     public override void UpdateData()
     {
         resetContent();
+        
         var _suspects = _caseRecord.GetSuspects();
         // if no suspects, show inactive screen
         if(_suspects.Count == 0)
@@ -110,7 +113,20 @@ public class SuspectsScreen : CaseScreen
             var suspectToUpdate = _suspects.Find(x => x.SuspectProfile == _activeSuspectProfile);
             UpdateSuspectView(suspectToUpdate);
         }
+
+
+        // after all is set, if we already have warrant, lock suspects in place
+        if(_caseRecord.caseStatus != CaseStatus.PENDING_WARRANT) HideButtons();
         
+    }
+
+    public void HideButtons()
+    {
+        _addSuspectButton.SetActive(false);
+        _removeSuspectButton.SetActive(false);
+        _primaryButton.SetActive(false);
+        _navPrevImage.SetActive(false);
+        _navNextImage.SetActive(false);
     }
 
     /***

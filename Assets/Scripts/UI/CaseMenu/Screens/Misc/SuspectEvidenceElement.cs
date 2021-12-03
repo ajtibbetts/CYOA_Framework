@@ -29,6 +29,9 @@ public class SuspectEvidenceElement : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData pointerEventData)
     {
+        // only activate if warrant has not been granted
+        if(PlayerCaseRecord.Instance.caseStatus != CaseStatus.PENDING_WARRANT) return;
+
         onElementTapped?.Invoke(_evidenceType);
     }
 }

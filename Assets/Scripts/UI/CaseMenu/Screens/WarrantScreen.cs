@@ -33,8 +33,10 @@ public class WarrantScreen : CaseScreen
     [SerializeField] private TextMeshProUGUI _suspectMotiveText;
     [SerializeField] private Image _suspectOpportunityImage;
     [SerializeField] private TextMeshProUGUI _suspectOpportunityText;
+    [SerializeField] private GameObject _changeTheoryButton;
 
     [Header("Warrant")]
+    [SerializeField] TextMeshProUGUI _requestButtonInfoText;
     [SerializeField] private GameObject _requestWarrantButton;
     [SerializeField] private GameObject _warrantRequestScreen;
     [SerializeField] private Toggle _codToggle;
@@ -58,6 +60,12 @@ public class WarrantScreen : CaseScreen
     private string _warrantInfoText_granted = "Locate the suspect and arrest them.";
     private string _warrantInfoText_arrested = "Interrogate the suspect and get a confession.";
     private string _warrantInfoText_complete = "Homicide solved. Great work Detective!";
+
+
+    private string _requestLabel_pending = "You may request an\narrest warrant when <b>Investigating</b>.";
+    private string _requestLabel_granted = "Arrest warrant granted for:\n";
+    private string _requestLabel_arrested = "Suspect arrested:\n";
+    private string _requestLabel_complete = "Case solved.";
 
     public override void UpdateData()
     {
@@ -94,16 +102,38 @@ public class WarrantScreen : CaseScreen
 
     public void SetWarrantButton()
     {
-        if(gameController.Instance.GetGameState() == GAMESTATE.WORLDNAVIGATION)
+        switch(_caseRecord.caseStatus)
         {
-            _requestWarrantButton.GetComponentInChildren<TextMeshProUGUI>().text = "Request Arrest Warrant";
-            _requestWarrantButton.GetComponent<Button>().interactable = true;
+            case CaseStatus.PENDING_WARRANT:
+                if(gameController.Instance.GetGameState() == GAMESTATE.WORLDNAVIGATION)
+                {
+                    _requestButtonInfoText.text = _requestLabel_pending;
+                    _requestWarrantButton.GetComponentInChildren<TextMeshProUGUI>().text = "Request Arrest Warrant";
+                    _requestWarrantButton.GetComponent<Button>().interactable = true;
+                }
+                else 
+                {
+                    _requestWarrantButton.GetComponentInChildren<TextMeshProUGUI>().text = "Warrant Request Unavailable";
+                    _requestWarrantButton.GetComponent<Button>().interactable = false;
+                }
+            return;
+            case CaseStatus.PENDING_ARREST:
+                _requestButtonInfoText.text = _requestLabel_granted;
+                _requestWarrantButton.GetComponentInChildren<TextMeshProUGUI>().text = "Arrest Warrant Granted";
+                _requestWarrantButton.GetComponent<Button>().interactable = false;
+            return;
+            case CaseStatus.PENDING_CONFESSION:
+                _requestButtonInfoText.text = _requestLabel_arrested;
+                _requestWarrantButton.GetComponentInChildren<TextMeshProUGUI>().text = "Suspect Arrested";
+                _requestWarrantButton.GetComponent<Button>().interactable = false;
+            return;
+            case CaseStatus.COMPLETE:
+                _requestButtonInfoText.text = _requestLabel_complete;
+                _requestWarrantButton.GetComponentInChildren<TextMeshProUGUI>().text = "Case Solved";
+                _requestWarrantButton.GetComponent<Button>().interactable = false;
+            return;
         }
-        else 
-        {
-            _requestWarrantButton.GetComponentInChildren<TextMeshProUGUI>().text = "Warrant Request Unavailable";
-            _requestWarrantButton.GetComponent<Button>().interactable = false;
-        }
+        
     }
 
     public void UpdateVictimSummaryData()
@@ -149,6 +179,9 @@ public class WarrantScreen : CaseScreen
 
         _noActiveSuspectContainer.SetActive(false);
         _activeSuspectContainer.SetActive(true);
+
+        if(_caseRecord.caseStatus != CaseStatus.PENDING_WARRANT) _changeTheoryButton.SetActive(false);
+        else _changeTheoryButton.SetActive(true);
     }
 
     

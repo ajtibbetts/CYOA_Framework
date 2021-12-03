@@ -2770,6 +2770,8 @@ MonoBehaviour:
   _suspectMotiveText: {fileID: 2032667157904232070}
   _suspectOpportunityImage: {fileID: 8901810973089611961}
   _suspectOpportunityText: {fileID: 3908956845843185451}
+  _changeTheoryButton: {fileID: 8838654909897930131}
+  _requestButtonInfoText: {fileID: 2880255784150624999}
   _requestWarrantButton: {fileID: 2902138188999475133}
   _warrantRequestScreen: {fileID: 8833323960739056094}
   _codToggle: {fileID: 779999094045113489}

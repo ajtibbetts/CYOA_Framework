@@ -25,6 +25,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: abe9ac7a72c6c4b4e888c9167ff9d09f, type: 2}
   _startingCharacterProfiles:
   - {fileID: 11400000, guid: 4f61461d4a4b16140a4f5ea2f3414164, type: 2}
+  - {fileID: 11400000, guid: e85ebb3080915e8489fa48fdb9c62325, type: 2}
+  - {fileID: 11400000, guid: 96bea0cf881d37549a78131f09af38e5, type: 2}
   _availableCharacterProfiles:
   - {fileID: 11400000, guid: e85ebb3080915e8489fa48fdb9c62325, type: 2}
   - {fileID: 11400000, guid: 96bea0cf881d37549a78131f09af38e5, type: 2}
