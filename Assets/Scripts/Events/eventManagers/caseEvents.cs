@@ -35,6 +35,9 @@ public static class caseEvents
         eventsDictionary.Add("addLocation", AddNewLocation);
         eventsDictionary.Add("updateLocation", UpdateLocationStatus);
         eventsDictionary.Add("warrant", WarrantEvent);
+        eventsDictionary.Add("arrestSuspect", ArrestSuspect);
+        eventsDictionary.Add("getConfession", GetConfession);
+        eventsDictionary.Add("completeCase", CompleteCase);
     }
 
     public static void ProcessEvent(string eventName, string eventValue)
@@ -206,5 +209,19 @@ public static class caseEvents
             break;
         }
 
+    }
+
+    private static void ArrestSuspect(string eventValue = "")
+    {
+        PlayerCaseRecord.Instance.ArrestSuspect();
+    }
+
+    private static void GetConfession(string eventValue = "")
+    {
+        
+    }
+    private static void CompleteCase(string eventValue = "")
+    {
+        
     }
 }

@@ -584,4 +584,24 @@ public class PlayerCaseRecord : MonoBehaviour
     {
         return _hasArrestWarrant;
     }
+
+    public void ArrestSuspect()
+    {
+        caseStatus = CaseStatus.PENDING_CONFESSION;
+        OnCaseDataUpdated?.Invoke();
+    }
+
+    public void GetConfession()
+    {
+        caseStatus = CaseStatus.COMPLETE;
+        OnCaseDataUpdated?.Invoke();
+    }
+
+    public void CompleteCase()
+    {
+        Debug.Log("CASE RECORD ---- COMPLETEING CASE: " + activeCaseID);
+        PlayerProgressTracker.Instance.AddCaseRecordToHistory(this);
+        OnCaseDataUpdated?.Invoke();
+    }
+
 }
