@@ -19,6 +19,7 @@ public class CaseMenu : UIMenu
     [SerializeField] private GameObject profilesButton;
     [SerializeField] private GameObject suspectsButton;
     [SerializeField] private GameObject warrantButton;
+    [SerializeField] private GameObject notesButton;
     [SerializeField] private GameObject helpButton;
 
     [Header("Content Screen")]
@@ -30,6 +31,7 @@ public class CaseMenu : UIMenu
     public GameObject profilesScreen;
     public GameObject suspectsScreen;
     public GameObject warrantScreen;
+    public GameObject notesScreen;
     public GameObject helpScreen;
 
     // data managers
@@ -61,6 +63,7 @@ public class CaseMenu : UIMenu
         profilesScreen.SetActive(false);
         suspectsScreen.SetActive(false);
         warrantScreen.SetActive(false);
+        notesScreen.SetActive(false);
         helpScreen.SetActive(false);
 
         PlayerCaseRecord.OnCaseDataUpdated += UpdateActiveData;
@@ -77,7 +80,7 @@ public class CaseMenu : UIMenu
     {
         _caseSummaryManager = caseSummaryScreen.GetComponent<CaseSummaryScreen>();
         _caseSummaryManager.SetCaseRecord(_caseRecord);
-        CaseSummaryScreen.OnButtonPressed += JumpToScreenFromSubMenu;
+        // CaseSummaryScreen.OnButtonPressed += JumpToScreenFromSubMenu;
 
         _victimManager = victimDataScreen.GetComponent<VictimDataScreen>();
         _victimManager.SetCaseRecord(_caseRecord);
@@ -125,9 +128,11 @@ public class CaseMenu : UIMenu
         _profilesManager.UpdateData();
         SetActiveScreen(profilesScreen, profilesButton);
     }
-    public void OpenSuspectsScreen()
+    public void OpenSuspectsScreen(bool openToPrimary = false)
     {
         _suspectsManager.UpdateData();
+        if(openToPrimary)
+            _suspectsManager.UpdateSuspectView(_caseRecord.GetPrimarySuspect());
         SetActiveScreen(suspectsScreen, suspectsButton);
     }
     public void OpenWarrantScreen()
@@ -135,6 +140,12 @@ public class CaseMenu : UIMenu
         _warrantManager.UpdateData();
         SetActiveScreen(warrantScreen, warrantButton);
     }
+
+    public void OpenNotesScreen()
+    {
+        SetActiveScreen(notesScreen, notesButton);
+    }
+
     public void OpenHelpScreen()
     {
         SetActiveScreen(helpScreen, helpButton);
