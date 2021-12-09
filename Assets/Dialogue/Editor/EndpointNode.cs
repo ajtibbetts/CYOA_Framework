@@ -5,5 +5,6 @@ using UnityEditor.Experimental.GraphView;
 
 public class EndpointNode : DialogueNode
 {
-    public string exitText;
+    public string nodeLinkTagID;
+    public bool isLinkStart;
 }

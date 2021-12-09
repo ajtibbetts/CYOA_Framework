@@ -71,4 +71,9 @@ CheckNode #playerPropertyDataContainer Label{
     color:black;
 }
 
+EndpointNode #title 
+{
+    background-color:rgb(99, 0, 186)
+}
+
 

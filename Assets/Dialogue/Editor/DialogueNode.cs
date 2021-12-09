@@ -16,4 +16,6 @@ public class DialogueNode : Node
     public bool EntryPoint = false;
 
     public nodeType nodeType;
+
+    public bool autoProgress = false;
 }

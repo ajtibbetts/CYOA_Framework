@@ -191,7 +191,7 @@ public class DialogueParser : MonoBehaviour
             switch(nodeType)
             {
                 case nodeType.additiveDialogue:
-                    ProcessAdditiveParagraphNode(narrativeDataGUID, text, characterID);
+                    ProcessAdditiveParagraphNode(narrativeDataGUID, text, characterID, data.autoProgress);
                     PlayerProgressTracker.Instance.AddDialogueEntry(data);
                 break;
                 case nodeType.dialogueNode:
@@ -303,7 +303,7 @@ public class DialogueParser : MonoBehaviour
             controller.UIManager.initConfirmActionButton();
         }
 
-        private void ProcessAdditiveParagraphNode(string narrativeDataGUID, string text, string characterID)
+        private void ProcessAdditiveParagraphNode(string narrativeDataGUID, string text, string characterID, bool autoProgress)
         {
             // var choices = dialogue.NodeLinks.Where(x => x.BaseNodeGuid == narrativeDataGUID);
             // simply add the paragraph, "continue dialogue "button, and proceed to next node
@@ -312,8 +312,17 @@ public class DialogueParser : MonoBehaviour
 
             // add logic to create / call continue button here
 
-
-            UIManager.Instance.SetAdditiveDialogueState(); // UI will handle the rest from here.
+            if(!autoProgress)
+            {
+                // if no auto progress, create button for manual progress to next node
+                UIManager.Instance.SetAdditiveDialogueState(); 
+            }
+            else 
+            {
+                // otherwise auto go to next node.
+                ProceedToNextNode();
+            }
+            
         }
 
         private string GetReturnedText(string nodeGUID, string text)
@@ -550,8 +559,12 @@ public class DialogueParser : MonoBehaviour
 
         private void ProcessEndpointNode(string narrativeDataGUID)
         {
-            Debug.Log("End point reached.");
-            onDialogueReachedDeadEnd?.Invoke();
+            Debug.Log("End point reached. Jumping to start point.");
+            var tagID = dialogue.EndpointNodeData.Find(x => x.nodeGuid == narrativeDataGUID).nodeLinkTagID;
+            var startNodeGUID = dialogue.EndpointNodeData.Find(x => x.nodeLinkTagID == tagID && x.isLinkStart).nodeGuid;
+            var destinationNodeGUID = dialogue.NodeLinks.Find(x => x.BaseNodeGuid == startNodeGUID).TargetNodeGuid;
+            ProceedToNarrative(destinationNodeGUID);
+            // onDialogueReachedDeadEnd?.Invoke();
             return;
         }
 

@@ -372,7 +372,7 @@ public class UIManager : MonoBehaviour
         contentText.text += contentManager.parseContent(contentToAdd) + "\n";
 
         _contentParagraphs.Add(newParagraph);
-        SetPreviousParagraphsColor();
+        // SetPreviousParagraphsColor();
 
         CheckForAutoScroll();
     }
@@ -388,7 +388,7 @@ public class UIManager : MonoBehaviour
         portraitMgr.UpdatePreferredHeight();
 
         _contentParagraphs.Add(newPortraitParagraph);
-        SetPreviousParagraphsColor();
+        // SetPreviousParagraphsColor();
 
         // check for any additional UI messages and create content paragraph for those.
         if(_additionalUIMessages.Count > 0) CreateContentParagraph("");
@@ -450,7 +450,7 @@ public class UIManager : MonoBehaviour
         _additiveContinueButton.GetComponentInChildren<Button>().onClick.AddListener(delegate { CheckAdditiveState(); });
         _inAdditiveDialogueState = true;
 
-        
+        SetPreviousParagraphsColor();
     }
 
     private void SetPreviousParagraphsColor()
@@ -688,18 +688,4 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void initRollUI()
-    {
-        Debug.Log("UI MANAGER: Initializing roll UI.");
-    }
-    
-    public void initRollPassUI()
-    {
-        Debug.Log("UI MANAGER: Initializing roll PASS UI.");
-    }
-
-    public void initRollFailUI()
-    {
-        Debug.Log("UI MANAGER: Initializing roll FAIL UI.");
-    }
 }

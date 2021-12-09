@@ -89,7 +89,8 @@ public class GraphSaveUtility
                 DialogueText = dialogueNode.DialogueText,
                 Position = dialogueNode.GetPosition().position,
                 nodeType = dialogueNode.nodeType,
-                characterID = dialogueNode.characterID
+                characterID = dialogueNode.characterID,
+                autoProgress = dialogueNode.autoProgress
             });
 
             // check if this node is event node and add data to save
@@ -143,13 +144,14 @@ public class GraphSaveUtility
             }
 
             // check if the node is an endpoint
-            if(dialogueNode.DialogueText.Contains("ENDPOINT"))
+            if(dialogueNode.nodeType == nodeType.endpointNode)
             {
                 var endNode = (EndpointNode) dialogueNode;
                 dialogueContainer.EndpointNodeData.Add(new EndpointNodeData
                 {
                     nodeGuid = dialogueNode.GUID,
-                    exitText = endNode.exitText
+                    nodeLinkTagID = endNode.nodeLinkTagID,
+                    isLinkStart = endNode.isLinkStart
                 });
             }
 
@@ -267,12 +269,12 @@ public class GraphSaveUtility
                     _targetGraphView.AddElement(tempNode);
                 }
             }
-            else if(nodeData.DialogueText.Contains("ENDPOINT"))
+            else if(nodeData.nodeType == nodeType.endpointNode)
             {
                 var _endpointNodeData = _containerCache.EndpointNodeData.FirstOrDefault(x => x.nodeGuid == nodeData.Guid);
                 if(_endpointNodeData !=null)
                 {
-                    var tempNode = _targetGraphView.CreateEndpointNode(Vector2.zero, _endpointNodeData.exitText);
+                    var tempNode = _targetGraphView.CreateEndpointNode(Vector2.zero, _endpointNodeData.nodeLinkTagID, _endpointNodeData.isLinkStart);
                     tempNode.GUID = nodeData.Guid;
                     _targetGraphView.AddElement(tempNode);
                 }
@@ -281,7 +283,7 @@ public class GraphSaveUtility
             {
                 var isSpeaker = nodeData.characterID != null;
                 if(isSpeaker) isSpeaker = nodeData.characterID.Length > 0;
-                var tempNode = _targetGraphView.CreateAdditiveDialogueNode(nodeData.DialogueText, Vector2.zero, isSpeaker, nodeData.characterID);
+                var tempNode = _targetGraphView.CreateAdditiveDialogueNode(nodeData.DialogueText, Vector2.zero, isSpeaker, nodeData.characterID, nodeData.autoProgress);
                 tempNode.GUID = nodeData.Guid;
                 _targetGraphView.AddElement(tempNode);
             }
@@ -349,11 +351,11 @@ public class GraphSaveUtility
 
         for(var i = 0; i < Nodes.Count; i++)
         {
+            
             var connections = _containerCache.NodeLinks.Where(x => x.BaseNodeGuid==Nodes[i].GUID).ToList();
             for(var j = 0; j < connections.Count; j++)
             {
-                var targetNodeGuid = connections[j].TargetNodeGuid;
-                
+                var targetNodeGuid = connections[j].TargetNodeGuid;                
                 var targetNode = Nodes.First(x => x.GUID == targetNodeGuid);
 
                 if(targetNode != null) {
@@ -376,15 +378,28 @@ public class GraphSaveUtility
                     
                     
                     if(targetNode.inputContainer != null)
-                    {
+                    { 
+                        // Debug.Log("Linking Node " + connections[j].BaseNodeGuid );
                         LinkNodes(Nodes[i].outputContainer[j].Q<Port>(), (Port) targetNode.inputContainer[0]);
                     }
                     
 
+                    // Debug.Log("Setting Node Position "  + targetNode.GUID );
                     targetNode.SetPosition(new Rect( 
                         _containerCache.DialogueNodeData.First(x => x.Guid == targetNodeGuid).Position,
                         _targetGraphView.defaultNodeSize
                     ));
+
+                    // // special case for any start link nodes, as they are never 'targets' in the node tree
+                    if(Nodes[i].nodeType == nodeType.endpointNode && Nodes[i].DialogueText == "STARTLINK")
+                    {
+                        var nodePostion = _containerCache.DialogueNodeData.First(x => x.Guid == connections[j].BaseNodeGuid).Position;
+                        
+                        Nodes[i].SetPosition(new Rect(
+                            nodePostion,
+                            _targetGraphView.defaultNodeSize
+                        ));
+                    }
 
                 }
                 

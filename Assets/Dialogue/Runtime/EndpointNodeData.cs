@@ -5,5 +5,6 @@ using UnityEngine;
 public class EndpointNodeData
 {
     public string nodeGuid;
-    public string exitText;
+    public string nodeLinkTagID;
+    public bool isLinkStart;
 }

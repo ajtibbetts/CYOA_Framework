@@ -1,0 +1,107 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9837df7c010b3346bca580cac5bac11, type: 3}
+  m_Name: linkTest
+  m_EditorClassIdentifier: 
+  DialogueName: linkTest
+  NodeLinks:
+  - BaseNodeGuid: f328c720-112a-4b4f-abf2-92c0562fa2ef
+    PortName: Next
+    TargetNodeGuid: d42ac9fb-0aea-4c94-a736-eb12887acac2
+  - BaseNodeGuid: d42ac9fb-0aea-4c94-a736-eb12887acac2
+    PortName: don't loop
+    TargetNodeGuid: 5d9db79c-7a84-4fd4-bbe3-4ba2b71f8d2b
+  - BaseNodeGuid: d42ac9fb-0aea-4c94-a736-eb12887acac2
+    PortName: loop back
+    TargetNodeGuid: 674306d5-1bb9-462a-83e5-2c0bd6c3023a
+  - BaseNodeGuid: 5d9db79c-7a84-4fd4-bbe3-4ba2b71f8d2b
+    PortName: yes, end loop
+    TargetNodeGuid: 062ca3a3-bf37-459e-9307-b9a7e5643ab6
+  - BaseNodeGuid: 5d9db79c-7a84-4fd4-bbe3-4ba2b71f8d2b
+    PortName: actually, let's loop
+    TargetNodeGuid: b6439975-3cd4-4c3b-8d28-0765de4abace
+  - BaseNodeGuid: b6439975-3cd4-4c3b-8d28-0765de4abace
+    PortName: Output
+    TargetNodeGuid: fc063ae3-66f0-4358-983a-45d3f95b05e2
+  - BaseNodeGuid: f68127c0-3b7a-4256-87b1-a7b464d52dfd
+    PortName: Output
+    TargetNodeGuid: f5a1ea18-2ef0-4c47-9228-6503e64105b6
+  - BaseNodeGuid: f5a1ea18-2ef0-4c47-9228-6503e64105b6
+    PortName: Output
+    TargetNodeGuid: d42ac9fb-0aea-4c94-a736-eb12887acac2
+  DialogueNodeData:
+  - Guid: d42ac9fb-0aea-4c94-a736-eb12887acac2
+    characterID: 
+    DialogueText: 'this test will utilize link nodes to
+
+      jump to the graph.
+      2nd option will loop back here.'
+    Position: {x: 358, y: 100}
+    nodeType: 0
+    autoProgress: 0
+  - Guid: 674306d5-1bb9-462a-83e5-2c0bd6c3023a
+    characterID: 
+    DialogueText: ENDLINK
+    Position: {x: 746, y: 356}
+    nodeType: 3
+    autoProgress: 0
+  - Guid: 5d9db79c-7a84-4fd4-bbe3-4ba2b71f8d2b
+    characterID: 
+    DialogueText: you sure you don't want to loop?
+    Position: {x: 698, y: 115}
+    nodeType: 0
+    autoProgress: 0
+  - Guid: 062ca3a3-bf37-459e-9307-b9a7e5643ab6
+    characterID: 
+    DialogueText: okay, ending dialogue tree.
+    Position: {x: 1063, y: 76}
+    nodeType: 0
+    autoProgress: 0
+  - Guid: b6439975-3cd4-4c3b-8d28-0765de4abace
+    characterID: 
+    DialogueText: Sure, adding some text before looping.
+    Position: {x: 1063, y: 210}
+    nodeType: 5
+    autoProgress: 1
+  - Guid: fc063ae3-66f0-4358-983a-45d3f95b05e2
+    characterID: 
+    DialogueText: ENDLINK
+    Position: {x: 1369, y: 243}
+    nodeType: 3
+    autoProgress: 0
+  - Guid: f68127c0-3b7a-4256-87b1-a7b464d52dfd
+    characterID: 
+    DialogueText: STARTLINK
+    Position: {x: 77, y: 428}
+    nodeType: 3
+    autoProgress: 0
+  - Guid: f5a1ea18-2ef0-4c47-9228-6503e64105b6
+    characterID: 
+    DialogueText: Adding Text after link.
+    Position: {x: 243, y: 437}
+    nodeType: 5
+    autoProgress: 1
+  ExposedProperties: []
+  RollNodeData: []
+  DialogueCheckData: []
+  EventNodeData: []
+  CheckNodeData: []
+  EndpointNodeData:
+  - nodeGuid: 674306d5-1bb9-462a-83e5-2c0bd6c3023a
+    nodeLinkTagID: A
+    isLinkStart: 0
+  - nodeGuid: fc063ae3-66f0-4358-983a-45d3f95b05e2
+    nodeLinkTagID: A
+    isLinkStart: 0
+  - nodeGuid: f68127c0-3b7a-4256-87b1-a7b464d52dfd
+    nodeLinkTagID: A
+    isLinkStart: 1

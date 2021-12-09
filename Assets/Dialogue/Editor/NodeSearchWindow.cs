@@ -126,10 +126,15 @@ public class NodeSearchWindow : ScriptableObject, ISearchWindowProvider
                 {
                     userData = new EventNode(), level = 2
                 },
-            new SearchTreeEntry(new GUIContent("ENDPOINT Node",_indentationIcon))
-            {
-                userData = new EndpointNode(), level = 1
-            }
+            new SearchTreeGroupEntry(new GUIContent("Link Nodes"), 1),
+                new SearchTreeEntry(new GUIContent("ENDPOINT Node",_indentationIcon))
+                {
+                    userData = new EndpointNode(), level = 2
+                },
+                new SearchTreeEntry(new GUIContent("STARTPOINT Node",_indentationIcon))
+                {
+                    userData = new EndpointNode(), level = 2
+                },
        };
        return tree;
    }
@@ -144,7 +149,10 @@ public class NodeSearchWindow : ScriptableObject, ISearchWindowProvider
         {
             
             case EndpointNode endpointNode:
-                _graphView.CreateNode("ENDPOINT",localMousePosition);
+                if(nodeName == "STARTPOINT Node")
+                    _graphView.CreateNode("STARTPOINT", localMousePosition);
+                else 
+                    _graphView.CreateNode("ENDPOINT",localMousePosition);
                 return true;
             case EventNode eventNode:
                 eventType eventType;

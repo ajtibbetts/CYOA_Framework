@@ -137,7 +137,10 @@ public class DialogueGraphView : GraphView
                 }
             break;
             case "ENDPOINT":
-                AddElement(CreateEndpointNode(position));
+                AddElement(CreateEndpointNode(position,"Destination tag ID", false));
+            break;
+            case "STARTPOINT":
+                AddElement(CreateEndpointNode(position,"Tag ID", true));
             break;
             default:
             break;
@@ -145,32 +148,48 @@ public class DialogueGraphView : GraphView
         
     }
 
-    public EndpointNode CreateEndpointNode(Vector2 position, string _exitText = ""){
+    public EndpointNode CreateEndpointNode(Vector2 position, string linkTagID = "", bool linkStart = false){
 
         var node = new EndpointNode
         {
             title = "END",
             GUID = Guid.NewGuid().ToString(),
             DialogueText = "ENDPOINT",
-            exitText = _exitText,
+            nodeLinkTagID = linkTagID,
+            isLinkStart = linkStart,
             nodeType = nodeType.endpointNode
         };
-
-        var generatedPort = GeneratePort(node, Direction.Input);
-        generatedPort.portName = "Input";
-        node.inputContainer.Add(generatedPort);
         node.styleSheets.Add(Resources.Load<StyleSheet>("Node"));
+
+        if(!linkStart)
+        {
+            var generatedPort = GeneratePort(node, Direction.Input);
+            generatedPort.portName = "Input";
+            node.inputContainer.Add(generatedPort);
+            node.title = "END Link Node";
+            node.DialogueText = "ENDLINK";
+        }
+        else
+        {
+            var generatedPort = GeneratePort(node, Direction.Output);
+            generatedPort.portName = "Output";
+            node.outputContainer.Add(generatedPort);
+            node.title = "START Link Node";
+            node.DialogueText = "STARTLINK";
+        }
+        
+        
 
         var textField = new TextField(string.Empty){
             multiline = true
         };
         textField.RegisterValueChangedCallback(evt => 
         { 
-            node.exitText = evt.newValue;
+            node.nodeLinkTagID = evt.newValue;
            // dialogueNode.title = evt.newValue;
         });
-        textField.SetValueWithoutNotify(node.exitText);
-        node.mainContainer.Add(new Label("Added flavor text."));
+        textField.SetValueWithoutNotify(node.nodeLinkTagID);
+        node.mainContainer.Add(new Label("Node Link Tag ID:"));
         node.mainContainer.Add(textField);
 
         node.RefreshExpandedState();
@@ -294,7 +313,7 @@ public class DialogueGraphView : GraphView
         return dialogueNode;
     }
 
-    public DialogueNode CreateAdditiveDialogueNode(string dialogueText, Vector2 position, bool isSpeaker = false, string charID = null)
+    public DialogueNode CreateAdditiveDialogueNode(string dialogueText, Vector2 position, bool isSpeaker = false, string charID = null, bool autoProg = false)
     {
         Debug.Log("Creating additive dualogue node");
         var dialogueNode = new DialogueNode
@@ -303,7 +322,8 @@ public class DialogueGraphView : GraphView
             GUID = Guid.NewGuid().ToString(),
             DialogueText = dialogueText,
             nodeType = nodeType.additiveDialogue,
-            characterID = charID
+            characterID = charID,
+            autoProgress = autoProg
         };
 
         // add input and style sheet
@@ -348,6 +368,19 @@ public class DialogueGraphView : GraphView
         textField.SetValueWithoutNotify(dialogueNode.DialogueText);
         dialogueNode.mainContainer.Add(new Label("Dialogue Text:"));
         dialogueNode.mainContainer.Add(textField);
+
+        // add autoprogress
+        var toggleAutoProgress = new Toggle 
+        {
+            name = "autoProgress?",
+            value = autoProg
+        };
+        toggleAutoProgress.RegisterValueChangedCallback(evt => dialogueNode.autoProgress = evt.newValue);
+        toggleAutoProgress.SetValueWithoutNotify(dialogueNode.autoProgress);
+        var toggleContainer = new VisualElement();
+        toggleContainer.Add(new Label("Auto Progress to next Node?"));
+        toggleContainer.Add(toggleAutoProgress);
+        dialogueNode.mainContainer.Add(toggleContainer);
 
 
         dialogueNode.RefreshExpandedState();

@@ -502,7 +502,9 @@ MonoBehaviour:
   dialogueOnNew:
   - conditions: []
     dialogue: {fileID: 11400000, guid: 8cf3ece780864ce4ea0f3507308b068e, type: 2}
-  dialogueOnReturn: []
+  dialogueOnReturn:
+  - conditions: []
+    dialogue: {fileID: 11400000, guid: a2d6c5f1d41749f4eaf31c959f2dfa44, type: 2}
   dialogueOnExit: []
   displayTextOnNew:
   - conditions: []

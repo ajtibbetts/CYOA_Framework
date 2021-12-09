@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9837df7c010b3346bca580cac5bac11, type: 3}
+  m_Name: autoTest
+  m_EditorClassIdentifier: 
+  DialogueName: autoTest
+  NodeLinks:
+  - BaseNodeGuid: 8fd6e37b-450b-48f4-abae-1148737a6517
+    PortName: Next
+    TargetNodeGuid: 742887ef-6fcf-4335-b358-21b940c2edb9
+  - BaseNodeGuid: 742887ef-6fcf-4335-b358-21b940c2edb9
+    PortName: Output
+    TargetNodeGuid: 414040d7-a649-4a93-a038-73082ab2e7d9
+  DialogueNodeData:
+  - Guid: 742887ef-6fcf-4335-b358-21b940c2edb9
+    characterID: 
+    DialogueText: This text will be added to the next node automatically.
+    Position: {x: 283, y: 217}
+    nodeType: 5
+    autoProgress: 1
+  - Guid: 414040d7-a649-4a93-a038-73082ab2e7d9
+    characterID: 
+    DialogueText: 
+    Position: {x: 676, y: 217}
+    nodeType: 0
+    autoProgress: 0
+  ExposedProperties: []
+  RollNodeData: []
+  DialogueCheckData: []
+  EventNodeData: []
+  CheckNodeData: []
+  EndpointNodeData: []
