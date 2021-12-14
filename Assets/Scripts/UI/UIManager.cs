@@ -632,6 +632,10 @@ public class UIManager : MonoBehaviour
         contentText.text += contentManager.parseContent(content) + "\n";
     }
 
+    public void addGenericMessageToText(string content)
+    {
+        _additionalUIMessages.Add(contentManager.parseContent(content) + "\n");
+    }
     public void addToContentText(string content)
     {
         Debug.Log("UI MANAGER ----- adding to content text list" + content);

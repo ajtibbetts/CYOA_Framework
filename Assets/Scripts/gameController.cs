@@ -64,15 +64,18 @@ public class gameController : MonoBehaviour
 
     public void StartGame()
     {
+        // string levelName = "testLevel";
+        string levelName = "case00_diner";
+        
         // test player saving
         //player.LoadPlayer();
         if(_progressTracker.CurrentScene == null)
         {
             Debug.Log("GAME CONTROLLER ---- Current scene is not saved to player starting fresh.");
-             _progressTracker.CurrentScene = "testLevel";
+             _progressTracker.CurrentScene = levelName;
             // player._player.CurrentScene = "testLevel";
             _progressTracker.CurrentAreaName = "detectiveHQ";
-            SubSceneManager.AddScene("testLevel");
+            SubSceneManager.AddScene(levelName);
         }
         else
         {
@@ -167,6 +170,7 @@ public class gameController : MonoBehaviour
         else {
             Debug.Log("GAME CONTROLLER ---- NO DIALOGUE FOUND ON THIS INTERACTIVE OBJECT");
             SetGAMESTATE(GAMESTATE.WORLDNAVIGATION);
+            worldNavigator.ActivateNoDialogueActionOnNavObject();
         }
     }
 

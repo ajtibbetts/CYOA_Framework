@@ -58,6 +58,8 @@ public abstract class NavObject : MonoBehaviour
         }
     }
 
+    public abstract void ActivateNoDialogueAction();
+
     public virtual void AddNavObjectToPlayer()
     {
         AddLocalProperty("hasPlayerVisited", "true");

@@ -94,6 +94,12 @@ public class WorldNavObject : NavObject
         SetupChildObjects();
     }
 
+    public override void ActivateNoDialogueAction()
+    {
+        
+
+    }
+
     // public override void AddNavObjectToPlayer()
     // {
     //     base.AddNavObjectToPlayer();

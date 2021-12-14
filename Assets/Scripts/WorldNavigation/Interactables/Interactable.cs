@@ -44,6 +44,8 @@ public abstract class Interactable : NavObject
         // INIT DIALOGUE HERE
     }
 
+    
+
     // public override void AddNavObjectToPlayer()
     // {
     //     base.AddNavObjectToPlayer();

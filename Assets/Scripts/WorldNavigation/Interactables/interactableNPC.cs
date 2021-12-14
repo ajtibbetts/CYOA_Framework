@@ -25,6 +25,11 @@ public class interactableNPC : Interactable
 
     }
 
+    public override void ActivateNoDialogueAction()
+    {
+        
+    }
+
 
     public CharacterProfileData GetProfileData()
     {

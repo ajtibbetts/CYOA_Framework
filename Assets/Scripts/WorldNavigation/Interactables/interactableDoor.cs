@@ -9,6 +9,7 @@ public class interactableDoor : Interactable
     private WorldNavObject destinationObject;
     [SerializeField]
     private string destinationLevelName;
+    [SerializeField] private string doorTravelText;
     
     // Start is called before the first frame update
     void Start()
@@ -52,10 +53,20 @@ public class interactableDoor : Interactable
         }
     }
 
+    public override void ActivateNoDialogueAction()
+    {
+        if(destinationObject != null)
+            SwitchToNavObject();
+        else if (destinationLevelName != null || destinationLevelName.Length < 1)
+            SwitchToLevel();
+
+    }
+
     private void SwitchToNavObject()
     {
         if(destinationObject != null)
         {
+            addDoorExitText();
             WorldNavigator.NavigateToNewWorldNavObject(destinationObject);
         }
         else
@@ -68,6 +79,7 @@ public class interactableDoor : Interactable
     {
         if(destinationLevelName != null || destinationLevelName.Length < 1)
         {
+            addDoorExitText();
             DeactivateInteractable();
             gameController.Instance.SwitchToLevel(destinationLevelName);
         }
@@ -75,6 +87,11 @@ public class interactableDoor : Interactable
         {
             Debug.Log("DOOR ERROR ---- NO DESTINATION OBJECT SET. CANNOT LOAD NEW LEVEL.");
         }
-        
+    }
+
+    private void addDoorExitText()
+    {
+        if(doorTravelText == null) return;
+        else if(doorTravelText.Length > 1) UIManager.Instance.addGenericMessageToText(doorTravelText);
     }
 }

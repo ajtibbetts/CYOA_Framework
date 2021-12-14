@@ -266,8 +266,7 @@ MonoBehaviour:
     eventValue: 
   conditionalEvents: []
   _additionalDialogues: []
-  interactiveDialogue: {fileID: 11400000, guid: 0cbe0abfb22ce6541b0d222dd49e5082,
-    type: 2}
+  interactiveDialogue: {fileID: 0}
   buttonTextOnNew:
   - conditions: []
     displayText: Use this door for first time.
@@ -276,6 +275,7 @@ MonoBehaviour:
     displayText: Use this door again.
   destinationObject: {fileID: 1093402700}
   destinationLevelName: 
+  doorTravelText: You enter the door into the second area.
 --- !u!1 &383172948
 GameObject:
   m_ObjectHideFlags: 0
@@ -739,6 +739,7 @@ MonoBehaviour:
     displayText: Go to starting area again.
   destinationObject: {fileID: 564815491}
   destinationLevelName: diner
+  doorTravelText: 
 --- !u!1 &1905155657
 GameObject:
   m_ObjectHideFlags: 0
@@ -886,3 +887,4 @@ MonoBehaviour:
     displayText: Return to next level.
   destinationObject: {fileID: 0}
   destinationLevelName: testLevel_2
+  doorTravelText: 

@@ -285,4 +285,9 @@ public class WorldNavigator : MonoBehaviour
         }
     }
 
+    public void ActivateNoDialogueActionOnNavObject()
+    {
+        _activeNavObject.ActivateNoDialogueAction();
+    }
+
 }
