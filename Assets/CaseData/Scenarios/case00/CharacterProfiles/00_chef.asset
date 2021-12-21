@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a810518b47780074db1dc1d8603dbf16, type: 3}
+  m_Name: 00_chef
+  m_EditorClassIdentifier: 
+  _characterID: 00chef
+  _characterType: 1
+  _characterName:
+    propertyValue: Joard Ohxum
+    startAsDiscovered: 1
+  _portrait:
+    portrait:
+      portraitSprite: {fileID: 21300000, guid: 99f6518e874870143813bb26b7872308, type: 3}
+      thumbNailOffsetX: 0
+      thumbNailOffsetY: 0
+    startAsDiscovered: 1
+  thumbNailOffsetX: 0
+  thumbNailOffsetY: 0
+  _age:
+    propertyValue: 42
+    startAsDiscovered: 1
+  _occupation:
+    propertyValue: Chef
+    startAsDiscovered: 1
+  _residence:
+    propertyValue: 10024 14th Ave S.
+    startAsDiscovered: 1
+  _summary:
+    propertyValue: Chef at the diner.
+    startAsDiscovered: 1
+  _relationshipToVictim:
+    propertyValue: Worked for the victim at the diner.
+    startAsDiscovered: 1
+  _additionalNotes: []
+  AsCulpritCompleteResponse: 
+  AsCulpritPartialResponse: 
+  AsInnocentResponse: The chef certainly had motive, but I don't think he did it.
+    Doesn't fit the full profile.
+  HasAlibi: 0
+  AlibiText: 

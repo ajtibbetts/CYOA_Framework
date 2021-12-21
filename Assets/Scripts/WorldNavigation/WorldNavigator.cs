@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using globalDataTypes;
 using CaseDataObjects;
+using Newtonsoft.Json;
 
 public class WorldNavigator : MonoBehaviour
 {
@@ -76,7 +77,8 @@ public class WorldNavigator : MonoBehaviour
             //     Debug.Log($"World object[{i}] name: " + worldObjects[i].Name);
             // }
 
-            var rootObject = worldObjects[0].GetComponent<Transform>().root;
+            // var rootObject = worldObjects[0].GetComponent<Transform>().root;
+            var rootObject = worldObjects.Find(x => x.tag == "startingNavObject");
             Debug.Log("WORLD NAVIGATOR ---- Root object in this scene (top of hierarchy): " + rootObject.name);
             ActiveWorldNavObject = rootObject.GetComponent<WorldNavObject>();
             ActiveWorldNavObject.ActivateNavObject();
@@ -124,8 +126,10 @@ public class WorldNavigator : MonoBehaviour
     {
         try
         {
-            var serializedParent = Newtonsoft.Json.JsonConvert.SerializeObject(_activeNavObject); 
-            interactableNPC npcObject  = Newtonsoft.Json.JsonConvert.DeserializeObject<interactableNPC>(serializedParent);
+            var serializedParent = JsonConvert.SerializeObject(_activeNavObject,
+            Formatting.None,
+            new JsonSerializerSettings(){ ReferenceLoopHandling = ReferenceLoopHandling.Ignore}); 
+            interactableNPC npcObject  = JsonConvert.DeserializeObject<interactableNPC>(serializedParent);
             return npcObject.GetProfileData();
         }
         catch (Exception e)

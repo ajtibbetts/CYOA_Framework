@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9837df7c010b3346bca580cac5bac11, type: 3}
+  m_Name: chef_01
+  m_EditorClassIdentifier: 
+  DialogueName: cases/00/chef_01
+  NodeLinks:
+  - BaseNodeGuid: 569ded50-8fdb-43f8-b526-761793608848
+    PortName: Next
+    TargetNodeGuid: 2898a35a-4fe4-40cf-ab7f-d925bd29e55f
+  DialogueNodeData:
+  - Guid: 2898a35a-4fe4-40cf-ab7f-d925bd29e55f
+    characterID: self
+    DialogueText: I am the chef. Helllooooo Cheffy chef chef.
+    Position: {x: 349, y: 189}
+    nodeType: 0
+    autoProgress: 0
+  ExposedProperties: []
+  RollNodeData: []
+  DialogueCheckData: []
+  EventNodeData: []
+  CheckNodeData: []
+  EndpointNodeData: []

@@ -345,6 +345,22 @@ public class DialogueParser : MonoBehaviour
             {
                 if(characterID.Length > 0)
                 {
+                    // check if charid is the local self profile attached to nav object
+                    if(characterID == "self")
+                    {
+                        var selfProfile = interactableNPC.GetActiveNPCProfile();
+                        if(selfProfile != null)
+                        {
+                            var speakerName = $"<style=h3>{selfProfile.GetCharacterName()}</style>\n";
+                            UIManager.Instance.CreateContentPortraitParagraph(speakerName + text, selfProfile.GetPortrait().portraitSprite);
+                            return;
+                        }
+                        else
+                        {
+                            Debug.LogError("DIALOGUE PARSER --- Speaker node had 'self' but no character profile found on attached npc object.");
+                        }
+                    }
+                    
                     // first check for common speakers
                     if(_commonSpeakers.Exists(x => x.characterID == characterID))
                     {

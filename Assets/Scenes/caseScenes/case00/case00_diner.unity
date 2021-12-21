@@ -123,6 +123,232 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &4123478
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4123479}
+  - component: {fileID: 4123480}
+  m_Layer: 0
+  m_Name: doorToBackHallway
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4123479
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4123478}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 606588346}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4123480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4123478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25994b630f2943c4686b81522afb57ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: eb08bd8d-37c7-486c-ad96-d1576a0849ed
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  interactiveDialogue: {fileID: 0}
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Take the door into the back hallway.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Take the door into the back hallway again.
+  destinationObject: {fileID: 512149054}
+  destinationLevelName: 
+  doorTravelText: You head out from the kitchen into the back hallway.
+--- !u!1 &37247229
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 37247230}
+  - component: {fileID: 37247231}
+  m_Layer: 0
+  m_Name: behindCounter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &37247230
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37247229}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 453281043}
+  - {fileID: 284666276}
+  m_Father: {fileID: 197374710}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &37247231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37247229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: 4ece2557-eb4a-458c-970b-ef68aa973514
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  ChildNavObjects: []
+  ChildInteractiveObjects: []
+  dialogueOnNew: []
+  dialogueOnReturn: []
+  dialogueOnExit: []
+  displayTextOnNew:
+  - conditions: []
+    displayText: You move behind the front dining counter for a better look.
+  displayTextOnReturn:
+  - conditions: []
+    displayText: You move behind the front dining counter once more for another look.
+  displayTextOnExit: []
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Head behind the front dining counter.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Head behind the front dining counter again.
+  buttonTextAsParent:
+  - conditions: []
+    displayText: Move back to behind the dining counter.
+--- !u!1 &59553380
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 59553381}
+  - component: {fileID: 59553382}
+  m_Layer: 0
+  m_Name: grillArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &59553381
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 59553380}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 606588346}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &59553382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 59553380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: 9d7f51a0-3e31-408c-a874-d80f04ef6281
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  ChildNavObjects: []
+  ChildInteractiveObjects: []
+  dialogueOnNew: []
+  dialogueOnReturn: []
+  dialogueOnExit: []
+  displayTextOnNew:
+  - conditions: []
+    displayText: As you move into the grill area, you smell stuff.
+  displayTextOnReturn:
+  - conditions: []
+    displayText: You head back into the grill area for another look.
+  displayTextOnExit: []
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Look over the area where the grills are.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Tale another look at the grill area.
+  buttonTextAsParent: []
 --- !u!1 &73764604
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,7 +360,7 @@ GameObject:
   - component: {fileID: 73764606}
   - component: {fileID: 73764605}
   m_Layer: 0
-  m_Name: dinerEntrance
+  m_Name: dinerEntranceArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -195,10 +421,1384 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1216158712}
+  - {fileID: 197374710}
+  - {fileID: 977126309}
+  - {fileID: 1847463372}
   - {fileID: 1655679403}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &182954373
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 182954374}
+  - component: {fileID: 182954375}
+  m_Layer: 0
+  m_Name: doorToBackAlley
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &182954374
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 182954373}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 512149055}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &182954375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 182954373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25994b630f2943c4686b81522afb57ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: 15496c16-ad8a-4127-a158-df240596e578
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  interactiveDialogue: {fileID: 0}
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Take the back door into the alley.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Take the back door into the alley again.
+  destinationObject: {fileID: 1291846939}
+  destinationLevelName: 
+  doorTravelText: You head out through the back door and into the back alley area.
+--- !u!1 &197374709
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 197374710}
+  - component: {fileID: 197374711}
+  m_Layer: 0
+  m_Name: diningCounter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &197374710
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197374709}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 37247230}
+  m_Father: {fileID: 73764606}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &197374711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197374709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: 726e0927-3188-44f7-933b-1d42f1a6994d
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  ChildNavObjects: []
+  ChildInteractiveObjects: []
+  dialogueOnNew: []
+  dialogueOnReturn: []
+  dialogueOnExit: []
+  displayTextOnNew:
+  - conditions: []
+    displayText: You head towards the dining counter.
+  displayTextOnReturn:
+  - conditions: []
+    displayText: You investigate the dining counter again.
+  displayTextOnExit: []
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Investigate the front dining counter.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Check out the front dining counter again.
+  buttonTextAsParent:
+  - conditions: []
+    displayText: Back to the dining counter area.
+--- !u!1 &267003592
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 267003594}
+  - component: {fileID: 267003593}
+  m_Layer: 0
+  m_Name: backStorageArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &267003593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267003592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: 3d383aef-d102-4d24-bf5e-3e16deabe51a
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  ChildNavObjects: []
+  ChildInteractiveObjects: []
+  dialogueOnNew: []
+  dialogueOnReturn: []
+  dialogueOnExit: []
+  displayTextOnNew:
+  - conditions: []
+    displayText: The main storage area is around you.  There is food stored on the
+      shelves.  There is a walk-in freezer in the back, and what looks to be a small
+      utility room to the side. A breaker box is posted along the far wall.
+  displayTextOnReturn:
+  - conditions: []
+    displayText: Back in the rear storage area, you once again see the food shelves
+      around you.  The walk-in freezer is situated along the back wall, while the
+      utility room sits through a door to the side. The breaker box rests on the
+      opposite wall.
+  displayTextOnExit: []
+  buttonTextOnNew: []
+  buttonTextOnReturn: []
+  buttonTextAsParent:
+  - conditions: []
+    displayText: Return to the main storage area.
+--- !u!4 &267003594
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267003592}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1789078227}
+  - {fileID: 1057785751}
+  - {fileID: 1677942936}
+  - {fileID: 664453943}
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &284666275
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 284666276}
+  - component: {fileID: 284666277}
+  m_Layer: 0
+  m_Name: doorToKichen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &284666276
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284666275}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 37247230}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &284666277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284666275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25994b630f2943c4686b81522afb57ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: f7faa583-c59b-47ae-b66e-c5c63729cec0
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  interactiveDialogue: {fileID: 0}
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Head through the door to the back kitchen.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Head back into the kitchen.
+  destinationObject: {fileID: 606588345}
+  destinationLevelName: 
+  doorTravelText: You move through the swinging door into the back kitchen.
+--- !u!1 &339725416
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 339725417}
+  - component: {fileID: 339725418}
+  m_Layer: 0
+  m_Name: npc-victimsBody
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &339725417
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339725416}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1034028600}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &339725418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339725416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 463fe99272a841f488faa5357efc84bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: aa4558ff-606a-40af-bc89-b387aa951d8a
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  interactiveDialogue: {fileID: 11400000, guid: 15bb3dfb14cc02c4b96d690edc62b12d,
+    type: 2}
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Examine the victim's body.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Examine the victim's body again.
+  _characterProfile: {fileID: 0}
+--- !u!1 &453281042
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 453281043}
+  - component: {fileID: 453281044}
+  m_Layer: 0
+  m_Name: orderUpWindow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &453281043
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453281042}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 37247230}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &453281044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453281042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: 6ca46f27-5109-42f1-86ab-db16458bbbf6
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  ChildNavObjects: []
+  ChildInteractiveObjects: []
+  dialogueOnNew: []
+  dialogueOnReturn: []
+  dialogueOnExit: []
+  displayTextOnNew:
+  - conditions: []
+    displayText: You take a closer look at the order up window, connecting the dining
+      area to the back kitchen.
+  displayTextOnReturn:
+  - conditions: []
+    displayText: You take another look at the order up window.
+  displayTextOnExit: []
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Take a closer look at the order up window.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Take a closer look at the order up window again.
+  buttonTextAsParent:
+  - conditions: []
+    displayText: Back to the order up window.
+--- !u!1 &512149053
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 512149055}
+  - component: {fileID: 512149054}
+  m_Layer: 0
+  m_Name: backHallwayArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &512149054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512149053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: 48b8e207-0a8d-4e3d-9dc4-365438255c10
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  ChildNavObjects: []
+  ChildInteractiveObjects: []
+  dialogueOnNew: []
+  dialogueOnReturn: []
+  dialogueOnExit: []
+  displayTextOnNew:
+  - conditions: []
+    displayText: You find yourself in the back hallway.  It looks like this is where
+      the manager's office is located.  There is a door in the back that likely leads
+      to the rear alley, a door to the kitchen, and a door to the front side hallway.
+  displayTextOnReturn:
+  - conditions: []
+    displayText: 'You find yourself in the back hallway once again. '
+  displayTextOnExit: []
+  buttonTextOnNew: []
+  buttonTextOnReturn: []
+  buttonTextAsParent:
+  - conditions: []
+    displayText: Return to the back hallway.
+--- !u!4 &512149055
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512149053}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1034028600}
+  - {fileID: 1409377691}
+  - {fileID: 1460046505}
+  - {fileID: 182954374}
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &606588344
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 606588346}
+  - component: {fileID: 606588345}
+  m_Layer: 0
+  m_Name: backKitchenArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &606588345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606588344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: 6e201134-13ba-4d90-bf3a-2f9fdb10da90
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  ChildNavObjects: []
+  ChildInteractiveObjects: []
+  dialogueOnNew: []
+  dialogueOnReturn: []
+  dialogueOnExit: []
+  displayTextOnNew:
+  - conditions: []
+    displayText: You move into the back kitchen of the diner.
+  displayTextOnReturn:
+  - conditions: []
+    displayText: You move back into the back kitchen of the diner once again.
+  displayTextOnExit: []
+  buttonTextOnNew: []
+  buttonTextOnReturn: []
+  buttonTextAsParent:
+  - conditions: []
+    displayText: Head back to the main kitchen area.
+--- !u!4 &606588346
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606588344}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 59553381}
+  - {fileID: 1004334264}
+  - {fileID: 1038563099}
+  - {fileID: 681611569}
+  - {fileID: 4123479}
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &664453942
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 664453943}
+  - component: {fileID: 664453944}
+  m_Layer: 0
+  m_Name: doorToKichen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &664453943
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 664453942}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 267003594}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &664453944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 664453942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25994b630f2943c4686b81522afb57ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: 1ee11868-5835-47ba-8646-a15690add2ff
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  interactiveDialogue: {fileID: 0}
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Head back to the kitchen.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Head back to the kitchen.
+  destinationObject: {fileID: 606588345}
+  destinationLevelName: 
+  doorTravelText: You move out from the storage area towards the kitchen.
+--- !u!1 &681611568
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 681611569}
+  - component: {fileID: 681611570}
+  m_Layer: 0
+  m_Name: doorToBehindServingCounter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &681611569
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 681611568}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 606588346}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &681611570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 681611568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25994b630f2943c4686b81522afb57ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: de641be3-883f-4fec-820d-c9ef798919d3
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  interactiveDialogue: {fileID: 0}
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Head back into the front serving area.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Head back into the front serving again.
+  destinationObject: {fileID: 37247231}
+  destinationLevelName: 
+  doorTravelText: You move back into the serving area through the swining door, leaving
+    the kitchen.
+--- !u!1 &756464514
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 756464515}
+  - component: {fileID: 756464516}
+  m_Layer: 0
+  m_Name: bathroomArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &756464515
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756464514}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1843794451}
+  - {fileID: 1300732110}
+  m_Father: {fileID: 896055593}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &756464516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756464514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: ab1c1c81-b73e-419d-8b76-2fb0a3de0b85
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  ChildNavObjects: []
+  ChildInteractiveObjects: []
+  dialogueOnNew: []
+  dialogueOnReturn: []
+  dialogueOnExit: []
+  displayTextOnNew:
+  - conditions: []
+    displayText: You move into the bathroom alcove. There are two bathroom doors
+      on either side.  Both look to be unisex bathrooms.
+  displayTextOnReturn:
+  - conditions: []
+    displayText: You move back into the bathroom alcove, where two bathroom door
+      entrances are visible to you.
+  displayTextOnExit: []
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Head to the bathroom alcove.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Head to the bathroom alcove again.
+  buttonTextAsParent:
+  - conditions: []
+    displayText: Return to the bathroom alcove area.
+--- !u!1 &896055591
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 896055593}
+  - component: {fileID: 896055592}
+  m_Layer: 0
+  m_Name: sideHallwayArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &896055592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 896055591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: 92bd4824-b65f-42a5-a3f5-ba59b5961e45
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  ChildNavObjects: []
+  ChildInteractiveObjects: []
+  dialogueOnNew: []
+  dialogueOnReturn: []
+  dialogueOnExit: []
+  displayTextOnNew:
+  - conditions: []
+    displayText: 'The side hallway is laid out before you.  There is an alcove on
+      the southern wall where the bathrooms are located, and another door on the
+      far end that leads to the back hallway.
+
+      There is also a single door
+      on the far wall that looks to be a janitor''s closet.'
+  displayTextOnReturn:
+  - conditions: []
+    displayText: 'The side hallway is laid out before you once more.  There is an
+      alcove on the southern wall where the bathrooms are located, and another door
+      on the far end that leads to the back hallway.
+
+      The janitor''s closet
+      sits along the far wall.'
+  displayTextOnExit: []
+  buttonTextOnNew: []
+  buttonTextOnReturn: []
+  buttonTextAsParent:
+  - conditions: []
+    displayText: Return to the main hallway.
+--- !u!4 &896055593
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 896055591}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1756645382}
+  - {fileID: 756464515}
+  - {fileID: 1161963489}
+  - {fileID: 917393144}
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &917393143
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 917393144}
+  - component: {fileID: 917393145}
+  m_Layer: 0
+  m_Name: doorToBackHallway
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &917393144
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917393143}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 896055593}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &917393145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917393143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25994b630f2943c4686b81522afb57ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: b6eca494-4c48-472e-b584-102170fa77c7
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  interactiveDialogue: {fileID: 0}
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Take the door into the back hallway.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Take the door into the back hallway again.
+  destinationObject: {fileID: 512149054}
+  destinationLevelName: 
+  doorTravelText: You head into the back hallway through the rear door.
+--- !u!1 &977126308
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 977126309}
+  - component: {fileID: 977126310}
+  m_Layer: 0
+  m_Name: boothSeating
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &977126309
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 977126308}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 73764606}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &977126310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 977126308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: 3e18e8aa-b6da-49f1-889c-c3b6535ed6b9
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  ChildNavObjects: []
+  ChildInteractiveObjects: []
+  dialogueOnNew: []
+  dialogueOnReturn: []
+  dialogueOnExit: []
+  displayTextOnNew:
+  - conditions: []
+    displayText: You investigate the seating booths within the front area.
+  displayTextOnReturn:
+  - conditions: []
+    displayText: You return to the booths in the seating area for another look.
+  displayTextOnExit: []
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Investigate the seating area.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Investigate the seating area again.
+  buttonTextAsParent:
+  - conditions: []
+    displayText: Return to the seating area.
+--- !u!1 &1004334263
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1004334264}
+  - component: {fileID: 1004334265}
+  m_Layer: 0
+  m_Name: prepTable
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1004334264
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1004334263}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 606588346}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1004334265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1004334263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: 31ca3469-4a47-421e-90a0-f43f22e89eb2
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  ChildNavObjects: []
+  ChildInteractiveObjects: []
+  dialogueOnNew: []
+  dialogueOnReturn: []
+  dialogueOnExit: []
+  displayTextOnNew:
+  - conditions: []
+    displayText: Moving to the prep table, you see knives and stuff about.
+  displayTextOnReturn:
+  - conditions: []
+    displayText: Moving to the prep table again, you see many of the same things
+      you saw previously.
+  displayTextOnExit: []
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Check out the prepping table.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Look over the prepping table once more.
+  buttonTextAsParent: []
+--- !u!1 &1034028599
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1034028600}
+  - component: {fileID: 1034028601}
+  m_Layer: 0
+  m_Name: managersOffice
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1034028600
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034028599}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1357631398}
+  - {fileID: 339725417}
+  m_Father: {fileID: 512149055}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1034028601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034028599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: e6131ab5-5041-4a70-bba9-3c50ae160e6f
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  ChildNavObjects: []
+  ChildInteractiveObjects: []
+  dialogueOnNew: []
+  dialogueOnReturn: []
+  dialogueOnExit: []
+  displayTextOnNew:
+  - conditions: []
+    displayText: You step into the manager's office, where the deceased met their
+      end.
+  displayTextOnReturn:
+  - conditions: []
+    displayText: You step into the manager's office once again, where the deceased
+      met their end.
+  displayTextOnExit: []
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Head into the manager's office.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Investigate the manager's office once more.
+  buttonTextAsParent:
+  - conditions: []
+    displayText: Refocus on the office area as a whole.
+--- !u!1 &1038563098
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1038563099}
+  - component: {fileID: 1038563100}
+  m_Layer: 0
+  m_Name: doorToStorage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1038563099
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1038563098}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 606588346}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1038563100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1038563098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25994b630f2943c4686b81522afb57ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: 4427f2d2-e719-4eb7-ab25-65eb2c291935
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  interactiveDialogue: {fileID: 0}
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Take the door to the rear storage area.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Head to the rear storage area again.
+  destinationObject: {fileID: 267003593}
+  destinationLevelName: 
+  doorTravelText: You move from the kitchen into the rear storage area.
+--- !u!1 &1057785750
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1057785751}
+  - component: {fileID: 1057785752}
+  m_Layer: 0
+  m_Name: breakerBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1057785751
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057785750}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 267003594}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1057785752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057785750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: 1d868a04-7029-4c83-bc2e-a0fe5a4fc1f5
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  ChildNavObjects: []
+  ChildInteractiveObjects: []
+  dialogueOnNew: []
+  dialogueOnReturn: []
+  dialogueOnExit: []
+  displayTextOnNew:
+  - conditions: []
+    displayText: You examine the breaker box. This is a breaker box.
+  displayTextOnReturn:
+  - conditions: []
+    displayText: You examine the breaker box again. This is still a breaker box.
+  displayTextOnExit: []
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Examine the breaker box.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Examine the breaker box again.
+  buttonTextAsParent: []
 --- !u!1 &1092868158
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,9 +1826,12 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1612843399}
+  - {fileID: 1998744059}
+  - {fileID: 1700588653}
   m_Father: {fileID: 1682029220}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1092868160
 MonoBehaviour:
@@ -276,6 +1879,634 @@ MonoBehaviour:
   - conditions: []
     displayText: Checkout suspects again.
   buttonTextAsParent: []
+--- !u!1 &1161963488
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1161963489}
+  - component: {fileID: 1161963490}
+  m_Layer: 0
+  m_Name: doorToFrontArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1161963489
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1161963488}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 896055593}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1161963490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1161963488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25994b630f2943c4686b81522afb57ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: b8135446-cdec-4520-9cf9-b318cc200b68
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  interactiveDialogue: {fileID: 0}
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Head back to the front dining area.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Head back to the front dining area again.
+  destinationObject: {fileID: 73764605}
+  destinationLevelName: 
+  doorTravelText: You head out of the hallway into the front dining area.
+--- !u!1 &1191553537
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1191553538}
+  - component: {fileID: 1191553539}
+  m_Layer: 0
+  m_Name: npc-sergeant
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1191553538
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191553537}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1682029220}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1191553539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191553537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 463fe99272a841f488faa5357efc84bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: 8b29d64b-ea4c-4c7e-99c9-7245a618681f
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  interactiveDialogue: {fileID: 11400000, guid: 15bb3dfb14cc02c4b96d690edc62b12d,
+    type: 2}
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Speak to the Sergeant.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Speak to the Sergeant again.
+  _characterProfile: {fileID: 0}
+--- !u!1 &1216158711
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1216158712}
+  - component: {fileID: 1216158713}
+  m_Layer: 0
+  m_Name: npc-partner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1216158712
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1216158711}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 73764606}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1216158713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1216158711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 463fe99272a841f488faa5357efc84bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: 46ca26ee-3b1d-4670-b560-8cc9e5ab0b9d
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  interactiveDialogue: {fileID: 11400000, guid: 15bb3dfb14cc02c4b96d690edc62b12d,
+    type: 2}
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Introduce yourself to the detective.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Check with your partner again.
+  _characterProfile: {fileID: 0}
+--- !u!1 &1291846938
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1291846940}
+  - component: {fileID: 1291846939}
+  m_Layer: 0
+  m_Name: BackAlleyArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1291846939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291846938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: 290fd408-5527-4ef8-8c09-f4b1f181a587
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  ChildNavObjects: []
+  ChildInteractiveObjects: []
+  dialogueOnNew: []
+  dialogueOnReturn: []
+  dialogueOnExit: []
+  displayTextOnNew:
+  - conditions: []
+    displayText: 'You find yourself in the back alley behind the diner. '
+  displayTextOnReturn:
+  - conditions: []
+    displayText: Once again, find yourself in the back alley behind the diner.
+  displayTextOnExit: []
+  buttonTextOnNew: []
+  buttonTextOnReturn: []
+  buttonTextAsParent:
+  - conditions: []
+    displayText: Back to the main alley area.
+--- !u!4 &1291846940
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291846938}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1844701055}
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1300732109
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1300732110}
+  - component: {fileID: 1300732111}
+  m_Layer: 0
+  m_Name: rightBathroom
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1300732110
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300732109}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 756464515}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1300732111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300732109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: 41c1a334-8b9b-4d6d-83b9-f571119091d0
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  ChildNavObjects: []
+  ChildInteractiveObjects: []
+  dialogueOnNew: []
+  dialogueOnReturn: []
+  dialogueOnExit: []
+  displayTextOnNew:
+  - conditions: []
+    displayText: You move into the bathroom on the right-hand side.
+  displayTextOnReturn:
+  - conditions: []
+    displayText: You move into the bathroom on the right-hand side once more.
+  displayTextOnExit: []
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Head into the right bathroom.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Head into the right bathroom again.
+  buttonTextAsParent:
+  - conditions: []
+    displayText: Go back.
+--- !u!1 &1357631397
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1357631398}
+  - component: {fileID: 1357631399}
+  m_Layer: 0
+  m_Name: npc-medicalExaminer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1357631398
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1357631397}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1034028600}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1357631399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1357631397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 463fe99272a841f488faa5357efc84bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: e8be447c-7799-41bd-8129-5196ea3be15a
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  interactiveDialogue: {fileID: 11400000, guid: 15bb3dfb14cc02c4b96d690edc62b12d,
+    type: 2}
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Speak with the forensic medical examiner.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Speak with the medical examiner again.
+  _characterProfile: {fileID: 0}
+--- !u!1 &1409377690
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1409377691}
+  - component: {fileID: 1409377692}
+  m_Layer: 0
+  m_Name: doorToKitchen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1409377691
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1409377690}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 512149055}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1409377692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1409377690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25994b630f2943c4686b81522afb57ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: 158c2965-7fed-4352-b49b-622d90e4a609
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  interactiveDialogue: {fileID: 0}
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Take the door into the back kitchen area.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Take the door into the back kitchen area again.
+  destinationObject: {fileID: 606588345}
+  destinationLevelName: 
+  doorTravelText: You head into the back kitchen area.
+--- !u!1 &1460046504
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1460046505}
+  - component: {fileID: 1460046506}
+  m_Layer: 0
+  m_Name: doorToSideHallway
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1460046505
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1460046504}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 512149055}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1460046506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1460046504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25994b630f2943c4686b81522afb57ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: 8340d96e-848b-4c2d-8015-2510aebd765c
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  interactiveDialogue: {fileID: 0}
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Take the door into the front side hallway.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Take the door into the front side hallway again.
+  destinationObject: {fileID: 896055592}
+  destinationLevelName: 
+  doorTravelText: You take the door into the side hallway, towards the front of the
+    diner.
+--- !u!1 &1612843398
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1612843399}
+  - component: {fileID: 1612843400}
+  m_Layer: 0
+  m_Name: npc-waitress
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1612843399
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1612843398}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1092868159}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1612843400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1612843398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 463fe99272a841f488faa5357efc84bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: 5e87f718-4d2c-4db9-8e4b-21809b499fa8
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  interactiveDialogue: {fileID: 11400000, guid: d99fc53fb5b7f5e408a11a2152bbe2d5,
+    type: 2}
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Interrogate the waitress.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Interrogate the waitress again.
+  _characterProfile: {fileID: 11400000, guid: 746d52171f6a3b748a7bba4433423c2f, type: 2}
 --- !u!1 &1655679402
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,7 +2536,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 73764606}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1655679404
 MonoBehaviour:
@@ -344,6 +2575,85 @@ MonoBehaviour:
   destinationObject: {fileID: 1682029219}
   destinationLevelName: 
   doorTravelText: You head back outside fron the front of the diner.
+--- !u!1 &1677942935
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1677942936}
+  - component: {fileID: 1677942937}
+  m_Layer: 0
+  m_Name: utilitiesRoom
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1677942936
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677942935}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 267003594}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1677942937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677942935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: b0e25cd5-4fbc-4c77-8401-b188f1ff8aed
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  ChildNavObjects: []
+  ChildInteractiveObjects: []
+  dialogueOnNew: []
+  dialogueOnReturn: []
+  dialogueOnExit: []
+  displayTextOnNew:
+  - conditions: []
+    displayText: You step into the utilities room, taking note of the standard utilities.
+      Very utility.
+  displayTextOnReturn:
+  - conditions: []
+    displayText: Stepping into the utilities room again, you notice that this room
+      is in fact, still filled with utilities.
+  displayTextOnExit: []
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Move into the utilities room.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Move into the utilities room again.
+  buttonTextAsParent: []
 --- !u!1 &1682029218
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,8 +2665,8 @@ GameObject:
   - component: {fileID: 1682029220}
   - component: {fileID: 1682029219}
   m_Layer: 0
-  m_Name: START-outsideDiner
-  m_TagString: Untagged
+  m_Name: START-outsideDinerArea
+  m_TagString: startingNavObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -416,11 +2726,520 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1191553538}
   - {fileID: 1092868159}
   - {fileID: 2063682838}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1700588652
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1700588653}
+  - component: {fileID: 1700588654}
+  m_Layer: 0
+  m_Name: npc-patron
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1700588653
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700588652}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1092868159}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1700588654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700588652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 463fe99272a841f488faa5357efc84bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: c43186a5-6a6d-470c-a70d-baf496e8ebf1
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  interactiveDialogue: {fileID: 11400000, guid: e0e2546ab1516fb4a9af48a61ebc76ff,
+    type: 2}
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Interrogate the patron.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Interrogate the patron again.
+  _characterProfile: {fileID: 11400000, guid: f0e74283e722bc54da6883ba2757d8ae, type: 2}
+--- !u!1 &1756645381
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1756645382}
+  - component: {fileID: 1756645383}
+  m_Layer: 0
+  m_Name: janitorsCloset
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1756645382
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1756645381}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 896055593}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1756645383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1756645381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: b8eacbf8-b65b-4212-99b4-600c4b0f8cea
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  ChildNavObjects: []
+  ChildInteractiveObjects: []
+  dialogueOnNew: []
+  dialogueOnReturn: []
+  dialogueOnExit: []
+  displayTextOnNew:
+  - conditions: []
+    displayText: You open the door to the janitor's closet.
+  displayTextOnReturn:
+  - conditions: []
+    displayText: You open the door to the janitor's closet once more.
+  displayTextOnExit: []
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Investigate the janitor's closet.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Investigate the janitor's closet again.
+  buttonTextAsParent:
+  - conditions: []
+    displayText: Re-assess the entire closet.
+--- !u!1 &1789078226
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1789078227}
+  - component: {fileID: 1789078228}
+  m_Layer: 0
+  m_Name: walkInFreezer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1789078227
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789078226}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 267003594}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1789078228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789078226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: 68aac83a-df67-465e-a9f5-20719d50d5a2
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  ChildNavObjects: []
+  ChildInteractiveObjects: []
+  dialogueOnNew: []
+  dialogueOnReturn: []
+  dialogueOnExit: []
+  displayTextOnNew:
+  - conditions: []
+    displayText: As you step into the walk-in freezer, your skin immediately feels
+      the cold air.
+  displayTextOnReturn:
+  - conditions: []
+    displayText: Stepping into the walk-in freezer once more, you feel the cold air
+      fill your sinuses.
+  displayTextOnExit: []
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Investigate the walk-in freezer.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Re-examine the walk-in freezer.
+  buttonTextAsParent: []
+--- !u!1 &1843794450
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1843794451}
+  - component: {fileID: 1843794452}
+  m_Layer: 0
+  m_Name: leftBathroom
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1843794451
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1843794450}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 756464515}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1843794452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1843794450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddff7be57eae2ef4989b3345c5118cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: a57d65d4-3f64-4125-bef0-6fd99aed85a0
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  ChildNavObjects: []
+  ChildInteractiveObjects: []
+  dialogueOnNew: []
+  dialogueOnReturn: []
+  dialogueOnExit: []
+  displayTextOnNew:
+  - conditions: []
+    displayText: You move into the left bathroom. Stinky!
+  displayTextOnReturn:
+  - conditions: []
+    displayText: You head back into the left bathroom for another look.
+  displayTextOnExit: []
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Head into the left bathroom.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Head into the left bathroom again.
+  buttonTextAsParent:
+  - conditions: []
+    displayText: Go back.
+--- !u!1 &1844701054
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1844701055}
+  - component: {fileID: 1844701056}
+  m_Layer: 0
+  m_Name: doorToHallway
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1844701055
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844701054}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1291846940}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1844701056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844701054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25994b630f2943c4686b81522afb57ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: 02d7ec17-64dd-4311-8855-a4446e6f2a99
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  interactiveDialogue: {fileID: 0}
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Take the back door into the diner.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Take the back door into the diner again.
+  destinationObject: {fileID: 512149054}
+  destinationLevelName: 
+  doorTravelText: You head back into the diner through the rear door, leaving the
+    alley.
+--- !u!1 &1847463371
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1847463372}
+  - component: {fileID: 1847463373}
+  m_Layer: 0
+  m_Name: doorToSideHallway
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1847463372
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1847463371}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 73764606}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1847463373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1847463371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25994b630f2943c4686b81522afb57ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: f367a409-9513-4e65-b390-1a35c8089808
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  interactiveDialogue: {fileID: 0}
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Head into the side hallway.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Head into the side hallway again.
+  destinationObject: {fileID: 896055592}
+  destinationLevelName: 
+  doorTravelText: You leave the front dining area and move into the side hallway.
+--- !u!1 &1998744058
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1998744059}
+  - component: {fileID: 1998744060}
+  m_Layer: 0
+  m_Name: npc-chef
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1998744059
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998744058}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1092868159}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1998744060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998744058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 463fe99272a841f488faa5357efc84bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  GUID: 96de1e80-8235-4133-bbbf-a059ff3135e7
+  localProperties: []
+  conditionsToEnable: []
+  ParentNavObject: {fileID: 0}
+  eventOnActivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  eventOnDeactivation:
+    eventType: 0
+    eventName: 
+    eventValue: 
+  conditionalEvents: []
+  _additionalDialogues: []
+  interactiveDialogue: {fileID: 11400000, guid: 7692b3a705629f64bb571f654320b63e,
+    type: 2}
+  buttonTextOnNew:
+  - conditions: []
+    displayText: Interrogate the chef.
+  buttonTextOnReturn:
+  - conditions: []
+    displayText: Interrogate the chef again.
+  _characterProfile: {fileID: 11400000, guid: 65a6098b2818d8a4ba433edbbc9fcb81, type: 2}
 --- !u!1 &2063682837
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,7 +3269,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1682029220}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2063682839
 MonoBehaviour:

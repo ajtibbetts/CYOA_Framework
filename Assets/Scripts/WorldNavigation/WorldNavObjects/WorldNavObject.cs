@@ -55,16 +55,17 @@ public class WorldNavObject : NavObject
         //Debug.Log("World nav object loaded: " + gameObject.name);
     }
     
-    private void OnEnable()
+    public override void OnEnable()
     {
+        base.OnEnable();
         if(AllWorldObjects == null) AllWorldObjects = new List<WorldNavObject>();
 
         AllWorldObjects.Add(this);
-        if(transform.parent != null)
-        {
-            // Debug.Log($"This world nav object's name: {Name}" );
-            ParentNavObject = transform.parent.gameObject;
-        }
+        // if(transform.parent != null)
+        // {
+        //     // Debug.Log($"This world nav object's name: {Name}" );
+        //     ParentNavObject = transform.parent.gameObject;
+        // }
     }
 
     private void OnDisable() {

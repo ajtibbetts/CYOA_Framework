@@ -44,6 +44,16 @@ public abstract class NavObject : MonoBehaviour
 
     public virtual void Awake() {
         gameEvents.OnDialogueSkipCalled += SkipToDialogue;
+        if(Name == null) Name = name;
+        else if (Name.Length == 0) Name = name;
+    }
+
+    public virtual void OnEnable() {
+        if(transform.parent != null)
+        {
+            // Debug.Log($"This world nav object's name: {Name}" );
+            ParentNavObject = transform.parent.gameObject;
+        }
     }
 
     public virtual void ActivateNavObject()

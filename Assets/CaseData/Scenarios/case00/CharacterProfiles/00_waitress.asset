@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a810518b47780074db1dc1d8603dbf16, type: 3}
+  m_Name: 00_waitress
+  m_EditorClassIdentifier: 
+  _characterID: 00waitress
+  _characterType: 1
+  _characterName:
+    propertyValue: Shainla Keppick
+    startAsDiscovered: 1
+  _portrait:
+    portrait:
+      portraitSprite: {fileID: 21300000, guid: 411db80e26c7d5541b2833943058af26, type: 3}
+      thumbNailOffsetX: 0
+      thumbNailOffsetY: 0
+    startAsDiscovered: 1
+  thumbNailOffsetX: 0
+  thumbNailOffsetY: 0
+  _age:
+    propertyValue: 28
+    startAsDiscovered: 1
+  _occupation:
+    propertyValue: Waitress at the Diner Cafe
+    startAsDiscovered: 1
+  _residence:
+    propertyValue: 27 Jenn Ave, Apt# 502
+    startAsDiscovered: 1
+  _summary:
+    propertyValue: Waitress at the diner. Has a sick child at home.
+    startAsDiscovered: 1
+  _relationshipToVictim:
+    propertyValue: Worked as waitress at business owned by victim.
+    startAsDiscovered: 1
+  _additionalNotes: []
+  AsCulpritCompleteResponse: 
+  AsCulpritPartialResponse: 
+  AsInnocentResponse: I don't think it was the waitress.
+  HasAlibi: 0
+  AlibiText: 
